@@ -107,7 +107,7 @@ function closeKeyPanel(){ remapAction=null; el('keyPanel').classList.add('hide')
 
 /* ================= B. 手指键位（触屏布局） ================= */
 const TOUCH_IDS = ['joystick','btnFire','btnReload','btnSwitch','btnUp','btnDown',
-  'btnCrouch','btnJump','btnRecon','btnKami','btnMark','btnChat'];
+  'btnCrouch','btnJump','btnRecon','btnKami','btnMark','btnChat','btnBoard'];
 const LS_LAYOUT = 'csTouchLayout';
 var layoutEditing = false;      // var：phone.js 先加载，事件回调里访问更安全
 let layoutDirty = false;

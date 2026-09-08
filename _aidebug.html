@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh">
+<head><meta charset="utf-8"><title>AI debug</title></head>
+<body>
+<pre id="log">start</pre>
+<script type="module">
+const log = m => { document.getElementById('log').textContent += "\n" + m; console.log(m); };
+import { env, AutoTokenizer, AutoModelForCausalLM } from './CS/assets/model/transformers.min.js';
+try {
+  if(!env.wasm) env.wasm = {};
+  env.wasm.wasmPaths = new URL('./CS/assets/model/ort/', import.meta.url).href;
+  env.wasm.numThreads = 1;
+  env.allowLocalModels = true;
+  const MODEL_DIR = './CS/assets/model/gpt2ft';
+  log('loading tokenizer...');
+  const tokenizer = await AutoTokenizer.from_pretrained(MODEL_DIR);
+  log('tokenizer loaded; has chat_template=' + (tokenizer.chat_template ? 'yes' : 'no'));
+
+  // 拼合分块模型
+  const parts = []; let total = 0, i = 0;
+  for (;;) { const r = await fetch(`${MODEL_DIR}/model.onnx.${String(i).padStart(2,'0')}`); if (!r.ok) break; const p = new Uint8Array(await r.arrayBuffer()); parts.push(p); total += p.length; i++; }
+  const out = new Uint8Array(total); let off = 0; for (const p of parts) { out.set(p, off); off += p.length; }
+  log('chunks=' + i + ' bytes=' + total);
+  log('loading model...');
+  const blob = new Blob([out], { type:'application/octet-stream' });
+  const url = URL.createObjectURL(blob);
+  log('blob url=' + url);
+  const model = await AutoModelForCausalLM.from_pretrained(MODEL_DIR, { device:'wasm', model: url });
+  log('model loaded');
+
+  const text = '你好，你是谁';
+  const prompt = '<|user|>' + text + '<|end|><|assistant|>';
+  log('prompt=' + JSON.stringify(prompt));
+  const input = tokenizer(prompt, { returnTensors:'pt', padding:false, truncation:true });
+  log('input_ids=' + JSON.stringify(input.input_ids.tolist()));
+  const inLen = input.input_ids.dims[1];
+  log('inLen=' + inLen);
+  const g = model.generate({ ...input, max_new_tokens:24, do_sample:true, top_k:40, top_p:0.9, temperature:0.95, repetition_penalty:1.15 });
+  const seq = g.tolist()[0];
+  log('seqLen=' + seq.length);
+  const genIds = seq.slice(inLen);
+  log('genIds=' + JSON.stringify(genIds));
+  let reply = tokenizer.decode(genIds, { skip_special_tokens:true });
+  log('rawReply=' + JSON.stringify(reply));
+  reply = reply.replace(/\s+/g,' ').trim().slice(0,60);
+  log('FINAL=' + reply);
+} catch(e) { log('ERR ' + (e && e.stack || e)); }
+</script>
+</body>
+</html>

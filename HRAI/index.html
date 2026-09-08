@@ -43,5 +43,17 @@
 <script src="assets/code/phone.js"></script>
 <!-- 键位自定义（键盘键位 + 手指键位布局，依赖上面全部模块，必须最后加载） -->
 <script src="assets/code/keymap.js"></script>
+<!-- 赞赏置顶弹窗 -->
+<div id="tipPop" style="position:fixed;top:0;left:0;right:0;z-index:99999;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 44px 10px 14px;background:linear-gradient(90deg,rgba(230,180,34,.96),rgba(212,147,10,.96));color:#fff;font-size:14px;font-family:inherit;box-shadow:0 2px 12px rgba(0,0,0,.35);">
+  <span style="flex:1;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.2);">♡ 觉得游戏好玩？请作者喝杯奶茶喵～</span>
+  <a href="/Tipping/" target="_blank" style="flex-shrink:0;padding:6px 18px;border-radius:999px;background:#fff;color:#b8860b;text-decoration:none;font-weight:bold;font-size:13px;">去赞赏</a>
+  <span id="tipPopClose" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:18px;line-height:1;opacity:.85;">✕</span>
+</div>
+<script>
+(function(){
+  var p=document.getElementById('tipPop'),c=document.getElementById('tipPopClose');
+  if(c)c.addEventListener('click',function(e){e.stopPropagation();p.style.display='none';});
+})();
+</script>
 </body>
 </html>

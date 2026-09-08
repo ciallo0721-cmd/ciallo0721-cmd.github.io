@@ -1362,6 +1362,9 @@ function adaptResolution(dt){
 }
 // 3) HUD DOM 刷新节流（每帧改 DOM 在低配机上是隐形杀手）
 let _hudT=0;
+let _hudDomT=0;    // updateHUD 降到 ~8Hz（开枪/受伤等事件仍会即时调用 updateHUD）
+let _mmT=0;        // 小地图 Canvas 重绘降到 10Hz
+let _pickupT=0;    // 医疗箱/补给箱拾取扫描降到 ~6.7Hz（冷却倒计时仍每帧走）
 
 function animate(){
   requestAnimationFrame(animate);
@@ -1373,9 +1376,11 @@ function animate(){
       if(g.pos.y<0.3){ g.pos.y=0.3; g.vel.y*=-0.42; g.vel.x*=0.6; g.vel.z*=0.6; if(Math.abs(g.vel.y)<1)g.vel.y=0; }
       g.mesh.position.copy(g.pos); g.fuse-=dt;
       if(g.fuse<=0){ explode(g.pos,g.owner); scene.remove(g.mesh); grenades.splice(i,1); } }
-    // 医疗箱拾取与刷新
+    // 医疗箱拾取与刷新（扫描降频：冷却倒计时每帧，角色距离扫描 0.15s 一轮）
+    _pickupT+=dt; const _scanNow = _pickupT>=0.15; if(_scanNow) _pickupT=0;
     for(const mk of medkits){
       if(mk.cd>0){ mk.cd-=dt; if(mk.cd<=0){ mk.active=true; mk.group.visible=true; } continue; }
+      if(!_scanNow) continue;
       for(const c of characters){ if(!c.alive||c.downed)continue;
         if(c.group.position.distanceTo(mk.pos)<MEDKIT_RADIUS){
           const heal=Math.min(MEDKIT_HEAL,100-c.hp);
@@ -1383,8 +1388,10 @@ function animate(){
             if(c.isPlayer){ toast('拾取医疗箱 +'+Math.round(heal)+' 血'); updateHUD(); } }
           break; } }
     }
-    updateRockets(dt); updateDrones(dt); tickGunSpecial(dt); tickLoots();
-    updateAIChat(dt); updateMinimap();
+    updateRockets(dt); updateDrones(dt); tickGunSpecial(dt);
+    if(_scanNow) tickLoots();
+    updateAIChat(dt);
+    _mmT+=dt; if(_mmT>=0.1){ _mmT=0; updateMinimap(); }
     if(bomb.planted){ bomb.timer-=dt; if(bomb.timer<=0) bombExplode(); }
     // 透视：侦查无人机(reconActive) 或 被带 perspective 的枪打中(markT) 都显示穿墙标记
     for(const c of characters){ if(c.mark){ if((reconActive||c.markT>0) && c.alive && !c.downed && c.team!==player.team){ c.mark.visible=true; c.mark.position.set(c.group.position.x,2.7,c.group.position.z); } else c.mark.visible=false; } }
@@ -1393,7 +1400,7 @@ function animate(){
     // 头顶名字/LOD 节流刷新（原来每帧全图扫 sprites，现在 0.25s 一轮）
     _hudT+=dt;
     if(_hudT>0.25){ _hudT=0; updateLOD(); }
-    updateHUD();
+    _hudDomT+=dt; if(_hudDomT>=0.12){ _hudDomT=0; updateHUD(); }
     adaptResolution(dt);
   }
   try{ renderer.render(scene,camera); }catch(e){ /* WebGPU 初始化中的首帧等瞬态错误直接吞掉 */ }

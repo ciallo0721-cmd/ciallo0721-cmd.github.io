@@ -19,7 +19,7 @@
    被 CS.js 主循环调用的入口： updateBot(b, dt)
    ============================================================ */
 
-// 帮个忙agent 让投雷概率小点
+// 帮个忙agent 让投雷概率小点 —— 已完成：掷雷改为「无视线才扔 + 12~20s 冷却」(2026-09-07)
 
 /* ============================================================
    [0] AI 总配置 —— 想调手感只改这里
@@ -49,7 +49,8 @@ const AI_CFG = {
   FLANK_DIST:      16,       // 包抄点的侧向偏移距离(米)
   STRAFE_SPEED:    4.6,      // 交火时横向走位速度
   STRAFE_SWITCH:   0.85,     // 切换左右横移的间隔(秒)
-  NADE_CHANCE:     0.001,     // 近距每帧掷雷概率（逼掩体后的敌人）
+  NADE_CHANCE:     0.002,    // 掷雷判定概率（每帧；仅在目标躲掩体后且冷却完毕时才会真扔）
+  NADE_CD:         12,       // 每 bot 掷雷冷却基准(秒)，实际 +0~8s 随机——防止人多时全场雷海
 
   /* —— 生存 —— */
   RETREAT_HP:      35,       // 血量低于此值转入撤退/找掩体
@@ -423,13 +424,24 @@ function towerPoint(){
   return new THREE.Vector3((Math.random() - 0.5) * 90, 0, (Math.random() - 0.5) * 90);
 }
 
-/* 开火决策：反应时间 + 装弹 + 视线 + 命中率 + 防误伤 + 掷雷 */
+/* 开火决策：反应时间 + 装弹 + 视线(缓存) + 命中率 + 防误伤 + 掷雷(带冷却)
+   性能要点：视线检测 hasLOS 每步遍历 40+ 柱子，原来每帧每 bot 都算
+   （60 bot × 60fps ≈ 每帧数万次运算）——现在降到思考周期(0.16~0.24s)算一次，
+   结果缓存在 b._losOK / b._tmLine，开火只读缓存。 */
 function botTryFire(b, target, nd, dt){
   if(b.reloading) return;
   if(b.reactT > 0){ b.reactT -= dt; return; }     // 刚发现，愣神中
   if(b.ammo[b.weapon].m <= 0){ startReload(b); return; }   // 弹匣空 → 换弹
-  if(!hasLOS(b.group.position, target.group.position)) return;   // 看不见不打
-  if(teammateInLine(b, target)) return;                         // 别崩队友
+  /* —— 掷雷决策（先于开火判定：目标躲掩体后=无视线才是扔雷的正确时机）—— */
+  if((b._nadeCd || 0) > 0){
+    b._nadeCd -= dt;
+  } else if(nd < 14 && b.ammo.grenade > 0 && b._losOK === false
+            && Math.random() < AI_CFG.NADE_CHANCE * (b.nadeBias || 1)){
+    b._nadeCd = AI_CFG.NADE_CD + Math.random() * 8;   // 冷却 12~20s，人多也不至于雷海
+    throwGrenade(b);
+  }
+  if(b._losOK === false) return;                  // 视线被挡（思考周期缓存）→ 不开枪
+  if(b._tmLine === true) return;                  // 队友挡枪线（缓存）→ 别崩队友
   if(nd > AI_CFG.ENGAGE_MIN){
     const far = Math.max(0, nd - AI_CFG.ENGAGE_MIN);
     const chance = Math.max(AI_CFG.HIT_FAR, AI_CFG.HIT_NEAR - far * 0.016);
@@ -439,10 +451,6 @@ function botTryFire(b, target, nd, dt){
   if(b.aiTimer <= 0){
     b.aiTimer = (b.weapon === 'ak') ? 0.2 : 0.5;
     botFire(b, target);
-  }
-  // 近距逼掩体后的敌人：按角色偏好掷雷
-  if(nd < 10 && b.ammo.grenade > 0 && Math.random() < AI_CFG.NADE_CHANCE * (b.nadeBias || 1)){
-    throwGrenade(b);
   }
 }
 
@@ -527,6 +535,12 @@ function updateBot(b, dt){
     b.aiTarget = enemy;                               // 给掷雷逻辑用方向
     if(!enemy) b._lostT = (b._lostT || 0) + AI_CFG.THINK_MIN;   // 丢失目标计时（按节流周期累计）
     b._th = { enemy, nd, dtm, state: decideState(b, enemy, dtm, nd) };
+    // —— 降频缓存（原每帧全算，60 bot 时是 CPU 大头）——
+    // 视线 hasLOS 每步遍历 40+ 柱子；teammateInLine / separation 每次全图扫角色。
+    // 现在只在思考周期(0.16~0.24s)算一次，供每帧的开火/移动逻辑读缓存。
+    b._losOK  = enemy ? hasLOS(b.group.position, enemy.group.position) : false;
+    b._tmLine = enemy ? teammateInLine(b, enemy) : false;
+    b._sep    = separation(b);
   b.aiState = b._th.state;
   }
   const _th = b._th;
@@ -624,7 +638,7 @@ function updateBot(b, dt){
   }
   if(b.pathIdx >= (b.path ? b.path.length : 0)) b.pathTimer = 0;   // 到站→下帧重算追移动目标
 
-  const sep = separation(b);
+  const sep = b._sep || { x: 0, z: 0 };   // 思考周期缓存（每 0.16~0.24s 重算一次）
   mvx += sep.x * 0.8; mvz += sep.z * 0.8;
 
   // 交火时的横向走位（让bot成为更难打的移动靶）

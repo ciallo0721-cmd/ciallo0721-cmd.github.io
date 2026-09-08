@@ -185,6 +185,7 @@ body.layoutedit .tbtn,body.layoutedit #joystick{outline:1px dashed rgba(255,216,
 #minimap{position:absolute;left:14px;bottom:64px;width:156px;height:156px;
   border:1px solid #3a5a8a;border-radius:8px;background:rgba(8,16,32,.62);}
 body.phone #minimap{left:auto;right:12px;top:54px;bottom:auto;width:120px;height:120px;}
+body.phone #scoreboard{top:182px;}   /* 手机端排行榜挪到小地图下方，避免叠住 */
 /* ---------- 淘汰播报（屏幕中下方） ---------- */
 #killfeed{position:absolute;left:50%;top:68%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:3px;pointer-events:none;}
@@ -208,3 +209,4 @@ body.phone #chatbox{top:60px;width:200px;}
 /* ---------- 手机标点 / 聊天按钮（蹲的上方一排） ---------- */
 #btnChat{right:18px;bottom:292px;width:64px;height:52px;font-size:15px;}
 #btnMark{right:130px;bottom:292px;width:64px;height:52px;font-size:15px;}
+#btnBoard{right:242px;bottom:292px;width:64px;height:52px;font-size:15px;}

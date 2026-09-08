@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 对话测试</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:system-ui,"PingFang SC","Microsoft YaHei",sans-serif;background:#0f1220;color:#e8eaf2}
+  #chat{flex:1;overflow:auto;max-width:720px;margin:0 auto;width:100%;padding:16px 16px 90px;display:flex;flex-direction:column;gap:10px}
+  .bubble{max-width:82%;padding:10px 14px;border-radius:14px;line-height:1.55;white-space:pre-wrap;word-break:break-word;font-size:15px}
+  .me{align-self:flex-end;background:#3b6ef5;color:#fff;border-bottom-right-radius:4px}
+  .ai{align-self:flex-start;background:#262b40;color:#e8eaf2;border-bottom-left-radius:4px}
+  .sys{align-self:center;background:transparent;color:#8b93ad;font-size:12px;margin:4px 0}
+  #bar{position:fixed;bottom:0;left:0;right:0;display:flex;gap:8px;padding:12px;background:#161a2b;border-top:1px solid #2a3050}
+  #bar .wrap{max-width:720px;margin:0 auto;width:100%;display:flex;gap:8px}
+  #bar input{flex:1;padding:11px 14px;border-radius:10px;border:1px solid #333a55;background:#0f1220;color:#e8eaf2;font-size:15px;outline:none}
+  #bar input:focus{border-color:#3b6ef5}
+  #bar button{padding:11px 20px;border:none;border-radius:10px;background:#3b6ef5;color:#fff;font-size:15px;cursor:pointer}
+  #bar button:disabled{opacity:.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+<div id="chat"><div class="sys">模型加载中…</div></div>
+<div id="bar"><div class="wrap">
+  <input id="inp" placeholder="和 AI 说点什么，回车发送…" disabled />
+  <button id="send" disabled>发送</button>
+</div></div>
+<script>
+const chat = document.getElementById('chat');
+const inp = document.getElementById('inp');
+const send = document.getElementById('send');
+
+const sys = (m)=>{const d=document.createElement('div');d.className='sys';d.textContent=m;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;};
+const bubble = (role, text)=>{const d=document.createElement('div');d.className='bubble '+(role==='me'?'me':'ai');d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;};
+
+let history = [];      // [{role:'user'|'ai', content}]
+let ready = false;
+
+// 把最近几轮拼成模型训练时的对话模板：<|user|>问<|end|><|assistant|>答<|end|>…
+function buildPrompt(){
+  let p = '';
+  const tail = history.slice(-7);   // 仅保留最近 7 轮，避免超出上下文窗口
+  for(const m of tail){
+    p += m.role==='user' ? `<|user|>${m.content}<|end|>` : `<|assistant|>${m.content}<|end|>`;
+  }
+  return p + '<|assistant|>';        // 让模型接着写 AI 的部分
+}
+
+const w = new Worker('CS/assets/code/chatai-worker.js', { type:'module' });
+w.onmessage = e => {
+  const d = e.data || {};
+  if(d.type==='ready'){ ready=true; inp.disabled=false; send.disabled=false; inp.focus(); sys('✅ 模型就绪，可以开始对话（多轮上下文已开启）'); }
+  else if(d.type==='reply'){
+    if(d.reply!=null){ history.push({role:'ai', content:d.reply}); bubble('ai', d.reply); }
+    else { sys('⚠️ 无回复: '+(d.err||'未知错误')); }
+    send.disabled=false; inp.disabled=false; inp.focus();
+  }
+  else if(d.type==='log'){ /* 调试用，可放开：sys('· '+d.msg) */ }
+  else if(d.type==='error'){ sys('❌ '+d.msg); }
+};
+w.onerror = ev => sys('❌ worker 错误: '+ev.message);
+
+function sendMsg(){
+  const text = inp.value.trim();
+  if(!text || !ready) return;
+  ready=false; send.disabled=true; inp.disabled=true;
+  history.push({role:'user', content:text});
+  bubble('me', text);
+  inp.value='';
+  w.postMessage({ type:'gen', prompt: buildPrompt() });
+}
+send.onclick = sendMsg;
+inp.addEventListener('keydown', e=>{ if(e.key==='Enter') sendMsg(); });
+</script>
+</body>
+</html>

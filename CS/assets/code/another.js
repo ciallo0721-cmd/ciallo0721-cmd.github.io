@@ -84,6 +84,7 @@ const UI_HTML = `
   <div id="btnKami" class="tbtn">自爆</div>
   <div id="btnMark" class="tbtn">标点</div>
   <div id="btnChat" class="tbtn">聊天</div>
+  <div id="btnBoard" class="tbtn">排行</div>
 </div>
 
 <!-- 聊天输入条（T 唤起 / 手机「聊天」按钮） -->
@@ -219,6 +220,7 @@ function escapeHtml(s){ return String(s==null?'':s).replace(/[&<>"']/g, m=>({'&'
 // 对局内排行榜：按 score 降序，显示名次 / 英文名 / 击杀-死亡 / 得分；头部带「第 X 把」（roundNum 持续累加）
 function renderScoreboard(){
   const sb=el('scoreboard'); if(!sb) return;
+  if(sb.classList.contains('hide')) return;   // 排行榜没收起就不重建（60人时每次击杀重建 innerHTML 很贵）
   const rows=characters.slice().sort((a,b)=>(b.score||0)-(a.score||0));
   if(!rows.length){ sb.innerHTML='<div class="sbHead">🏆 排行榜</div><div class="sbEmpty">暂无数据</div>'; return; }
   let h='<div class="sbHead">🏆 排行榜 · 第 '+roundNum+' 把 <span class="sbHint">按 / 关闭</span></div>';

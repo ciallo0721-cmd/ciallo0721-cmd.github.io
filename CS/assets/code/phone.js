@@ -50,6 +50,7 @@ bindBtn('btnRecon', ()=>{ useRecon(); });
 bindBtn('btnKami', ()=>{ useKamikaze(); });
 bindBtn('btnMark', ()=>{ placeMark(); });
 bindBtn('btnChat', ()=>{ openChatInput(); });
+bindBtn('btnBoard', ()=>{ toggleScoreboard(); });   // 手机端排行榜（桌面用「/」键）
 
 /* ---------- 4. 手机视角（#look 层拖拽；摇杆与按钮在其上层，互不干扰） ---------- */
 const lookEl=el('look'), look={id:null,lx:0,ly:0};
