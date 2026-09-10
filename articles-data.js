@@ -871,17 +871,6 @@ window.articlesData = {
             readTime: 11,
             featured: true
         },
-        {
-            id: 81,
-            category: "公告",
-            fileName: "公告/81/",
-            title: "最新nas地址",
-            excerpt: "最新nas地址",
-            date: "2026-09-08",
-            tags: ["NAS"],
-            readTime: 1,
-            featured: true
-        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

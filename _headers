@@ -47,7 +47,7 @@
   #
   #   Turnstile（oops/turnstile/ 验证页）需要 challenges.cloudflare.com：
   #   script-src 加载 api.js；frame-src 加载验证码 iframe；style/img/connect 供 widget 渲染与通信。
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com https://challenges.cloudflare.com; font-src 'self' cdnjs.cloudflare.com data:; img-src 'self' data: blob: https://challenges.cloudflare.com; media-src 'self'; frame-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://api.ip.sb https://v1.hitokoto.cn https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://cloud.umami.is; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com https://challenges.cloudflare.com; font-src 'self' cdnjs.cloudflare.com data:; img-src 'self' data: blob: https://challenges.cloudflare.com https://www.youtube.com; media-src 'self'; frame-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://api.ip.sb https://v1.hitokoto.cn https://challenges.cloudflare.com https://www.youtube.com https://cloud.umami.is; object-src 'none'; base-uri 'self'; form-action 'self';
 
   # 性能优化：缓存策略
   # 静态资源缓存1年

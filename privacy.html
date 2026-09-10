@@ -1,189 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隐私政策 - ciallo0721-cmd</title>
-    <meta name="robots" content="index, follow">
-    <style>
-        :root {
-            --bg: linear-gradient(160deg, #fdf6ff 0%, #f3e8ff 50%, #e8f0ff 100%);
-            --card: rgba(255, 255, 255, 0.82);
-            --border: rgba(168, 85, 247, 0.18);
-            --text: #3b3350;
-            --text-2: #6b6480;
-            --accent: #a855f7;
-            --accent-2: #ec4899;
-            --radius: 18px;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.8;
-        }
-        .wrap { max-width: 780px; margin: 0 auto; padding: 48px 20px 80px; }
-        header { text-align: center; margin-bottom: 36px; }
-        header h1 {
-            font-size: 1.9rem;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-        header p { color: var(--text-2); font-size: 0.9rem; }
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 26px 28px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.08);
-        }
-        .card h2 {
-            font-size: 1.15rem;
-            margin-bottom: 14px;
-            padding-left: 12px;
-            border-left: 4px solid var(--accent);
-        }
-        .card p, .card li { color: var(--text-2); font-size: 0.95rem; }
-        .card ul, .card ol { padding-left: 22px; margin: 8px 0; }
-        .card li { margin: 6px 0; }
-        code {
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            color: #7c3aed;
-            padding: 1px 8px;
-            border-radius: 6px;
-            font-size: 0.88rem;
-            word-break: break-all;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 0.9rem;
-        }
-        th, td {
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            padding: 8px 12px;
-            text-align: left;
-            color: var(--text-2);
-        }
-        th { background: rgba(168, 85, 247, 0.08); color: var(--text); }
-        .tag {
-            display: inline-block;
-            background: rgba(236, 72, 153, 0.12);
-            color: #db2777;
-            border: 1px solid rgba(236, 72, 153, 0.25);
-            border-radius: 20px;
-            padding: 2px 12px;
-            font-size: 0.8rem;
-            margin-right: 6px;
-        }
-        .note {
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 0.88rem;
-            color: #92400e;
-            margin-top: 10px;
-        }
-        footer { text-align: center; color: var(--text-2); font-size: 0.85rem; margin-top: 30px; }
-        footer a { color: var(--accent); text-decoration: none; }
-        @media (max-width: 600px) {
-            .card { padding: 18px 16px; }
-            header h1 { font-size: 1.5rem; }
-        }
-    </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TR4FT7JPDZ');
-</script>
-<!-- GA4 统一埋点模块 -->
-<script src="./assets/js/gtag-config.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私政策已迁移 - ciallo0721-cmd</title>
+<!--
+  旧地址 /privacy.html 的兼容跳转页（2026-09-10 隐私政策迁至 /doc/privacy.html）
+  说明：GitHub Pages 是纯静态托管，不支持服务端 302 响应头，
+        因此这里用 meta refresh + JS 实现等效跳转（JS 优先，更快）。
+  搜索引擎：canonical 指向新地址 + noindex，避免新旧地址被判重复内容。
+  本页不加载任何分析/追踪脚本。
+-->
+<link rel="canonical" href="https://ciallo0721-cmd.top/doc/privacy.html">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=/doc/privacy.html">
+<script>location.replace('/doc/privacy.html' + (location.hash || ''));</script>
 </head>
-<body>
-    <div class="wrap">
-        <header>
-            <h1>隐私政策</h1>
-            <p>最后更新：2026 年 8 月 19 日</p>
-        </header>
-
-        <div class="card">
-            <h2>一、本站收集什么</h2>
-            <p>为了在收到 Bug 反馈、处理争议或内容被转载时能够追溯来源，本站会在您的浏览器中生成并使用以下信息：</p>
-            <table>
-                <tr><th>项目</th><th>内容</th><th>存储位置</th><th>可逆性</th></tr>
-                <tr><td>用户标识 userid</td><td>随机生成的访客编号</td><td>浏览器 localStorage</td><td>不含个人身份信息</td></tr>
-                <tr><td>操作系统版本</td><td>如 Windows 11 / macOS 15</td><td>仅出现在水印中</td><td>不可逆</td></tr>
-                <tr><td>IP 哈希</td><td>公网 IP 经第三方接口查询后 SHA-256 加盐哈希</td><td>仅出现在水印中</td><td>不可逆</td></tr>
-            </table>
-            <p class="note">说明：本站通过第三方接口 api.ip.sb 查询访客公网 IP，仅用于生成不可逆哈希（加固定盐后取前 12 位十六进制）。哈希无法还原为真实 IP，无法定位到具体地址；IP 本身不会被存储、不会对外公开、不会出售。接口不可用时自动降级为内网 IP 哈希或占位符。哈希仅用于区分不同访客、处理 Bug 反馈与内容溯源。</p>
-        </div>
-
-        <div class="card">
-            <h2>二、userid 生成规则</h2>
-            <p>每位访客首次访问时自动生成一个唯一编号，格式为：</p>
-            <p style="text-align:center;margin:12px 0;"><code>cialloblog-{系统}-{随机4位}-{年份}</code></p>
-            <p>其中「系统」部分的编码规则如下：</p>
-            <table>
-                <tr><th>系统</th><th>编码</th><th>示例</th></tr>
-                <tr><td>Windows 11</td><td><code>11</code></td><td>cialloblog-11-3f2a-2026</td></tr>
-                <tr><td>Windows 10</td><td><code>10</code></td><td>cialloblog-10-8c1d-2026</td></tr>
-                <tr><td>Windows 7（个位数补零）</td><td><code>07</code></td><td>cialloblog-07-a91c-2026</td></tr>
-                <tr><td>Windows 98</td><td><code>98</code></td><td>cialloblog-98-5b2e-2026</td></tr>
-                <tr><td>仅能识别 NT 版本</td><td><code>nt-版本</code></td><td>cialloblog-nt-10.0-77d0-2026</td></tr>
-                <tr><td>macOS</td><td><code>mc-版本</code></td><td>cialloblog-mc-15-1c4f-2026</td></tr>
-                <tr><td>Linux</td><td><code>lx-发行版</code></td><td>cialloblog-lx-ubuntu-9e07-2026</td></tr>
-                <tr><td>Android / iOS</td><td><code>ad-版本</code> / <code>io-版本</code></td><td>cialloblog-ad-14-42ab-2026</td></tr>
-                <tr><td>无法识别</td><td><code>ot-xxxx</code></td><td>cialloblog-ot-xxxx-3d81-2026</td></tr>
-            </table>
-            <p>随机 4 位由浏览器加密级随机数生成器产生，每次访问不改变；仅当您清除浏览器数据后才会重新分配。</p>
-        </div>
-
-        <div class="card">
-            <h2>三、隐形水印</h2>
-            <p>本站页面会叠加一层肉眼几乎不可见的透明水印，内容包含您的 userid、系统编码与 IP 哈希。它不影响浏览、不遮挡内容、不收集额外数据。</p>
-            <ul>
-                <li><strong>用途</strong>：当您截图反馈 Bug 时，站长可通过截图中的水印定位到对应的 userid，快速确认问题环境；当内容被截图转发时，同样用于溯源。</li>
-                <li><strong>透明度</strong>：约 3.5%，正常浏览完全不可见。</li>
-                <li><strong>不会公开</strong>：水印信息仅站长本人可见，不会展示在页面上，不会写入任何公开内容。</li>
-            </ul>
-            <p class="note">请勿使用截图分享本站内容时携带的个人信息进行骚扰或人肉搜索——本站不会、也不支持任何形式的网络暴力行为。</p>
-        </div>
-
-        <div class="card">
-            <h2>四、如何清除这些数据</h2>
-            <ul>
-                <li>清除浏览器站点数据（Cookie 与网站数据）后，userid 即被删除，下次访问会生成新的编号；</li>
-                <li>使用浏览器的「无痕 / 隐私模式」访问，则每次会话都会生成临时编号；</li>
-                <li>水印随页面渲染产生，关闭页面即消失，不会在您的设备上留下任何文件。</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>五、联系我们</h2>
-            <p>如对本隐私政策有任何疑问，欢迎通过以下方式联系站长：</p>
-            <p style="margin-top:8px;">
-                <span class="tag">QQ 3627742771</span>
-                <span class="tag">ciallo0721cmd@gmail.com</span>
-            </p>
-        </div>
-
-        <footer>
-            <p>© 2026 ciallo0721-cmd · <a href="./index.html">返回首页</a> · <a href="./aboutme.html">关于作者</a></p>
-        </footer>
-    </div>
+<body style="margin:0;padding:60px 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;text-align:center;color:#3b3350;background:linear-gradient(160deg,#fdf6ff,#f3e8ff 50%,#e8f0ff);">
+<p style="font-size:1rem;">隐私政策已迁移至新地址，正在跳转…</p>
+<p style="font-size:0.9rem;color:#6b6480;">没有自动跳转的话，点这里 →
+  <a href="/doc/privacy.html" style="color:#ec4899;text-decoration:none;border-bottom:1px solid rgba(236,72,153,.35);">/doc/privacy.html</a>
+</p>
 </body>
 </html>
