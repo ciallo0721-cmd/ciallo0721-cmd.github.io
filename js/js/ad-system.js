@@ -78,6 +78,30 @@
   var MIN_WEIGHT   = 10;
   var MAX_WEIGHT   = 500;
 
+  // ============ Cookie 读写 ============
+  // 2026-09-12 起：ciallo_ad_prefs / ciallo_ad_disabled 由 localStorage 改存 Cookie。
+  // 单个 Cookie 上限约 4KB，故写入时把 history 截到 20 条（原为 50）。
+  // ciallo_ad_stats 仍留在 localStorage —— 它只是本地统计，不回传、也不随请求发送。
+  var CK_PREF_DAYS = 365;
+  var CK_HISTORY_MAX = 20;
+
+  function ckGet(name) {
+    var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+  function ckSet(name, value, days) {
+    var exp = days > 0 ? new Date(Date.now() + days * 86400000).toUTCString() : 'Fri, 31 Dec 9999 23:59:59 GMT';
+    var secure = location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = name + '=' + encodeURIComponent(value) +
+      '; Path=/; Expires=' + exp + '; SameSite=Lax' + secure;
+  }
+
+  function ckDel(name) {
+    var secure = location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = name + '=; Path=/; Max-Age=0; SameSite=Lax' + secure;
+  }
+
   // ============ Adkey 自验证签名 ============
   // 内置盐值（有默认值，站长无需修改）。
   // adkey.htm 生成带签名的 adkey → 直接发给访客 → 访客在调试面板输入 → 自动验证。
@@ -114,7 +138,7 @@
   /** 验证并通过 adkey 后永久关闭广告 */
   function applyAdkey(key) {
     if (validateAdkey(key)) {
-      try { localStorage.setItem(ADKEY_STORAGE_KEY, 'true'); } catch(e) {}
+      try { ckSet(ADKEY_STORAGE_KEY, 'true', 3650); } catch(e) {}
       return true;
     }
     return false;
@@ -122,18 +146,18 @@
 
   /** 恢复广告显示 */
   function removeAdkey() {
-    try { localStorage.removeItem(ADKEY_STORAGE_KEY); } catch(e) {}
+    try { ckDel(ADKEY_STORAGE_KEY); } catch(e) {}
   }
 
   /** 检查广告是否已被禁用 */
   function isAdDisabled() {
-    try { return localStorage.getItem(ADKEY_STORAGE_KEY) === 'true'; } catch(e) {}
+    try { return ckGet(ADKEY_STORAGE_KEY) === 'true'; } catch(e) {}
     return false;
   }
 
   function loadPrefs() {
     try {
-      var raw = localStorage.getItem(STORAGE_KEY);
+      var raw = ckGet(STORAGE_KEY);
       if (raw) {
         var p = JSON.parse(raw);
         if (p.blocked && p.blocked.length > 0) {
@@ -148,10 +172,10 @@
 
   function savePrefs(prefs) {
     try {
-      if (prefs.history && prefs.history.length > 50) {
-        prefs.history = prefs.history.slice(-50);
+      if (prefs.history && prefs.history.length > CK_HISTORY_MAX) {
+        prefs.history = prefs.history.slice(-CK_HISTORY_MAX);
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+      ckSet(STORAGE_KEY, JSON.stringify(prefs), CK_PREF_DAYS);
     } catch (e) { /* ignore */ }
   }
 
@@ -188,7 +212,7 @@
   }
 
   function resetPrefs() {
-    localStorage.removeItem(STORAGE_KEY);
+    ckDel(STORAGE_KEY);
     console.log('[AdSystem] 偏好已重置');
   }
 

@@ -303,7 +303,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                     本页面整合了 ciallo0721-cmd 个人网站全部法律条款，包括用户协议、隐私政策、Cookie说明、DMCA合规声明、免责声明、知识产权条款及联系方式。访问或使用本网站即表示您同意本文件中的所有条款。
                 </p>
                 <div class="article-meta">
-                    <div class="article-date"><i class="far fa-calendar"></i> 最后更新：<span>2026年7月19日</span></div>
+                    <div class="article-date"><i class="far fa-calendar"></i> 最后更新：<span>2026年9月12日</span></div>
                     <div class="article-date"><i class="far fa-clock"></i> 阅读时间：<span>约30分钟</span></div>
                 </div>
             </header>
@@ -343,7 +343,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                     <span class="callout-icon">⚠️</span>
                     <div class="callout-body">
                         <p class="callout-title">重要提示</p>
-                        <p class="callout-text">本站为个人创作网站，部分内容可能包含不适合未成年人的元素（如心理惊悚题材的视觉小说、复杂情感关系描写等）。未满18周岁的用户应在监护人陪同下使用本网站。若您不同意本文件中的任何条款，请立即停止访问和使用本网站。</p>
+                        <p class="callout-text">本站为个人创作网站，内容分级为 <strong>8+（全年龄适宜）</strong>：以温馨日常、解谜益智与小游戏为主，不含暴力、恐怖、成人或任何不适合未成年人的内容。未满 8 周岁的儿童建议在监护人陪同下使用。若您不同意本文件中的任何条款，请立即停止访问和使用本网站。</p>
                     </div>
                 </div>
 
@@ -468,7 +468,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                     <li><strong>屏幕分辨率</strong>：用于分析用户设备环境，优化显示效果；</li>
                     <li><strong>访问时间、访问页面、停留时长</strong>：用于分析用户行为模式；</li>
                     <li><strong>Referer（来源页面）</strong>：了解用户从何处访问本网站；</li>
-                    <li><strong>Cookie 和 sessionStorage 数据</strong>：用于记住验证状态和偏好设置。</li>
+                    <li><strong>Cookie 数据</strong>：用于记住同意选择、验证状态和偏好设置（详见第 7 节）。</li>
                 </ul>
 
                 <h4>5.2.2 用户主动提供的信息</h4>
@@ -529,9 +529,17 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                 <h2 id="sec-cookie">🍪 7. Cookie 与本地存储</h2>
 
                 <h3>7.1 什么是 Cookie</h3>
-                <p>Cookie 是网站存储在您浏览器中的小型文本文件，用于记住您的偏好设置和访问状态。本网站还使用 sessionStorage（会话存储）和 localStorage（本地存储）来实现类似功能。</p>
+                <p>Cookie 是网站存储在您浏览器中的小型文本文件，用于记住您的偏好设置和访问状态。本网站还少量使用 localStorage（本地存储）保存页面内的功能设置，这类数据不会随网络请求发送给任何服务器。</p>
 
-                <h3>7.2 我们使用的 Cookie 和存储技术</h3>
+                <h3>7.2 同意面板：先询问，再写入</h3>
+                <p>本站设置了 Cookie 同意面板（页面底部浮出的「本站 Cookie 与统计」），目前已接入首页等主要入口页面，其余内容页正在逐步接入。在已接入面板的页面中，您做出选择之前本站<strong>不会向 Google 发送任何请求</strong>，也<strong>不会写入非必要 Cookie</strong>。面板提供两个选项：</p>
+                <ul>
+                    <li><strong>全部同意</strong>：启用 Google Analytics 统计，并允许写入来源归因等非必要 Cookie；</li>
+                    <li><strong>仅必要</strong>：只保留运行必需的记录，Google Analytics 不会启动，同时清理此前写入的来源归因记录。</li>
+                </ul>
+                <p>您的选择保存在 Cookie <code>cb_cookie_consent</code> 中，有效期 180 天，期间不会重复打扰。若想改变选择，清除该 Cookie 后刷新页面即可重新出现面板。</p>
+
+                <h3>7.3 我们使用的 Cookie 和存储技术</h3>
                 <div class="table-wrap">
                     <table>
                         <thead>
@@ -544,48 +552,78 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                         </thead>
                         <tbody>
                             <tr>
-                                <td>验证状态</td>
-                                <td>记住您已通过安全验证</td>
-                                <td>sessionStorage</td>
-                                <td>关闭浏览器即清除</td>
+                                <td>同意记录</td>
+                                <td>记住您对 Cookie 与统计的选择</td>
+                                <td>Cookie（<code>cb_cookie_consent</code>）</td>
+                                <td>180 天</td>
                             </tr>
                             <tr>
-                                <td>语言偏好</td>
-                                <td>记住您选择的语言设置</td>
-                                <td>localStorage</td>
-                                <td>持久保存</td>
+                                <td>英文界面偏好</td>
+                                <td>记录您是否切换英文界面或不再提示</td>
+                                <td>Cookie（<code>cb_en_hint</code>）</td>
+                                <td>30 天 / 1 年</td>
+                            </tr>
+                            <tr>
+                                <td>访客标识</td>
+                                <td>生成匿名访客 ID，用于图片隐形水印（首页与全部博客文章页）</td>
+                                <td>Cookie（<code>cb_userid</code>，另在 localStorage 保留一份兜底）</td>
+                                <td>10 年，可随时清除</td>
+                            </tr>
+                            <tr>
+                                <td>IP 哈希缓存</td>
+                                <td>同一会话内复用已算好的 IP 哈希，避免每翻一页都请求第三方接口</td>
+                                <td>sessionStorage（<code>cb_iphash</code>）</td>
+                                <td>关闭标签页即清除</td>
                             </tr>
                             <tr>
                                 <td>广告偏好</td>
-                                <td>记录您的广告交互行为（点击、不感兴趣等）</td>
-                                <td>localStorage</td>
-                                <td>持久保存</td>
+                                <td>记录您的广告交互行为（点击、不感兴趣等），用于加权推荐</td>
+                                <td>Cookie（<code>ciallo_ad_prefs</code>）</td>
+                                <td>365 天</td>
                             </tr>
                             <tr>
-                                <td>特效设置</td>
-                                <td>记住您对鼠标特效的偏好（低性能模式等）</td>
-                                <td>localStorage</td>
-                                <td>持久保存</td>
+                                <td>广告解锁状态</td>
+                                <td>记住您已使用 adkey 关闭广告位</td>
+                                <td>Cookie（<code>ciallo_ad_disabled</code>）</td>
+                                <td>10 年</td>
                             </tr>
                             <tr>
-                                <td>Google Analytics</td>
-                                <td>网站流量分析</td>
-                                <td>Cookie</td>
+                                <td>人机验证</td>
+                                <td>记住您已通过 Cloudflare Turnstile 验证</td>
+                                <td>Cookie（<code>turnstile_pass</code>）</td>
+                                <td>24 小时</td>
+                            </tr>
+                            <tr>
+                                <td>来源归因（非必要）</td>
+                                <td>记录首次访问的来源域名，用于统计渠道来源；仅在您选择「全部同意」后写入</td>
+                                <td>Cookie（<code>site_user_from</code>）</td>
+                                <td>180 天</td>
+                            </tr>
+                            <tr>
+                                <td>Google Analytics（非必要）</td>
+                                <td>网站流量分析；仅在您选择「全部同意」后加载</td>
+                                <td>Cookie（<code>_ga</code> 等）</td>
                                 <td>由 Google 设定</td>
+                            </tr>
+                            <tr>
+                                <td>页面功能设置</td>
+                                <td>工具页面的本地选项（纹理模式、生成次数等）</td>
+                                <td>localStorage</td>
+                                <td>持久保存于您的浏览器</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <h3>7.3 您的选择</h3>
-                <p>您可以通过浏览器设置控制 Cookie 和存储权限：</p>
+                <h3>7.4 在浏览器中管理</h3>
+                <p>您随时可以通过浏览器设置控制或清除 Cookie 和存储数据：</p>
                 <ul>
                     <li>在 Chrome 中：设置 → 隐私和安全 → Cookie 及其他网站数据；</li>
                     <li>在 Edge 中：设置 → Cookie 和站点权限；</li>
                     <li>在 Firefox 中：选项 → 隐私与安全 → Cookie 和网站数据；</li>
                     <li>在 Safari 中：偏好设置 → 隐私 → Cookie 和网站数据。</li>
                 </ul>
-                <p>本站未设置 Cookie 同意弹窗（未实现"同意/不同意"交互），Google Analytics 在页面加载时即开始标准数据收集。如果您不希望被追踪，可以通过安装浏览器插件（如 Google Analytics Opt-out 插件）或在浏览器设置中禁用 Cookie 来阻止 Google Analytics 的数据收集。关闭浏览器即可清除验证状态数据，因为该数据存储在 sessionStorage 中。</p>
+                <p>若您不希望被统计，除在面板中选择「仅必要」外，也可安装浏览器插件（如 Google Analytics Opt-out 插件）或在浏览器设置中禁用 Cookie。请注意，禁用全部 Cookie 可能导致部分功能（如人机验证、广告偏好记忆）无法正常使用。</p>
 
                 <hr>
 
@@ -686,7 +724,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                 <p>这些第三方服务各自拥有独立的隐私政策和服务条款，我们建议您查阅其相关文件以了解其数据处理实践。我们不对第三方服务的数据处理行为承担责任。</p>
                 <p>特别说明：</p>
                 <ul>
-                    <li><strong>Google Analytics</strong>：我们使用 GA4（ID: G-TR4FT7JPDZ）进行网站流量分析，页面加载时即开始标准数据收集，本站未设置 Cookie 同意弹窗。Google 可能会将您的地理位置信息（基于 IP）和其他浏览数据传输到美国。您可以通过 Google Analytics Opt-out 浏览器插件或浏览器 Cookie 设置选择退出。</li>
+                    <li><strong>Google Analytics</strong>：我们使用 GA4（ID: G-TR4FT7JPDZ）进行网站流量分析。在已接入 Cookie 同意面板的页面，GA4 <strong>仅在您选择「全部同意」后才会加载</strong>；选择「仅必要」则不会向 Google 发送请求，站点仅保留无 Cookie 的匿名访问计数（Umami）。Google 可能会将您的地理位置信息（基于 IP）和其他浏览数据传输到美国，您也可以通过 Google Analytics Opt-out 浏览器插件或浏览器 Cookie 设置选择退出。</li>
                     <li><strong>Giscus 评论区</strong>：评论区内容通过 GitHub Discussions 存储，对 GitHub 用户公开可见。您的评论行为应遵守 GitHub 的服务条款和社区准则。</li>
                     <li><strong>Umami</strong>：我们部署了自托管的 Umami 分析服务，其收集的数据不包含个人身份信息，且不使用 Cookie。</li>
                 </ul>
@@ -697,13 +735,13 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                 <h2 id="sec-storage">🛡️ 10. 数据存储与安全</h2>
 
                 <h3>10.1 数据存储位置</h3>
-                <p>本网站托管于 GitHub Pages（服务器位于美国）。Google Analytics 数据由 Google 的服务器处理。如果您从中国或其他地区访问本网站，您的数据可能会被传输到美国。本网站不设服务器端数据库，所有本地存储数据均保存在您的浏览器中。</p>
+                <p>本网站托管于 GitHub Pages（服务器位于美国）。Google Analytics 数据由 Google 的服务器处理。如果您从中国或其他地区访问本网站，您的数据可能会被传输到美国。本网站不设服务器端数据库，所有 Cookie 与本地存储数据均保存在您的浏览器中。</p>
 
                 <h3>10.2 数据存储期限</h3>
                 <p>不同类型的数据有不同的存储期限：</p>
                 <ul>
-                    <li><strong>sessionStorage 数据</strong>：仅在当前浏览器会话期间有效，关闭浏览器后自动清除；</li>
-                    <li><strong>localStorage 数据</strong>：持久保存于您的浏览器中，您可以通过浏览器设置手动清除；</li>
+                    <li><strong>Cookie 数据</strong>：同意选择等记录保存在 Cookie 中，按上表各自的有效期到期后自动失效；</li>
+                    <li><strong>本地存储数据</strong>：工具页面的功能设置保存于您的浏览器中，您可以通过浏览器设置手动清除；</li>
                     <li><strong>Google Analytics 数据</strong>：由 Google 按照其数据保留政策处理，我们设置为 14 个月后自动过期；</li>
                     <li><strong>您主动提供的信息</strong>：将在完成服务目的所必需的期限内保留，之后将安全删除或匿名化处理。</li>
                 </ul>
@@ -713,7 +751,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                 <ul>
                     <li>使用 HTTPS 加密传输所有数据；</li>
                     <li>实施安全响应头（CSP、X-Frame-Options、X-Content-Type-Options 等）；</li>
-                    <li>验证状态数据仅存储在浏览器 sessionStorage 中，本站无法直接访问；</li>
+                    <li>验证状态通过 Cloudflare Turnstile 校验后写入 24 小时有效的 Cookie，本站不保存任何表单内容；</li>
                     <li>不设服务器端数据库，降低数据泄露风险；</li>
                     <li>定期更新依赖库以修补已知安全漏洞；</li>
                     <li>实施基础 DDoS 防护（通过 Cloudflare）。</li>
@@ -732,7 +770,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
                 <ul>
                     <li><strong>知情权</strong>：了解我们收集哪些数据及具体用途（本文件已详细说明）；</li>
                     <li><strong>拒绝权</strong>：您可以通过浏览器设置或插件选择拒绝 Google Analytics 的数据收集；</li>
-                    <li><strong>清除权</strong>：关闭浏览器即可清除 sessionStorage 中的验证状态；</li>
+                    <li><strong>清除权</strong>：您可以在浏览器中随时清除本站 Cookie 与本地存储数据，清除后如需验证将重新发起人机校验；</li>
                     <li><strong>Cookie 控制权</strong>：您可在浏览器设置中管理 Cookie 及存储权限；</li>
                     <li><strong>访问权</strong>：请求我们提供收集的关于您的个人信息副本；</li>
                     <li><strong>更正权</strong>：请求更正不准确或不完整的个人信息；</li>

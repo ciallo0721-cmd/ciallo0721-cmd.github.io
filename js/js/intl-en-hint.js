@@ -37,10 +37,25 @@
     probeTimeout: 3000,   // 探测总超时（毫秒），墙内用户不干等
     showDelay: 800,       // 探测成功后再延迟一点弹，避免抢首屏
 
-    storeKey: 'cb_en_hint',
+    cookieName: 'cb_en_hint',   // 决策记录（Cookie，不再用 localStorage）
     muteDays: 30,         // 点「不用了」后的静默天数
+    keepDays: 365,        // 点「切到英文」后的记录时长
     barID: 'cb-en-hint'
   };
+
+  /* ==================== Cookie 读写 ==================== */
+
+  function ckGet(name) {
+    var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+  function ckSet(name, value, days) {
+    var exp = days > 0 ? new Date(Date.now() + days * 86400000).toUTCString() : 'Fri, 31 Dec 9999 23:59:59 GMT';
+    var secure = location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = name + '=' + encodeURIComponent(value) +
+      '; Path=/; Expires=' + exp + '; SameSite=Lax' + secure;
+  }
 
   /* ==================== 前置判断 ==================== */
 
@@ -58,7 +73,7 @@
 
   function readChoice() {
     try {
-      var raw = localStorage.getItem(CFG.storeKey);
+      var raw = ckGet(CFG.cookieName);
       if (!raw) return '';
       var o = JSON.parse(raw);
       if (!o || !o.choice) return '';
@@ -73,7 +88,8 @@
 
   function saveChoice(choice) {
     try {
-      localStorage.setItem(CFG.storeKey, JSON.stringify({ choice: choice, ts: Date.now() }));
+      var days = choice === 'switch' ? CFG.keepDays : CFG.muteDays;
+      ckSet(CFG.cookieName, JSON.stringify({ choice: choice, ts: Date.now() }), days);
     } catch (e) { /* 隐私模式等场景忽略 */ }
   }
 
@@ -128,21 +144,21 @@
 
   var CSS =
     '#' + CFG.barID + '{position:fixed;right:20px;bottom:20px;z-index:99998;width:296px;' +
-      'max-width:calc(100vw - 40px);box-sizing:border-box;padding:16px 18px;border-radius:16px;' +
-      'background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);' +
-      'border:1px solid rgba(236,72,153,.22);box-shadow:0 12px 34px rgba(120,60,110,.18);' +
+      'max-width:calc(100vw - 40px);box-sizing:border-box;padding:16px 18px;border-radius:18px;' +
+      'background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);' +
+      'border:1px solid rgba(14,165,233,.22);box-shadow:0 16px 40px rgba(15,23,42,.16);' +
       'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;' +
       'line-height:1.55;opacity:0;transform:translateY(24px);' +
       'transition:opacity .45s ease,transform .45s ease,bottom .35s ease;}' +
     '#' + CFG.barID + '.on{opacity:1;transform:translateY(0);}' +
-    '#' + CFG.barID + ' .ceh-t{font-size:.95rem;font-weight:600;color:#1f2233;margin-bottom:5px;}' +
-    '#' + CFG.barID + ' .ceh-d{font-size:.82rem;color:#5b6070;}' +
-    '#' + CFG.barID + ' .ceh-d span{display:block;font-size:.76rem;color:#8a90a0;margin-top:2px;}' +
+    '#' + CFG.barID + ' .ceh-t{font-size:.95rem;font-weight:600;color:#0F172A;margin-bottom:5px;}' +
+    '#' + CFG.barID + ' .ceh-d{font-size:.82rem;color:#475569;}' +
+    '#' + CFG.barID + ' .ceh-d span{display:block;font-size:.76rem;color:#94A3B8;margin-top:2px;}' +
     '#' + CFG.barID + ' .ceh-b{display:flex;gap:8px;align-items:center;margin-top:13px;}' +
     '#' + CFG.barID + ' button{border:none;cursor:pointer;font-family:inherit;transition:opacity .2s ease,transform .2s ease;}' +
     '#' + CFG.barID + ' .ceh-go{flex:1;padding:9px 14px;border-radius:22px;font-size:.85rem;font-weight:600;color:#fff;' +
-      'background:linear-gradient(135deg,#ec4899,#2575fc);box-shadow:0 4px 14px rgba(236,72,153,.35);}' +
-    '#' + CFG.barID + ' .ceh-no{padding:9px 12px;border-radius:22px;font-size:.82rem;color:#7b8093;background:rgba(0,0,0,.05);}' +
+      'background:#0284C7;box-shadow:0 4px 14px rgba(2,132,199,.28);}' +
+    '#' + CFG.barID + ' .ceh-no{padding:9px 12px;border-radius:22px;font-size:.82rem;color:#475569;background:rgba(15,23,42,.06);}' +
     '#' + CFG.barID + ' button:hover{opacity:.88;}' +
     '#' + CFG.barID + ' button:active{transform:scale(.97);}';
 

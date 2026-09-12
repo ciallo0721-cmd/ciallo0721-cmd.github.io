@@ -34,10 +34,63 @@
     // ========== 来源检测 ==========
     // 优先级：① URL 参数 ?userfrom=xxx（显式指定）
     //         ② document.referrer 自动判断来源域名（无需手动加参数）
-    //         ③ localStorage 历史记录（全站跨页保留首次来源）
+    //         ③ Cookie 历史记录（全站跨页保留首次来源，180 天）
     // 都没有则为 null
+    //
+    // 存储说明（2026-09-12 改）：
+    //   原先写 localStorage，现改为 Cookie，且属于「非必要 Cookie」——
+    //   只有用户在同意面板里选了「全部同意」才写入；选「仅必要」则不写并清理。
     var USER_FROM_KEY = 'site_user_from';
+    var USER_FROM_DAYS = 180;
     var userFromCache;
+
+    function ckGet(name) {
+        var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+        return m ? decodeURIComponent(m[1]) : '';
+    }
+
+    function ckSet(name, value, days) {
+        var exp = days > 0 ? new Date(Date.now() + days * 86400000).toUTCString() : 'Fri, 31 Dec 9999 23:59:59 GMT';
+        var secure = location.protocol === 'https:' ? '; Secure' : '';
+        document.cookie = name + '=' + encodeURIComponent(value) +
+            '; Path=/; Expires=' + exp + '; SameSite=Lax' + secure;
+    }
+
+    function consentAll() {
+        try { return !!(window.CB_Consent && window.CB_Consent.isAll()); } catch (e) { return false; }
+    }
+
+    function consentPending() {
+        try { return !window.CB_Consent || window.CB_Consent.get() === ''; } catch (e) { return false; }
+    }
+
+    // 非必要 Cookie：同意后才落盘；未表态则等用户选完再补写
+    function persistFrom(from) {
+        if (!from) return;
+        if (consentAll()) { ckSet(USER_FROM_KEY, from, USER_FROM_DAYS); return; }
+        if (consentPending()) {
+            document.addEventListener('cb-consent-decided', function (e) {
+                if (e.detail && e.detail.choice === 'all') ckSet(USER_FROM_KEY, from, USER_FROM_DAYS);
+            });
+        }
+    }
+
+    function readFromStore() {
+        var v = ckGet(USER_FROM_KEY);
+        if (v) return v;
+        // 兼容旧版 localStorage 记录：同意后迁移到 Cookie 并清理旧键
+        try {
+            var legacy = localStorage.getItem(USER_FROM_KEY);
+            if (legacy) {
+                if (consentAll()) {
+                    ckSet(USER_FROM_KEY, legacy, USER_FROM_DAYS);
+                    localStorage.removeItem(USER_FROM_KEY);
+                }
+                return legacy;
+            }
+        } catch (e) { /* 忽略 */ }
+        return null;
+    }
 
     function cleanFrom(v) {
         if (!v) return null;
@@ -70,11 +123,11 @@
         if (userFromCache !== undefined) return userFromCache;
         var from = getFromUrl() || getFromReferrer();
         if (from !== null) {
-            try { localStorage.setItem(USER_FROM_KEY, from); } catch (e) {}
+            persistFrom(from);           // 同意「全部」后才写入 Cookie
             userFromCache = from;
             return from;
         }
-        try { userFromCache = localStorage.getItem(USER_FROM_KEY); } catch (e) { userFromCache = null; }
+        userFromCache = readFromStore();
         return userFromCache;
     };
 
