@@ -63,10 +63,6 @@
     <link rel="icon" href="./fanv.ico" type="image/x-icon">
     <link rel="shortcut icon" href="./fanv.ico" type="image/x-icon">
     <!-- DNS预解析外部资源 -->
-    <!-- Poppins 字体（玻璃拟态模板同款排版） -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- 预连接减少连接建立时间 -->
     <!-- 预加载关键字体 -->
     <!-- 异步加载非关键CSS -->
@@ -159,28 +155,6 @@
   <script src="./js/js/svg-icons.js" defer></script>
     <link rel="stylesheet" href="./css/css/index.css">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
-<style>
-#hitokoto-text .cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: #ec4899;
-  margin-left: 2px;
-  animation: hk-blink .75s step-end infinite;
-  vertical-align: baseline;
-}
-@keyframes hk-blink {
-  0%,100% { opacity:1; }
-  50% { opacity:0; }
-}
-#tagline { font-size:0.82rem; color:#aaa; text-align:right; margin-top:4px; }
-#tagline .hk-author { color:#ec4899; font-weight:500; }
-/* 无障碍：尊重系统"减弱动态效果"设置 */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  html { scroll-behavior: auto; }
-}
-</style>
 </head>
 <body class="auth-passed">
     <!-- 玻璃拟态背景层（流动渐变 + 漂浮光斑，参考 github.com/tuhuowo/tuhutest） -->
@@ -188,25 +162,25 @@
     <div class="backdrop-orbs"></div>
     <!-- 骨架屏 -->
     <div id="skeletonOverlay" class="skeleton-overlay" aria-hidden="true">
-        <div class="skeleton-block" style="width:200px;height:28px;margin-bottom:8px;"></div>
-        <div class="skeleton-block" style="width:320px;height:18px;margin-bottom:16px;"></div>
-        <div class="skeleton-block" style="width:280px;height:14px;margin-bottom:10px;"></div>
-        <div class="skeleton-block" style="width:340px;height:14px;margin-bottom:10px;"></div>
-        <div class="skeleton-block" style="width:260px;height:14px;margin-bottom:20px;"></div>
-        <div style="display:flex;gap:12px;">
-            <div class="skeleton-block" style="width:64px;height:12px;border-radius:20px;"></div>
-            <div class="skeleton-block" style="width:80px;height:12px;border-radius:20px;"></div>
-            <div class="skeleton-block" style="width:56px;height:12px;border-radius:20px;"></div>
+        <div class="skeleton-block sk-title"></div>
+        <div class="skeleton-block sk-sub"></div>
+        <div class="skeleton-block sk-line"></div>
+        <div class="skeleton-block sk-line"></div>
+        <div class="skeleton-block sk-line sk-last"></div>
+        <div class="skeleton-chips">
+            <div class="skeleton-block sk-chip"></div>
+            <div class="skeleton-block sk-chip"></div>
+            <div class="skeleton-block sk-chip"></div>
         </div>
     </div>
     <!-- HTTP 检测提示框 -->
-    <div class="http-warning-overlay" id="httpWarningOverlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="httpWarningTitle">
+    <div class="http-warning-overlay" id="httpWarningOverlay" role="dialog" aria-modal="true" aria-labelledby="httpWarningTitle">
         <div class="http-warning-box">
             <div class="http-warning-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div>
             <h2 class="http-warning-title" id="httpWarningTitle">不安全连接警告</h2>
             <p class="http-warning-text">
-                您正在通过 <strong style="color:#ff9800;">HTTP</strong> 不安全连接访问此网站。<br>
-                建议您切换到 <strong style="color:#4CAF50;">HTTPS</strong> 安全连接以保护您的数据安全。
+                您正在通过 <strong class="http-tag">HTTP</strong> 不安全连接访问此网站。<br>
+                建议您切换到 <strong class="https-tag">HTTPS</strong> 安全连接以保护您的数据安全。
             </p>
             <div>
                 <button class="http-warning-btn primary" onclick="switchToHTTPS()">
@@ -216,8 +190,8 @@
                     继续访问（不安全）
                 </button>
             </div>
-            <p style="color:#666; font-size:0.8rem; margin-top:20px;">
-                当前地址：<span id="currentHttpUrl" style="color:#ff9800;"></span>
+            <p class="http-warning-foot">
+                当前地址：<span id="currentHttpUrl" class="http-url"></span>
             </p>
         </div>
     </div>
@@ -226,46 +200,45 @@
       JS检测到真实用户后会移除该类，触发验证流程
     -->
     <noscript>
-        <div id="seo-content" style="padding: 40px; max-width: 1200px; margin: 0 auto; font-family: 'MaokenAssortedSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: #333;">
-            <header style="text-align: center; padding: 60px 0; background: linear-gradient(135deg, #ec4899, #2575fc); color: white; border-radius: 20px; margin-bottom: 40px;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 15px;">ciallo0721-cmd</h1>
-                <p style="font-size: 1.2rem; opacity: 0.9;">Ren'Py视觉小说开发者 | 二次元创作者 | 独立游戏创作者</p>
+        <div id="seo-content" class="seo-content">
+            <header class="seo-header">
+                <h1>ciallo0721-cmd</h1>
+                <p>Ren'Py视觉小说开发者 | 二次元创作者 | 独立游戏创作者</p>
             </header>
-            
+
             <main>
-                <section style="margin-bottom: 40px;">
-                    <h2 style="color: #ec4899; font-size: 1.8rem; margin-bottom: 20px;">关于我</h2>
-                    <p style="margin-bottom: 15px;">你好！我是ciallo0721-cmd，一名热爱二次元文化的独立游戏创作者。专注于Ren'Py视觉小说开发，致力于创作有趣的游戏和实用的工具。</p>
+                <section class="seo-section">
+                    <h2>关于我</h2>
+                    <p>你好！我是ciallo0721-cmd，一名热爱二次元文化的独立游戏创作者。专注于Ren'Py视觉小说开发，致力于创作有趣的游戏和实用的工具。</p>
                     <p>我的开发技能包括：Ren'Py视觉小说引擎、Unity游戏开发、HTML/CSS/JavaScript前端开发、UTAU虚拟歌姬调音等。</p>
                 </section>
-                
-                <section style="margin-bottom: 40px;">
-                    <h2 style="color: #ec4899; font-size: 1.8rem; margin-bottom: 20px;">我的项目</h2>
-                    
+
+                <section class="seo-section">
+                    <h2>我的项目</h2>
                 </section>
-                
-                <section style="margin-bottom: 40px;">
-                    <h2 style="color: #ec4899; font-size: 1.8rem; margin-bottom: 20px;">技术文章</h2>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 15px; background: #f0f4ff; border-radius: 10px; margin-bottom: 10px;">
-                            <a href="./wz.html" style="color: #ec4899; text-decoration: none; font-weight: 600;">UTAU教程：从调音到发布完全指南</a>
-                            <p style="margin: 5px 0 0; color: #666;">学习如何使用UTAU进行歌声合成，从基础调音到高级技巧</p>
+
+                <section class="seo-section">
+                    <h2>技术文章</h2>
+                    <ul class="seo-list">
+                        <li>
+                            <a href="./wz.html">UTAU教程：从调音到发布完全指南</a>
+                            <p>学习如何使用UTAU进行歌声合成，从基础调音到高级技巧</p>
                         </li>
                     </ul>
-                    <p style="text-align: center; margin-top: 20px;">
-                        <a href="./wz.html" style="color: #ec4899; text-decoration: none; font-weight: 600;">查看更多文章 →</a>
+                    <p class="seo-more">
+                        <a href="./wz.html">查看更多文章 →</a>
                     </p>
                 </section>
-                
-                <section style="margin-bottom: 40px;">
-                    <h2 style="color: #ec4899; font-size: 1.8rem; margin-bottom: 20px;">联系方式</h2>
-                    <p>GitHub: <a href="https://github.com/ciallo0721-cmd" style="color: #ec4899;">ciallo0721-cmd</a></p>
-                    <p>Bilibili: <a href="https://space.bilibili.com" style="color: #ec4899;">我的B站空间</a></p>
+
+                <section class="seo-section">
+                    <h2>联系方式</h2>
+                    <p>GitHub: <a href="https://github.com/ciallo0721-cmd">ciallo0721-cmd</a></p>
+                    <p>Bilibili: <a href="https://space.bilibili.com">我的B站空间</a></p>
                     <p>邮箱: 3627742771 [at] qq.com</p>
                 </section>
             </main>
-            
-            <footer style="text-align: center; padding: 30px; color: #666; border-top: 1px solid #eee; margin-top: 40px;">
+
+            <footer class="seo-footer">
                 <p>&copy; 2024-2026 ciallo0721-cmd. All rights reserved.</p>
                 <p>本站使用 GitHub Pages 托管</p>
             </footer>
@@ -283,7 +256,7 @@
 
     <!-- 移动端菜单 -->
     <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header"><div><div style="font-weight:bold;">ciallo0721-cmd</div><div style="font-size:0.8rem;color:#666;">Ren'Py 视觉小说创作者</div></div></div>
+        <div class="mobile-menu-header"><div><div class="mm-name">ciallo0721-cmd</div><div class="mm-role">Ren'Py 视觉小说创作者</div></div></div>
         <ul class="mobile-menu-links">
             <li><a href="#articles"><i class="fas fa-newspaper" aria-hidden="true"></i> 文章喵～</a></li>
             <li><a href="#iframes"><i class="fas fa-gamepad" aria-hidden="true"></i> 游戏预览喵～</a></li>
@@ -307,7 +280,7 @@
 
     <!-- 导航栏 -->
     <nav><div class="container nav-container"><a href="index.html" class="logo"><i class="fas fa-gamepad"></i> 关于我的说～</a><ul class="nav-links"><li><a href="#articles"><i class="fas fa-newspaper"></i> 文章喵～</a></li><li><a href="#iframes"><i class="fas fa-gamepad"></i> 游戏预览喵～</a></li><li><a href="#changelog"><i class="fas fa-history"></i> 更新记录喵～</a></li><li><a href="https://space.bilibili.com/478967440" target="_blank" rel="noopener noreferrer"><i class="fab fa-bilibili"></i> Bilibili</a></li><li><a href="https://www.douyin.com/user/MS4wLjABAAAA-r_cTw_4f1RrpzWAs3twxb_iWcLYXmNlgGeXbl-2m8k" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> 抖音的说～</a></li><li><a href="https://ifdian.net/a/ciallo0721-cmd" target="_blank" rel="noopener noreferrer"><i class="fas fa-heart"></i> 爱发电</a></li><li><a href="./mathtovideo/"><i class="fas fa-square-root-variable"></i> 塔珀动画</a></li><li><a href="#tools"><i class="fas fa-wand-magic-sparkles"></i> 工具</a></li><li><a href="./friends.html"><i class="fas fa-link"></i> 友链</a></li><li><a href="adss.html"><i class="fas fa-envelope"></i> 联系方式</a></li>
-        </ul></div></nav>
+        </ul><button class="nav-search-btn" id="siteSearchBtn" type="button" aria-label="全站搜索" title="全站搜索（Ctrl+K）"><i class="fas fa-search"></i><span class="nav-search-text">搜索</span></button></div></nav>
 
     <!-- 网站运行状态栏 -->
     <div class="container">
@@ -341,8 +314,8 @@
     <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
     <!-- 广告位 #1：顶部横幅 -->
-    <div class="container" style="margin-bottom:18px;">
-      <div data-ad-slot style="max-width:728px;margin:0 auto;"></div>
+    <div class="container">
+        <div class="ad-slot" data-ad-slot></div>
     </div>
 
     <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
@@ -351,12 +324,53 @@
         <main class="container">
 
 <!-- 7. 联系方式 -->
-        <div class="two-column-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:50px 0;">
+        <div class="two-column-layout">
             <!-- 左侧：联系方式 -->
-            <section id="contact" class="section" style="margin:0;padding:30px;background:linear-gradient(135deg,rgba(255,71,87,0.08),rgba(255,71,87,0.05));border-radius:20px;border:1px solid rgba(255,71,87,0.15);"><div class="section-title"><h2>联系我的说～</h2></div><div class="contact-content"><p style="margin-bottom:15px;">如果对我的作品感兴趣，欢迎通过以下方式联系人家哦～ (｡･ω･｡)ﾉ♡</p><div style="overflow-x:auto;margin-bottom:20px;"><table style="width:100%;border-collapse:collapse;font-size:0.9rem;"><thead><tr style="background:linear-gradient(135deg,rgba(236,72,153,0.1),rgba(37,117,252,0.08));"><th style="padding:10px 12px;text-align:left;color:#ec4899;font-weight:600;border-bottom:2px solid rgba(236,72,153,0.2);">平台</th><th style="padding:10px 12px;text-align:left;color:#ec4899;font-weight:600;border-bottom:2px solid rgba(236,72,153,0.2);">账号</th></tr></thead><tbody><tr><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">QQ</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://qm.qq.com/cgi-bin/qm/qr?k=ciallo" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">3627742771</a></td></tr><tr style="background:rgba(236,72,153,0.02);"><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">邮箱</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);">ciallo0721cmd@gmail.com<br>3627742771@qq.com<br>nb666mc26@outlook.com</td></tr><tr><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">GitHub</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://github.com/ciallo0721-cmd" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">@ciallo0721-cmd</a></td></tr><tr style="background:rgba(236,72,153,0.02);"><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">Bilibili</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://space.bilibili.com/478967440" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">丛雨丸-</a></td></tr><tr><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">X / Twitter</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://x.com/ciallo0721cmd?s=21" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">@ciallo0721cmd</a></td></tr><tr style="background:rgba(236,72,153,0.02);"><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">YouTube</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://www.youtube.com/@ciallo0721-cmd" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">Ciallo0721-cmd</a></td></tr><tr><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">Discord</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://discord.gg/fx4N3jg6" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">Ciallo0721</a></td></tr><tr style="background:rgba(236,72,153,0.02);"><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">Steam</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://steamcommunity.com/profiles/76561199473709076/" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">aaa关注塔菲喵</a></td></tr><tr><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">Facebook</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://www.facebook.com/profile.php?id=61590168321280" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">moyucmd</a></td></tr><tr style="background:rgba(236,72,153,0.02);"><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">Instagram</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://www.instagram.com/moyu0721cmd/" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">@moyu0721cmd</a></td></tr><tr><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);font-weight:500;">Discord 群</td><td style="padding:8px 12px;border-bottom:1px solid rgba(0,0,0,0.05);"><a href="https://discord.gg/hKKC8Crg" target="_blank" rel="noopener noreferrer" style="color:#ec4899;text-decoration:none;">讨论区/服务器</a></td></tr></tbody></table></div><div style="margin-top:20px;padding:20px;background:rgba(255,255,255,0.8);border-radius:16px;border:1px solid rgba(236,72,153,0.2);"><div style="font-size:1.1rem;font-weight:600;color:#ec4899;margin-bottom:12px;"><i class="fas fa-envelope"></i> 在线给我发消息喵～</div><form id="contactForm" onsubmit="sendEmail(); return false;" style="display:grid;gap:12px;"><input type="text" id="senderName" placeholder="你的名字（可选）" style="padding:10px 14px;border:1px solid rgba(236,72,153,0.3);border-radius:10px;font-size:0.95rem;outline:none;transition:all 0.3s ease;" onfocus="this.style.borderColor='#ec4899';this.style.boxShadow='0 0 0 3px rgba(236,72,153,0.1)'" onblur="this.style.borderColor='rgba(236,72,153,0.3)';this.style.boxShadow='none'"><input type="email" id="senderEmail" placeholder="你的邮箱（可选）" style="padding:10px 14px;border:1px solid rgba(236,72,153,0.3);border-radius:10px;font-size:0.95rem;outline:none;transition:all 0.3s ease;" onfocus="this.style.borderColor='#ec4899';this.style.boxShadow='0 0 0 3px rgba(236,72,153,0.1)'" onblur="this.style.borderColor='rgba(236,72,153,0.3)';this.style.boxShadow='none'"><textarea id="messageContent" placeholder="你想说的消息..." rows="4" style="padding:10px 14px;border:1px solid rgba(236,72,153,0.3);border-radius:10px;font-size:0.95rem;outline:none;resize:vertical;transition:all 0.3s ease;font-family:inherit;" onfocus="this.style.borderColor='#ec4899';this.style.boxShadow='0 0 0 3px rgba(236,72,153,0.1)'" onblur="this.style.borderColor='rgba(236,72,153,0.3)';this.style.boxShadow='none'"></textarea><button type="submit" style="padding:12px 24px;background:linear-gradient(135deg,#ec4899,#2575fc);color:white;border:none;border-radius:25px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(236,72,153,0.4);"><i class="fas fa-paper-plane"></i> 发送消息喵～</button></form><p style="font-size:0.8rem;color:#666;margin-top:10px;text-align:center;">点击发送后会在你的邮件客户端打开新邮件，手动发送即可喵～</p></div><div class="social-links"><a href="https://space.bilibili.com/478967440" class="social-link bilibili" target="_blank" rel="noopener noreferrer"><i class="fab fa-bilibili"></i></a><a href="https://www.douyin.com/user/MS4wLjABAAAA-r_cTw_4f1RrpzWAs3twxb_iWcLYXmNlgGeXbl-2m8k?from_tab_name=main" class="social-link douyin" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a></div></div></section>
+            <section id="contact" class="section contact-card">
+                <div class="section-title"><h2>联系我的说～</h2></div>
+                <div class="contact-content">
+                    <p class="contact-lead">如果对我的作品感兴趣，欢迎通过以下方式联系人家哦～ (｡･ω･｡)ﾉ♡</p>
+                    <div class="contact-table-wrap">
+                        <table class="contact-table">
+                            <thead>
+                                <tr><th>平台</th><th>账号</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>QQ</td><td><a href="https://qm.qq.com/cgi-bin/qm/qr?k=ciallo" target="_blank" rel="noopener noreferrer">3627742771</a></td></tr>
+                                <tr><td>邮箱</td><td>ciallo0721cmd@gmail.com<br>3627742771@qq.com<br>nb666mc26@outlook.com</td></tr>
+                                <tr><td>GitHub</td><td><a href="https://github.com/ciallo0721-cmd" target="_blank" rel="noopener noreferrer">@ciallo0721-cmd</a></td></tr>
+                                <tr><td>Bilibili</td><td><a href="https://space.bilibili.com/478967440" target="_blank" rel="noopener noreferrer">丛雨丸-</a></td></tr>
+                                <tr><td>X / Twitter</td><td><a href="https://x.com/ciallo0721cmd?s=21" target="_blank" rel="noopener noreferrer">@ciallo0721cmd</a></td></tr>
+                                <tr><td>YouTube</td><td><a href="https://www.youtube.com/@ciallo0721-cmd" target="_blank" rel="noopener noreferrer">Ciallo0721-cmd</a></td></tr>
+                                <tr><td>Discord</td><td><a href="https://discord.gg/fx4N3jg6" target="_blank" rel="noopener noreferrer">Ciallo0721</a></td></tr>
+                                <tr><td>Steam</td><td><a href="https://steamcommunity.com/profiles/76561199473709076/" target="_blank" rel="noopener noreferrer">aaa关注塔菲喵</a></td></tr>
+                                <tr><td>Facebook</td><td><a href="https://www.facebook.com/profile.php?id=61590168321280" target="_blank" rel="noopener noreferrer">moyucmd</a></td></tr>
+                                <tr><td>Instagram</td><td><a href="https://www.instagram.com/moyu0721cmd/" target="_blank" rel="noopener noreferrer">@moyu0721cmd</a></td></tr>
+                                <tr><td>Discord 群</td><td><a href="https://discord.gg/hKKC8Crg" target="_blank" rel="noopener noreferrer">讨论区/服务器</a></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="contact-form-card">
+                        <div class="contact-form-title"><i class="fas fa-envelope"></i> 在线给我发消息喵～</div>
+                        <form id="contactForm" onsubmit="sendEmail(); return false;">
+                            <input type="text" id="senderName" class="contact-field" placeholder="你的名字（可选）">
+                            <input type="email" id="senderEmail" class="contact-field" placeholder="你的邮箱（可选）">
+                            <textarea id="messageContent" class="contact-field" placeholder="你想说的消息..." rows="4"></textarea>
+                            <button type="submit" class="contact-submit"><i class="fas fa-paper-plane"></i> 发送消息喵～</button>
+                        </form>
+                        <p class="contact-note">点击发送后会在你的邮件客户端打开新邮件，手动发送即可喵～</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://space.bilibili.com/478967440" class="social-link bilibili" target="_blank" rel="noopener noreferrer"><i class="fab fa-bilibili"></i></a>
+                        <a href="https://www.douyin.com/user/MS4wLjABAAAA-r_cTw_4f1RrpzWAs3twxb_iWcLYXmNlgGeXbl-2m8k?from_tab_name=main" class="social-link douyin" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </section>
 
             <!-- 右侧：简介 -->
-            <section class="intro" style="margin:0;padding:30px;background:linear-gradient(135deg,rgba(236,72,153,0.08),rgba(37,117,252,0.05));border-radius:20px;border:1px solid rgba(236,72,153,0.15);"><p style="font-size:1.05rem;line-height:1.8;"> <strong>代码能写出什么？</strong> 这里有答案——人家是 ciallo0721-cmd，用 Ren'Py 引擎把故事变成游戏、把创意变成代码的创作者喵～<br><br>视觉小说 · 二次元 · 创作分享 · 每一行代码都在讲一个故事！<br><br><span style="color:#ec4899;font-weight:700"> 看完记得分享给你的小伙伴——也许他正在等这个！(๑>ᴗ<๑)</span></p></section>
+            <section class="intro section">
+                <p> <strong>代码能写出什么？</strong> 这里有答案——人家是 ciallo0721-cmd，用 Ren'Py 引擎把故事变成游戏、把创意变成代码的创作者喵～<br><br>视觉小说 · 二次元 · 创作分享 · 每一行代码都在讲一个故事！<br><br><span class="intro-cta"> 看完记得分享给你的小伙伴——也许他正在等这个！(๑>ᴗ<๑)</span></p>
+            </section>
         </div>
 
         <!-- 响应式布局适配 -->
@@ -365,54 +379,153 @@
     
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
         <!-- 1. 关于我 + 更新记录（两列，首位！） -->
-        <div class="two-column-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:50px 0;">
+        <div class="two-column-layout">
             <!-- 左侧：关于我 -->
-            <section id="about" class="section" style="margin:0;"><div class="section-title"><h2>关于我的说～</h2></div><div class="about-content"><div class="about-text"><p>Ciallo～(∠・ω＜ )⌒★ <strong>你们好呀！</strong> 人家是 <strong>ciallo0721-cmd</strong>——一个爱折腾代码的脆皮初中生喵！<br>弗雷尔卓德人 · 嘉豪(bushi) · <strong>INFP</strong> · 雏草姬 · VTuber 文化重度爱好者</p><p> 我是<strong>全栈野路子开发者</strong>，喜欢做一些<strong>没人做、但有人需要</strong>的小工具！项目里 taffy 出没率 120%～<br>代码风格：能跑就行，能跑得好更好喵 (๑•̀ㅂ•́)و✧</p><p> <strong>🌟 主要项目展示：</strong><br>• 🔍 <strong>MoeFace</strong> — 动漫人脸识别系统（3⭐），支持图片/视频/摄像头实时识别<br>• 🌐 <strong>ciallo0721-cmd.top</strong> — 个人站点 & 博客，20+ 篇技术文章<br>• 🧩 <strong>taffyineverything</strong> — 浏览器插件，让塔菲出现在任何地方喵<br>• 🎵 <strong>dashichang-to-UTAU</strong> — 大市唱转 UTAU 工具（开发中）<br>• 🧠 <strong>acetaffy-prompt</strong> — 永雏塔菲的提示词（2⭐）<br>• 🔒 <strong>url-masker</strong> — 独立密钥、无历史记录的 URL 加密工具</p><p> <strong>💻 技术栈：</strong>Python · JavaScript · HTML/CSS · MediaPipe · FaceNet · PyTorch · OpenCV · 原生 JS（无框架洁癖）</p><div style="margin-top:12px;padding:14px 18px;background:linear-gradient(135deg,rgba(236,72,153,0.12),rgba(37,117,252,0.08));border-radius:14px;border-left:4px solid #ec4899;font-size:0.97rem;color:#2d3a6b;font-weight:500"> <strong>喜欢这里？</strong> 把网址发给朋友，一起来玩游戏、聊技术吧！分享才是最好的支持！</div><div class="skills"><div class="skill-tag">Python</div><div class="skill-tag">JavaScript</div><div class="skill-tag">AI/ML</div><div class="skill-tag">VTuber 文化</div><div class="skill-tag">全栈开发</div><div class="skill-tag">开源爱好者</div></div></div></div></section>
-            
+            <section id="about" class="section">
+                <div class="section-title"><h2>关于我的说～</h2></div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Ciallo～(∠・ω＜ )⌒★ <strong>你们好呀！</strong> 人家是 <strong>ciallo0721-cmd</strong>——一个爱折腾代码的脆皮初中生喵！<br>弗雷尔卓德人 · 嘉豪(bushi) · <strong>INFP</strong> · 雏草姬 · VTuber 文化重度爱好者</p>
+                        <p> 我是<strong>全栈野路子开发者</strong>，喜欢做一些<strong>没人做、但有人需要</strong>的小工具！项目里 taffy 出没率 120%～<br>代码风格：能跑就行，能跑得好更好喵 (๑•̀ㅂ•́)و✧</p>
+                        <p> <strong>🌟 主要项目展示：</strong><br>• 🔍 <strong>MoeFace</strong> — 动漫人脸识别系统（3⭐），支持图片/视频/摄像头实时识别<br>• 🌐 <strong>ciallo0721-cmd.top</strong> — 个人站点 &amp; 博客，20+ 篇技术文章<br>• 🧩 <strong>taffyineverything</strong> — 浏览器插件，让塔菲出现在任何地方喵<br>• 🎵 <strong>dashichang-to-UTAU</strong> — 大市唱转 UTAU 工具（开发中）<br>• 🧠 <strong>acetaffy-prompt</strong> — 永雏塔菲的提示词（2⭐）<br>• 🔒 <strong>url-masker</strong> — 独立密钥、无历史记录的 URL 加密工具</p>
+                        <p> <strong>💻 技术栈：</strong>Python · JavaScript · HTML/CSS · MediaPipe · FaceNet · PyTorch · OpenCV · 原生 JS（无框架洁癖）</p>
+                        <div class="about-note"> <strong>喜欢这里？</strong> 把网址发给朋友，一起来玩游戏、聊技术吧！分享才是最好的支持！</div>
+                        <div class="skills">
+                            <div class="skill-tag">Python</div>
+                            <div class="skill-tag">JavaScript</div>
+                            <div class="skill-tag">AI/ML</div>
+                            <div class="skill-tag">VTuber 文化</div>
+                            <div class="skill-tag">全栈开发</div>
+                            <div class="skill-tag">开源爱好者</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- 右侧：更新记录（首页仅显示最近3条） -->
-            <section id="changelog" class="section timeline-section" style="margin:0;"><div class="section-title"><h2>更新记录喵～</h2></div><div class="timeline-wrapper"><div class="timeline" id="timelineList"><!-- 时间线条目由 JS 动态渲染，CSS 控制首页显示前3条 --></div><div style="text-align:center;margin-top:16px;"><a href="./timeline.html" class="game-jump-btn" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:0.85rem;padding:8px 20px;"><i class="fas fa-history"></i> 查看全部更新喵～</a></div></div></section>
+            <section id="changelog" class="section timeline-section">
+                <div class="section-title"><h2>更新记录喵～</h2></div>
+                <div class="timeline-wrapper">
+                    <div class="timeline" id="timelineList"><!-- 时间线条目由 JS 动态渲染，CSS 控制首页显示前3条 --></div>
+                    <div class="block-more">
+                        <a href="./timeline.html" class="game-jump-btn"><i class="fas fa-history"></i> 查看全部更新喵～</a>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- 广告位 #2：项目中横幅 -->
-        <div style="max-width:728px;margin:24px auto;">
-          <div data-ad-slot></div>
-        </div>
+        <div class="ad-slot"><div data-ad-slot></div></div>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
         <!-- 2. Pinned 项目展示 -->
-        <section id="pinned-projects" class="section"><div class="section-title"><h2>Pinned 项目喵～</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1200px;margin:0 auto;"><!-- MoeFace --><div style="background:rgba(255,255,255,0.95);border-radius:16px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border:1px solid rgba(236,72,153,0.15);transition:all 0.3s ease;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-eye" style="font-size:1.5rem;color:#ec4899;"></i><h3 style="font-size:1.2rem;color:#333;margin:0;">MoeFace</h3><span style="background:#ff6b9d;color:white;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:bold;margin-left:auto;">3 ⭐</span></div><p style="font-size:0.95rem;color:#666;line-height:1.6;margin-bottom:12px;">基于人脸识别的动漫角色识别系统，支持视频文件和摄像头实时识别，可显示中文角色名和置信度。</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><span style="background:rgba(236,72,153,0.1);color:#ec4899;padding:4px 10px;border-radius:12px;font-size:0.8rem;font-weight:500;">Python</span></div><a href="https://github.com/ciallo0721-cmd/MoeFace" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:#ec4899;font-size:0.9rem;margin-top:12px;text-decoration:none;font-weight:600;">查看项目 <i class="fas fa-external-link-alt"></i></a></div><!-- url-masker --><div style="background:rgba(255,255,255,0.95);border-radius:16px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border:1px solid rgba(236,72,153,0.15);transition:all 0.3s ease;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-lock" style="font-size:1.5rem;color:#ec4899;"></i><h3 style="font-size:1.2rem;color:#333;margin:0;">url-masker</h3><span style="background:#ff6b9d;color:white;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:bold;margin-left:auto;">1 ⭐</span></div><p style="font-size:0.95rem;color:#666;line-height:1.6;margin-bottom:12px;">一个独立密钥、无历史记录的URL加密工具</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><span style="background:rgba(236,72,153,0.1);color:#ec4899;padding:4px 10px;border-radius:12px;font-size:0.8rem;font-weight:500;">Python</span></div><a href="https://github.com/ciallo0721-cmd/url-masker" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:#ec4899;font-size:0.9rem;margin-top:12px;text-decoration:none;font-weight:600;">查看项目 <i class="fas fa-external-link-alt"></i></a></div><!-- Work-Simulator --><div style="background:rgba(255,255,255,0.95);border-radius:16px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border:1px solid rgba(236,72,153,0.15);transition:all 0.3s ease;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-gamepad" style="font-size:1.5rem;color:#ec4899;"></i><h3 style="font-size:1.2rem;color:#333;margin:0;">Work-Simulator</h3><span style="background:#ff6b9d;color:white;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:bold;margin-left:auto;">1 ⭐</span></div><p style="font-size:0.95rem;color:#666;line-height:1.6;margin-bottom:12px;">无聊写的</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><span style="background:rgba(236,72,153,0.1);color:#ec4899;padding:4px 10px;border-radius:12px;font-size:0.8rem;font-weight:500;">C++</span></div><a href="https://github.com/ciallo0721-cmd/Work-Simulator" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:#ec4899;font-size:0.9rem;margin-top:12px;text-decoration:none;font-weight:600;">查看项目 <i class="fas fa-external-link-alt"></i></a></div><!-- dashichang-to-UTAU --><div style="background:rgba(255,255,255,0.95);border-radius:16px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border:1px solid rgba(236,72,153,0.15);transition:all 0.3s ease;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-music" style="font-size:1.5rem;color:#ec4899;"></i><h3 style="font-size:1.2rem;color:#333;margin:0;">dashichang-to-UTAU</h3><span style="background:#ff6b9d;color:white;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:bold;margin-left:auto;">2 ⭐</span></div><p style="font-size:0.95rem;color:#666;line-height:1.6;margin-bottom:12px;">Convert Dashichang project files (.dsc/.ufdata) to UTAU formats (MID/UST)</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><span style="background:rgba(236,72,153,0.1);color:#ec4899;padding:4px 10px;border-radius:12px;font-size:0.8rem;font-weight:500;">Python</span></div><a href="https://github.com/ciallo0721-cmd/dashichang-to-UTAU" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:#ec4899;font-size:0.9rem;margin-top:12px;text-decoration:none;font-weight:600;">查看项目 <i class="fas fa-external-link-alt"></i></a></div><!-- acetaffy-prompt --><div style="background:rgba(255,255,255,0.95);border-radius:16px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border:1px solid rgba(236,72,153,0.15);transition:all 0.3s ease;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-robot" style="font-size:1.5rem;color:#ec4899;"></i><h3 style="font-size:1.2rem;color:#333;margin:0;">acetaffy-prompt</h3><span style="background:#ff6b9d;color:white;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:bold;margin-left:auto;">2 ⭐</span></div><p style="font-size:0.95rem;color:#666;line-height:1.6;margin-bottom:12px;">一个永雏塔菲的提示词</p><div style="display:flex;gap:8px;flex-wrap:wrap;"></div><a href="https://github.com/ciallo0721-cmd/acetaffy-prompt" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:#ec4899;font-size:0.9rem;margin-top:12px;text-decoration:none;font-weight:600;">查看项目 <i class="fas fa-external-link-alt"></i></a></div><!-- project-reviewer-skills --><div style="background:rgba(255,255,255,0.95);border-radius:16px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border:1px solid rgba(236,72,153,0.15);transition:all 0.3s ease;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><i class="fas fa-code-review" style="font-size:1.5rem;color:#ec4899;"></i><h3 style="font-size:1.2rem;color:#333;margin:0;">project-reviewer-skills</h3><span style="background:#ff6b9d;color:white;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:bold;margin-left:auto;">1 ⭐</span></div><p style="font-size:0.95rem;color:#666;line-height:1.6;margin-bottom:12px;">多维度项目审查专家</p><div style="display:flex;gap:8px;flex-wrap:wrap;"></div><a href="https://github.com/ciallo0721-cmd/project-reviewer-skills" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:#ec4899;font-size:0.9rem;margin-top:12px;text-decoration:none;font-weight:600;">查看项目 <i class="fas fa-external-link-alt"></i></a></div></div></section>
+        <section id="pinned-projects" class="section">
+            <div class="section-title"><h2>Pinned 项目喵～</h2></div>
+            <div class="pinned-grid">
+                <!-- MoeFace -->
+                <div class="project-card">
+                    <div class="project-head">
+                        <i class="fas fa-eye project-icon"></i>
+                        <h3 class="project-name">MoeFace</h3>
+                        <span class="project-badge">3 ⭐</span>
+                    </div>
+                    <p class="project-desc">基于人脸识别的动漫角色识别系统，支持视频文件和摄像头实时识别，可显示中文角色名和置信度。</p>
+                    <div class="project-tags"><span class="project-tag">Python</span></div>
+                    <a href="https://github.com/ciallo0721-cmd/MoeFace" target="_blank" rel="noopener noreferrer" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <!-- url-masker -->
+                <div class="project-card">
+                    <div class="project-head">
+                        <i class="fas fa-lock project-icon"></i>
+                        <h3 class="project-name">url-masker</h3>
+                        <span class="project-badge">1 ⭐</span>
+                    </div>
+                    <p class="project-desc">一个独立密钥、无历史记录的URL加密工具</p>
+                    <div class="project-tags"><span class="project-tag">Python</span></div>
+                    <a href="https://github.com/ciallo0721-cmd/url-masker" target="_blank" rel="noopener noreferrer" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <!-- Work-Simulator -->
+                <div class="project-card">
+                    <div class="project-head">
+                        <i class="fas fa-gamepad project-icon"></i>
+                        <h3 class="project-name">Work-Simulator</h3>
+                        <span class="project-badge">1 ⭐</span>
+                    </div>
+                    <p class="project-desc">无聊写的</p>
+                    <div class="project-tags"><span class="project-tag">C++</span></div>
+                    <a href="https://github.com/ciallo0721-cmd/Work-Simulator" target="_blank" rel="noopener noreferrer" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <!-- dashichang-to-UTAU -->
+                <div class="project-card">
+                    <div class="project-head">
+                        <i class="fas fa-music project-icon"></i>
+                        <h3 class="project-name">dashichang-to-UTAU</h3>
+                        <span class="project-badge">2 ⭐</span>
+                    </div>
+                    <p class="project-desc">Convert Dashichang project files (.dsc/.ufdata) to UTAU formats (MID/UST)</p>
+                    <div class="project-tags"><span class="project-tag">Python</span></div>
+                    <a href="https://github.com/ciallo0721-cmd/dashichang-to-UTAU" target="_blank" rel="noopener noreferrer" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <!-- acetaffy-prompt -->
+                <div class="project-card">
+                    <div class="project-head">
+                        <i class="fas fa-robot project-icon"></i>
+                        <h3 class="project-name">acetaffy-prompt</h3>
+                        <span class="project-badge">2 ⭐</span>
+                    </div>
+                    <p class="project-desc">一个永雏塔菲的提示词</p>
+                    <div class="project-tags"></div>
+                    <a href="https://github.com/ciallo0721-cmd/acetaffy-prompt" target="_blank" rel="noopener noreferrer" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <!-- project-reviewer-skills -->
+                <div class="project-card">
+                    <div class="project-head">
+                        <i class="fas fa-code-review project-icon"></i>
+                        <h3 class="project-name">project-reviewer-skills</h3>
+                        <span class="project-badge">1 ⭐</span>
+                    </div>
+                    <p class="project-desc">多维度项目审查专家</p>
+                    <div class="project-tags"></div>
+                    <a href="https://github.com/ciallo0721-cmd/project-reviewer-skills" target="_blank" rel="noopener noreferrer" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </section>
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
         <!-- 3. 技术文章（最新3篇，缩略展示） -->
-        <section id="articles" class="section"><div class="section-title"><h2>技术文章喵～</h2></div><div class="articles-container"><div class="articles-grid" id="articlesGrid"></div><div style="text-align:center; margin-top:40px;">            <a href="wz/" class="game-jump-btn" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;"><i class="fas fa-book-open"></i> 查看全部文章的说～</a></div>
+        <section id="articles" class="section">
+            <div class="section-title"><h2>技术文章喵～</h2></div>
+            <div class="articles-container">
+                <div class="articles-grid" id="articlesGrid"></div>
+                <div class="articles-more">
+                    <a href="wz/" class="game-jump-btn"><i class="fas fa-book-open"></i> 查看全部文章的说～</a>
+                </div>
 
-        <!-- Googlebot 静态文章链接（no-js 回退） -->
-        <noscript>
-          <div style="margin-top:30px;padding:20px;background:rgba(255,255,255,0.95);border-radius:16px;">
-            <h3 style="margin-bottom:15px;">文章列表</h3>
-            <ul style="list-style:none;padding:0;">
-              <li style="margin-bottom:8px;"><a href="/blog/科技/69/" style="color:#00A1D6;">CMD —— 命令提示符，Windows 的灵魂之窗</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/科技/64/" style="color:#00A1D6;">16位, 32位, 64位操作系统, 都是什么东西</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/科技/17/" style="color:#00A1D6;">优化X(Twitter)推荐算法</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/生活/76/" style="color:#00A1D6;">我与AI</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/生活/55/" style="color:#00A1D6;">我的音乐品味三年进化史（2023-2026）</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/生活/52/" style="color:#00A1D6;">从 UTAU 到心理学——我的 51 篇文章进化路</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/生活/48/" style="color:#00A1D6;">红烧五花肉——入口即化的幸福</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/生活/49/" style="color:#00A1D6;">蒜蓉西兰花——健康又美味的快手菜</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/闲聊/72/" style="color:#00A1D6;">NN 聊天室 —— 一个 Flask 项目的血泪修复史</a></li>
-              <li style="margin-bottom:8px;"><a href="/blog/生活/57/" style="color:#00A1D6;">浪漫文案？那是词语废料</a></li>
-              <li style="margin-top:12px;"><a href="/blog/" style="color:#FB7299;font-weight:600;">查看全部文章 →</a></li>
-            </ul>
-          </div>
-        </noscript>
-
-        </div></section>
+                <!-- Googlebot 静态文章链接（no-js 回退） -->
+                <noscript>
+                    <div class="articles-fallback">
+                        <h3>文章列表</h3>
+                        <ul>
+                            <li><a href="/blog/科技/69/">CMD —— 命令提示符，Windows 的灵魂之窗</a></li>
+                            <li><a href="/blog/科技/64/">16位, 32位, 64位操作系统, 都是什么东西</a></li>
+                            <li><a href="/blog/科技/17/">优化X(Twitter)推荐算法</a></li>
+                            <li><a href="/blog/生活/76/">我与AI</a></li>
+                            <li><a href="/blog/生活/55/">我的音乐品味三年进化史（2023-2026）</a></li>
+                            <li><a href="/blog/生活/52/">从 UTAU 到心理学——我的 51 篇文章进化路</a></li>
+                            <li><a href="/blog/生活/48/">红烧五花肉——入口即化的幸福</a></li>
+                            <li><a href="/blog/生活/49/">蒜蓉西兰花——健康又美味的快手菜</a></li>
+                            <li><a href="/blog/闲聊/72/">NN 聊天室 —— 一个 Flask 项目的血泪修复史</a></li>
+                            <li><a href="/blog/生活/57/">浪漫文案？那是词语废料</a></li>
+                            <li><a href="/blog/" class="fallback-all">查看全部文章 →</a></li>
+                        </ul>
+                    </div>
+                </noscript>
+            </div>
+        </section>
 
         <!-- 广告位 #3：文章区下方 -->
-        <div style="max-width:728px;margin:24px auto;">
-          <div data-ad-slot></div>
-        </div>
+        <div class="ad-slot"><div data-ad-slot></div></div>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
@@ -420,14 +533,36 @@
         <section id="iframes" class="section iframe-section"><div class="section-title"><h2>游戏预览喵～</h2></div><div class="iframe-container"><div class="iframe-wrapper"><div class="iframe-grid">
             <div class="iframe-item fade-in-up"><div class="iframe-header"><i class="fas fa-gamepad"></i><h3>打工模拟器</h3><span class="age-rating age-all">全年龄</span></div><div class="iframe-content"><a href="./work/" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fas fa-external-link-alt"></i> 在新标签页打开：打工模拟器</a></div><p class="iframe-description">C语言编译的WebAssembly文字经营模拟游戏，打工赚钱走上人生巅峰</p></div>
             <div class="iframe-item fade-in-up"><div class="iframe-header"><i class="fas fa-search"></i><h3>镜中人</h3><span class="age-rating age-all">全年龄</span></div><div class="iframe-content"><a href="./arg/" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fas fa-external-link-alt"></i> 在新标签页打开：镜中人</a></div><p class="iframe-description">Win98复古美学ARG解谜游戏 — 探索2002年神秘论坛「镜面论坛」，与"镜中人"对话，四种结局等你发现</p></div>
+            <div class="iframe-item fade-in-up">
+                <div class="iframe-header">
+                    <i class="fas fa-fire" aria-hidden="true"></i>
+                    <h3>12队大乱斗 fyGrid</h3>
+                    <span class="age-rating age-all">全年龄</span>
+                </div>
+                <div class="iframe-content">
+                    <a href="./CS/" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fas fa-external-link-alt"></i> 在新标签页打开：12队大乱斗</a>
+                </div>
+                <p class="iframe-description">仿 CSGO fy_iceworld 的 5v5 团队死斗第一人称射击，蓝白像素风小竞技场，倒地队友可扶起</p>
+            </div>
+            <div class="iframe-item fade-in-up">
+                <div class="iframe-header">
+                    <i class="fas fa-ghost" aria-hidden="true"></i>
+                    <h3>HRAI 恐怖逃生</h3>
+                    <span class="age-rating age-12">12+</span>
+                </div>
+                <div class="iframe-content">
+                    <a href="./HRAI/" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fas fa-external-link-alt"></i> 在新标签页打开：HRAI 恐怖逃生</a>
+                </div>
+                <p class="iframe-description">黑暗冰封竞技场里的单人恐怖追逐，收集 20 把钥匙盒合成大钥匙，从「它」手中逃出生天</p>
+            </div>
         </div></div></div></section>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
         <!-- 5. 更多功能（折叠容器，默认收起） -->
         <section id="more-content" class="section collapsible-section collapsed">
-            <div class="section-title collapsible-header" style="cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between;" onclick="toggleCollapse(this)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCollapse(this);}">
-                <h2>更多功能喵～ <i class="fas fa-chevron-down collapse-icon" style="font-size:0.85rem;" aria-hidden="true"></i></h2>
+            <div class="section-title collapsible-header" onclick="toggleCollapse(this)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCollapse(this);}">
+                <h2>更多功能喵～ <i class="fas fa-chevron-down collapse-icon" aria-hidden="true"></i></h2>
             </div>
             <div class="collapsible-body">
 
@@ -435,10 +570,22 @@
                 <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
                 <!-- B站 + 抖音 + TikTok + lit.link -->
-                <div class="two-column-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:50px 0;">
-                    <section id="douyin-space" class="section" style="background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:40px 20px;border-radius:25px;margin:0;box-shadow:0 10px 30px rgba(0,0,0,0.1);"><div class="section-title"><h2 style="display:inline-block;background:linear-gradient(45deg,#ec4899,#2575fc,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent;padding:10px 20px;font-size:2rem;">我的抖音空间喵～</h2><p style="color:#666;margin-top:10px;">点击下方按钮直接访问我的抖音主页 (๑>ᴗ<๑)</p></div><div style="text-align:center;margin-top:20px;"><a href="https://www.douyin.com/user/MS4wLjABAAAA-r_cTw_4f1RrpzWAs3twxb_iWcLYXmNlgGeXbl-2m8k?from_tab_name=main" target="_blank" rel="noopener noreferrer" class="game-jump-btn" style="background:linear-gradient(45deg,#ec4899,#2575fc);color:white;padding:12px 30px;border-radius:30px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-weight:bold;"><i class="fab fa-tiktok"></i> 直接打开</a></div></section>
-                    <section id="tiktok-space" class="section" style="background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:40px 20px;border-radius:25px;margin:0;box-shadow:0 10px 30px rgba(0,0,0,0.1);"><div class="section-title"><h2 style="display:inline-block;background:linear-gradient(45deg,#ec4899,#2575fc,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent;padding:10px 20px;font-size:2rem;">我的TikTok喵～</h2><p style="color:#666;margin-top:10px;">点击下方按钮直接访问我的TikTok主页 (๑>ᴗ<๑)</p></div><div style="text-align:center;margin-top:20px;"><a href="https://www.tiktok.com/@ciallo0721cmd" target="_blank" rel="noopener noreferrer" class="game-jump-btn" style="background:linear-gradient(45deg,#ec4899,#2575fc);color:white;padding:12px 30px;border-radius:30px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-weight:bold;"><i class="fab fa-tiktok"></i> 直接打开TikTok</a></div></section>
-                    <section id="litlink-space" class="section" style="background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:40px 20px;border-radius:25px;margin:0;box-shadow:0 10px 30px rgba(0,0,0,0.1);"><div class="section-title"><h2 style="display:inline-block;background:linear-gradient(45deg,#ec4899,#2575fc,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent;padding:10px 20px;font-size:2rem;">我的链接聚合喵～</h2><p style="color:#666;margin-top:10px;">lit.link 聚合页，所有社交账号一键直达 (๑>ᴗ<๑)</p></div><div style="text-align:center;margin-top:20px;"><a href="https://lit.link/zh-tw/ciallo0721cmd" target="_blank" rel="noopener noreferrer" class="game-jump-btn" style="background:linear-gradient(45deg,#ec4899,#2575fc);color:white;padding:12px 30px;border-radius:30px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-weight:bold;"><i class="fas fa-link"></i> 打开聚合页</a></div></section>
+                <div class="two-column-layout">
+                    <section id="douyin-space" class="section social-card">
+                        <div class="section-title"><h2 class="social-card-title">我的抖音空间喵～</h2></div>
+                        <p class="social-card-desc">点击下方按钮直接访问我的抖音主页 (๑>ᴗ<๑)</p>
+                        <a href="https://www.douyin.com/user/MS4wLjABAAAA-r_cTw_4f1RrpzWAs3twxb_iWcLYXmNlgGeXbl-2m8k?from_tab_name=main" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fab fa-tiktok"></i> 直接打开</a>
+                    </section>
+                    <section id="tiktok-space" class="section social-card">
+                        <div class="section-title"><h2 class="social-card-title">我的TikTok喵～</h2></div>
+                        <p class="social-card-desc">点击下方按钮直接访问我的TikTok主页 (๑>ᴗ<๑)</p>
+                        <a href="https://www.tiktok.com/@ciallo0721cmd" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fab fa-tiktok"></i> 直接打开TikTok</a>
+                    </section>
+                    <section id="litlink-space" class="section social-card">
+                        <div class="section-title"><h2 class="social-card-title">我的链接聚合喵～</h2></div>
+                        <p class="social-card-desc">lit.link 聚合页，所有社交账号一键直达 (๑>ᴗ<๑)</p>
+                        <a href="https://lit.link/zh-tw/ciallo0721cmd" target="_blank" rel="noopener noreferrer" class="game-jump-btn"><i class="fas fa-link"></i> 打开聚合页</a>
+                    </section>
                 </div>
             </div>
         </section>
@@ -446,26 +593,56 @@
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
         <!-- 6. 实用工具 -->
-        <section id="tools" class="section"><div class="section-title"><h2>实用工具喵～</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;max-width:1000px;margin:0 auto;">
-            <a href="./tools/vtuber-name-generator/" class="game-card" style="text-decoration:none;color:inherit;"><div style="padding:28px 24px;text-align:center;"><i class="fas fa-star" style="font-size:2.2rem;color:var(--bili-pink);margin-bottom:14px;"></i><h3 style="margin-bottom:8px;font-size:1.1rem;">VTuber 名字生成器</h3><p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;">随机生成 VTuber 风格的名字，支持多种风格</p></div></a>
-            <a href="./tools/renpy-template-generator/" class="game-card" style="text-decoration:none;color:inherit;"><div style="padding:28px 24px;text-align:center;"><i class="fas fa-code" style="font-size:2.2rem;color:var(--bili-blue);margin-bottom:14px;"></i><h3 style="margin-bottom:8px;font-size:1.1rem;">Ren'Py 模板生成器</h3><p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;">一键生成 script.rpy + options.rpy 完整项目文件</p></div></a>
-            <a href="./tools/vtuber-personality-test/" class="game-card" style="text-decoration:none;color:inherit;"><div style="padding:28px 24px;text-align:center;"><i class="fas fa-brain" style="font-size:2.2rem;color:#e056a0;margin-bottom:14px;"></i><h3 style="margin-bottom:8px;font-size:1.1rem;">VTuber 人格测试</h3><p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;">测测你适合什么样的 VTuber 人设</p></div></a>
-            <a href="./tools/anime-color-analyzer/" class="game-card" style="text-decoration:none;color:inherit;"><div style="padding:28px 24px;text-align:center;"><i class="fas fa-palette" style="font-size:2.2rem;color:#f5a623;margin-bottom:14px;"></i><h3 style="margin-bottom:8px;font-size:1.1rem;">二次元色彩分析器</h3><p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;">上传图片分析配色方案，生成调色板</p></div></a>
-            <a href="https://ciallo0721-cmd.top/scraper" target="_blank" rel="noopener noreferrer" class="game-card" style="text-decoration:none;color:inherit;"><div style="padding:28px 24px;text-align:center;"><i class="fas fa-film" style="font-size:2.2rem;color:#ec4899;margin-bottom:14px;" aria-hidden="true"></i><h3 style="margin-bottom:8px;font-size:1.1rem;">新番数据库</h3><p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;">实时查询当季新番动画信息，追番必备喵～</p></div></a>
-            <a href="https://ciallo0721-cmd.top/moeface" target="_blank" rel="noopener noreferrer" class="game-card" style="text-decoration:none;color:inherit;"><div style="padding:28px 24px;text-align:center;"><i class="fas fa-face-smile" style="font-size:2.2rem;color:#ff6699;margin-bottom:14px;" aria-hidden="true"></i><h3 style="margin-bottom:8px;font-size:1.1rem;">人脸识别</h3><p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.5;">上传图片识别动漫角色，纯浏览器端 AI 处理喵～</p></div></a>
-        </div><div style="text-align:center;margin-top:30px;"><a href="./tools/" class="game-jump-btn" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;"><i class="fas fa-wand-magic-sparkles"></i> 查看全部工具的说～</a></div></section>
+        <section id="tools" class="section">
+            <div class="section-title"><h2>实用工具喵～</h2></div>
+            <div class="tools-grid">
+                <a href="./tools/vtuber-name-generator/" class="game-card tool-card">
+                    <i class="fas fa-star tool-card-icon"></i>
+                    <h3 class="tool-card-name">VTuber 名字生成器</h3>
+                    <p class="tool-card-desc">随机生成 VTuber 风格的名字，支持多种风格</p>
+                </a>
+                <a href="./tools/renpy-template-generator/" class="game-card tool-card">
+                    <i class="fas fa-code tool-card-icon"></i>
+                    <h3 class="tool-card-name">Ren'Py 模板生成器</h3>
+                    <p class="tool-card-desc">一键生成 script.rpy + options.rpy 完整项目文件</p>
+                </a>
+                <a href="./tools/vtuber-personality-test/" class="game-card tool-card">
+                    <i class="fas fa-brain tool-card-icon"></i>
+                    <h3 class="tool-card-name">VTuber 人格测试</h3>
+                    <p class="tool-card-desc">测测你适合什么样的 VTuber 人设</p>
+                </a>
+                <a href="./tools/anime-color-analyzer/" class="game-card tool-card">
+                    <i class="fas fa-palette tool-card-icon"></i>
+                    <h3 class="tool-card-name">二次元色彩分析器</h3>
+                    <p class="tool-card-desc">上传图片分析配色方案，生成调色板</p>
+                </a>
+                <a href="https://ciallo0721-cmd.top/scraper" target="_blank" rel="noopener noreferrer" class="game-card tool-card">
+                    <i class="fas fa-film tool-card-icon" aria-hidden="true"></i>
+                    <h3 class="tool-card-name">新番数据库</h3>
+                    <p class="tool-card-desc">实时查询当季新番动画信息，追番必备喵～</p>
+                </a>
+                <a href="https://ciallo0721-cmd.top/moeface" target="_blank" rel="noopener noreferrer" class="game-card tool-card">
+                    <i class="fas fa-face-smile tool-card-icon" aria-hidden="true"></i>
+                    <h3 class="tool-card-name">人脸识别</h3>
+                    <p class="tool-card-desc">上传图片识别动漫角色，纯浏览器端 AI 处理喵～</p>
+                </a>
+            </div>
+            <div class="tools-more">
+                <a href="./tools/" class="game-jump-btn"><i class="fas fa-wand-magic-sparkles"></i> 查看全部工具的说～</a>
+            </div>
+        </section>
 
-        <section id="promo" class="section" style="background:linear-gradient(135deg, rgba(236,72,153,0.04), rgba(37,117,252,0.04));border:1px solid rgba(236,72,153,0.15);">
+        <section id="promo" class="section promo-card">
             <div class="section-title"><h2>🌐 想搞个自己的域名吗</h2></div>
-            <p style="color:var(--text-secondary);margin-bottom:20px;line-height:1.8;font-size:0.95rem;">
-                悄悄说，我域名都是在这个站搞的，<strong style="color:var(--bili-pink);">比某里某讯便宜一截</strong>～<br>
+            <p class="promo-text">
+                悄悄说，我域名都是在这个站搞的，<strong class="promo-hl">比某里某讯便宜一截</strong>～<br>
                 注册只要十几块，还不用实名等审核，懂的都懂喵～
             </p>
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap;">
-                <span style="font-weight:600;font-size:0.9rem;white-space:nowrap;">👇 点这里看看</span>
-                <div style="display:flex;align-items:center;background:white;border:2px solid rgba(236,72,153,0.2);border-radius:12px;overflow:hidden;flex:1;min-width:280px;">
-                    <input type="text" style="flex:1;border:none;padding:10px 14px;font-size:0.9rem;background:transparent;color:var(--text-primary);outline:none;font-family:'Courier New',monospace;" value="https://tname.net?sid=11078" readonly id="promoLinkIndex">
-                    <button onclick="copyPromoLinkIndex()" style="background:linear-gradient(135deg,var(--bili-pink),var(--bili-blue));color:white;border:none;padding:10px 20px;cursor:pointer;font-size:0.88rem;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all 0.3s;" id="promoBtnIndex"><i class="fas fa-copy"></i> 复制</button>
+            <div class="promo-copy-row">
+                <span class="promo-label">👇 点这里看看</span>
+                <div class="promo-input-wrap">
+                    <input type="text" class="promo-input" value="https://tname.net?sid=11078" readonly id="promoLinkIndex">
+                    <button onclick="copyPromoLinkIndex()" class="promo-copy-btn" id="promoBtnIndex"><i class="fas fa-copy"></i> 复制</button>
                 </div>
             </div>
         </section>
@@ -473,9 +650,7 @@
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
         <!-- 广告位 #4：底部横幅（动态广告系统） -->
-        <div style="max-width:728px;margin:24px auto;">
-          <div data-ad-slot></div>
-        </div>
+        <div class="ad-slot"><div data-ad-slot></div></div>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
@@ -512,7 +687,7 @@
     <!-- 7. 评论区 -->
     <section id="comments" class="section">
         <div class="section-title"><h2>💬 留言板</h2></div>
-        <p style="text-align:center;color:var(--text-secondary);margin-bottom:24px;font-size:0.95rem;">欢迎留下你的想法和足迹喵～</p>
+        <p class="comments-hint">欢迎留下你的想法和足迹喵～</p>
         <script src="https://giscus.app/client.js"
                 data-repo="ciallo0721-cmd/ciallo0721-cmd.github.io"
                 data-repo-id="R_kgDOQQdllw"
@@ -530,7 +705,7 @@
                 async>
         </script>
         <noscript>
-            <p style="text-align:center;color:var(--text-secondary);padding:40px 0;">
+            <p class="comments-noscript">
                 您的浏览器未启用 JavaScript，无法加载评论区。请启用 JavaScript 后刷新页面喵～
             </p>
         </noscript>
@@ -541,13 +716,25 @@
             <div class="footer-logo">ciallo0721-cmd</div>
             <p>感谢访问我的个人博客！期待与您交流游戏开发心得哦～ (๑˃̵ᴗ˂̵)و</p>
             <p class="copyright">© 2026 ciallo0721-cmd. 保留所有权利喵～</p>
-            <p id="dynamicFooterInfo" style="font-size:0.78rem;opacity:0.6;margin-top:8px;">加载动态数据中...</p>
-            <div style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
-                <a href="https://status.ciallo0721-cmd.top" style="display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.35);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(34,197,94,0.28)';this.style.color='white'" onmouseout="this.style.background='rgba(34,197,94,0.15)';this.style.color='rgba(255,255,255,0.85)'"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;animation:pulse-green 2.5s infinite">                 
-                </span> 查看网站状态</a><a href="./aboutme.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.35);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(236,72,153,0.28)';this.style.color='white'" onmouseout="this.style.background='rgba(236,72,153,0.15)';this.style.color='rgba(255,255,255,0.85)'">👤 关于作者</a><a href="./tools/" style="display:inline-flex;align-items:center;gap:6px;background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.35);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(236,72,153,0.28)';this.style.color='white'" onmouseout="this.style.background='rgba(236,72,153,0.15)';this.style.color='rgba(255,255,255,0.85)'">🔧 免费工具</a><a href="./friends.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.color='white'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.85)'">🔗 友情链接</a><a href="#comments" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.color='white'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.85)'">💬 留言板</a><a href="https://ifdian.net/a/ciallo0721-cmd" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,77,109,0.15);border:1px solid rgba(255,77,109,0.35);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(255,77,109,0.28)';this.style.color='white'" onmouseout="this.style.background='rgba(255,77,109,0.15)';this.style.color='rgba(255,255,255,0.85)'">❤️ 爱发电支持</a><a href="./doc/all.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.color='white'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.85)'">📜 用户协议与隐私政策</a><button id="adminEntryBtn" onclick="openAdminPanel()" style="background:transparent;border:none;color:rgba(255,255,255,0.15);font-size:0.7rem;cursor:pointer;padding:4px 8px;border-radius:4px;transition:all 0.3s;letter-spacing:1px;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.15)'"> 管理后台</button></div><div style="margin-top:14px"></div><a href="./doc/privacy.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.82rem;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all 0.3s;letter-spacing:0.3px;" onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.color='white'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.85)'">🔒 隐私政策</a></div></footer>
+            <p id="dynamicFooterInfo">加载动态数据中...</p>
+            <div class="footer-pills">
+                <a href="https://status.ciallo0721-cmd.top" class="footer-pill footer-pill--status"><span class="status-dot-live"></span> 查看网站状态</a>
+                <a href="./aboutme.html" class="footer-pill footer-pill--accent">👤 关于作者</a>
+                <a href="./tools/" class="footer-pill footer-pill--accent">🔧 免费工具</a>
+                <a href="./friends.html" class="footer-pill">🔗 友情链接</a>
+                <a href="#comments" class="footer-pill">💬 留言板</a>
+                <a href="https://ifdian.net/a/ciallo0721-cmd" target="_blank" rel="noopener noreferrer" class="footer-pill footer-pill--support">❤️ 爱发电支持</a>
+                <a href="./doc/all.html" class="footer-pill">📜 用户协议与隐私政策</a>
+                <button id="adminEntryBtn" class="admin-entry-btn" onclick="openAdminPanel()">管理后台</button>
+            </div>
+            <div class="footer-secondary">
+                <a href="./doc/privacy.html" class="footer-pill">🔒 隐私政策</a>
+            </div>
+        </div>
+    </footer>
 <!-- 管理后台入口 -->
     <!-- 特效容器（已精简，保留结构以防 JS 报错  -->
-    <div id="mouseTracker" style="display:none!important"></div>
+    <div id="mouseTracker"></div>
 
     <!-- 页面脚本 -->
     <script src="./articles-data.js"></script>
@@ -571,59 +758,25 @@
     
 
 <!-- ===== 公告弹窗 ===== -->
-<div id="announcementModal" style="
-    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-    background:rgba(0,0,0,0.6); z-index:99999;
-    align-items:center; justify-content:center;
-    backdrop-filter:blur(4px);
-">
-    <div style="
-        background:#fff; border-radius:20px; padding:36px 32px 28px;
-        max-width:480px; width:90%; position:relative;
-        box-shadow:0 20px 60px rgba(236,72,153,0.25);
-        animation:announcePop .35s cubic-bezier(.34,1.56,.64,1);
-    ">
-        <!-- 顶部装饰条 -->
-        <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ec4899,#2575fc,#66aaff);border-radius:20px 20px 0 0;"></div>
-        <!-- 关闭按钮 -->
-        <button onclick="closeAnnouncement()" style="
-            position:absolute; top:14px; right:16px;
-            background:none; border:none; font-size:1.4rem;
-            color:#999; cursor:pointer; line-height:1;
-            transition:color .2s;
-        " onmouseover="this.style.color='#ec4899'" onmouseout="this.style.color='#999'">×</button>
-        <!-- 图标 + 标题 -->
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <span style="font-size:1.6rem;">📢</span>
-            <h2 style="font-size:1.2rem;font-weight:700;background:linear-gradient(90deg,#ec4899,#2575fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0;">
-                站点公告
-            </h2>
+<div id="announcementModal" class="announcement-modal">
+    <div class="announcement-box">
+        <div class="announcement-bar"></div>
+        <button class="announcement-close" onclick="closeAnnouncement()">×</button>
+        <div class="announcement-head">
+            <span class="ann-icon">📢</span>
+            <h2 class="announcement-title">站点公告</h2>
         </div>
-        <!-- 公告正文（在这里修改内容喵～） -->
-        <div id="announcementContent" style="
-            font-size:0.97rem; color:#444; line-height:1.8;
-            border-left:3px solid #ec4899; padding-left:14px;
-            margin-bottom:22px;
-        ">
+        <div id="announcementContent" class="announcement-content">
             <!--ANN:START-->
-            <p>网站正在持续更新中，如果发现问题或有建议，欢迎在 <a href="./adss.html" style="color:#3366ff;text-decoration:none;font-weight:600;">联系页面</a> 告诉我的说～</p>
+            <p>网站正在持续更新中，如果发现问题或有建议，欢迎在 <a href="./adss.html">联系页面</a> 告诉我的说～</p>
             <!--ANN:END-->
         </div>
-        <!-- 底部按钮 -->
-        <div style="display:flex;gap:10px;justify-content:flex-end;align-items:center;">
-            <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#888;cursor:pointer;margin-right:auto;">
-                <input type="checkbox" id="announceNoMore" style="cursor:pointer;accent-color:#ec4899;">
+        <div class="announcement-foot">
+            <label class="announcement-nomore">
+                <input type="checkbox" id="announceNoMore">
                 今天不再显示
             </label>
-            <button onclick="closeAnnouncement()" style="
-                padding:9px 26px; background:linear-gradient(90deg,#ec4899,#2575fc);
-                color:#fff; border:none; border-radius:10px; cursor:pointer;
-                font-size:0.95rem; font-weight:600;
-                box-shadow:0 4px 12px rgba(236,72,153,0.35);
-                transition:opacity .2s;
-            " onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-                我知道了 ✓
-            </button>
+            <button class="announcement-ok" onclick="closeAnnouncement()">我知道了 ✓</button>
         </div>
     </div>
 </div>
@@ -635,10 +788,7 @@
 
     <audio id="bg-music" src="./css/戸高一生 - 似顔絵広場 (似顔絵チャンネル).mp3" loop preload="auto"></audio>
 
-    <!-- 低功耗模式切换按钮 -->
-    <button class="theme-switcher" id="powerSaveBtn" onclick="toggleLowPowerEffects()" title="切换低功耗模式，提升旧电脑性能" style="min-width:auto;padding:12px 18px;">
-        <i class="fas fa-bolt"></i><span>特效加速</span>
-    </button>
+
 
     <script src="./js/js/index.js"></script>
 <script>
@@ -730,5 +880,25 @@
     <script src="./js/js/tracking.js"></script>
     <!-- 海外访客英文界面提示（探测能否直连 YouTube，仅墙外显示，点击才跳转） -->
     <script src="./js/js/intl-en-hint.js" defer></script>
+    <!-- 全站搜索 -->
+    <div class="site-search" id="siteSearch" role="dialog" aria-modal="true" aria-label="全站搜索">
+        <div class="site-search-panel">
+            <div class="site-search-head">
+                <i class="fas fa-search site-search-icon" aria-hidden="true"></i>
+                <input type="search" id="siteSearchInput" class="site-search-input"
+                       placeholder="搜索全站文章与页面…" autocomplete="off" spellcheck="false">
+                <button type="button" class="site-search-close" id="siteSearchClose" aria-label="关闭搜索">×</button>
+            </div>
+            <div class="site-search-hint" id="siteSearchHint">
+                支持文章标题 / 摘要 / 标签，以及站点页面
+                <span class="site-search-kbd">Ctrl</span><span class="site-search-kbd">K</span> 呼出
+                <span class="site-search-kbd">Esc</span> 关闭
+            </div>
+            <div class="site-search-results" id="siteSearchResults"></div>
+        </div>
+    </div>
+
+    <script src="./js/js/site-search.js" defer></script>
+
 </body>
 </html>
