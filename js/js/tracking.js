@@ -39,6 +39,7 @@
     wmOpacity: 0.035,               // 水印不透明度（0.035 = 隐形但截图放大可见）
     wmColor: '0,0,0',               // 水印 RGB 颜色
     wmZIndex: 2147483646,           // 水印层级
+    wmMinDataLen: 600,              // 水印 dataURL 最短长度（低于此值视为被隐私特性抹白）
     trackAttr: 'data-track',        // 链接自动拼接 userid 的属性
     trackFormAttr: 'data-track-form' // 表单自动注入 userid 的属性
   };
@@ -48,13 +49,28 @@
   var lastIPHash = 'ip-xxxxxxxxxxxx';
   var wmEl = null;
   var wmTimer = null;
+  var wmStatus = 'pending';        // pending | ok | no-context | blank | blocked | error
+
+  // 统一告警出口：水印失败只在控制台提示，绝不中断页面其他功能
+  function wmWarn(msg) {
+    try {
+      if (window.console && console.warn) console.warn('[tracking/watermark] ' + msg);
+    } catch (e) {}
+  }
 
   /* ==================== 工具函数 ==================== */
 
   function randHex(len) {
-    var a = new Uint16Array(Math.ceil(len / 4));
-    crypto.getRandomValues(a);
-    return a[0].toString(16).padStart(len, '0').slice(0, len);
+    try {
+      var a = new Uint16Array(Math.ceil(len / 4));
+      crypto.getRandomValues(a);
+      return a[0].toString(16).padStart(len, '0').slice(0, len);
+    } catch (e) {
+      // crypto 不可用（极旧浏览器 / 非安全上下文）时降级，保证水印仍能生成
+      var s = '';
+      for (var i = 0; i < len; i++) s += Math.floor(Math.random() * 16).toString(16);
+      return s;
+    }
   }
 
   function getParam(name) {
@@ -263,45 +279,85 @@
 
   function buildWatermark(userid, code, ipHash) {
     lastIPHash = ipHash;
-    var W = 380, H = 190;
-    var canvas = document.createElement('canvas');
-    canvas.width = W; canvas.height = H;
-    var ctx = canvas.getContext('2d');
-    ctx.translate(W / 2, H / 2);
-    ctx.rotate(-Math.PI / 7); // 约 -25.7 度
-    ctx.fillStyle = 'rgba(' + CONFIG.wmColor + ',0.55)';
-    ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(userid, 0, -10);
-    ctx.fillText(code + ' | ' + ipHash, 0, 12);
-    var url = canvas.toDataURL('image/png');
+    try {
+      var W = 380, H = 190;
+      var canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      var ctx = canvas.getContext && canvas.getContext('2d');
+      if (!ctx) {
+        wmStatus = 'no-context';
+        wmWarn('拿不到 canvas 2d 上下文，本次跳过水印（页面其他功能不受影响）');
+        return false;
+      }
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(-Math.PI / 7); // 约 -25.7 度
+      ctx.fillStyle = 'rgba(' + CONFIG.wmColor + ',0.55)';
+      ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(userid, 0, -10);
+      ctx.fillText(code + ' | ' + ipHash, 0, 12);
 
-    if (wmEl) wmEl.remove();
-    wmEl = document.createElement('div');
-    wmEl.id = 'cb-watermark';
-    wmEl.setAttribute('aria-hidden', 'true');
-    wmEl.style.cssText =
-      'position:fixed;left:0;top:0;width:100vw;height:100vh;' +
-      'pointer-events:none;z-index:' + CONFIG.wmZIndex + ';' +
-      'background-image:url("' + url + '");background-repeat:repeat;' +
-      'background-size:' + W + 'px ' + H + 'px;' +
-      'opacity:' + CONFIG.wmOpacity + ';user-select:none;';
-    document.documentElement.appendChild(wmEl);
+      // 读回校验：确认文字真的写进了像素，也能发现读回被屏蔽的情况
+      var painted = 0;
+      try {
+        var px = ctx.getImageData(0, 0, W, H).data;
+        for (var i = 3; i < px.length; i += 4) { if (px[i] > 0) painted++; }
+      } catch (e) {
+        painted = -1; // 读回被拒，交给下面的 dataURL 长度兜底判断
+      }
+      if (painted === 0) {
+        wmStatus = 'blank';
+        wmWarn('canvas 像素读回为空，绘制未生效');
+        return false;
+      }
+
+      var url = canvas.toDataURL('image/png');
+      // 空白 PNG 的 dataURL 极短；被 Brave / Firefox 指纹防护抹白时会明显偏小
+      if (!url || url.indexOf('data:image/png') !== 0 || url.length < CONFIG.wmMinDataLen) {
+        wmStatus = 'blocked';
+        wmWarn('canvas 内容疑似被浏览器隐私保护屏蔽（Brave / Firefox 指纹防护等），水印将不可见');
+        return false;
+      }
+
+      if (wmEl) wmEl.remove();
+      wmEl = document.createElement('div');
+      wmEl.id = 'cb-watermark';
+      wmEl.setAttribute('aria-hidden', 'true');
+      wmEl.style.cssText =
+        'position:fixed;left:0;top:0;width:100vw;height:100vh;' +
+        'pointer-events:none;z-index:' + CONFIG.wmZIndex + ';' +
+        'background-image:url("' + url + '");background-repeat:repeat;' +
+        'background-size:' + W + 'px ' + H + 'px;' +
+        'opacity:' + CONFIG.wmOpacity + ';user-select:none;';
+      document.documentElement.appendChild(wmEl);
+      wmStatus = 'ok';
+      return true;
+    } catch (e) {
+      wmStatus = 'error';
+      wmWarn('水印绘制异常：' + (e && e.message ? e.message : e));
+      return false;
+    }
   }
 
   // 防删除/防隐藏：MutationObserver + 定时器双重保险
   function guardWatermark(rebuild) {
+    var lastCheck = 0;
     var check = function () {
-      if (!wmEl || !wmEl.isConnected) { rebuild(); return; }
-      var cs = window.getComputedStyle(wmEl);
-      if (cs.display === 'none' || cs.visibility === 'hidden' ||
-          parseFloat(cs.opacity || '1') < 0.001) {
-        rebuild();
-      }
+      var now = Date.now();
+      if (now - lastCheck < 500) return;   // 节流：文章页 DOM 变动频繁，避免高频强制重排
+      lastCheck = now;
+      try {
+        if (!wmEl || !wmEl.isConnected) { rebuild(); return; }
+        var cs = window.getComputedStyle(wmEl);
+        if (cs.display === 'none' || cs.visibility === 'hidden' ||
+            parseFloat(cs.opacity || '1') < 0.001) {
+          rebuild();
+        }
+      } catch (e) { /* 忽略，避免影响页面 */ }
     };
     try {
-      new MutationObserver(function () { check(); })
+      new MutationObserver(check)
         .observe(document.documentElement, { childList: true, subtree: true });
     } catch (e) {}
     if (wmTimer) clearInterval(wmTimer);
@@ -370,6 +426,28 @@
     } catch (e) {}
   }
 
+  /* ==================== IP 哈希（按会话缓存） ==================== */
+
+  // 全站铺开后每个页面都查一次第三方接口既慢又浪费 → 同一会话内只查一次
+  var IP_CACHE_KEY = 'cb_iphash';
+
+  function resolveIPHash() {
+    try {
+      var cached = sessionStorage.getItem(IP_CACHE_KEY);
+      if (cached) return Promise.resolve(cached);
+    } catch (e) {}
+    return getPublicIP().then(function (ip) {
+      if (ip) return buildIPHash(ip);            // 优先公网 IP
+      return getLocalIP().then(buildIPHash);     // 失败降级内网 IP
+    }).then(function (h) {
+      // 只缓存有效结果，失败占位不要固化
+      if (h && h.indexOf('xxxxxxxxxxxx') < 0) {
+        try { sessionStorage.setItem(IP_CACHE_KEY, h); } catch (e) {}
+      }
+      return h;
+    });
+  }
+
   /* ==================== 初始化 ==================== */
 
   function init() {
@@ -404,10 +482,7 @@
           osCodeStr = c2;
         }
       }),
-      getPublicIP().then(function (ip) {
-        if (ip) return buildIPHash(ip);            // 优先公网 IP
-        return getLocalIP().then(buildIPHash);     // 失败降级内网 IP
-      })
+      resolveIPHash()
     ]).then(function (res) {
       buildWatermark(currentUserID, osCodeStr, res[1]);
       syncParamsToURL(); // OS 精确识别后 id 可能已更新，地址栏同步一次
@@ -422,7 +497,12 @@
     }
   }
 
-  init();
+  // 用 try 包住：任何意外只在控制台报一声，绝不连累宿主页面的其他脚本
+  try {
+    init();
+  } catch (e) {
+    wmWarn('初始化失败：' + (e && e.message ? e.message : e));
+  }
 
   /* 调试 / 站长自查入口 */
   window.CB_Tracking = {
@@ -430,7 +510,8 @@
     get os() { return osCodeStr; },
     get ipHash() { return lastIPHash; },
     getTrackUrl: getTrackUrl,
-    get watermarked() { return !!(wmEl && wmEl.isConnected); }
+    get watermarked() { return !!(wmEl && wmEl.isConnected); },
+    get status() { return wmStatus; }   // pending / ok / no-context / blank / blocked / error
   };
 
   /* =====================================================================
