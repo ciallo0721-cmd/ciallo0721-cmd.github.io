@@ -25,12 +25,12 @@
 </head>
 <body>
     <!-- 广告位 #1：顶部横幅 -->
-    <div style="max-width:728px;margin:18px auto;">
+    <div class="ad-slot">
       <div data-ad-slot></div>
     </div>
 
 <!-- 顶部导航 -->
-<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">网站状态监控 - ciallo0721-cmd</h1>
+    <h1 class="sr-only">网站状态监控 - ciallo0721-cmd</h1>
 <div class="topbar">
     <div class="topbar-inner">
         <div class="topbar-title">
@@ -67,10 +67,10 @@
 
     <!-- 图例 -->
     <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> 一切正常</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> 小问题（错别字/引用错误等）</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> 严重问题（无法访问/界面错位等）</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--gray)"></div> 无记录</div>
+        <div class="legend-item"><div class="legend-dot ok"></div> 一切正常</div>
+        <div class="legend-item"><div class="legend-dot warn"></div> 小问题（错别字/引用错误等）</div>
+        <div class="legend-item"><div class="legend-dot error"></div> 严重问题（无法访问/界面错位等）</div>
+        <div class="legend-item"><div class="legend-dot gray"></div> 无记录</div>
     </div>
 
     <!-- ===== 历史回放 ===== -->
@@ -79,7 +79,7 @@
         <h3>历史回放</h3>
         <div class="section-line"></div>
     </div>
-    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">
+    <p class="section-hint">
         每次网站更新都会在此记录状态喵～红色=严重问题，黄色=小问题，绿色=一切正常。
     </p>
     <div class="sh-container" id="statusHistoryList">
@@ -98,7 +98,7 @@
     <script src="./js/js/status.js"></script>
 
     <!-- 广告位 #2：底部横幅 -->
-    <div style="max-width:728px;margin:18px auto;">
+    <div class="ad-slot">
       <div data-ad-slot></div>
     </div>
 

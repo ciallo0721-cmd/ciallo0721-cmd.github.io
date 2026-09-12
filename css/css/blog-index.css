@@ -1,0 +1,344 @@
+/* ==========================================================================
+   ciallo0721-cmd · 文章站（blog/index.html）样式表
+   设计语言：海青 #0EA5E9 + 中性白底 · 大留白 · 清晰分层 · 细腻圆角 · 柔和阴影
+   断点：1024 / 768 / 480
+   ========================================================================== */
+
+/* ---------- 1. 设计令牌 ---------- */
+:root{
+  --accent:#0EA5E9;
+  --accent-dark:#0284C7;
+  --accent-deep:#0C4A6E;
+  --accent-soft:#E0F2FE;
+  --accent-line:#BAE6FD;
+
+  --bg:#FFFFFF;
+  --bg-soft:#F8FAFC;
+  --bg-page:#F7FAFC;
+  --surface:#FFFFFF;
+
+  --border:#E2E8F0;
+  --border-strong:#CBD5E1;
+
+  --text:#0F172A;
+  --text-2:#475569;
+  --text-3:#94A3B8;
+
+  --radius-s:8px;
+  --radius-m:12px;
+  --radius-l:16px;
+  --radius-xl:20px;
+  --radius-pill:999px;
+
+  --shadow-1:0 1px 2px rgba(15,23,42,.05);
+  --shadow-2:0 4px 16px rgba(15,23,42,.06);
+  --shadow-3:0 12px 32px rgba(15,23,42,.10);
+
+  --maxw:1120px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC","Noto Sans CJK SC",sans-serif;
+
+  --s-1:4px;  --s-2:8px;  --s-3:12px; --s-4:16px;
+  --s-6:24px; --s-8:32px; --s-12:48px; --s-16:64px; --s-24:96px;
+
+  --t:.25s cubic-bezier(.4,0,.2,1);
+  --transition:var(--t);
+}
+
+/* ---------- 2. 基础与重置 ---------- */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font);
+  font-size:16px;line-height:1.7;
+  color:var(--text);
+  background:var(--bg-page);
+  min-height:100vh;position:relative;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:var(--accent-dark);text-decoration:none;transition:color var(--t);}
+a:hover{color:var(--accent);}
+button{font-family:inherit;}
+i.fas,i.fab,i.far,i.fa{display:inline-flex;align-items:center;justify-content:center;line-height:1;}
+i svg{width:1em;height:1em;fill:currentColor;display:block;}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--s-6);position:relative;z-index:1;}
+
+/* 原书架插画装饰 —— 简洁风格下隐藏，保留 DOM 不报错 */
+.bookshelf-bg{display:none;}
+
+/* ---------- 3. 导航 ---------- */
+nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-container{display:flex;align-items:center;justify-content:space-between;gap:var(--s-6);padding-top:var(--s-3);padding-bottom:var(--s-3);}
+.logo{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:1.05rem;font-weight:700;color:var(--text);
+  letter-spacing:-.01em;white-space:nowrap;
+}
+.logo:hover{color:var(--accent-dark);}
+.logo i{color:var(--accent);}
+.nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-1);list-style:none;}
+.nav-links a{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 12px;border-radius:var(--radius-s);
+  color:var(--text-2);font-size:.9rem;font-weight:500;
+  transition:var(--t);
+}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent-deep);}
+
+/* ---------- 4. 页头 ---------- */
+header{
+  padding:var(--s-24) 0 var(--s-16);
+  text-align:center;
+  background:linear-gradient(180deg,#F0F9FF 0%,rgba(240,249,255,0) 100%);
+  border-bottom:1px solid var(--border);
+  margin-bottom:var(--s-12);
+}
+.header-content h1{
+  font-size:2.6rem;font-weight:700;line-height:1.25;
+  letter-spacing:-.02em;color:var(--accent-deep);
+  margin-bottom:var(--s-3);
+}
+.header-content p{
+  font-size:1.05rem;color:var(--text-2);
+  max-width:620px;margin:0 auto;
+}
+
+/* ---------- 5. 主内容 ---------- */
+.articles-main-container{padding-bottom:var(--s-16);}
+
+.articles-header{text-align:center;margin-bottom:var(--s-8);}
+.articles-header h2{
+  font-size:1.8rem;font-weight:700;letter-spacing:-.01em;
+  color:var(--text);
+}
+.articles-count{font-size:.95rem;color:var(--text-2);margin-top:var(--s-2);}
+.articles-count .highlight{color:var(--accent-dark);font-weight:700;}
+
+/* ---------- 6. 筛选区 ---------- */
+.articles-filters{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--s-6);
+  margin-bottom:var(--s-8);
+  box-shadow:var(--shadow-1);
+}
+.search-container{display:flex;gap:var(--s-3);margin-bottom:var(--s-6);}
+.search-input{
+  flex:1;min-width:0;
+  padding:13px 20px;
+  font-family:inherit;font-size:.95rem;color:var(--text);
+  background:var(--bg-soft);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  outline:none;
+  transition:border-color var(--t),box-shadow var(--t),background var(--t);
+}
+.search-input::placeholder{color:var(--text-3);}
+.search-input:focus{
+  background:#fff;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(14,165,233,.14);
+}
+.search-button{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);
+  padding:13px 26px;border:none;border-radius:var(--radius-pill);
+  background:var(--accent-dark);color:#fff;
+  font-size:.95rem;font-weight:600;white-space:nowrap;
+  cursor:pointer;box-shadow:var(--shadow-1);transition:var(--t);
+}
+.search-button:hover{background:var(--accent-deep);box-shadow:var(--shadow-2);}
+
+.filter-tags{
+  display:flex;flex-wrap:wrap;gap:var(--s-2);
+  max-height:82px;overflow:hidden;position:relative;
+  transition:max-height .45s cubic-bezier(.4,0,.2,1);
+}
+.filter-tags.expanded{max-height:3000px;}
+.filter-tags::after{
+  content:'';position:absolute;inset:auto 0 0 0;height:40px;
+  background:linear-gradient(transparent,var(--surface));
+  pointer-events:none;transition:opacity .3s;
+}
+.filter-tags.expanded::after{opacity:0;}
+.filter-tag{
+  padding:7px 16px;border-radius:var(--radius-pill);
+  background:var(--bg-soft);border:1px solid var(--border);
+  color:var(--text-2);font:inherit;
+  font-size:.86rem;font-weight:500;line-height:1.5;
+  cursor:pointer;
+  transition:background var(--t),border-color var(--t),color var(--t),box-shadow var(--t);
+}
+.filter-tag:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-deep);}
+.filter-tag.active{
+  background:var(--accent-dark);border-color:var(--accent-dark);
+  color:#fff;box-shadow:var(--shadow-1);
+}
+.tags-toggle{
+  /* 默认隐藏，标签超过 4 个时由 blog/index.html 内联脚本置为 inline-flex */
+  display:none;align-items:center;gap:6px;
+  margin-top:var(--s-3);padding:6px 18px;
+  background:none;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill);
+  color:var(--text-2);font-size:.84rem;
+  cursor:pointer;transition:var(--t);
+}
+.tags-toggle:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-deep);}
+
+/* ---------- 7. 文章网格 ---------- */
+.articles-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:var(--s-6);
+  margin-bottom:var(--s-12);
+}
+.article-card{
+  display:flex;flex-direction:column;height:100%;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-l);
+  box-shadow:var(--shadow-1);
+  color:inherit;overflow:hidden;position:relative;
+  transition:transform var(--t),box-shadow var(--t),border-color var(--t);
+}
+.article-card::before{
+  content:'';position:absolute;inset:0 0 auto;height:3px;
+  background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.article-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-3);
+  border-color:var(--accent-line);
+  color:inherit;
+}
+.article-card:hover::before{transform:scaleX(1);}
+.article-card.paid{border-color:var(--accent-line);}
+.article-content{display:flex;flex-direction:column;flex:1;padding:var(--s-6);}
+.article-meta{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);margin-bottom:var(--s-3);}
+.article-number{
+  padding:3px 10px;border-radius:var(--radius-s);
+  background:var(--accent-soft);color:var(--accent-deep);
+  font-size:.75rem;font-weight:600;white-space:nowrap;
+}
+.article-date{font-size:.8rem;color:var(--text-3);white-space:nowrap;}
+.article-content h3{
+  font-size:1.15rem;font-weight:600;line-height:1.45;
+  color:var(--text);margin-bottom:var(--s-3);flex-grow:1;
+}
+.article-excerpt{
+  font-size:.92rem;color:var(--text-2);line-height:1.75;
+  margin-bottom:var(--s-4);
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.article-tags{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:auto;}
+.article-tag{
+  padding:3px 12px;border-radius:var(--radius-pill);
+  background:var(--bg-soft);border:1px solid var(--border);
+  color:var(--text-2);font-size:.76rem;font-weight:500;
+  transition:var(--t);
+}
+.article-tag:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-deep);}
+.article-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);
+  margin-top:var(--s-4);padding-top:var(--s-4);
+  border-top:1px solid var(--border);
+}
+.read-more{display:inline-flex;align-items:center;gap:6px;color:var(--accent-dark);font-size:.88rem;font-weight:600;}
+.read-more i{font-size:.8em;transition:transform var(--t);}
+.article-card:hover .read-more i{transform:translateX(3px);}
+.read-time{display:inline-flex;align-items:center;gap:5px;color:var(--text-3);font-size:.8rem;}
+
+/* 空状态 */
+.no-results{display:none;text-align:center;padding:var(--s-16) var(--s-6);color:var(--text-2);}
+.no-results i{font-size:2.6rem;color:var(--accent);margin-bottom:var(--s-4);}
+.no-results h3{font-size:1.15rem;font-weight:600;color:var(--text);margin-bottom:var(--s-2);}
+.no-results p{font-size:.92rem;color:var(--text-3);}
+
+/* 入场动画（JS 添加 .card-reveal） */
+@keyframes cardReveal{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.card-reveal{animation:cardReveal .5s cubic-bezier(.4,0,.2,1) both;}
+
+/* ---------- 8. 页脚 ---------- */
+footer{
+  background:var(--accent-deep);
+  color:rgba(255,255,255,.78);
+  padding:var(--s-16) 0 var(--s-8);
+  margin-top:var(--s-16);
+}
+.footer-content{text-align:center;}
+.footer-logo{
+  font-size:1.5rem;font-weight:700;color:#fff;
+  letter-spacing:-.01em;margin-bottom:var(--s-3);
+}
+footer p{font-size:.92rem;margin-bottom:var(--s-3);color:rgba(255,255,255,.72);}
+.copyright{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:var(--s-4);}
+.back-home{margin-top:var(--s-4);}
+.back-home a{
+  display:inline-flex;align-items:center;gap:var(--s-2);
+  padding:10px 24px;border-radius:var(--radius-pill);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  color:rgba(255,255,255,.85);
+  font-size:.9rem;font-weight:500;
+  transition:var(--t);
+}
+.back-home a:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3);color:#fff;}
+
+/* ---------- 9. 滚动条 ---------- */
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+
+/* ---------- 10. 焦点可见性 ---------- */
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+/* ---------- 11. 响应式 ---------- */
+@media (max-width:1024px){
+  :root{--maxw:100%;}
+}
+
+@media (max-width:768px){
+  :root{--s-24:64px;--s-16:48px;--s-12:32px;}
+  .container{padding:0 var(--s-4);}
+  .nav-container{flex-direction:column;gap:var(--s-3);padding:var(--s-3) var(--s-4);}
+  .nav-links{justify-content:center;}
+  header{padding:var(--s-16) 0 var(--s-12);}
+  .header-content h1{font-size:2rem;}
+  .header-content p{font-size:.98rem;}
+  .articles-header h2{font-size:1.5rem;}
+  .articles-grid{grid-template-columns:1fr;gap:var(--s-4);}
+  .search-container{flex-direction:column;}
+  .search-button{width:100%;}
+  .article-content{padding:var(--s-4);}
+  .articles-filters{padding:var(--s-4);}
+}
+
+@media (max-width:480px){
+  .header-content h1{font-size:1.7rem;}
+  .header-content p{font-size:.92rem;}
+  .articles-header h2{font-size:1.3rem;}
+  .article-content h3{font-size:1.05rem;}
+  .filter-tag{font-size:.8rem;padding:6px 13px;}
+  .footer-logo{font-size:1.3rem;}
+}
+
+/* ---------- 12. 无障碍：尊重系统「减弱动态效果」 ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+  html{scroll-behavior:auto;}
+}

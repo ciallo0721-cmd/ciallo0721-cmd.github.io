@@ -101,19 +101,19 @@
     '#' + CFG.barID + '{position:fixed;left:0;right:0;bottom:0;z-index:99997;box-sizing:border-box;' +
       'padding:14px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 18px;' +
       'background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);' +
-      'border-top:1px solid rgba(236,72,153,.2);box-shadow:0 -6px 24px rgba(120,60,110,.12);' +
+      'border-top:1px solid rgba(14,165,233,.2);box-shadow:0 -6px 24px rgba(15,23,42,.10);' +
       'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;' +
       'transform:translateY(100%);transition:transform .45s ease;}' +
     '#' + CFG.barID + '.on{transform:translateY(0);}' +
-    '#' + CFG.barID + ' .cbc-txt{font-size:.82rem;color:#4a4f60;line-height:1.65;max-width:660px;}' +
-    '#' + CFG.barID + ' .cbc-txt b{color:#1f2233;font-weight:600;}' +
-    '#' + CFG.barID + ' .cbc-txt a{color:#ec4899;text-decoration:none;border-bottom:1px solid rgba(236,72,153,.35);}' +
+    '#' + CFG.barID + ' .cbc-txt{font-size:.82rem;color:#475569;line-height:1.65;max-width:660px;}' +
+    '#' + CFG.barID + ' .cbc-txt b{color:#0F172A;font-weight:600;}' +
+    '#' + CFG.barID + ' .cbc-txt a{color:#0284C7;text-decoration:none;border-bottom:1px solid rgba(14,165,233,.35);}' +
     '#' + CFG.barID + ' .cbc-btns{display:flex;gap:8px;flex-shrink:0;}' +
     '#' + CFG.barID + ' button{border:none;cursor:pointer;font-family:inherit;font-size:.82rem;' +
       'padding:9px 18px;border-radius:22px;transition:opacity .2s ease,transform .2s ease;}' +
-    '#' + CFG.barID + ' .cbc-ok{font-weight:600;color:#fff;background:linear-gradient(135deg,#ec4899,#2575fc);' +
-      'box-shadow:0 4px 14px rgba(236,72,153,.32);}' +
-    '#' + CFG.barID + ' .cbc-no{color:#7b8093;background:rgba(0,0,0,.05);}' +
+    '#' + CFG.barID + ' .cbc-ok{font-weight:600;color:#fff;background:#0284C7;' +
+      'box-shadow:0 4px 14px rgba(2,132,199,.28);}' +
+    '#' + CFG.barID + ' .cbc-no{color:#64748B;background:rgba(0,0,0,.05);}' +
     '#' + CFG.barID + ' button:hover{opacity:.88;}' +
     '#' + CFG.barID + ' button:active{transform:scale(.97);}' +
     '@media (max-width:560px){#' + CFG.barID + '{padding:12px 16px;gap:8px;}' +
