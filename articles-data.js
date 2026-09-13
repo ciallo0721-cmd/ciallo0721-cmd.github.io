@@ -871,6 +871,28 @@ window.articlesData = {
             readTime: 11,
             featured: true
         },
+        {
+            id: 81,
+            category: "教程",
+            fileName: "教程/81/",
+            title: "STMG 超级文本 Markdown：给 Galgame 写剧本的一门语言",
+            excerpt: "STMG（超级文本 Markdown）是一门用来写 Galgame 剧本的标记语言。从头的元信息、身体的流程模块，到目录结构、角色定义、Python 后门与五级错误提示，一份完整的语法速览。",
+            date: "2026-09-12",
+            tags: ["STMG", "STM", "Galgame", "脚本语言", "Markdown", "游戏开发", "Ren'Py"],
+            readTime: 8,
+            featured: false
+        },
+        {
+            id: 82,
+            category: "教程",
+            fileName: "教程/82/",
+            title: "怎么扒好一首歌的谱，并转成 .mid 文件",
+            excerpt: "怎么扒好一首歌的谱，并转成 .mid 文件",
+            date: "2026-09-13",
+            tags: ["mid", "扒谱", "音乐"],
+            readTime: 11,
+            featured: true
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

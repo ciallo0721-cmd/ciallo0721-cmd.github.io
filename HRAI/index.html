@@ -55,5 +55,14 @@
   if(c)c.addEventListener('click',function(e){e.stopPropagation();p.style.display='none';});
 })();
 </script>
+<!-- 真·果蝇脑注入：?fly=1 果蝇自动驾驶人类；?battle=1 对战（你开「它」追果蝇人）；?free=1 逗果蝇沙盒（你飞天、果蝇 6 向漫游）。均需先 node server.js 起 8088 -->
+<script>
+if (location.search.indexOf('fly') >= 0 || location.search.indexOf('battle') >= 0 || location.search.indexOf('free') >= 0) {
+  var f = document.createElement('script');
+  f.src = 'http://localhost:8088/fly-pilot.js';
+  f.onerror = function () { console.warn('[fly] 仿真服务器未启动：请先 `node server.js`（端口 8088）'); };
+  document.body.appendChild(f);
+}
+</script>
 </body>
 </html>
