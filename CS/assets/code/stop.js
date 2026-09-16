@@ -40,6 +40,22 @@ el('shareBtn2').addEventListener('click', shareGame);
 el('againBtn').addEventListener('click', resetMatch);
 el('quitBtn').addEventListener('click', quitToMenu);
 
+// 取消全屏：手机端 requestLandscape 进了全屏后，提供游戏内退出入口（仅在全屏时显示）
+function exitFullscreen(){
+  if(document.exitFullscreen) document.exitFullscreen();
+  else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+  else if(document.msExitFullscreen) document.msExitFullscreen();
+}
+function syncFsBtn(){
+  const b=el('fsExitBtn'); if(!b) return;
+  const fs=!!(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement);
+  b.classList.toggle('hide', !fs);
+}
+document.addEventListener('fullscreenchange', syncFsBtn);
+document.addEventListener('webkitfullscreenchange', syncFsBtn);
+syncFsBtn();
+el('fsExitBtn').addEventListener('click', ()=>{ exitFullscreen(); toast('已退出全屏'); });
+
 // 灵敏度旋钮
 const sensInput=el('sens'), sensVal=el('sensVal');
 function applySens(){ const mul=parseFloat(sensInput.value); sensitivity=0.001*mul; sensVal.textContent=mul.toFixed(1); }

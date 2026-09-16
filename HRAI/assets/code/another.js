@@ -72,6 +72,7 @@ const UI_HTML = `
   </div>
   <div class="start" id="resumeBtn">继续</div>
   <div class="start" id="shareBtn2" style="border-color:#5aa6ff;color:#5aa6ff;">分享链接</div>
+  <div class="start hide" id="fsExitBtn" style="border-color:#8b949e;color:#8b949e;">取消全屏</div>
   <div class="start" id="quitBtn" style="border-color:#ff6a6a;color:#ff6a6a;">返回开始界面</div>
 </div>
 
