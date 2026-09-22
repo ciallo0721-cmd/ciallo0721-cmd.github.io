@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>永雏塔菲开播了吗 · 直播间状态监控</title>
+<meta name="description" content="实时轮询永雏塔菲 B 站直播间（22603245）的开播状态：直播中 / 轮播中 / 未开播，一眼看清。内置官方嵌入播放器与浏览器截图两种查看方式，纯静态实现。">
+<meta name="keywords" content="永雏塔菲,开播了吗,直播间状态,AceTaffy,bilibili,22603245">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="永雏塔菲开播了吗 · 直播间状态监控">
+<meta property="og:description" content="实时轮询塔菲直播间状态：直播中 / 轮播中 / 未开播喵～">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciallo0721-cmd.top/istaffylive/">
+<link rel="icon" href="../fanv.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../fanv.ico" type="image/x-icon">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.pageMeta = { content_type: 'app', page_name: 'istaffylive', category: 'taffy' };
+</script>
+<script src="../js/js/gtag-config.js"></script>
+
+<link rel="stylesheet" href="../css/css/istaffylive.css">
+<script defer src="../js/js/svg-icons.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      <i class="fas fa-bilibili"></i>
+      开播了吗
+    </div>
+    <nav class="topbar-links">
+      <a href="https://xn--d6qr7hrtcb06avk0aljka.top" target="_blank" rel="noopener">关注塔菲谢谢喵.top <i class="fas fa-external-link-alt"></i></a>
+      <a href="https://live.bilibili.com/22603245" target="_blank" rel="noopener">直播间 <i class="fas fa-external-link-alt"></i></a>
+      <a href="../">回首页</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+
+  <h1 class="page-title">永雏塔菲 · 直播间状态</h1>
+  <p class="page-sub">房间号 22603245 · 每隔一段时间自动轮询一次，判定规则见页面底部说明。</p>
+
+  <!-- ============ 状态总览 ============ -->
+  <section class="status-card" id="statusCard" data-state="checking">
+    <div class="status-pulse">
+      <span class="pulse-dot"></span>
+    </div>
+    <div class="status-body">
+      <span class="status-badge" id="statusBadge">检测中…</span>
+      <h2 class="status-title" id="statusTitle">正在确认塔菲的开播状态</h2>
+      <p class="status-text" id="statusText">首次检测需要几秒钟，正在读取直播间页面。</p>
+    </div>
+    <div class="status-side">
+      <div class="side-item">
+        <span class="side-k">开播时长</span>
+        <strong class="side-v" id="liveDuration">—</strong>
+      </div>
+      <div class="side-item">
+        <span class="side-k">当前人气</span>
+        <strong class="side-v" id="onlineCount">—</strong>
+      </div>
+      <div class="side-item">
+        <span class="side-k">更新时间</span>
+        <strong class="side-v" id="lastCheck">—</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 检测信号 ============ -->
+  <section class="signals" aria-label="本次检测信号">
+    <span class="sig" id="sigPage"><i class="fas fa-file-contract"></i><span class="sig-v">页面文本：待检测</span></span>
+    <span class="sig" id="sigApi"><i class="fas fa-database"></i><span class="sig-v">接口状态：待检测</span></span>
+    <span class="sig" id="sigRoute"><i class="fas fa-wifi-slash"></i><span class="sig-v">数据通路：—</span></span>
+    <span class="sig" id="sigNext"><i class="fas fa-clock"></i><span class="sig-v">下次检测：—</span></span>
+  </section>
+
+  <!-- ============ 浏览器窗口 ============ -->
+  <section class="window">
+    <div class="window-bar">
+      <div class="window-dots"><span></span><span></span><span></span></div>
+      <div class="window-addr" id="windowAddr">live.bilibili.com/22603245</div>
+      <div class="window-tabs" role="tablist" aria-label="查看方式">
+        <button type="button" class="win-tab is-on" id="tabLive" role="tab" aria-selected="true">实时画面</button>
+        <button type="button" class="win-tab" id="tabShot" role="tab" aria-selected="false">截图模式</button>
+      </div>
+    </div>
+
+    <div class="window-view">
+      <iframe class="win-frame" id="liveFrame" src="about:blank"
+              title="永雏塔菲直播间（B 站官方嵌入播放器）"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+
+      <div class="win-shot" id="shotPane" hidden>
+        <div class="shot-loading" id="shotLoading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <span id="shotLoadingText">正在让远端渲染服务截取直播间页面…</span>
+        </div>
+        <img class="shot-img" id="shotImg" alt="永雏塔菲直播间页面截图" hidden>
+        <p class="shot-note" id="shotNote"></p>
+      </div>
+    </div>
+
+    <div class="window-foot">
+      <span class="foot-hint" id="footHint">官方嵌入播放器，未开播时显示等待画面</span>
+      <button type="button" class="btn btn-ghost" id="btnShotRefresh"><i class="fas fa-refresh"></i> 重新截图</button>
+    </div>
+  </section>
+
+  <!-- ============ 检测设置与日志 ============ -->
+  <section class="panel">
+    <div class="panel-head">
+      <i class="fas fa-adjust"></i>
+      <h2>检测设置</h2>
+      <div class="panel-line"></div>
+    </div>
+
+    <div class="controls">
+      <label class="field" for="selInterval">
+        <span class="field-k">轮询间隔</span>
+        <select id="selInterval" class="select">
+          <option value="30000">30 秒</option>
+          <option value="60000">60 秒</option>
+          <option value="120000">2 分钟</option>
+          <option value="300000">5 分钟</option>
+          <option value="0">不自动，仅手动</option>
+        </select>
+      </label>
+
+      <label class="check" for="chkPause">
+        <input type="checkbox" id="chkPause" checked>
+        <span>切到后台标签时暂停轮询</span>
+      </label>
+
+      <button type="button" class="btn btn-primary" id="btnCheckNow"><i class="fas fa-refresh"></i><span>立即检测</span></button>
+    </div>
+
+    <div class="panel-head">
+      <i class="fas fa-list-ul"></i>
+      <h2>检测日志</h2>
+      <div class="panel-line"></div>
+      <button type="button" class="btn btn-ghost btn-sm" id="btnClearLog">清空</button>
+    </div>
+    <ul class="log" id="logList"></ul>
+  </section>
+
+  <!-- ============ 说明 ============ -->
+  <section class="notes">
+    <article class="note">
+      <h3><i class="fas fa-info-circle"></i> 判定规则</h3>
+      <p>页面出现「未开播」字样 → 判为<strong>未开播</strong>；出现「直播中」字样或任意超级留言（醒目留言 / SC）→ 判为<strong>已开播</strong>。若两者都没抓到，则回落到接口字段 <code>live_status</code>：<code>1</code> 直播中、<code>2</code> 轮播中、<code>0</code> 未开播。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-wifi-slash"></i> 为什么是「公共数据通路」</h3>
+      <p>本页是纯静态页面，浏览器直连 B 站接口会被跨域策略以 403 拦下，所以改用公共 CORS 中继读取直播间页面与接口，多路自动切换、失效即换下一条。中继整体不可用时，页面会保留上一次的结果并提示失败，不会乱报状态。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-image"></i> 关于「截图模式」</h3>
+      <p>截图由第三方渲染服务生成，是真实页面截图（不是本站缓存）。遇到 B 站验证浮层、渲染排队或偶发超时都属正常，点「重新截图」重试即可。为避免滥用第三方额度，截图只在切换到该模式或点按钮时抓取。</p>
+    </article>
+  </section>
+
+  <div class="footer-bar">
+    © 2026 ciallo0721-cmd · 本页与哔哩哔哩官方无关，状态仅供参考
+  </div>
+
+</main>
+
+<script src="../js/js/istaffylive.js" defer></script>
+</body>
+</html>
