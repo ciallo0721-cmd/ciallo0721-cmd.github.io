@@ -85,21 +85,16 @@
     <div class="window-bar">
       <div class="window-dots"><span></span><span></span><span></span></div>
       <div class="window-addr" id="windowAddr">live.bilibili.com/22603245</div>
-      <div class="window-tabs" role="tablist" aria-label="查看方式">
-        <button type="button" class="win-tab is-on" id="tabLive" role="tab" aria-selected="true">实时画面</button>
-        <button type="button" class="win-tab" id="tabShot" role="tab" aria-selected="false">截图模式</button>
-      </div>
+      <span class="win-tag"><i class="fas fa-image"></i> 截图模式</span>
     </div>
 
     <div class="window-view">
-      <iframe class="win-frame" id="liveFrame" src="about:blank"
-              title="永雏塔菲直播间（B 站官方嵌入播放器）"
-              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-
-      <div class="win-shot" id="shotPane" hidden>
+      <div class="win-shot" id="shotPane">
         <div class="shot-loading" id="shotLoading">
           <i class="fas fa-spinner fa-spin"></i>
           <span id="shotLoadingText">正在让远端渲染服务截取直播间页面…</span>
+          <span class="shot-timer" id="shotTimer" hidden>预计 40 秒内出结果 · 已等待 0 秒</span>
+          <span class="shot-bar" id="shotBar" hidden><span class="shot-bar-fill" id="shotBarFill"></span></span>
         </div>
         <img class="shot-img" id="shotImg" alt="永雏塔菲直播间页面截图" hidden>
         <p class="shot-note" id="shotNote"></p>
@@ -107,7 +102,7 @@
     </div>
 
     <div class="window-foot">
-      <span class="foot-hint" id="footHint">官方嵌入播放器，未开播时显示等待画面</span>
+      <span class="foot-hint" id="footHint">截图约需 40 秒，超时或遇到验证浮层可点「重新截图」重试</span>
       <button type="button" class="btn btn-ghost" id="btnShotRefresh"><i class="fas fa-refresh"></i> 重新截图</button>
     </div>
   </section>
@@ -161,7 +156,7 @@
     </article>
     <article class="note">
       <h3><i class="fas fa-image"></i> 关于「截图模式」</h3>
-      <p>截图由第三方渲染服务生成，是真实页面截图（不是本站缓存）。遇到 B 站验证浮层、渲染排队或偶发超时都属正常，点「重新截图」重试即可。为避免滥用第三方额度，截图只在切换到该模式或点按钮时抓取。</p>
+      <p>截图由第三方渲染服务生成，是真实页面截图（不是本站缓存），<strong>约 40 秒出结果</strong>：页面会显示等待秒数与进度条，超过 40 秒仍未出图则自动放弃并提示重试。遇到 B 站验证浮层、渲染排队或偶发超时都属正常，点「重新截图」即可。为避免滥用第三方额度，截图只在打开页面和点按钮时抓取。</p>
     </article>
   </section>
 

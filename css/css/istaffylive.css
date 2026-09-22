@@ -271,32 +271,23 @@ i.fas,i.far,i.fab{display:inline-block;line-height:1;}
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 
-.window-tabs{display:flex;gap:4px;flex:0 0 auto;}
-.win-tab{
-  font-family:inherit;font-size:12.5px;font-weight:600;
-  color:var(--text2);
-  background:transparent;
-  border:1px solid transparent;
+.win-tag{
+  flex:0 0 auto;
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;
+  color:var(--accent-deep);
+  background:var(--accent-soft);
+  border:1px solid var(--accent-line);
   border-radius:var(--radius-pill);
-  padding:5px 12px;
-  cursor:pointer;
-  transition:background var(--t),color var(--t),border-color var(--t);
+  padding:4px 11px;
+  white-space:nowrap;
 }
-.win-tab:hover{background:var(--surface);color:var(--text);}
-.win-tab.is-on{
-  background:var(--accent);color:#fff;border-color:var(--accent);
-}
+.win-tag i.fas,.win-tag svg{font-size:12px;width:12px;height:12px;color:var(--accent);}
 
 .window-view{
   position:relative;
   aspect-ratio:16 / 9;
   min-height:280px;
-  background:#0F172A;
-}
-.win-frame{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  border:0;display:block;
   background:#0F172A;
 }
 
@@ -312,10 +303,28 @@ i.fas,i.far,i.fab{display:inline-block;line-height:1;}
 .shot-loading{
   display:flex;flex-direction:column;align-items:center;gap:var(--s-3);
   color:#CBD5E1;font-size:13.5px;text-align:center;padding:var(--s-6);
+  width:min(420px,80%);
 }
 /* 图标尺寸写在 <i> 上，替换成 SVG 时会被复制过去 */
 .shot-loading i.fas{font-size:26px;color:var(--accent);}
 @keyframes spin{to{transform:rotate(360deg);}}
+.shot-timer{
+  font-size:12.5px;color:#94A3B8;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.3px;
+}
+.shot-bar{
+  display:block;width:100%;height:4px;
+  background:rgba(148,163,184,.22);
+  border-radius:var(--radius-pill);
+  overflow:hidden;
+}
+.shot-bar-fill{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--accent),#7DD3FC);
+  border-radius:var(--radius-pill);
+  transition:width .25s linear;
+}
 .shot-note{
   position:absolute;left:0;right:0;bottom:0;
   font-size:12px;color:#E2E8F0;

@@ -21,21 +21,39 @@
   var ROOM_ID   = 22603245;
   var PAGE_URL  = 'https://live.bilibili.com/' + ROOM_ID;
   var API_URL   = 'https://api.live.bilibili.com/room/v1/Room/get_info?room_id=' + ROOM_ID;
-  var FRAME_URL = 'https://live.bilibili.com/blanc/' + ROOM_ID;
   var SHOT_API  = 'https://api.microlink.io/';
+  var SHOT_BUDGET = 40000;   // 截图模式整体预算：40 秒内出结果，超时即放弃并提示重试
 
   var RELAY_TIMEOUT = 14000;   // 单次中继请求超时
   var RELAY_TRIES   = 2;       // 单个中继重试次数（公共中继常间歇性 5xx）
   var LOG_MAX       = 40;
 
-  /* 公共 CORS 中继链，按顺序尝试；上次成功的会被提到最前 */
-  var RELAYS = [
-    { name: 'allorigins', wrap: function (u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); } },
-    { name: 'corsfix',    wrap: function (u) { return 'https://proxy.corsfix.com/?' + u; } },
-    { name: 'cors.lol',   wrap: function (u) { return 'https://api.cors.lol/?url=' + encodeURIComponent(u); } },
-    { name: 'codetabs',   wrap: function (u) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u); } },
-    { name: 'corsproxy',  wrap: function (u) { return 'https://corsproxy.io/?url=' + encodeURIComponent(u); } }
-  ];
+  /* 自建中转（可选，推荐）：部署 istaffylive/bili-proxy-worker.js 到 Cloudflare Worker，
+     把地址填在下面（结尾带 /），例如：
+       var SELF_RELAY = 'https://bili-proxy.abc.workers.dev/';
+     留空则只用公共中继。填上后自建优先，失败了才回落公共中继。 */
+  var SELF_RELAY = '';
+
+  /* allorigins 的 /get 端点会把目标内容包一层 {"contents":"..."}，需要拆开 */
+  function unwrapAllOrigins(txt) {
+    var j = JSON.parse(txt);
+    if (j && typeof j.contents === 'string' && j.contents.length > 20) return j.contents;
+    throw new Error('allorigins 包装异常');
+  }
+
+  /* 公共 CORS 中继链，按顺序尝试；上次成功的会被提到最前。
+     2026-09-22 实测：allorigins /raw 挂（522），/get 正常；corsfix 要求域名注册，降级后排。 */
+  var RELAYS = (SELF_RELAY ? [{
+    name: '自建中转',
+    wrap: function (u) { return SELF_RELAY + '?u=' + encodeURIComponent(u); }
+  }] : []).concat([
+    { name: 'allorigins',     wrap: function (u) { return 'https://api.allorigins.win/get?url=' + encodeURIComponent(u); }, unwrap: unwrapAllOrigins },
+    { name: 'allorigins-raw', wrap: function (u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); } },
+    { name: 'cors.lol',       wrap: function (u) { return 'https://api.cors.lol/?url=' + encodeURIComponent(u); } },
+    { name: 'codetabs',       wrap: function (u) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u); } },
+    { name: 'corsproxy',      wrap: function (u) { return 'https://corsproxy.io/?url=' + encodeURIComponent(u); } },
+    { name: 'corsfix',        wrap: function (u) { return 'https://proxy.corsfix.com/?' + u; } }
+  ]);
 
   var TEXT = {
     checking: { badge: '检测中…', title: '正在确认塔菲的开播状态', text: '正在读取直播间页面与接口，请稍候。' },
@@ -55,10 +73,9 @@
     nextAt: 0,
     inflight: false,
     last: null,          // { kind, title, startMs, online, at }
-    mode: 'live',
-    frameInited: false,
     shotBusy: false,
     shotAt: 0,
+    shotTickTimer: null,
     dom: {}
   };
 
@@ -153,7 +170,9 @@
   }
 
   function tryRelay(relay, url, tries) {
-    return rawText(relay.wrap(url)).catch(function (err) {
+    return rawText(relay.wrap(url)).then(function (txt) {
+      return relay.unwrap ? relay.unwrap(txt) : txt;
+    }).catch(function (err) {
       if (tries <= 1) throw err;
       return new Promise(function (res) { setTimeout(res, 700); })
         .then(function () { return tryRelay(relay, url, tries - 1); });
@@ -434,39 +453,41 @@
     tickMeta();
   }
 
-  /* ---------- 查看模式 ---------- */
-  function setMode(mode, silent) {
-    state.mode = (mode === 'shot') ? 'shot' : 'live';
-
-    var isShot = state.mode === 'shot';
-    state.dom.tabLive.className = 'win-tab' + (isShot ? '' : ' is-on');
-    state.dom.tabLive.setAttribute('aria-selected', isShot ? 'false' : 'true');
-    state.dom.tabShot.className = 'win-tab' + (isShot ? ' is-on' : '');
-    state.dom.tabShot.setAttribute('aria-selected', isShot ? 'true' : 'false');
-
-    state.dom.shotPane.hidden = !isShot;
-    state.dom.btnShotRefresh.disabled = !isShot;
-    state.dom.footHint.textContent = isShot
-      ? '截图来自第三方渲染服务，可能有延迟或验证浮层'
-      : '官方嵌入播放器，未开播时显示等待画面';
-
-    if (isShot) {
-      /* 停掉播放器，避免后台继续拉流 */
-      if (state.frameInited) {
-        state.dom.liveFrame.src = 'about:blank';
-        state.frameInited = false;
-      }
-      if (!state.shotAt) takeShot();
-    } else if (!state.frameInited) {
-      state.dom.liveFrame.src = FRAME_URL;
-      state.frameInited = true;
-    }
-
-    store('ista_live_mode', state.mode);
-    if (!silent) addLog('切换到' + (isShot ? '截图模式' : '实时画面'), null);
+  /* ---------- 截图（唯一查看方式） ---------- */
+  function showShot(img, note) {
+    state.dom.shotImg.hidden = true;
+    if (img) state.dom.shotImg.src = img;
+    state.dom.shotNote.textContent = note || '';
   }
 
-  /* ---------- 截图 ---------- */
+  /* 40 秒预算内显示已等待秒数与进度条 */
+  function startShotClock() {
+    var started = Date.now();
+    var timer = state.dom.shotTimer;
+    var bar = state.dom.shotBar;
+    var fill = state.dom.shotBarFill;
+    timer.hidden = false;
+    bar.hidden = false;
+    fill.style.width = '0%';
+    timer.textContent = '预计 40 秒内出结果 · 已等待 0 秒';
+
+    state.shotTickTimer = setInterval(function () {
+      var ms = Date.now() - started;
+      var sec = Math.floor(ms / 1000);
+      var pct = Math.min(96, ms / SHOT_BUDGET * 100);
+      fill.style.width = pct.toFixed(1) + '%';
+      timer.textContent = ms >= SHOT_BUDGET
+        ? '已等待 ' + sec + ' 秒 · 已超过 40 秒，正在收尾…'
+        : '预计 40 秒内出结果 · 已等待 ' + sec + ' 秒';
+    }, 250);
+  }
+
+  function stopShotClock() {
+    if (state.shotTickTimer) { clearInterval(state.shotTickTimer); state.shotTickTimer = null; }
+    if (state.dom.shotTimer) state.dom.shotTimer.hidden = true;
+    if (state.dom.shotBar) state.dom.shotBar.hidden = true;
+  }
+
   function takeShot() {
     if (state.shotBusy) return;
     state.shotBusy = true;
@@ -476,6 +497,13 @@
     state.dom.shotLoadingText.textContent = '正在让远端渲染服务截取直播间页面…';
     state.dom.shotNote.textContent = '';
     state.dom.btnShotRefresh.disabled = true;
+    startShotClock();
+
+    var started = Date.now();
+
+    /* 整体 40 秒硬预算：到点直接中断，不让页面一直转圈 */
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var budgetTimer = setTimeout(function () { if (ctrl) ctrl.abort(); }, SHOT_BUDGET);
 
     var url = SHOT_API +
       '?url=' + encodeURIComponent(PAGE_URL) +
@@ -484,60 +512,66 @@
       '&viewport.width=1440&viewport.height=810' +
       '&waitUntil=domcontentloaded';
 
-    fetch(url, { cache: 'no-store' }).then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
-    }).then(function (data) {
-      if (!data || data.status !== 'success' || !data.data || !data.data.screenshot) {
-        throw new Error((data && data.message) || '渲染服务返回失败');
-      }
-      var shot = data.data.screenshot;
-      return new Promise(function (resolve, reject) {
-        var img = state.dom.shotImg;
-        var probe = new Image();
-        var done = false;
-        var to = setTimeout(function () {
-          if (done) return;
-          done = true;
-          reject(new Error('截图图片加载超时'));
-        }, 25000);
-        probe.onload = function () {
-          if (done) return;
-          done = true;
-          clearTimeout(to);
-          img.src = probe.src;
-          img.hidden = false;
-          state.dom.shotLoading.hidden = true;
-          resolve(shot);
-        };
-        probe.onerror = function () {
-          if (done) return;
-          done = true;
-          clearTimeout(to);
-          reject(new Error('截图图片加载失败'));
-        };
-        probe.src = shot.url;
+    fetch(url, ctrl ? { cache: 'no-store', signal: ctrl.signal } : { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }).then(function (data) {
+        if (!data || data.status !== 'success' || !data.data || !data.data.screenshot) {
+          throw new Error((data && data.message) || '渲染服务返回失败');
+        }
+        var shot = data.data.screenshot;
+        return new Promise(function (resolve, reject) {
+          var img = state.dom.shotImg;
+          var probe = new Image();
+          var done = false;
+          var left = SHOT_BUDGET - (Date.now() - started);
+          var to = setTimeout(function () {
+            if (done) return;
+            done = true;
+            reject(new Error('超过 40 秒仍未出图'));
+          }, left > 1000 ? left : 1000);
+          probe.onload = function () {
+            if (done) return;
+            done = true;
+            clearTimeout(to);
+            img.src = probe.src;
+            img.hidden = false;
+            state.dom.shotLoading.hidden = true;
+            resolve(shot);
+          };
+          probe.onerror = function () {
+            if (done) return;
+            done = true;
+            clearTimeout(to);
+            reject(new Error('截图图片加载失败'));
+          };
+          probe.src = shot.url;
+        });
+      }).then(function (shot) {
+        stopShotClock();
+        state.shotAt = Date.now();
+        state.dom.shotNote.textContent = '截图时间 ' + fmtClock(new Date()) +
+          ' · ' + shot.width + '×' + shot.height + ' · ' + shot.size_pretty +
+          ' · 耗时 ' + Math.round((state.shotAt - started) / 1000) + ' 秒';
+        addLog('已生成直播间截图（' + shot.size_pretty + '）', 'ok');
+      }).catch(function (err) {
+        stopShotClock();
+        state.dom.shotLoading.hidden = false;
+        state.dom.shotLoadingText.textContent = (err && err.name === 'AbortError')
+          ? '等待超过 40 秒仍未出图，点「重新截图」重试'
+          : '截图失败：' + err.message + '（可点「重新截图」重试）';
+        addLog('截图失败：' + ((err && err.name === 'AbortError') ? '超过 40 秒未出图' : err.message), 'bad');
+      }).then(function () {
+        clearTimeout(budgetTimer);
+        state.shotBusy = false;
+        state.dom.btnShotRefresh.disabled = false;
       });
-    }).then(function (shot) {
-      state.shotAt = Date.now();
-      state.dom.shotNote.textContent = '截图时间 ' + fmtClock(new Date()) +
-        ' · ' + shot.width + '×' + shot.height + ' · ' + shot.size_pretty;
-      addLog('已生成直播间截图（' + shot.size_pretty + '）', 'ok');
-    }).catch(function (err) {
-      state.dom.shotLoading.hidden = false;
-      state.dom.shotLoadingText.textContent = '截图失败：' + err.message + '（可点「重新截图」重试）';
-      addLog('截图失败：' + err.message, 'bad');
-    }).then(function () {
-      state.shotBusy = false;
-      if (state.mode === 'shot') state.dom.btnShotRefresh.disabled = false;
-    });
   }
 
   /* ---------- 事件绑定 ---------- */
   function bindEvents() {
     state.dom.btnCheckNow.addEventListener('click', function () { check(true); });
-    state.dom.tabLive.addEventListener('click', function () { setMode('live'); });
-    state.dom.tabShot.addEventListener('click', function () { setMode('shot'); });
     state.dom.btnShotRefresh.addEventListener('click', function () { takeShot(); });
 
     state.dom.btnClearLog.addEventListener('click', function () {
@@ -571,8 +605,8 @@
   function cacheDom() {
     var ids = ['statusCard', 'statusBadge', 'statusTitle', 'statusText', 'liveDuration',
                'onlineCount', 'lastCheck', 'sigPage', 'sigApi', 'sigRoute', 'sigNext',
-               'windowAddr', 'tabLive', 'tabShot', 'liveFrame', 'shotPane', 'shotLoading',
-               'shotLoadingText', 'shotImg', 'shotNote', 'footHint', 'btnShotRefresh',
+               'windowAddr', 'shotPane', 'shotLoading', 'shotLoadingText', 'shotTimer',
+               'shotBar', 'shotBarFill', 'shotImg', 'shotNote', 'btnShotRefresh',
                'selInterval', 'chkPause', 'btnCheckNow', 'btnClearLog', 'logList'];
     for (var i = 0; i < ids.length; i++) state.dom[ids[i]] = $(ids[i]);
   }
@@ -595,13 +629,12 @@
     applyPrefsToUI();
     bindEvents();
 
-    setMode(store('ista_live_mode') || 'live', true);
-
     setInterval(tickMeta, 1000);
 
     addLog('页面就绪，房间号 ' + ROOM_ID, null);
     check(true);
     schedule();
+    takeShot();          /* 打开页面即抓一次截图（40 秒预算） */
   }
 
   if (document.readyState === 'loading') {
