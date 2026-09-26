@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.0 播放器测试 - ciallo0721</title>
+<style>
+  body{margin:0;padding:28px 18px 60px;background:#f8fafc;color:#0f172a;
+       font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+  .box{max-width:820px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 6px}
+  p.sub{color:#64748b;font-size:13px;margin:0 0 22px}
+  h2{font-size:15px;color:#0EA5E9;margin:30px 0 10px}
+  .note{font-size:13px;color:#475569;line-height:1.7;background:#fff;border:1px solid #e2e8f0;
+        border-radius:10px;padding:12px 14px;margin:14px 0}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>2.0 播放器 验收页</h1>
+  <p class="sub">放在 js/js/video/ 的自研播放器 · 自动接管所有 class 为 2.0vid 的 video</p>
+
+  <div class="note">
+    <strong>页面只做了两件事：</strong><br>
+    1. <code>&lt;script src="/js/js/video/index.js"&gt;&lt;/script&gt;</code><br>
+    2. <code>&lt;video class="2.0vid" src="...">&lt;/video&gt;</code>
+  </div>
+
+  <h2>① 本地 mp4（相对路径）</h2>
+  <div class="note" style="color:#94a3b8;font-size:12px">
+    如果这段黑屏/报错，多是这个 mp4 路径不存在，跟播放器无关，换成你自己的视频即可。
+  </div>
+  <video class="2.0vid" src="/blog/muban/video.mp4" preload="metadata"></video>
+
+  <h2>② 在线 URL（跨域 mp4）</h2>
+  <video class="2.0vid" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" preload="metadata"></video>
+
+  <h2>③ 用 data-src 指定（video 里不放 src）</h2>
+  <video class="2.0vid" data-src="https://www.w3schools.com/html/mov_bbb.mp4" preload="metadata"></video>
+
+  <h2>④ 用 &lt;source&gt; 子标签</h2>
+  <video class="2.0vid" preload="metadata">
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+  </video>
+
+  <h2>功能清单（自己点着试试）</h2>
+  <div class="note">
+    点击播放 · 进度条拖动(带时间预览) · 音量拖动+滚轮 · 静音 · 倍速(0.5~2x) ·
+    前进/后退10秒 · 循环 · 画中画 · 网页全屏 · 小窗悬浮(拖顶部移动) · 全屏 · 快捷键(Space/K 空格播放，←→ 5秒，↑↓ 音量，M 静音，F 全屏，W 网页全屏，I 小窗) · 播放进度记忆
+  </div>
+</div>
+
+<script src="/js/js/video/index.js"></script>
+</body>
+</html>
