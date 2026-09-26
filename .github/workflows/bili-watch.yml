@@ -1,0 +1,58 @@
+name: 更新 B 站更新快照
+
+on:
+  # 每 20 分钟检查一次（GitHub cron 可能延迟几分钟，属正常）
+  schedule:
+    - cron: '*/20 * * * *'
+  # 手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bili-watch
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 抓取快照
+        id: snap
+        run: |
+          python "实用工具/bili_watch.py" --quiet
+          echo "---- 快照摘要 ----"
+          python - <<'PY'
+          import json
+          d = json.load(open('data/bili-watch.json', encoding='utf-8'))
+          for k, u in (d.get('ups') or {}).items():
+              print(f"{u.get('name')} ({k}) 合集 {u.get('season_count')} · 视频 {u.get('archive_in_seasons')}"
+                    f" · 最近更新 {(u.get('latest') or {}).get('title', '无')[:30]}")
+          p = d.get('popcorn')
+          if p:
+              print(f"爆米花电台 {p.get('total')} 期")
+          if d.get('errors'):
+              print("告警：", "；".join(d['errors']))
+          PY
+
+      - name: 提交并推送
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/bili-watch.json
+          if git diff --cached --quiet; then
+            echo "📋 快照无变化，跳过提交"
+          else
+            git commit -m "🔄 auto: 更新 B 站更新快照 $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M')"
+            git push
+            echo "✅ 快照已更新并推送"
+          fi

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爆米花电台更新了吗 · warma 视频播客更新监控</title>
+<meta name="description" content="warma 的视频播客《爆米花电台》更新了吗？实时汇总合集内全部期数、更新间隔与更新节奏，一眼看清最新一期、下一期大概什么时候来。纯静态实现，附真实页面截图。">
+<meta name="keywords" content="爆米花电台,PontPopcorn Radio,warma,沃玛,更新了吗,视频播客">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="爆米花电台更新了吗 · 视频播客更新监控">
+<meta property="og:description" content="汇总《爆米花电台》全部期数与更新节奏，一眼看清更新状态喵～">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciallo0721-cmd.top/ispopcornradioupdate/">
+<link rel="icon" href="../fanv.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../fanv.ico" type="image/x-icon">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.pageMeta = { content_type: 'app', page_name: 'ispopcornradioupdate', category: 'warma' };
+</script>
+<script src="../js/js/gtag-config.js"></script>
+
+<link rel="stylesheet" href="../css/css/biliwatch.css">
+<script defer src="../js/js/svg-icons.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+</head>
+<body data-accent="popcorn">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      <i class="fas fa-music"></i>
+      爆米花电台更新了吗
+    </div>
+    <nav class="topbar-links">
+      <a href="https://space.bilibili.com/106320250/lists/5906893?type=season" target="_blank" rel="noopener">合集页 <i class="fas fa-external-link-alt"></i></a>
+      <a href="../iswarmaupdate/">沃玛更新了吗 <i class="fas fa-arrow-right"></i></a>
+      <a href="../">回首页</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+
+  <h1 class="page-title">爆米花电台更新了吗</h1>
+  <p class="page-sub">监控 warma 的视频播客合集 <strong>《视频播客-爆米花电台》</strong>（合集 5906893），汇总全部期数与更新节奏，判定规则见页面底部。</p>
+
+  <!-- ============ 状态总览 ============ -->
+  <section class="status-card" id="statusCard" data-state="checking">
+    <div class="status-pulse">
+      <span class="pulse-dot"></span>
+    </div>
+    <div class="status-body">
+      <span class="status-badge" id="statusBadge">载入中…</span>
+      <h2 class="status-title" id="statusTitle">正在读取更新快照</h2>
+      <p class="status-text" id="statusText">首次打开需要读取一次同源数据文件。</p>
+    </div>
+    <div class="status-side">
+      <div class="side-item">
+        <span class="side-k">最新一期</span>
+        <strong class="side-v" id="lastEp">—</strong>
+      </div>
+      <div class="side-item">
+        <span class="side-k">距今天数</span>
+        <strong class="side-v" id="lastDay">—</strong>
+      </div>
+      <div class="side-item">
+        <span class="side-k">总期数</span>
+        <strong class="side-v" id="totalEp">—</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 检测信号 ============ -->
+  <section class="signals" aria-label="本次检测信号">
+    <span class="sig" id="sigSource"><i class="fas fa-database"></i><span class="sig-v">数据源：待检测</span></span>
+    <span class="sig" id="sigSnap"><i class="fas fa-clock"></i><span class="sig-v">快照时间：—</span></span>
+    <span class="sig" id="sigOwner"><i class="fas fa-user"></i><span class="sig-v">所属账号：—</span></span>
+    <span class="sig" id="sigRoute"><i class="fas fa-wifi-slash"></i><span class="sig-v">实时通路：未启用</span></span>
+  </section>
+
+  <!-- ============ 浏览器窗口 ============ -->
+  <section class="window">
+    <div class="window-bar">
+      <div class="window-dots"><span></span><span></span><span></span></div>
+      <div class="window-addr" id="windowAddr">m.bilibili.com/video/…</div>
+      <span class="win-tag"><i class="fas fa-image"></i> 截图模式</span>
+    </div>
+
+    <div class="window-view">
+      <div class="win-shot" id="shotPane">
+        <div class="shot-loading" id="shotLoading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <span id="shotLoadingText">正在让远端渲染服务截取最新一期视频页…</span>
+          <span class="shot-timer" id="shotTimer" hidden>预计 10 秒内出结果 · 已等待 0 秒</span>
+          <span class="shot-bar" id="shotBar" hidden><span class="shot-bar-fill" id="shotBarFill"></span></span>
+        </div>
+        <img class="shot-img" id="shotImg" alt="爆米花电台最新一期视频页截图" hidden>
+        <p class="shot-note" id="shotNote"></p>
+      </div>
+    </div>
+
+    <div class="window-foot">
+      <span class="foot-hint" id="footHint">截图通常 3~10 秒出图；遇到渲染排队可点「重新截图」重试</span>
+      <button type="button" class="btn btn-ghost" id="btnShotRefresh"><i class="fas fa-refresh"></i> 重新截图</button>
+    </div>
+  </section>
+
+  <!-- ============ 更新节奏 ============ -->
+  <section class="panel">
+    <div class="panel-head">
+      <i class="fas fa-chart-line"></i>
+      <h2>更新节奏</h2>
+      <div class="panel-line"></div>
+      <button type="button" class="btn btn-ghost btn-sm" id="btnReload"><i class="fas fa-refresh"></i> 重新读取</button>
+    </div>
+
+    <div class="up-stats stat-grid" id="paceGrid"></div>
+
+    <div class="panel-head">
+      <i class="fas fa-list-ul"></i>
+      <h2>全部期数</h2>
+      <div class="panel-line"></div>
+      <button type="button" class="btn btn-ghost btn-sm" id="btnClearLog">清空日志</button>
+    </div>
+
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <!-- ============ 日志 ============ -->
+  <section class="panel">
+    <div class="panel-head">
+      <i class="fas fa-terminal"></i>
+      <h2>检测日志</h2>
+      <div class="panel-line"></div>
+    </div>
+    <ul class="log" id="logList"></ul>
+  </section>
+
+  <!-- ============ 说明 ============ -->
+  <section class="notes">
+    <article class="note">
+      <h3><i class="fas fa-info-circle"></i> 判定规则</h3>
+      <p>把合集内全部视频按发布时间倒序排，最上面那条就是「最新一期」，并据此判定状态：14 天内为<strong>刚更新</strong>，90 天内为<strong>近期更新</strong>，一年内为<strong>有一阵子了</strong>，更久为<strong>年更预定</strong>。播客本身更新节奏偏慢，判定阈值比日常投稿宽松。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-chart-line"></i> 关于「更新间隔」</h3>
+      <p>间隔 = 相邻两期的发布时间之差，页面会给出平均间隔、最长最短间隔，并按平均间隔推算「下一期大概什么时候来」。这只是统计外推，不是官方排期，参考一下就好。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-image"></i> 关于「截图模式」</h3>
+      <p>截图由第三方渲染服务生成，是真实页面截图（不是本站缓存），通常 <strong>3~10 秒出结果</strong>，目标是<strong>最新一期</strong>的移动端视频页。</p>
+      <p>之所以不截合集页 / 空间页：实测渲染服务打开 <code>space.bilibili.com</code> 会被 B 站反爬挂住，30 秒触发服务端硬超时（HTTP 408），只会截到空白骨架 —— 跟等待时间长短无关。</p>
+    </article>
+  </section>
+
+  <div class="footer-bar">
+    © 2026 ciallo0721-cmd · 本页与哔哩哔哩及 warma 官方无关，更新状态仅供参考
+  </div>
+
+</main>
+
+<noscript>
+  <p class="empty">本页需要开启 JavaScript 才能读取更新快照。</p>
+</noscript>
+
+<script src="../js/js/bili-watch.js" defer></script>
+<script src="../js/js/ispopcornradioupdate.js" defer></script>
+</body>
+</html>
