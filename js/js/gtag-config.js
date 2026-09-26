@@ -97,6 +97,8 @@
         v = v.trim();
         if (!v) return null;
         if (v.length > 200) v = v.substring(0, 200);
+        // 谷歌翻译代理域（*.translate.goog）不是真实来源，直接忽略
+        if (/translate\.goog$/i.test(v)) return null;
         return v;
     }
 
@@ -128,6 +130,14 @@
             return from;
         }
         userFromCache = readFromStore();
+        // 历史误记录的谷歌翻译代理来源：丢弃并把脏 Cookie 清掉
+        if (userFromCache && /translate\.goog$/i.test(userFromCache)) {
+            userFromCache = null;
+            try {
+                document.cookie = USER_FROM_KEY + '=; Path=/; Max-Age=0; SameSite=Lax';
+                localStorage.removeItem(USER_FROM_KEY);
+            } catch (e) { /* 忽略 */ }
+        }
         return userFromCache;
     };
 
