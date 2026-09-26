@@ -43,6 +43,10 @@
 <script src="assets/code/phone.js"></script>
 <!-- 键位自定义（键盘键位 + 手指键位布局，依赖上面全部模块，必须最后加载） -->
 <script src="assets/code/keymap.js"></script>
+<!-- 背景音乐（免费素材：Kevin MacLeod · incompetech.com · CC BY 4.0）
+     自包含模块：开始界面/暂停自动停，游戏中淡入，结算压低音量；HUD 有 🎵 开关，暂停面板可调音量 -->
+<script>window.BGM_CONFIG = { src:'assets/sound/bgm.mp3', volume:0.26, duck:0.5, label:'恐怖氛围音乐' };</script>
+<script src="assets/code/bgm.js"></script>
 <!-- 赞赏置顶弹窗 -->
 <div id="tipPop" style="position:fixed;top:0;left:0;right:0;z-index:99999;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 44px 10px 14px;background:linear-gradient(90deg,rgba(230,180,34,.96),rgba(212,147,10,.96));color:#fff;font-size:14px;font-family:inherit;box-shadow:0 2px 12px rgba(0,0,0,.35);">
   <span style="flex:1;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.2);">♡ 觉得游戏好玩？请作者喝杯奶茶喵～</span>

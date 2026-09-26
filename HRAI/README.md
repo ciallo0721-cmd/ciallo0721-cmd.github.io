@@ -28,6 +28,15 @@
 
 > 设备模式可用开始界面的「切换为手机/桌面」按钮手动改，或用 URL 参数 `?isphone=T` / `?isphone=F` 强制。
 
+## 背景音乐
+
+- 曲目：`assets/sound/bgm.mp3`（*Ossuary 5 - Rest* · Kevin MacLeod · incompetech.com · **CC BY 4.0**，可商用但需署名——暂停面板内已标注）。默认音量 0.26，比 CS 更轻，不抢氛围。
+- 逻辑在 `assets/code/bgm.js`，**自包含、不改游戏主逻辑**：靠观察 `#overlay` / `#pause` / `#victory` 的 `.hide` 推游戏状态——开始界面停、游戏中淡入、暂停停、结算压低音量续播。
+- 受浏览器自动播放策略限制，**首次必须要一次点击才出声**；点「点击开始」即自动解锁，之后无需再点。
+- 右上角 `🎵` 一键静音 / 恢复；暂停面板第二行是音量滑块。音量与静音存在 `localStorage`（`bgmVolume` / `bgmMuted`，同源下与 CS 共享，即改一处两处生效）。
+- 换曲子：直接替换 `assets/sound/bgm.mp3`（文件名别改）。改默认音量 / 结算压低系数：`index.html` 里的 `window.BGM_CONFIG`。
+- 控制台可手动接管：`BGM.setVolume(0.2)`、`BGM.play()`、`BGM.pause()`、`BGM.stop()`、`BGM.state()`。它快追上来时想加紧张感，也可以 `BGM.setVolume(0.5)` 临时拉高。
+
 ## 自定义键位（保存在本机浏览器）
 
 对局中按 `Esc` 或 `` ` `` 打开暂停设置：
