@@ -39,11 +39,11 @@ permissions:
   contents: write
   actions: read
 
-# 必须排在「图片自动压缩」「图片自动加水印」之后：
-# 那两个工作流会重新编码图片（jpegoptim --strip-all / Pillow 重存），会把刚写好的元数据抹掉。
-# 同名串行组保证排队执行；文件名排序 image-* < metadata-*；脚本里还会再等一次队列清空。
+# 自己一个串行组，不要挤进 image-processing：
+# 实测三个工作流共用一组时，排队最久的那个（图片自动压缩）会被取消掉，
+# 所以改成「独立组 + 在脚本里主动等图片压缩/加水印两个工作流收工」。
 concurrency:
-  group: image-processing
+  group: media-metadata
   cancel-in-progress: false
 
 jobs:
@@ -96,16 +96,31 @@ jobs:
 
       - name: 提交改动
         run: |
-          if git status --porcelain | grep -q .; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add -A
-            git commit -m "🏷️ 自动抹除媒体元数据并写入水印"
-            git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-            git push
-          else
+          if ! git status --porcelain | grep -q .; then
             echo "没有需要提交的改动，跳过"
+            exit 0
           fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "🏷️ 自动抹除媒体元数据并写入水印"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          # 状态记录 / B站快照 / GA4 注入等机器人随时可能往 main 推提交，
+          # 直接 push 会被 non-fast-forward 拒掉 → 先 fetch+rebase，失败重试
+          for i in 1 2 3 4 5; do
+            if git fetch origin main -q && git rebase origin/main; then
+              if git push origin HEAD:main; then
+                echo "第 $i 轮推送成功"
+                exit 0
+              fi
+            else
+              git rebase --abort 2>/dev/null || true
+            fi
+            echo "第 $i 轮未成功，10 秒后重试"
+            sleep 10
+          done
+          echo "::error::连续 5 轮推送失败"
+          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
