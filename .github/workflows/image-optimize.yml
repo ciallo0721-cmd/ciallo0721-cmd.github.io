@@ -25,6 +25,9 @@ jobs:
   optimize:
     runs-on: ubuntu-latest
     name: 压缩新增/修改的图片
+    # 跳过机器人自己的提交：否则会在「加水印 / 元数据」工作流提交之后再压一遍，
+    # jpegoptim --strip-all 会把刚写好的水印元数据抹掉，还可能形成死循环
+    if: "github.event_name != 'push' || !contains(github.event.head_commit.author.email, 'github-actions[bot]')"
 
     steps:
       - name: 检出仓库

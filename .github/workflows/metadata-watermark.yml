@@ -1,0 +1,119 @@
+name: 媒体元数据抹除与水印
+
+# 图片 / 视频被推送时：先抹掉它们的全部元数据（EXIF / XMP / ICC / QuickTime / PNG 文本块……），
+# 再写入统一的水印字段：
+#   from   ciallo0721-cmd.top
+#   author ciallo0721-cmd
+#   name   <文件名>
+#   PS     本图来自ciallo0721-cmd.top,已经抹除大部分敏感元数据
+# 另支持手动触发与每天兜底全量扫一遍。
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.png'
+      - '**.gif'
+      - '**.webp'
+      - '**.avif'
+      - '**.tif'
+      - '**.tiff'
+      - '**.mp4'
+      - '**.mov'
+      - '**.m4v'
+      - '**.webm'
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: '处理范围'
+        type: choice
+        options:
+          - 全仓库
+          - 本次提交
+        default: 全仓库
+  schedule:
+    - cron: '40 19 * * 0'   # 每周一 03:40（北京时间）兜底全量扫一遍；日常靠 push 触发
+
+permissions:
+  contents: write
+  actions: read
+
+# 必须排在「图片自动压缩」「图片自动加水印」之后：
+# 那两个工作流会重新编码图片（jpegoptim --strip-all / Pillow 重存），会把刚写好的元数据抹掉。
+# 同名串行组保证排队执行；文件名排序 image-* < metadata-*；脚本里还会再等一次队列清空。
+concurrency:
+  group: image-processing
+  cancel-in-progress: false
+
+jobs:
+  metadata:
+    name: 抹除元数据 + 写入水印
+    runs-on: ubuntu-latest
+    # 跳过机器人自己的提交，防止「写元数据 → 触发压缩 → 元数据被抹 → 再写」死循环
+    if: "github.event_name != 'push' || !contains(github.event.head_commit.author.email, 'github-actions[bot]')"
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 exiftool
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libimage-exiftool-perl
+          exiftool -ver
+
+      - name: 等图片压缩 / 加水印两个工作流收工
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -u
+          quiet=0
+          for i in $(seq 1 40); do
+            busy=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+                     "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs?per_page=80" \
+                   | python3 -c "import json,sys;d=json.load(sys.stdin);print(sum(1 for r in d.get('workflow_runs',[]) if r['name'] in ('图片自动压缩','图片自动加水印') and r['status'] in ('queued','in_progress','requested','waiting','pending')))")
+            echo "第 $i 次检查：仍在排队的图片工作流 = $busy"
+            if [ "$busy" = "0" ]; then
+              quiet=$((quiet + 1))
+              [ "$quiet" -ge 2 ] && break
+            else
+              quiet=0
+            fi
+            sleep 15
+          done
+
+      - name: 抹除元数据并写入水印
+        env:
+          EVENT: ${{ github.event_name }}
+          DISPATCH_SCOPE: ${{ github.event.inputs.scope }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: python3 .github/scripts/metadata-watermark.py
+
+      - name: 提交改动
+        run: |
+          if git status --porcelain | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "🏷️ 自动抹除媒体元数据并写入水印"
+            git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git push
+          else
+            echo "没有需要提交的改动，跳过"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 结果摘要
+        if: always()
+        run: |
+          echo "## 🏷️ 媒体元数据结果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- 范围：\`${{ github.event_name }}\`（手动/定时 = 全仓库，push = 本次提交的媒体文件）" >> $GITHUB_STEP_SUMMARY
+          echo "- 写入字段：\`from ciallo0721-cmd.top\` / \`author ciallo0721-cmd\` / \`name <文件名>\` / \`PS 本图来自ciallo0721-cmd.top,已经抹除大部分敏感元数据\`" >> $GITHUB_STEP_SUMMARY
+          echo "- 注：ICC 色彩配置也一并抹除（与「图片自动压缩」的 \`--strip-all\` 行为一致）" >> $GITHUB_STEP_SUMMARY

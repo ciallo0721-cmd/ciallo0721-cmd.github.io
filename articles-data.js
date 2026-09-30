@@ -893,6 +893,17 @@ window.articlesData = {
             readTime: 11,
             featured: true
         },
+        {
+            id: 83,
+            category: "心理学",
+            fileName: "心理学/83/",
+            title: "何为“自然女”，何为“对立”",
+            excerpt: "一条路人评论，被做成了两期视频。本文从逻辑与心理学视角拆解“游乐园在前面左边”的连环转移话题（稻草人、诉诸人身、反向形成、非人化），再顺着投稿时间线往回翻——拐点停在 2026-02-10 那一期。",
+            date: "2026-09-30",
+            tags: ["心理学", "认知偏差", "逻辑谬误", "社会评论", "性别对立", "短视频"],
+            readTime: 19,
+            featured: false
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),
