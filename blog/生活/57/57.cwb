@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #57
+[
+    {
+    index:
+        "title"="浪漫文案？那是词语废料——当朋友圈文案变成「1+1=2 uxdjdbskakdbs」" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-07-04" //日期
+        "tag"="浪漫文案","朋友圈","批判","词语废料","逻辑","社交媒体" //标签
+        "excerpt"="现在的朋友圈浪漫文案全是词语废料——前言不搭后语，逻辑混乱像乱码。当「今天天气不错，我喜欢你」配上不露脸自拍成为标准模板，浪漫已经不是浪漫，是SEO。" //摘要(扩展字段)
+        "readTime"=5 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/生活/57"
+        "html"="index.html"
+    }
+]

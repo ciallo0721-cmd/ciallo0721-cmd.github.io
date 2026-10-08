@@ -1,0 +1,412 @@
+{
+  "name": "CialloWebBlogInformation manifest",
+  "generator": "实用工具/CWBI转换器.py",
+  "count": 81,
+  "articles": [
+    {
+      "id": 1,
+      "category": "教程",
+      "cwbPath": "blog/教程/1/1.cwb"
+    },
+    {
+      "id": 2,
+      "category": "教程",
+      "cwbPath": "blog/教程/2/2.cwb"
+    },
+    {
+      "id": 3,
+      "category": "教程",
+      "cwbPath": "blog/教程/3/3.cwb"
+    },
+    {
+      "id": 4,
+      "category": "公告",
+      "cwbPath": "blog/公告/4/4.cwb"
+    },
+    {
+      "id": 5,
+      "category": "公告",
+      "cwbPath": "blog/公告/5/5.cwb"
+    },
+    {
+      "id": 6,
+      "category": "闲聊",
+      "cwbPath": "blog/闲聊/6/6.cwb"
+    },
+    {
+      "id": 7,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/7/7.cwb"
+    },
+    {
+      "id": 8,
+      "category": "公告",
+      "cwbPath": "blog/公告/8/8.cwb"
+    },
+    {
+      "id": 9,
+      "category": "公告",
+      "cwbPath": "blog/公告/9/9.cwb"
+    },
+    {
+      "id": 10,
+      "category": "公告",
+      "cwbPath": "blog/公告/10/10.cwb"
+    },
+    {
+      "id": 11,
+      "category": "公告",
+      "cwbPath": "blog/公告/11/11.cwb"
+    },
+    {
+      "id": 12,
+      "category": "公告",
+      "cwbPath": "blog/公告/12/12.cwb"
+    },
+    {
+      "id": 13,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/13/13.cwb"
+    },
+    {
+      "id": 14,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/14/14.cwb"
+    },
+    {
+      "id": 15,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/15/15.cwb"
+    },
+    {
+      "id": 16,
+      "category": "教程",
+      "cwbPath": "blog/教程/16/16.cwb"
+    },
+    {
+      "id": 17,
+      "category": "科技",
+      "cwbPath": "blog/科技/17/17.cwb"
+    },
+    {
+      "id": 18,
+      "category": "生活",
+      "cwbPath": "blog/生活/18/18.cwb"
+    },
+    {
+      "id": 19,
+      "category": "教程",
+      "cwbPath": "blog/教程/19/19.cwb"
+    },
+    {
+      "id": 20,
+      "category": "教程",
+      "cwbPath": "blog/教程/20/20.cwb"
+    },
+    {
+      "id": 21,
+      "category": "教程",
+      "cwbPath": "blog/教程/21/21.cwb"
+    },
+    {
+      "id": 22,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/22/22.cwb"
+    },
+    {
+      "id": 23,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/23/23.cwb"
+    },
+    {
+      "id": 24,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/24/24.cwb"
+    },
+    {
+      "id": 25,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/25/25.cwb"
+    },
+    {
+      "id": 26,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/26/26.cwb"
+    },
+    {
+      "id": 27,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/27/27.cwb"
+    },
+    {
+      "id": 28,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/28/28.cwb"
+    },
+    {
+      "id": 29,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/29/29.cwb"
+    },
+    {
+      "id": 30,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/30/30.cwb"
+    },
+    {
+      "id": 31,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/31/31.cwb"
+    },
+    {
+      "id": 32,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/32/32.cwb"
+    },
+    {
+      "id": 33,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/33/33.cwb"
+    },
+    {
+      "id": 34,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/34/34.cwb"
+    },
+    {
+      "id": 35,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/35/35.cwb"
+    },
+    {
+      "id": 36,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/36/36.cwb"
+    },
+    {
+      "id": 37,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/37/37.cwb"
+    },
+    {
+      "id": 38,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/38/38.cwb"
+    },
+    {
+      "id": 39,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/39/39.cwb"
+    },
+    {
+      "id": 40,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/40/40.cwb"
+    },
+    {
+      "id": 41,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/41/41.cwb"
+    },
+    {
+      "id": 42,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/42/42.cwb"
+    },
+    {
+      "id": 43,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/43/43.cwb"
+    },
+    {
+      "id": 44,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/44/44.cwb"
+    },
+    {
+      "id": 45,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/45/45.cwb"
+    },
+    {
+      "id": 46,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/46/46.cwb"
+    },
+    {
+      "id": 47,
+      "category": "生活",
+      "cwbPath": "blog/生活/47/47.cwb"
+    },
+    {
+      "id": 48,
+      "category": "生活",
+      "cwbPath": "blog/生活/48/48.cwb"
+    },
+    {
+      "id": 49,
+      "category": "生活",
+      "cwbPath": "blog/生活/49/49.cwb"
+    },
+    {
+      "id": 50,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/50/50.cwb"
+    },
+    {
+      "id": 52,
+      "category": "生活",
+      "cwbPath": "blog/生活/52/52.cwb"
+    },
+    {
+      "id": 53,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/53/53.cwb"
+    },
+    {
+      "id": 54,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/54/54.cwb"
+    },
+    {
+      "id": 55,
+      "category": "生活",
+      "cwbPath": "blog/生活/55/55.cwb"
+    },
+    {
+      "id": 57,
+      "category": "生活",
+      "cwbPath": "blog/生活/57/57.cwb"
+    },
+    {
+      "id": 58,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/58/58.cwb"
+    },
+    {
+      "id": 60,
+      "category": "教程",
+      "cwbPath": "blog/教程/60/60.cwb"
+    },
+    {
+      "id": 61,
+      "category": "公告",
+      "cwbPath": "blog/公告/61/61.cwb"
+    },
+    {
+      "id": 62,
+      "category": "医学",
+      "cwbPath": "blog/医学/62/62.cwb"
+    },
+    {
+      "id": 63,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/63/63.cwb"
+    },
+    {
+      "id": 64,
+      "category": "科技",
+      "cwbPath": "blog/科技/64/64.cwb"
+    },
+    {
+      "id": 65,
+      "category": "教程",
+      "cwbPath": "blog/教程/65/65.cwb"
+    },
+    {
+      "id": 66,
+      "category": "小说",
+      "cwbPath": "blog/小说/66/66.cwb"
+    },
+    {
+      "id": 67,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/67/67.cwb"
+    },
+    {
+      "id": 68,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/68/68.cwb"
+    },
+    {
+      "id": 69,
+      "category": "科技",
+      "cwbPath": "blog/科技/69/69.cwb"
+    },
+    {
+      "id": 70,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/70/70.cwb"
+    },
+    {
+      "id": 71,
+      "category": "医学",
+      "cwbPath": "blog/医学/71/71.cwb"
+    },
+    {
+      "id": 72,
+      "category": "闲聊",
+      "cwbPath": "blog/闲聊/72/72.cwb"
+    },
+    {
+      "id": 73,
+      "category": "日记",
+      "cwbPath": "blog/日记/73/73.cwb"
+    },
+    {
+      "id": 74,
+      "category": "公告",
+      "cwbPath": "blog/公告/74/74.cwb"
+    },
+    {
+      "id": 75,
+      "category": "闲聊",
+      "cwbPath": "blog/闲聊/75/75.cwb"
+    },
+    {
+      "id": 76,
+      "category": "生活",
+      "cwbPath": "blog/生活/76/76.cwb"
+    },
+    {
+      "id": 77,
+      "category": "生活",
+      "cwbPath": "blog/生活/77/77.cwb"
+    },
+    {
+      "id": 78,
+      "category": "教程",
+      "cwbPath": "blog/教程/78/78.cwb"
+    },
+    {
+      "id": 79,
+      "category": "教程",
+      "cwbPath": "blog/教程/79/79.cwb"
+    },
+    {
+      "id": 80,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/80/80.cwb"
+    },
+    {
+      "id": 81,
+      "category": "教程",
+      "cwbPath": "blog/教程/81/81.cwb"
+    },
+    {
+      "id": 82,
+      "category": "教程",
+      "cwbPath": "blog/教程/82/82.cwb"
+    },
+    {
+      "id": 83,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/83/83.cwb"
+    },
+    {
+      "id": 84,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/84/84.cwb"
+    }
+  ]
+}

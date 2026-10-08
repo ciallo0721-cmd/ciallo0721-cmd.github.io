@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #32
+[
+    {
+    index:
+        "title"="语义饱和：为什么盯着一个字看久了就不认识了？" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-21" //日期
+        "tag"="语义饱和","认知心理学","神经适应","视觉感知","语言加工" //标签
+        "excerpt"="一个熟悉的汉字盯着看30秒后突然变得陌生——这不是眼睛出了问题，而是大脑的自我保护机制。" //摘要(扩展字段)
+        "readTime"=10 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/32"
+        "html"="index.html"
+    }
+]

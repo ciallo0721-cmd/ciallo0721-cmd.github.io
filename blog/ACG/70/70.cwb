@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #70
+[
+    {
+    index:
+        "title"="悼念吉他手 猫月めい" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-07-28" //日期
+        "tag"="猫月めい","MEI","终末的钻石","BanG Dream!","悼念","RIP","Ave Mujica","millsage" //标签
+        "excerpt"="2026年7月26日，年仅25岁的吉他手猫月めい（MEI）离世。距她的生日演唱会 猫月めい 仅剩三天。她是终末的钻石的吉他手，也是 BanG Dream! 企划的支援乐手。谨以此文纪念那位在舞台上闪闪发光的女孩。" //摘要(扩展字段)
+        "readTime"=8 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/ACG/70"
+        "html"="index.html"
+    }
+]

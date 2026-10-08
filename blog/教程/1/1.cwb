@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #1
+[
+    {
+    index:
+        "title"="UTAU教程：从调音到发布完全指南" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2025-12-28" //日期
+        "tag"="UTAU","虚拟歌姬","调音","歌声合成","教程","音乐制作" //标签
+        "excerpt"="学习如何使用UTAU进行歌声合成，从基础调音到高级技巧，完整指南带你入门。" //摘要(扩展字段)
+        "readTime"=15 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/教程/1"
+        "html"="index.html"
+    }
+]

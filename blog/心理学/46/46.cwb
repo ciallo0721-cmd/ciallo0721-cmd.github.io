@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #46
+[
+    {
+    index:
+        "title"="如何判断一个人是否在说谎？——以及我为什么走上了心理学的道路" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-21" //日期
+        "tag"="测谎","说谎心理学","行为分析","个人感悟","心理学入门" //标签
+        "excerpt"="从科学的角度拆解读谎的真相——以及本系列最后一篇文章中，分享对心理学产生浓厚兴趣的个人故事与感悟。" //摘要(扩展字段)
+        "readTime"=18 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/46"
+        "html"="index.html"
+    }
+]

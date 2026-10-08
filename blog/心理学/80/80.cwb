@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #80
+[
+    {
+    index:
+        "title"="锐评“BV1yRFQzqEyo”和“游乐园在前面左边”这个人" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-09-01" //日期
+        "tag"="心理学","认知偏差","性别批判","逻辑谬误","阅读思考","社会评论" //标签
+        "excerpt"="一篇从心理学视角，对“读书先看作者性别”言论的深度拆解。用认知行为疗法、防御机制等工具，剖析其中的绝对化、二极管、投射等七重认知谬误，并以《实践论》《论持久战》等经典作为反例，论证“思想的价值与性别无关”。言辞激烈，逻辑在线。" //摘要(扩展字段)
+        "readTime"=11 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/80"
+        "html"="index.html"
+    }
+]

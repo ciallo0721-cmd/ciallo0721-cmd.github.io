@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #54
+[
+    {
+    index:
+        "title"="为什么儿童会对高饱和度上瘾？——从脑腐到Cocomelon的色彩心理学" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-30" //日期
+        "tag"="色彩心理学","儿童发展","高饱和度","脑腐","烂梗","Cocomelon","视觉发育" //标签
+        "excerpt"="为什么婴幼儿玩具几乎都是高饱和的鲜艳色系？色彩对孩子的大脑发育有什么影响？从进化心理学到脑腐（烂梗），从Cocomelon到蒙台梭利教具，深度解析高饱和度色彩对儿童认知的影响。" //摘要(扩展字段)
+        "readTime"=15 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/54"
+        "html"="index.html"
+    }
+]

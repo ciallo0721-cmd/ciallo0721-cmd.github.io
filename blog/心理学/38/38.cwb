@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #38
+[
+    {
+    index:
+        "title"="躯体化现象：当心理的痛苦说不出来，身体就会替你说" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-21" //日期
+        "tag"="躯体化","心身医学","心理防御机制","躯体症状障碍","跨文化心理学" //标签
+        "excerpt"="为什么长期压力会导致胃痛？你的身体是你最诚实的翻译官——东方文化中特有的躯体化现象。" //摘要(扩展字段)
+        "readTime"=15 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/38"
+        "html"="index.html"
+    }
+]

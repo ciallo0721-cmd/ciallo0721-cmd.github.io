@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #44
+[
+    {
+    index:
+        "title"="被害妄想症专题：当整个世界都在与你作对" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-21" //日期
+        "tag"="被害妄想症","妄想性障碍","精神分裂症","精神病学","偏执型人格" //标签
+        "excerpt"="从日常多疑到临床被害妄想——这条界线在哪？当怀疑变成不可动摇的信念时会发生什么。" //摘要(扩展字段)
+        "readTime"=16 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/44"
+        "html"="index.html"
+    }
+]

@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #30
+[
+    {
+    index:
+        "title"="C-PTSD：复杂性创伤后应激障碍——看不见的伤口" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-21" //日期
+        "tag"="C-PTSD","复杂性创伤","童年创伤","心理虐待","依恋创伤" //标签
+        "excerpt"="当创伤不是一次性事件，而是漫长的、重复的、无法逃脱的经历——长期暴露于控制与虐待形成的复杂创伤反应。" //摘要(扩展字段)
+        "readTime"=18 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/30"
+        "html"="index.html"
+    }
+]

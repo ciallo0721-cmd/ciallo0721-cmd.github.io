@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #12
+[
+    {
+    index:
+        "title"="关于本站广告位的说明：为什么会有广告？以及我们不会成为\"邪恶网站\"" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-04-23" //日期
+        "tag"="网站公告","广告说明","用户体验","承诺","FAQ" //标签
+        "excerpt"="针对近期访客对广告位设置的疑问，本文将详细解释放置广告的原因、广告的具体形式，以及本站绝不会成为弹窗满天飞的\"邪恶网站\"的承诺。" //摘要(扩展字段)
+        "readTime"=8 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/公告/12"
+        "html"="index.html"
+    }
+]

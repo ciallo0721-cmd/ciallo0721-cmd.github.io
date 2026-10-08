@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #83
+[
+    {
+    index:
+        "title"="何为“自然女”，何为“对立”" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-09-30" //日期
+        "tag"="心理学","认知偏差","逻辑谬误","社会评论","性别对立","短视频" //标签
+        "excerpt"="一条路人评论，被做成了两期视频。本文从逻辑与心理学视角拆解“游乐园在前面左边”的连环转移话题（稻草人、诉诸人身、反向形成、非人化），再顺着投稿时间线往回翻——拐点停在 2026-02-10 那一期。" //摘要(扩展字段)
+        "readTime"=19 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/83"
+        "html"="index.html"
+    }
+]

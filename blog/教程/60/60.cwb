@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #60
+[
+    {
+    index:
+        "title"="git commit -m \"1\"——你的项目历史正在被一个字符毁掉" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-07-10" //日期
+        "tag"="Git","commit","最佳实践","版本控制","GitHub","教程" //标签
+        "excerpt"="犀利拆解为什么「git commit -m 1」短期能忍，长期是慢性自杀。一个人写的时候可以偷懒，但项目一旦认真起来，每一个'1'都是在给未来的自己挖坑。" //摘要(扩展字段)
+        "readTime"=5 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/教程/60"
+        "html"="index.html"
+    }
+]

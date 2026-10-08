@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #25
+[
+    {
+    index:
+        "title"="斯德哥尔摩效应：人质为什么会对绑匪产生感情？" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-06-21" //日期
+        "tag"="斯德哥尔摩效应","反常心理学","受害者心理","创伤绑定","社会心理学" //标签
+        "excerpt"="从1973年瑞典银行劫案到娜塔莎·坎普施被囚八年案，揭秘受害者与加害者之间复杂情感纽带的心理学机制——创伤绑定与生存本能。" //摘要(扩展字段)
+        "readTime"=12 //预计阅读分钟(扩展字段)
+        "featured"=True //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/25"
+        "html"="index.html"
+    }
+]

@@ -19,6 +19,7 @@
     <link rel="canonical" href="https://ciallo0721-cmd.top/blog/">
     <link rel="icon" href="/fanv.ico" type="image/x-icon">
     <script src="/articles-data.js"></script>
+    <script src="../js/js/cwbi.js"></script>
     <!-- 百科词条系统 -->
     <script src="../wiki-data.js"></script>
     <script src="../css/wiki-linker.js"></script>
@@ -374,10 +375,30 @@
                 if ((e.ctrlKey || e.metaKey) && e.key === 'f') { e.preventDefault(); searchInput.focus(); }
                 if (e.key === 'Escape' && searchInput.value !== '') { searchInput.value = ''; currentSearch = ''; filterArticles(); }
             });
-            initPage();
-            setTimeout(function() {
-                document.querySelectorAll('.article-card').forEach(function(el) { el.classList.add('card-reveal'); });
-            }, 100);
+            // CWBI 双源合并：cwb 优先（同 id 覆盖），articlesData 兜底
+            function mergeCwbi(cwbList) {
+                allArticles = window.CWBI.mergeArticles(cwbList, allArticles);
+            }
+            var pageStarted = false;
+            function startPage() {
+                if (pageStarted) return;
+                pageStarted = true;
+                initPage();
+                setTimeout(function() {
+                    document.querySelectorAll('.article-card').forEach(function(el) { el.classList.add('card-reveal'); });
+                }, 100);
+            }
+            if (window.CWBI && window.CWBI.loadAll) {
+                // 2.5s 超时兜底：cwb 清单拉不到也照常渲染旧数据
+                var cwbiTimeout = setTimeout(startPage, 2500);
+                window.CWBI.loadAll().then(function(list) {
+                    clearTimeout(cwbiTimeout);
+                    if (list && list.length) mergeCwbi(list);
+                    startPage();
+                }).catch(function() { clearTimeout(cwbiTimeout); startPage(); });
+            } else {
+                startPage();
+            }
         });
     </script>    <script src="../js/js/blog-share.js"></script>
     <script src="/js/js/tracking.js"></script>

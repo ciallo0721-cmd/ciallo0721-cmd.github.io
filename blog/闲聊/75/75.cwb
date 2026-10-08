@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #75
+[
+    {
+    index:
+        "title"="测试付费文章功能" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-08-02" //日期
+        "tag"="测试","付费文章","新功能" //标签
+        "excerpt"="付费文章功能测试文章。测试期间请勿付费，如需查看请联系站长获取测试key。" //摘要(扩展字段)
+        "readTime"=1 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/闲聊/75"
+        "html"="index.html"
+    }
+]
