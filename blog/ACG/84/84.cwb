@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #84
+[
+    {
+    index:
+        "title"="当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-10-07" //日期
+        "tag"="V圈","真白花音","結川ユイナ","虚拟主播","社区心理","承诺与背叛","舆论分析" //标签
+        "excerpt"="真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。" //摘要(扩展字段)
+        "readTime"=19 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/ACG/84"
+        "html"="index.html"
+    }
+]

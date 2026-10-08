@@ -904,6 +904,17 @@ window.articlesData = {
             readTime: 19,
             featured: false
         },
+  {
+    id: 84,
+    category: "ACG",
+    fileName: "ACG/84/",
+    title: "当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤",
+    excerpt: "真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。",
+    date: "2026-10-07",
+    tags: ["V圈", "真白花音", "結川ユイナ", "虚拟主播", "社区心理", "承诺与背叛", "舆论分析"],
+    readTime: 19,
+    featured: false
+  },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://ciallo0721-cmd.top/blog/ACG/84/">
+    <title>当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤 | ciallo0721-cmd</title>
+    <meta name="description" content="真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。">
+    <link rel="stylesheet" href="/media-viewer.css">
+    <link rel="icon" href="/fanv.ico" type="image/x-icon">
+    <script src="/media-viewer.js"></script>
+    <script src="/articles-data.js"></script>
+    <link rel="stylesheet" href="../../mus/audio-player.css">
+    <script src="../../mus/audio-player.js"></script>
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TR4FT7JPDZ');
+    </script>
+<style>
+@font-face {
+    font-family: 'MaokenAssortedSans';
+    src: url('../../css/MaokenAssortedSans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --bili-pink: #FB7299;
+    --bili-blue: #00A1D6;
+    --text-primary: #1D1D1F;
+    --text-secondary: #515154;
+    --bg-light: #F5F5F7;
+    --transition: all 0.3s ease;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --success: #34C759;
+    --warning: #FF9500;
+    --danger: #FF3B30;
+    --info: #007AFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'MaokenAssortedSans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ── 导航栏 ── */
+nav {
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 15px; }
+.logo {
+    font-size: 1.6rem; font-weight: 700; color: var(--bili-pink);
+    text-decoration: none; display: flex; align-items: center; gap: 10px; transition: var(--transition);
+}
+.logo:hover { transform: translateY(-2px); color: var(--bili-blue); }
+.back-btn {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; border: none; padding: 10px 25px; border-radius: 25px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 15px rgba(251,114,153,0.3);
+}
+.back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(251,114,153,0.4); }
+
+/* ── 目录 ── */
+.toc-box {
+    background: rgba(0,161,214,0.06);
+    border: 1px solid rgba(0,161,214,0.25);
+    border-radius: 14px; padding: 22px 28px; margin: 30px 0;
+}
+.toc-box h4 { color: var(--bili-blue); margin-bottom: 12px; font-size: 1rem; }
+.toc-box ol { padding-left: 20px; }
+.toc-box ol li { margin-bottom: 6px; }
+.toc-box ol li a { color: var(--bili-blue); text-decoration: none; font-size: 0.95rem; transition: var(--transition); }
+.toc-box ol li a:hover { color: var(--bili-pink); text-decoration: underline; }
+
+/* ── 文章框架 ── */
+.article-detail-container { padding: 60px 0; }
+.article-detail {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px; box-shadow: var(--shadow);
+    padding: 50px; border: 1px solid rgba(255,255,255,0.3);
+    position: relative; overflow: hidden; animation: fadeIn 0.5s ease;
+}
+.article-detail::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+}
+.article-header {
+    text-align: center; margin-bottom: 40px; padding-bottom: 30px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.article-number {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; padding: 8px 20px; border-radius: 20px;
+    font-size: 0.9rem; font-weight: 600; margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(251,114,153,0.3);
+}
+.article-title { font-size: 2.4rem; color: var(--text-primary); margin-bottom: 20px; line-height: 1.3; font-weight: 700; }
+.article-intro {
+    font-size: 1.2rem; color: var(--bili-blue); font-weight: 500;
+    margin-bottom: 25px; line-height: 1.5;
+    max-width: 800px; margin-left: auto; margin-right: auto;
+}
+.article-meta { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+.article-date { color: var(--text-secondary); font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+.article-date i { color: var(--bili-pink); }
+.article-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
+.article-tag {
+    background: rgba(251,114,153,0.1); color: var(--bili-pink);
+    padding: 6px 15px; border-radius: 15px; font-size: 0.85rem; font-weight: 500;
+    border: 1px solid rgba(251,114,153,0.2); transition: var(--transition); cursor: default;
+}
+.article-tag:hover { background: var(--bili-pink); color: white; transform: translateY(-2px); }
+
+/* ── 正文内容 ── */
+.article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); }
+.article-content h2 {
+    color: var(--text-primary); margin: 40px 0 15px; font-size: 1.8rem; font-weight: 600;
+    position: relative; padding-bottom: 10px;
+}
+.article-content h2::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue)); border-radius: 3px;
+}
+.article-content h3 { color: var(--text-primary); margin: 25px 0 12px; font-size: 1.35rem; font-weight: 600; }
+.article-content p { margin-bottom: 20px; text-align: justify; }
+.article-content ul, .article-content ol { margin-left: 25px; margin-bottom: 20px; }
+.article-content li { margin-bottom: 8px; }
+.article-content hr { border: none; border-top: 2px solid rgba(251,114,153,0.25); margin: 35px 0; border-radius: 2px; }
+
+/* 引用块 */
+.article-content blockquote {
+    border-left: 4px solid var(--bili-pink);
+    padding: 18px 22px; margin: 25px 0;
+    background: rgba(251,114,153,0.05);
+    border-radius: 0 12px 12px 0;
+    color: var(--text-primary);
+}
+.article-content blockquote p { margin: 0; font-style: italic; }
+.article-content blockquote cite { display: block; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary); }
+
+/* 代码块 */
+.article-content pre {
+    background: linear-gradient(135deg, #2D2D30, #1E1E1E);
+    border-radius: 12px; padding: 25px; margin: 25px 0;
+    overflow-x: auto; border: 1px solid rgba(255,255,255,0.1);
+}
+.article-content pre code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    color: #E8E8E8; font-size: 0.95rem; white-space: pre;
+}
+/* 行内代码 - 鼠标悬停揭示 */
+.article-content :not(pre) > code {
+    font-family: 'Monaco', 'Menlo', monospace;
+    color: transparent; font-size: 0.9em;
+    position: relative; display: inline-block; cursor: pointer;
+    border-radius: 4px; padding: 1px 6px; transition: color 0.2s;
+}
+.article-content :not(pre) > code::before {
+    content: attr(data-plain);
+    position: absolute; inset: 0;
+    background: #111; border-radius: 4px;
+    pointer-events: none; transition: opacity 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75em; color: #888; letter-spacing: 0.05em;
+}
+.article-content :not(pre) > code:hover { color: #E8E8E8; }
+.article-content :not(pre) > code:hover::before { opacity: 0; }
+
+/* highlight span */
+.article-content .hl { background: rgba(251,114,153,0.1); padding: 2px 7px; border-radius: 4px; color: var(--bili-pink); font-weight: 500; }
+.article-content .hl-blue { background: rgba(0,161,214,0.1); padding: 2px 7px; border-radius: 4px; color: var(--bili-blue); font-weight: 500; }
+
+/* ── 表格 ── */
+.article-content .table-wrap { overflow-x: auto; margin: 25px 0; border-radius: 14px; box-shadow: var(--shadow); }
+.article-content table { width: 100%; border-collapse: collapse; background: white; }
+.article-content thead th {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; padding: 14px 18px; text-align: left; font-size: 0.95rem;
+}
+.article-content tbody tr { transition: background 0.2s; }
+.article-content tbody tr:nth-child(even) { background: rgba(0,161,214,0.04); }
+.article-content tbody tr:hover { background: rgba(251,114,153,0.06); }
+.article-content tbody td { padding: 13px 18px; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 0.95rem; vertical-align: middle; }
+.article-content tbody tr:last-child td { border-bottom: none; }
+
+/* 状态点 */
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.dot-green { background: var(--success); }
+.dot-yellow { background: var(--warning); }
+.dot-red { background: var(--danger); }
+.dot-blue { background: var(--info); }
+
+/* ── 徽章 ── */
+.badge {
+    display: inline-block; padding: 3px 10px; border-radius: 10px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em; vertical-align: middle;
+}
+.badge-pink { background: rgba(251,114,153,0.15); color: var(--bili-pink); border: 1px solid rgba(251,114,153,0.35); }
+.badge-blue { background: rgba(0,161,214,0.12); color: var(--bili-blue); border: 1px solid rgba(0,161,214,0.3); }
+.badge-green { background: rgba(52,199,89,0.12); color: #2da14b; border: 1px solid rgba(52,199,89,0.3); }
+.badge-orange { background: rgba(255,149,0,0.12); color: #c97500; border: 1px solid rgba(255,149,0,0.3); }
+.badge-gray { background: rgba(0,0,0,0.07); color: #666; border: 1px solid rgba(0,0,0,0.12); }
+
+/* ── 按钮组 ── */
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; align-items: center; }
+.btn {
+    padding: 10px 22px; border-radius: 22px; border: none; font-size: 0.95rem;
+    font-weight: 600; cursor: pointer; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+}
+.btn-primary { background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue)); color: white; box-shadow: 0 4px 15px rgba(251,114,153,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(251,114,153,0.4); }
+.btn-outline { background: transparent; color: var(--bili-pink); border: 2px solid var(--bili-pink); }
+.btn-outline:hover { background: var(--bili-pink); color: white; transform: translateY(-2px); }
+.btn-ghost { background: rgba(0,0,0,0.06); color: var(--text-primary); }
+.btn-ghost:hover { background: rgba(0,0,0,0.12); transform: translateY(-1px); }
+.btn-success { background: linear-gradient(135deg, #34C759, #2eb350); color: white; box-shadow: 0 4px 12px rgba(52,199,89,0.3); }
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(52,199,89,0.4); }
+.btn-danger { background: linear-gradient(135deg, #FF3B30, #c9190b); color: white; box-shadow: 0 4px 12px rgba(255,59,48,0.3); }
+.btn-danger:hover { transform: translateY(-2px); }
+.btn-sm { padding: 6px 14px; font-size: 0.85rem; border-radius: 14px; }
+.btn-lg { padding: 14px 32px; font-size: 1.1rem; border-radius: 28px; }
+.btn-disabled { opacity: 0.45; pointer-events: none; }
+
+/* ── 超链接样式 ── */
+.article-content a.link-default { color: var(--bili-blue); text-decoration: none; border-bottom: 1px dashed var(--bili-blue); transition: var(--transition); }
+.article-content a.link-default:hover { color: var(--bili-pink); border-bottom-color: var(--bili-pink); }
+.article-content a.link-card {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,161,214,0.07); border: 1px solid rgba(0,161,214,0.2);
+    border-radius: 10px; padding: 8px 16px; color: var(--bili-blue);
+    text-decoration: none; transition: var(--transition); font-size: 0.95rem;
+}
+.article-content a.link-card:hover { background: rgba(0,161,214,0.14); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,161,214,0.15); }
+.article-content a.link-ext::after { content: ' ↗'; font-size: 0.8em; opacity: 0.6; }
+
+/* ── 警告/提示框 ── */
+.callout {
+    border-radius: 12px; padding: 18px 22px; margin: 22px 0;
+    display: flex; gap: 14px; align-items: flex-start;
+}
+.callout .callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout .callout-body { flex: 1; }
+.callout .callout-title { font-weight: 700; margin-bottom: 5px; font-size: 0.95rem; }
+.callout .callout-text { font-size: 0.93rem; line-height: 1.6; margin: 0; }
+.callout-info { background: rgba(0,122,255,0.08); border: 1px solid rgba(0,122,255,0.2); }
+.callout-info .callout-title, .callout-info .callout-icon { color: var(--info); }
+.callout-warning { background: rgba(255,149,0,0.08); border: 1px solid rgba(255,149,0,0.25); }
+.callout-warning .callout-title, .callout-warning .callout-icon { color: var(--warning); }
+.callout-danger { background: rgba(255,59,48,0.07); border: 1px solid rgba(255,59,48,0.2); }
+.callout-danger .callout-title, .callout-danger .callout-icon { color: var(--danger); }
+.callout-success { background: rgba(52,199,89,0.07); border: 1px solid rgba(52,199,89,0.2); }
+.callout-success .callout-title, .callout-success .callout-icon { color: var(--success); }
+.callout-pink { background: rgba(251,114,153,0.07); border: 1px solid rgba(251,114,153,0.25); }
+.callout-pink .callout-title, .callout-pink .callout-icon { color: var(--bili-pink); }
+
+/* ── 进度条 ── */
+.progress-list { list-style: none; margin: 20px 0; padding: 0; }
+.progress-list li { margin-bottom: 16px; }
+.progress-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.95rem; }
+.progress-track { background: rgba(0,0,0,0.08); border-radius: 8px; height: 10px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 8px; transition: width 1.2s cubic-bezier(.23,1,.32,1); }
+.pf-pink { background: linear-gradient(90deg, var(--bili-pink), #ff9fc3); }
+.pf-blue { background: linear-gradient(90deg, var(--bili-blue), #66d9ff); }
+.pf-green { background: linear-gradient(90deg, #34C759, #7ee89a); }
+.pf-orange { background: linear-gradient(90deg, #FF9500, #ffcc66); }
+.pf-gray { background: linear-gradient(90deg, #8e8e93, #c7c7cc); }
+
+/* ── 折叠区域 ── */
+details.spoiler {
+    border: 1px solid rgba(251,114,153,0.25);
+    border-radius: 12px; margin: 20px 0; overflow: hidden;
+}
+details.spoiler summary {
+    background: rgba(251,114,153,0.07); padding: 14px 20px;
+    cursor: pointer; font-weight: 600; color: var(--bili-pink);
+    list-style: none; display: flex; align-items: center; gap: 10px;
+    user-select: none; transition: background 0.2s;
+}
+details.spoiler summary::before { content: '▶'; font-size: 0.75rem; transition: transform 0.2s; }
+details.spoiler[open] summary::before { transform: rotate(90deg); }
+details.spoiler summary:hover { background: rgba(251,114,153,0.13); }
+details.spoiler .spoiler-body { padding: 18px 22px; font-size: 0.97rem; line-height: 1.7; color: var(--text-secondary); }
+
+/* ── 卡片网格 ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin: 22px 0; }
+.card {
+    background: white; border-radius: 14px; padding: 22px 18px;
+    box-shadow: var(--shadow); transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.06);
+    display: flex; flex-direction: column; gap: 10px;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.card-icon { font-size: 2rem; }
+.card-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.card-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ── 图表区 ── */
+.chart-wrap {
+    background: white; border-radius: 14px; padding: 24px;
+    box-shadow: var(--shadow); margin: 22px 0;
+    border: 1px solid rgba(0,0,0,0.06);
+}
+.chart-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+canvas { display: block; max-width: 100%; }
+
+/* 手绘风 SVG 图表包裹 */
+.svg-chart-wrap {
+    background: white; border-radius: 14px; padding: 20px;
+    box-shadow: var(--shadow); margin: 22px 0; overflow-x: auto;
+}
+
+/* ── 键盘按键 ── */
+kbd {
+    display: inline-block; background: #f5f5f5;
+    border: 1px solid #ccc; border-radius: 5px;
+    padding: 2px 8px; font-family: monospace; font-size: 0.85rem;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2); color: #333;
+}
+
+/* ── 图片区 ── */
+.article-image-container { text-align: center; margin: 30px 0; }
+.article-content img, .article-img {
+    max-width: 100%; height: auto; border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1); display: block; margin: 0 auto;
+}
+.image-caption {
+    text-align: center; font-size: 0.9rem; color: var(--text-secondary);
+    margin-top: 12px; font-style: italic;
+}
+
+/* ── 音视频 ── */
+.article-audio-container { text-align: center; margin: 30px 0; }
+.article-audio-container .audio-player-container { max-width: 500px; margin: 0 auto; }
+
+/* ── PDF 阅读器 ── */
+.pdf-reader-wrap {
+    background: white; border-radius: 16px; box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.06); margin: 22px 0; overflow: hidden;
+}
+.pdf-reader-toolbar {
+    background: linear-gradient(135deg, rgba(251,114,153,0.08), rgba(0,161,214,0.08));
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 12px 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+}
+.pdf-reader-toolbar .pdf-upload-label {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; padding: 8px 18px; border-radius: 20px; cursor: pointer;
+    font-size: 0.9rem; font-weight: 600; transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(251,114,153,0.25); white-space: nowrap;
+}
+.pdf-reader-toolbar .pdf-upload-label:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(251,114,153,0.35); }
+.pdf-reader-toolbar input[type="file"] { display: none; }
+.pdf-url-row { display: flex; flex: 1; gap: 8px; min-width: 0; }
+.pdf-url-input {
+    flex: 1; border: 1px solid rgba(0,0,0,0.15); border-radius: 20px;
+    padding: 8px 16px; font-size: 0.88rem; outline: none; transition: border-color 0.2s;
+    min-width: 0; font-family: inherit;
+}
+.pdf-url-input:focus { border-color: var(--bili-blue); }
+.pdf-url-btn {
+    background: rgba(0,161,214,0.1); border: 1px solid rgba(0,161,214,0.3);
+    color: var(--bili-blue); border-radius: 20px; padding: 8px 16px;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: var(--transition); white-space: nowrap;
+}
+.pdf-url-btn:hover { background: var(--bili-blue); color: white; }
+.pdf-page-ctrl {
+    display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-left: auto;
+}
+.pdf-page-btn {
+    width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15);
+    background: white; cursor: pointer; font-size: 1rem; display: flex; align-items: center;
+    justify-content: center; transition: var(--transition); color: var(--text-primary);
+}
+.pdf-page-btn:hover { background: var(--bili-pink); color: white; border-color: var(--bili-pink); }
+.pdf-page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.pdf-zoom-btn {
+    background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 14px; padding: 5px 10px; cursor: pointer; font-size: 0.85rem;
+    transition: var(--transition); color: var(--text-primary);
+}
+.pdf-zoom-btn:hover { background: rgba(251,114,153,0.15); }
+.pdf-canvas-area {
+    background: #f0f0f0; min-height: 400px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 20px; position: relative; overflow: auto;
+}
+.pdf-canvas-area canvas { box-shadow: 0 4px 20px rgba(0,0,0,0.15); border-radius: 4px; display: block; }
+.pdf-placeholder {
+    text-align: center; color: #999; font-size: 1rem; user-select: none;
+}
+.pdf-placeholder i { font-size: 3rem; margin-bottom: 14px; display: block; opacity: 0.4; }
+.pdf-status-bar {
+    background: rgba(0,0,0,0.03); border-top: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 18px; font-size: 0.82rem; color: var(--text-secondary);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.pdf-err { color: #c9190b; font-size: 0.88rem; }
+
+/* ── 分割线 ── */
+.divider-text {
+    display: flex; align-items: center; gap: 14px;
+    margin: 30px 0; color: var(--text-secondary); font-size: 0.9rem;
+}
+.divider-text::before, .divider-text::after {
+    content: ''; flex: 1; border-top: 1px solid rgba(0,0,0,0.12);
+}
+
+/* ── 分享 & 图片放大弹窗（继承） ── */
+.share-btn {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; border: none; padding: 12px 25px; border-radius: 25px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 10px; margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(251,114,153,0.3);
+}
+.share-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(251,114,153,0.4); }
+.share-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); display: none; justify-content: center;
+    align-items: center; z-index: 10000;
+}
+.share-modal.active { display: flex; }
+.share-modal-content {
+    background: white; border-radius: 20px; padding: 40px; max-width: 500px; width: 90%;
+    position: relative; animation: slideUp 0.3s ease; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+.share-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.share-modal-title { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); }
+.share-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); transition: var(--transition); }
+.share-close-btn:hover { color: var(--bili-pink); }
+.share-text {
+    background: rgba(251,114,153,0.1); border: 1px solid rgba(251,114,153,0.3);
+    border-radius: 12px; padding: 15px; margin-bottom: 25px;
+    font-size: 1rem; line-height: 1.6; color: var(--text-primary); word-break: break-all;
+}
+.share-actions { display: flex; gap: 15px; flex-wrap: wrap; }
+.share-copy-btn {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; border: none; padding: 12px 25px; border-radius: 12px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.share-copy-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(251,114,153,0.3); }
+.share-copy-btn.copied { background: linear-gradient(135deg, #00cc66, #00b359); }
+.share-close-modal-btn {
+    background: rgba(0,0,0,0.1); color: var(--text-primary); border: none;
+    padding: 12px 25px; border-radius: 12px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: var(--transition); flex: 1;
+}
+.share-close-modal-btn:hover { background: rgba(0,0,0,0.15); }
+.image-zoom-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: none; justify-content: center;
+    align-items: center; z-index: 10001; cursor: zoom-out;
+}
+.image-zoom-modal.active { display: flex; }
+.image-zoom-modal img { max-width: 95%; max-height: 95%; border-radius: 8px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+.image-zoom-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; z-index: 10002; }
+.image-zoom-close:hover { color: var(--bili-pink); }
+
+/* ── 页脚 ── */
+footer {
+    background: linear-gradient(135deg, var(--text-primary), #2D2D2F);
+    color: white; text-align: center; padding: 50px 0 30px;
+    margin-top: 80px; position: relative; overflow: hidden;
+}
+footer::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+}
+.footer-content { position: relative; z-index: 2; }
+.footer-logo { font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; color: var(--bili-pink); }
+footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
+
+/* ── 动画 ── */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── 滚动条 ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue)); border-radius: 4px; }
+
+
+
+
+
+
+/* ── 响应式 ── */
+@media (max-width: 768px) {
+    .article-detail { padding: 30px; }
+    .article-title { font-size: 1.8rem; }
+    .article-intro { font-size: 1.1rem; }
+    .article-content { font-size: 1rem; }
+    .article-content h2 { font-size: 1.5rem; }
+    .btn-row { gap: 8px; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
+    
+}
+@media (max-width: 480px) {
+    .article-detail { padding: 20px; }
+    .article-title { font-size: 1.5rem; }
+    .article-meta { flex-direction: column; gap: 8px; }
+    .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+    <!-- IP 地理检测（美国用户拒绝访问） -->
+    <script src="/geo-check.js"></script>
+    <!-- HTTP 检测与提示 -->
+    <script>
+        (function() {
+            function checkHTTP() {
+                if (window.location.protocol === 'http:') {
+                    var urlSpan = document.getElementById('currentHttpUrl');
+                    if (urlSpan) urlSpan.textContent = window.location.href;
+                    var overlay = document.getElementById('httpWarningOverlay');
+                    if (overlay) overlay.style.display = 'flex';
+                }
+            }
+            function switchToHTTPS() {
+                var url = window.location.href;
+                url = url.replace(/^http:/i, 'https:');
+                window.location.href = url;
+            }
+            function continueHTTP() {
+                var overlay = document.getElementById('httpWarningOverlay');
+                if (overlay) overlay.style.display = 'none';
+            }
+            window.switchToHTTPS = switchToHTTPS;
+            window.continueHTTP = continueHTTP;
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', checkHTTP);
+            } else {
+                checkHTTP();
+            }
+        })();
+    </script>
+    <!-- 百科词条系统 -->
+    <script src="/wiki-data.js"></script>
+    <script src="/css/wiki-linker.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TR4FT7JPDZ');
+</script>
+<!-- GA4 统一埋点模块 -->
+<script src="../../assets/js/gtag-config.js"></script>
+
+  <script src="/js/svg-icons.js" defer></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+    <link rel="stylesheet" href="../../css/css/blog-share.css">
+    <!-- Open Graph / 社交分享预览 -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤">
+    <meta property="og:description" content="真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。">
+    <meta property="og:url" content="https://ciallo0721-cmd.top/blog/ACG/84/">
+    <meta property="og:site_name" content="ciallo0721-cmd">
+    <meta property="og:image" content="https://ciallo0721-cmd.top/og-image.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤">
+    <meta name="twitter:description" content="真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。">
+
+    <!-- 结构化数据: BlogPosting -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤",
+      "description": "真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。",
+      "author": {
+        "@type": "Person",
+        "name": "ciallo0721-cmd"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "ciallo0721-cmd"
+      },
+      "mainEntityOfPage": "https://ciallo0721-cmd.top/blog/ACG/84/",
+      "image": "https://ciallo0721-cmd.top/og-image.png",
+      "inLanguage": "zh-CN",
+      "datePublished": "2026-10-07",
+      "dateModified": "2026-10-07"
+    }
+    </script>
+</head>
+<body>
+<!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-gamepad"></i> 开发者ciallo0721-cmd的空间
+            </a>
+            <a href="../../index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> 返回首页
+            </a>
+        </div>
+    </nav>
+
+    <!-- 文章内容 -->
+    <main class="container article-detail-container">
+        <article class="article-detail">
+
+            <!-- ── 文章头 ── -->
+            <header class="article-header">
+                <div class="article-number">ACG</div>
+                <h1 class="article-title">当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤</h1>
+                <p class="article-intro">真白花音毕业 158 天后以結川ユイナ身份回归。本文梳理完整时间线、拆解「永久停止账号」这句话的边界、分析切片生态中第三方的处境，并指出这场争议真正伤害人的地方不是转生本身，而是预期被单方面剥夺。</p>
+                <div class="article-meta">
+                    <div class="article-date"><i class="far fa-calendar"></i> 发布日期：<span>2026-10-07</span></div>
+                    <div class="article-date"><i class="far fa-clock"></i> 阅读时间：<span>约19分钟</span></div>
+                </div>
+                <div class="article-tags">
+                    <span class="article-tag">V圈</span>
+                    <span class="article-tag">真白花音</span>
+                    <span class="article-tag">結川ユイナ</span>
+                    <span class="article-tag">虚拟主播</span>
+                    <span class="article-tag">社区心理</span>
+                    <span class="article-tag">承诺与背叛</span>
+                    <span class="article-tag">舆论分析</span>
+                </div>
+            </header>
+
+            <!-- ── 目录 ── -->
+            <nav class="toc-box" aria-label="文章目录">
+                <h4><i class="fas fa-list-ul"></i> &nbsp;目录</h4>
+                <ol>
+<li><a href="#_1">一、一条今天才被广泛证实的消息</a></li>
+<li><a href="#158">二、时间线：把「158 天」摊开看</a></li>
+<li><a href="#_2">三、「三不」这句话，到底出自谁</a></li>
+<li><a href="#_3">四、为什么「技术上没撒谎」仍然会激怒所有人</a></li>
+<li><a href="#_4">五、被忽略的第三方：切片生态的位置</a></li>
+<li><a href="#_5">六、必须说清的部分：哪些说法目前没有实锤</a></li>
+<li><a href="#vtuber">七、VTuber 的「转生」为什么本不该是新闻</a></li>
+<li><a href="#_6">八、几种立场，逐一拆开</a></li>
+<li><a href="#_7">九、我们真正在愤怒什么</a></li>
+<li><a href="#_8">十、结语：这不是谁对谁错，是口径差</a></li>
+</ol>
+            </nav>
+
+            <div class="article-content">
+<blockquote>
+<p>本文只做事实梳理与现象分析，不站队、不判决。对当事人不做道德评价，对未证实的信息一律标注来源性质。</p>
+</blockquote>
+<h2 id="_1">一、一条今天才被广泛证实的消息</h2>
+<p>2026 年 10 月 7 日，中文互联网开始流传一个说法：B 站头部日V 虚拟主播<strong>真白花音</strong>（粉丝名「帕清姬」，B 站 ID 眞白花音_Official，216 万粉）在宣布「永久毕业」五个月后，以新身份重新开始活动。</p>
+<p>传播路径很典型：先在 X 上被扒出账号，再被搬运到 QQ 新闻、头条、公众号，最后在 B 站评论区炸开。整个事件的核心争议，只用三句话就能概括：</p>
+<ol>
+<li>2026 年 4 月 30 日，她在毕业直播里以一张毕业证书的形式，向两万名观众告别；</li>
+<li>5 月 1 日起，真白花音账号「永久停止全部活动」；</li>
+<li>158 天后，同一个声音出现在另一个平台的另一个账号里。</li>
+</ol>
+<p>新身份是<strong>結川ユイナ</strong>（Yuikawa Yuina），2026 年 10 月 5 日 19:00（日本时间）在 YouTube 完成初配信，隶属 VTuber 品牌 <strong>UltraLMTM</strong>。</p>
+<p>值得先说清楚的是：这件事并非今天才发生。<strong>首次配信日期是 10 月 5 日</strong>，不是部分报道里写的「预告 10 月 7 日首播」。中文媒体在三天后才集中跟进，搜索引擎的收录明显滞后——所以你现在搜不到是正常的。</p>
+<h2 id="158">二、时间线：把「158 天」摊开看</h2>
+<div class=「article-image-container」>
+<img src="images/01-sandwich.png" class="zoomable" alt="真白花音新形象与'不会复活 不会转生 不要期待'三句话并置的网络传播图">
+<div class=「image-caption」>图 1：社区里流传最广的那张图。左边是新身份形象，右边是三句话。矛盾感之所以这么强，是因为这两样东西被放在一起看了。</div>
+</div>
+
+<p>把关键节点按时间排开，这事的节奏比「突然复出」要复杂得多：</p>
+<ul>
+<li><strong>2019-05-01</strong> 真白花音出道，隶属个人势企划「ちゅこらら」，设定是白发红瞳的精灵公主，以「杂谈」直播风格著称</li>
+<li><strong>2019-10-24</strong> 在推特宣告将于月末引退</li>
+<li><strong>2020-12-01</strong> 宣告「复活」，随后加入 P 家</li>
+<li><strong>2026-01-24</strong> 举办五周年纪念 3D 演唱会，此时仍在正常活动</li>
+<li><strong>2026-04-17</strong> 宣布因身体与心理问题、医嘱要求长期休养，将于 5 月 1 日起永久停止活动</li>
+<li><strong>2026-04-30</strong> 毕业直播，2 万观众在场，最后展示毕业证书，达成「千人舰队」成就</li>
+<li><strong>2026-05-02</strong> 将早期自我介绍、回归声明、部分 vlog 与直播回放设为「仅自己可见」，推特动态改为仅粉丝可见</li>
+<li><strong>2026-09-28</strong> GANYMEDE（ZETA DIVISION 母公司）旗下、由 k4sen 担任制作人的 VTuber 品牌 UltraLMTM 公开一期生名单，結川ユイナ在列</li>
+<li><strong>2026-10-05</strong> 結川ユイナ初配信</li>
+</ul>
+<p>关键点在于：<strong>这不是她人生中第一次「转生」。</strong> 2019 年宣布引退、2020 年复活，是同一个账号上的同一次转生。所以「VTuber 转生」这件事在这个圈子里，本身是有先例、有共识基础的。</p>
+<p>真正没有先例的部分，是<strong>告别的规格</strong>。</p>
+<h2 id="_2">三、「三不」这句话，到底出自谁</h2>
+<p>社区里流传最广的一句控诉是那著名的「三不」——<strong>不会复活、不会转生、不要期待</strong>。很多后来的讨论把它当作她本人的承诺，直接拿来定罪。</p>
+<p>但这里必须做一次拆分。</p>
+<p>根据可查到的公告原文，措是这样的：</p>
+<blockquote>
+<p>因此决定自 2026 年 5 月 1 日起，<strong>永久停止【真白花音】账号的全部活动</strong>。</p>
+</blockquote>
+<p>请注意这句话的边界：它限定的是「【真白花音】账号」，不是「这个人不再从事 VT 活动」。而在 B 站的评论区内，有相当一部分老粉在毕业时就已经在纠正这一点——他们说，那句「不会转生」多半来自切片账号的标题与运营话术，<strong>并不是她本人的原话</strong>。</p>
+<p>所以在事实层面能确定的是：</p>
+<ul>
+<li>她本人明确承诺的，是停止「真白花音」这个账号</li>
+<li>「三不」这套话术，在传播中确实存在，但主要载体是切片生态与社区二次加工</li>
+<li>但<strong>这并不减轻伤害</strong>——下面这一节就是原因</li>
+</ul>
+<h2 id="_3">四、为什么「技术上没撒谎」仍然会激怒所有人</h2>
+<p>这是整件事最值得拆开的地方。</p>
+<p>一个常见的中立式辩解是：「她说了只停账号，又没说停行业，所以不算违背承诺。」</p>
+<p>这个辩解在逻辑上成立，在情感上完全失效。原因在于：<strong>她同时做了另一组动作，而那组动作比任何话都更有分量。</strong></p>
+<p>具体来说，5 月 2 日她把 200 余条视频和 vlog 设为仅自己可见。这个动作传递的信息量远超任何一句声明：</p>
+<ul>
+<li>删掉历史内容，等于宣告「我不希望任何人回头看」</li>
+<li>推特动态改为仅粉丝可见，等于切断公共讨论渠道</li>
+<li>社区给这个行为起了个名字：<strong>赛博葬礼</strong></li>
+</ul>
+<p>于是真正的矛盾在这里：</p>
+<blockquote>
+<p>她用<strong>账号层面</strong>的措辞保留了退路，却在<strong>情感层面</strong>把退路全部封死。</p>
+</blockquote>
+<p>这不是文字游戏，这是<strong>两套不同层级的表达系统在打架</strong>。理性的那一层在做风险规避，感性的那一层在做彻底的告别。而听众是按照感性那一层去理解这件事的。</p>
+<p>再叠加一个更难辩解的细节：她要真打算彻底告别，就没必要把告别办得如此隆重。毕业证书、两千人舰队达成、2 万观众在场、3 天告别渲染——这套流程的强度，与「永久停止」这个语义是<strong>互相矛盾</strong>的。</p>
+<p>如果她只是想换平台，为什么不把告别办得轻一点？如果她真的把这段关系当永别，为什么要在这几天里把气氛推到那么满？</p>
+<p>社区里有一句评论，把这种逻辑指认为一种合法化的自我保护：只要把话说得足够死，日后无论做什么，都可以解释成「当时只是文字游戏」。<strong>这不能证明她就是这么打算的，但确实是很多老粉会往这个方向想的原因。</strong></p>
+<h2 id="_4">五、被忽略的第三方：切片生态的位置</h2>
+<p>事件发酵过程中，社区里出现了一句被转发了很多次的话，大意是：<strong>「现在最可怜的人就是绯吧。」</strong></p>
+<p>这里需要解释一下绯吧是谁。</p>
+<p>绯吧是中文互联网上最大的真白花音切片账号之一。萌娘百科词条里有一条记载得很直接：由于绯吧在制作切片时大量使用「日本萝莉」这一关键词，账号在短时间内获得了巨大的流量，随后其他切片账号纷纷效仿——真白花音也因此成为 B 站约定俗成的「日本萝莉」这个标签的代表。</p>
+<p>这意味着一个结构性的事实：</p>
+<blockquote>
+<p><strong>真白花音 216 万粉丝里，有相当大一部分是切片喂养出来的。这批人关注的是「日本萝莉」这个内容品类，而不是这个具体的人。</strong></p>
+</blockquote>
+<p>于是就有了这一层的经济学：</p>
+<ul>
+<li>切片账号的收益归切片账号自己，流量池的估值建立在「本尊会持续产出」的前提上</li>
+<li>本尊消失，流量池的原料就断了，切片账号手里的存量粉丝变成不可变现的死粉</li>
+<li>更关键的是，切片账号对「本尊要走了」这件事<strong>没有任何知情权</strong>——他甚至没有机会调整内容方向</li>
+</ul>
+<p>这才是那句「最可怜」的实质。</p>
+<p>在舆论结构上，绯吧是<strong>唯一一个在这次事件里既没有做错任何事、也没有任何立场的人</strong>。他没有违约、没有消费谁的信任，他只是把自己全部的资产押注在了一个人格上，然后那个人格单方面宣布终止了。</p>
+<p>他不是被背叛的甲方，也不是被欺骗的消费者，他是被抛下的合作方。</p>
+<blockquote>
+<p>如果说社区对「转生」这件事本身有分歧，那么「最可怜」这个说法的一致性要高得多。因为<strong>利益受损最直接、且从头到尾没有话语权的人，只有一个。</strong></p>
+</blockquote>
+<h2 id="_5">六、必须说清的部分：哪些说法目前没有实锤</h2>
+<p>这类事件里最容易混入伪造信息的地方，就是把「合理推测」当「已确认事实」传播。目前网上流传最广的几条，性质如下：</p>
+<p><strong>属于事实、有公开来源的：</strong></p>
+<ul>
+<li>毕业时间、毕业直播、毕业证书、删除视频</li>
+<li>新账号名称、所属品牌、初配信时间、人设设定</li>
+<li>旧公告的原始措辞</li>
+</ul>
+<p><strong>属于单一来源、无法交叉验证的：</strong></p>
+<ul>
+<li>「2025 年 10 月开始找下家、2026 年 1 月面试通过」这类精确到月的时间线——目前广泛流传的来源是一张网络截图，出自某个视频的评论区</li>
+<li>「原公会老板跑路、拖欠大量工资」</li>
+<li>「白菜与明前奶绿被同一家公会欠薪两年」</li>
+</ul>
+<p><strong>属于纯推测的：</strong></p>
+<ul>
+<li>各种对个人动机的归因（结婚、赚够了、跑路、被针对）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>说法</th>
+<th>传播广度</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>毕业时间、删除视频</td>
+<td>极高</td>
+<td>有公告与实际页面为证</td>
+</tr>
+<tr>
+<td>新账号与初配信</td>
+<td>极高</td>
+<td>频道与推特均可查</td>
+</tr>
+<tr>
+<td>旧公告限定「账号」</td>
+<td>中</td>
+<td>有公告原文</td>
+</tr>
+<tr>
+<td>「三不」是她本人说的</td>
+<td>极高</td>
+<td><strong>存疑</strong>，主要载体是切片标题</td>
+</tr>
+<tr>
+<td>提前找好下家</td>
+<td>中</td>
+<td>单一截图来源</td>
+</tr>
+<tr>
+<td>公会欠薪</td>
+<td>中</td>
+<td>全为匿名爆料，无实锤</td>
+</tr>
+<tr>
+<td>个人动机归因</td>
+<td>极高</td>
+<td>纯推测</td>
+</tr>
+</tbody>
+</table>
+<p>需要特别提醒的是：<strong>「欠薪」这条线索目前在中文社区里传播极广，但全部是匿名爆料，没有任何实锤材料。</strong> 在没有可靠信源之前，把它当作解释框架来使用，等于是在给一个未验证的因果链做加固。</p>
+<p>同样地，「提前找好下家」这种说法，逻辑上确实能解释「为什么复出得这么快」——但它本身也是推测。用推测去填补信息空白，然后再用填补好的图像去攻击当事人，这个循环本身就是这类舆论最需要警惕的部分。</p>
+<h2 id="vtuber">七、VTuber 的「转生」为什么本不该是新闻</h2>
+<p>把视角拉远一点，这件事其实处在一个非常成熟的行业惯例里。</p>
+<p>在虚拟主播生态中，<strong>角色与中之人是分离的</strong>。角色是一个 IP，可以有名字、有生日、有性格、有形象设定；中之人是一个真实的人，负责表演与运营。围绕这套结构，行业里形成了几条被广泛接受的惯例：</p>
+<ul>
+<li><strong>毕业</strong>（引退）：停止这个账号的活动</li>
+<li><strong>转生</strong>：换一个账号重新开始，用新的角色身份</li>
+<li><strong>毕业不等于退圈</strong>，只等于「这个角色不再活动」</li>
+<li>只要不同时使用两个身份运营同一份粉丝关系，转生是<strong>合规且常见</strong>的</li>
+</ul>
+<p>真白花音自己2020 年就做过一次。所以从行业逻辑上说，她这次的操作完全在规则之内。</p>
+<p>社区里有一条被反复引用的评论，我觉得是整件事里最清醒的一句话：</p>
+<blockquote>
+<p>现在的虚拟主播，感觉快像是方便逃避责任的工具和幌子了。</p>
+</blockquote>
+<p>这句话里藏着一个真实的行业矛盾：<strong>规则允许转生，但观众的心理契约不允许。</strong> 平台和公司按「账号」计算，情感按「人」计算，两边的口径从来就没对齐过。</p>
+<p>也就是说，争议的真实结构不是「她该不该转生」，而是：</p>
+<blockquote>
+<p><strong>当「角色可以被回收」成为行业惯例，而「人」被当成角色的一部分来承诺时，谁来为这个口径差买单？</strong></p>
+</blockquote>
+<h2 id="_6">八、几种立场，逐一拆开</h2>
+<p>事件发酵过程中出现了几种典型的说法，把它们摊开看会更清楚：</p>
+<p><strong>第一种：支持转生，认为这很正常。</strong>
+论据是行业惯例 + 她的账号所有权 + 旧公告措辞本来就限定了账号 + 她的身体状况可能是真的。这个立场最稳，但它有一个盲区：它把「她有权这么做」和「这件事没有伤害任何人」当成了同一件事。</p>
+<p><strong>第二种：认为构成背信。</strong>
+论据是三句话式的告别强度、删视频的行为、以及「赛博葬礼」的仪式感。这个立场情绪上最能被理解，但它依赖「三不是她本人说的」这个前提，而这个前提本身存疑。</p>
+<p><strong>第三种：认为「没做错什么」。</strong>
+论据是打赏是自愿的、关注是自愿的、虚拟内容本来就是演出。这条立场在法律和逻辑上都很稳，但它低估了一件事：观众投入的不只是钱，还有<strong>时间与情感</strong>。把这两者都算作「自愿」来完成道德清算，本身也是一种粗暴。</p>
+<p><strong>第四种：把火力对准切片博主和公会。</strong>
+这是舆论里最容易跑偏的方向。切片账号的「日本萝莉」标签确实带流量，但那是内容策略，不是欺诈；公会欠薪即便属实，责任也在公会。把这两件事和「转生」混在一起谈，会把一场关于承诺的讨论，稀释成一场关于行业生态的宣泄。</p>
+<p><strong>第五种，也是我认为最接近问题核心的：把「被背叛感」当作主要情绪来处理。</strong></p>
+<p>下面单独展开。</p>
+<h2 id="_7">九、我们真正在愤怒什么</h2>
+<p>如果把评论区里上千条发言做一次归纳，会发现愤怒的对象很少是「转生」这个行为本身。</p>
+<p>排在前面的表述，几乎都在说同一件事：<strong>信息不对称。</strong></p>
+<p>一位观众的追问写得最完整：</p>
+<blockquote>
+<p>他们的生气点不在于她转不转生，在于停播之前疯狂地渲染——不转生、不复活、不要期待。然后这个时候回头你告诉我说这是文字游戏。她又没说不在外网转生。而且最后直播的那三天疯狂渲染氛围，那三天的应收快顶上大半年了。</p>
+</blockquote>
+<p>这段话里有三个层次的委屈：</p>
+<ol>
+<li><strong>被剥夺了知情权</strong>：作为观众，你被引导相信了一个结论，而结论的制定者持有一个不同的结论</li>
+<li><strong>被当成资源</strong>：那三天的告别本身就是一场高密度的打赏收割，而「永久」这个措辞为它提供了道德正当性</li>
+<li><strong>被剥夺了哀悼权</strong>：即使粉丝提前知道，她也可以正常告别。问题不在于她要走，而在于她要你以为自己再也见不到她</li>
+</ol>
+<p>第3 点是很多人忽略的。<strong>真正的伤害不是「她回来了」，而是「你被迫经历了一次没有告别的告别」。</strong></p>
+<p>这在心理学上有对应的机制。心理学里管这种「被剥夺预期」的现象叫做<strong>预期违背</strong>，而它的伤害强度和违背幅度、以及「违背者是否知情」高度相关。</p>
+<ul>
+<li>如果她说了「我要走了，但你将来可能以另一个身份回来」 → 违背幅度小，伤害小</li>
+<li>如果她说了「我不会回来」，然后自己毫不解释地回来 → 违背幅度大，且被认定为主观故意 → 伤害指数级上升</li>
+</ul>
+<p>而在这个事件里，<strong>她大概率是知情的</strong>——她知道自己在做什么（转生），她也知道自己说过什么（三不）。</p>
+<p>这才是「寒心」这个词被使用得如此密集的原因。它指向的不是「你回来了」，而是「<strong>你计算过我们的反应，而你还是这么做了</strong>」。</p>
+<p>至于社区里那句「她明明可以说展开新的人生冒险，大家都懂什么意思，但就是要骗你生病了」——它的尖锐之处也在这里。<strong>在「把话说死」和「坦白」之间，她选了前者。</strong> 而这个选择的收益是可计算的。</p>
+<h2 id="_8">十、结语：这不是谁对谁错，是口径差</h2>
+<p>如果要给整件事留一句结论，那大概是：</p>
+<blockquote>
+<p>这不是一次撒谎，这是一次<strong>精确的、没有恶意的、但收益明确的表达选择</strong>。</p>
+</blockquote>
+<p>她的措辞在法律上无懈可击，她的转生在行业规则内成立，她的身体状况也无从证伪。</p>
+<p>但她同时也是一个懂得「告别规格会决定观众情绪状态」的人。她用规格当了工具。</p>
+<p>对粉丝来说，这不构成愤怒的理由，也不构成原谅的理由。它只构成一件很具体的事：<strong>下次再有人告诉你「我永远不会离开这个行业」的时候，你可以选择先打个问号。</strong></p>
+<p>这不是针对某个人。这是这件事真正想教给所有人的东西。</p>
+<p>至于那个从头到尾没有说话、也没人在意的人——</p>
+<p>那位把全部身家押在「日本萝莉」这五个字上的切片账号运营者。他连知道自己被抛下的资格，都是从别人的讨论里推导出来的。</p>
+<p>他大概是这次事件里，唯一一个连生气的资格都没有的人。</p>
+            </div><!-- /article-content -->
+
+            <!-- ── 分享按钮 ── -->
+            <div style="text-align:center;margin-top:20px;">
+                <button class="share-btn" id="shareButton2">
+                    <i class="fas fa-share-alt"></i> 分享这篇文章
+                </button>
+            </div>
+
+        </article>
+        
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">开发者ciallo0721-cmd的空间</div>
+            <p>© 2026 ciallo0721-cmd · 当承诺被做成了葬礼：一次虚拟主播「转生」事件里的信任、话术与共同体创伤</p>
+            <p>感谢阅读喵～</p>
+        </div>
+    </footer>
+
+    <!-- 图片放大弹窗 -->
+    <div class="image-zoom-modal" id="imageZoomModal">
+        <span class="image-zoom-close" id="imageZoomClose">&times;</span>
+        <img src="" alt="放大图片" id="zoomedImage">
+    </div>
+
+    <!-- 分享弹窗 -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <div class="share-modal-header">
+                <h3 class="share-modal-title"><i class="fas fa-share-alt"></i> 分享这篇文章</h3>
+                <button class="share-close-btn" id="closeShareModal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="share-text" id="shareText">快来看看这篇文章: https://ciallo0721-cmd.top/blog/ACG/84/</div>
+            <div class="share-actions">
+                <button class="share-copy-btn" id="copyShareText"><i class="far fa-copy"></i> 复制分享链接</button>
+                <button class="share-close-modal-btn" id="closeShareModalBtn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="totop-btn" aria-label="返回顶部"
+        style="position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,var(--bili-pink),var(--bili-blue));color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 4px 15px rgba(251,114,153,0.3);display:none;z-index:9999;transition:all 0.3s;opacity:0.85;justify-content:center;align-items:center;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    // ── 进度条动画（进入视口后启动） ──
+    function animateProgressBars() {
+        document.querySelectorAll('.progress-fill[data-target]').forEach(function(el) {
+            el.style.width = el.getAttribute('data-target') + '%';
+        });
+    }
+    var progressObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateProgressBars(); progressObserver.disconnect(); } });
+    }, { threshold: 0.3 });
+    var pl = document.getElementById('progressList');
+    if (pl) progressObserver.observe(pl);
+
+    // ── Canvas 折线图 ──
+    function drawLineChart() {
+        var c = document.getElementById('lineChart');
+        if (!c) return;
+        c.width = c.parentElement.clientWidth - 48;
+        var ctx = c.getContext('2d');
+        var data = [1024, 889, 1580, 2101, 2470];
+        var labels = ['2026-01','2026-02','2026-03','2026-04','2026-05'];
+        var w = c.width, h = c.height;
+        var pad = { top: 20, right: 20, bottom: 40, left: 55 };
+        var cw = w - pad.left - pad.right, ch = h - pad.top - pad.bottom;
+        var maxV = 3000, step = cw / (data.length - 1);
+
+        ctx.clearRect(0, 0, w, h);
+
+        // 网格线
+        ctx.strokeStyle = 'rgba(0,0,0,0.06)'; ctx.lineWidth = 1;
+        for (var i = 0; i <= 4; i++) {
+            var y = pad.top + ch - (i / 4) * ch;
+            ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
+            ctx.fillStyle = '#999'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+            ctx.fillText((maxV / 4 * i).toFixed(0), pad.left - 8, y + 4);
+        }
+
+        // X 轴标签
+        ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '11px sans-serif';
+        labels.forEach(function(l, i) { ctx.fillText(l, pad.left + i * step, h - 8); });
+
+        // 渐变填充
+        var pts = data.map(function(v, i) { return [pad.left + i * step, pad.top + ch - (v / maxV) * ch]; });
+        var grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
+        grad.addColorStop(0, 'rgba(251,114,153,0.35)');
+        grad.addColorStop(1, 'rgba(251,114,153,0.02)');
+        ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+        pts.forEach(function(p) { ctx.lineTo(p[0], p[1]); });
+        ctx.lineTo(pts[pts.length-1][0], pad.top + ch); ctx.lineTo(pts[0][0], pad.top + ch);
+        ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+
+        // 折线
+        ctx.beginPath(); ctx.strokeStyle = '#FB7299'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+        pts.forEach(function(p, i) { i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]); });
+        ctx.stroke();
+
+        // 圆点
+        pts.forEach(function(p, i) {
+            ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#FB7299'; ctx.fill();
+            ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillStyle = '#515154'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText(data[i].toLocaleString(), p[0], p[1] - 12);
+        });
+    }
+
+    // ── Canvas 柱状图 ──
+    function drawBarChart() {
+        var c = document.getElementById('barChart');
+        if (!c) return;
+        c.width = c.parentElement.clientWidth - 48;
+        var ctx = c.getContext('2d');
+        var data = [3200, 1800, 4500, 2700, 1200, 5100, 890];
+        var labels = ['文章1','文章2','文章3','文章4','文章5','文章6','文章7'];
+        var w = c.width, h = c.height;
+        var pad = { top: 20, right: 20, bottom: 40, left: 55 };
+        var cw = w - pad.left - pad.right, ch = h - pad.top - pad.bottom;
+        var maxV = 6000, barW = cw / data.length * 0.55, gap = cw / data.length;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // 网格
+        ctx.strokeStyle = 'rgba(0,0,0,0.06)'; ctx.lineWidth = 1;
+        for (var i = 0; i <= 4; i++) {
+            var y = pad.top + ch - (i / 4) * ch;
+            ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
+            ctx.fillStyle = '#999'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+            ctx.fillText((maxV / 4 * i).toFixed(0), pad.left - 8, y + 4);
+        }
+
+        data.forEach(function(v, i) {
+            var x = pad.left + i * gap + (gap - barW) / 2;
+            var barH = (v / maxV) * ch;
+            var y = pad.top + ch - barH;
+            var grad = ctx.createLinearGradient(0, y, 0, y + barH);
+            grad.addColorStop(0, '#00A1D6'); grad.addColorStop(1, 'rgba(0,161,214,0.5)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            var r = 5;
+            ctx.moveTo(x + r, y); ctx.lineTo(x + barW - r, y);
+            ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+            ctx.lineTo(x + barW, y + barH); ctx.lineTo(x, y + barH);
+            ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.fill();
+
+            ctx.fillStyle = '#515154'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText(labels[i], x + barW / 2, h - 8);
+            ctx.fillStyle = 'white'; ctx.font = 'bold 10px sans-serif';
+            if (barH > 22) ctx.fillText(v.toLocaleString(), x + barW / 2, y + 15);
+        });
+    }
+
+    // ── SVG 饼图 ──
+    function drawPieChart() {
+        var svg = document.getElementById('pieChart');
+        var legend = document.getElementById('pieLegend');
+        if (!svg || !legend) return;
+        var data = [
+            { label: '直接访问', value: 52, color: '#FB7299' },
+            { label: '搜索引擎', value: 28, color: '#00A1D6' },
+            { label: '社交媒体', value: 12, color: '#34C759' },
+            { label: '外链引用', value: 8,  color: '#FF9500' }
+        ];
+        var total = data.reduce(function(s, d) { return s + d.value; }, 0);
+        var cx = 100, cy = 100, r = 80; var startAngle = -Math.PI / 2;
+        svg.innerHTML = '';
+
+        data.forEach(function(d) {
+            var angle = (d.value / total) * 2 * Math.PI;
+            var endAngle = startAngle + angle;
+            var x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+            var x2 = cx + r * Math.cos(endAngle),   y2 = cy + r * Math.sin(endAngle);
+            var large = angle > Math.PI ? 1 : 0;
+            var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+            path.setAttribute('d', 'M '+cx+' '+cy+' L '+x1+' '+y1+' A '+r+' '+r+' 0 '+large+' 1 '+x2+' '+y2+' Z');
+            path.setAttribute('fill', d.color);
+            path.style.transition = 'transform 0.2s';
+            path.style.transformOrigin = cx+'px '+cy+'px';
+            path.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.06)'; });
+            path.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
+            svg.appendChild(path);
+            startAngle = endAngle;
+
+            var item = document.createElement('div');
+            item.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:0.9rem;';
+            item.innerHTML = '<span style="width:12px;height:12px;border-radius:3px;background:'+d.color+';flex-shrink:0;"></span>'
+                + '<span style="color:#515154">'+d.label+'</span>'
+                + '<span style="font-weight:700;color:#1D1D1F">'+d.value+'%</span>';
+            legend.appendChild(item);
+        });
+    }
+
+    // ── 灰度预览按钮 ──
+    var isGrayscale = false;
+    document.getElementById('previewGrayscale').addEventListener('click', function() {
+        document.documentElement.style.filter = 'grayscale(1)';
+        isGrayscale = true;
+        this.style.display = 'none';
+        document.getElementById('removeGrayscale').style.display = '';
+    });
+    document.getElementById('removeGrayscale').addEventListener('click', function() {
+        document.documentElement.style.filter = '';
+        isGrayscale = false;
+        this.style.display = 'none';
+        document.getElementById('previewGrayscale').style.display = '';
+    });
+
+    // ── DOMContentLoaded ──
+    document.addEventListener('DOMContentLoaded', function() {
+        // 图片放大
+        var modal = document.getElementById('imageZoomModal');
+        var modalImg = document.getElementById('zoomedImage');
+        var closeBtn = document.getElementById('imageZoomClose');
+        if (modal && modalImg) {
+            document.querySelectorAll('.zoomable').forEach(function(img) {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', function() {
+                    modalImg.src = this.src; modalImg.alt = this.alt;
+                    modal.classList.add('active'); document.body.style.overflow = 'hidden';
+                });
+            });
+            function closeZoom() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+            closeBtn.addEventListener('click', closeZoom);
+            modal.addEventListener('click', function(e) { if (e.target === modal) closeZoom(); });
+        }
+
+        // 分享功能
+        var shareModal = document.getElementById('shareModal');
+        var copyBtn = document.getElementById('copyShareText');
+        function openShare() { shareModal.classList.add('active'); }
+        function closeShare() {
+            shareModal.classList.remove('active');
+            copyBtn.innerHTML = '<i class="far fa-copy"></i> 复制分享链接';
+            copyBtn.classList.remove('copied');
+        }
+        ['shareButton','shareButton2'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.addEventListener('click', openShare);
+        });
+        document.getElementById('closeShareModal').addEventListener('click', closeShare);
+        document.getElementById('closeShareModalBtn').addEventListener('click', closeShare);
+        shareModal.addEventListener('click', function(e) { if (e.target === shareModal) closeShare(); });
+        copyBtn.addEventListener('click', function() {
+            var text = document.getElementById('shareText').textContent.trim();
+            function fallbackCopy() {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed'; ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch(e) {}
+                document.body.removeChild(ta);
+                copied();
+            }
+            function copied() {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制到剪贴板';
+                copyBtn.classList.add('copied');
+                setTimeout(function() {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> 复制分享链接';
+                    copyBtn.classList.remove('copied');
+                }, 3000);
+            }
+            // 非安全上下文（http）下 navigator.clipboard 不可用，走降级方案
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(copied).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        });
+
+        // ESC 处理
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (modal && modal.classList.contains('active')) { modal.classList.remove('active'); document.body.style.overflow = ''; return; }
+                if (shareModal && shareModal.classList.contains('active')) { closeShare(); return; }
+                window.location.href = '../../index.html';
+            }
+        });
+
+        // 视频播放器（自研播放器已停用，改用浏览器原生播放器）
+        // if (window.NiceVideo) NiceVideo.initAll();
+
+        // 绘制图表
+        drawLineChart(); drawBarChart(); drawPieChart();
+    });
+
+    // 返回顶部
+    (function() {
+        var btn = document.getElementById('totop-btn');
+        if (!btn) return;
+        btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        window.addEventListener('scroll', function() { btn.style.display = window.scrollY > 300 ? 'flex' : 'none'; }, { passive: true });
+    })();
+
+    // 窗口 resize 重绘图表
+    window.addEventListener('resize', function() { drawLineChart(); drawBarChart(); });
+
+    // ── 推荐文章自动加载 ──
+    ;
+    </script>
+
+    <!-- ─── PDF 阅读器 JS ─── -->
+    <script>
+    (function() {
+        // 等 PDF.js 加载完毕
+        if (!window.pdfjsLib) return;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        var pdfDoc = null, curPage = 1, totalPages = 0, scale = 1.0;
+        var canvas = document.getElementById('pdfCanvas');
+        var ctx = canvas ? canvas.getContext('2d') : null;
+
+        function el(id) { return document.getElementById(id); }
+
+        function setErr(msg) { el('pdfErrMsg').textContent = msg || ''; }
+
+        function updateUI() {
+            el('pdfPageInfo').textContent = totalPages ? curPage + ' / ' + totalPages : '— / —';
+            el('pdfPrevBtn').disabled = curPage <= 1;
+            el('pdfNextBtn').disabled = curPage >= totalPages;
+            el('pdfZoomLabel').textContent = Math.round(scale * 100) + '%';
+        }
+
+        function renderPage(num) {
+            if (!pdfDoc || !canvas || !ctx) return;
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({ scale: scale });
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                var renderCtx = { canvasContext: ctx, viewport: viewport };
+                page.render(renderCtx).promise.then(function() {
+                    curPage = num;
+                    updateUI();
+                    setErr('');
+                });
+            }).catch(function(e) { setErr('渲染失败：' + e.message); });
+        }
+
+        function loadPDF(src) {
+            setErr('');
+            el('pdfPlaceholder').style.display = 'none';
+            canvas.style.display = 'none';
+            var loadingTask = pdfjsLib.getDocument(src);
+            loadingTask.promise.then(function(doc) {
+                pdfDoc = doc;
+                totalPages = doc.numPages;
+                curPage = 1;
+                canvas.style.display = 'block';
+                renderPage(1);
+            }).catch(function(e) {
+                setErr('加载失败：' + e.message);
+                el('pdfPlaceholder').style.display = '';
+            });
+        }
+
+        // 本地文件上传
+        el('pdfFileInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+            el('pdfFileName').textContent = file.name + '（' + (file.size / 1024).toFixed(1) + ' KB）';
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+                var typedArray = new Uint8Array(ev.target.result);
+                loadPDF({ data: typedArray });
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        // URL 加载
+        el('pdfUrlLoadBtn').addEventListener('click', function() {
+            var url = el('pdfUrlInput').value.trim();
+            if (!url) return;
+            el('pdfFileName').textContent = url;
+            loadPDF(url);
+        });
+        el('pdfUrlInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') el('pdfUrlLoadBtn').click();
+        });
+
+        // 翻页
+        el('pdfPrevBtn').addEventListener('click', function() { if (curPage > 1) renderPage(curPage - 1); });
+        el('pdfNextBtn').addEventListener('click', function() { if (curPage < totalPages) renderPage(curPage + 1); });
+
+        // 缩放
+        el('pdfZoomIn').addEventListener('click', function() {
+            if (scale >= 3.0) return;
+            scale = Math.round((scale + 0.25) * 100) / 100;
+            renderPage(curPage);
+        });
+        el('pdfZoomOut').addEventListener('click', function() {
+            if (scale <= 0.5) return;
+            scale = Math.round((scale - 0.25) * 100) / 100;
+            renderPage(curPage);
+        });
+
+        // 键盘左右翻页（仅 PDF 区域聚焦时）
+        el('pdfCanvasArea').setAttribute('tabindex', '0');
+        el('pdfCanvasArea').addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); if (curPage > 1) renderPage(curPage - 1); }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); if (curPage < totalPages) renderPage(curPage + 1); }
+        });
+
+        updateUI();
+    })();
+    </script>    <script src="../../js/js/blog-share.js"></script>
+    <script src="/js/js/tracking.js"></script>
+<script src="../../../js/js/cwbiblog.js"></script>
+</body>
+</html>
