@@ -218,6 +218,16 @@ body {
     color: var(--text-light);
     line-height: 1.6;
 }
+.tl-desc a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--pink2);
+}
+.tl-desc a:hover {
+    color: #a56a6a;
+    border-bottom-color: var(--accent);
+}
 
 /* ===== 轶事 ===== */
 .trivia-list {
