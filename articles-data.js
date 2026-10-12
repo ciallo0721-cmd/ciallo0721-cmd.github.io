@@ -915,6 +915,17 @@ window.articlesData = {
     readTime: 44,
     featured: false
   },
+        {
+            id: 85,
+            category: "公告",
+            fileName: "公告/85/",
+            title: "博客架构升级：从 articles-data.js 到 CWBI",
+            excerpt: "博客元数据层升级：每篇文章一个 .cwb 文件，首页双源合并，CWBI 优先、articles-data.js 兜底。完整解析 .cwb 格式、生成管线与前端读取链路。",
+            date: "2026-10-11",
+            tags: ["CWBI", "CWB", "博客", "架构", "前端"],
+            readTime: 11,
+            featured: false
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),
