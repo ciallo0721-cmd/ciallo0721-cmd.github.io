@@ -895,14 +895,15 @@ npm run test:perf     # 仅性能检测</code></pre>
     });
     }
 
-    // ── 灰度预览按钮 ──
+    // ── 灰度预览按钮（元素不存在时跳过，防止 TypeError 中断后续脚本）──
     var isGrayscale = false;
+    if (document.getElementById('previewGrayscale') && document.getElementById('removeGrayscale'))
     document.getElementById('previewGrayscale').addEventListener('click', function() {
         document.documentElement.style.filter = 'grayscale(1)';
         isGrayscale = true;
         this.style.display = 'none';
         document.getElementById('removeGrayscale').style.display = ''; });
-    document.getElementById('removeGrayscale').addEventListener('click', function() {
+    if (document.getElementById('removeGrayscale')) document.getElementById('removeGrayscale').addEventListener('click', function() {
         document.documentElement.style.filter = '';
         isGrayscale = false;
         this.style.display = 'none';
@@ -1030,6 +1031,7 @@ npm run test:perf     # 仅性能检测</code></pre>
     <!-- ─── PDF 阅读器 JS ─── -->
     <script>
     (function() {
+        if (!document.getElementById('pdfFileInput')) return; // 阅读器组件不存在时跳过，防止 TypeError 中断
         // 等 PDF.js 加载完毕
         if (!window.pdfjsLib) return;
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';

@@ -574,7 +574,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
 
   <script src="/js/svg-icons.js" defer></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
-    <link rel="stylesheet" href="../../css/css/blog-share.css">
+    <link rel="stylesheet" href="../../../css/css/blog-share.css">
     <!-- Open Graph / 社交分享预览 -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="STMG 超级文本 Markdown：给 Galgame 写剧本的一门语言">
@@ -1194,15 +1194,16 @@ Turtle.forward(10)
         });
     }
 
-    // ── 灰度预览按钮 ──
+    // ── 灰度预览按钮（元素不存在时跳过，防止 TypeError 中断后续脚本）──
     var isGrayscale = false;
+    if (document.getElementById('previewGrayscale') && document.getElementById('removeGrayscale'))
     document.getElementById('previewGrayscale').addEventListener('click', function() {
         document.documentElement.style.filter = 'grayscale(1)';
         isGrayscale = true;
         this.style.display = 'none';
         document.getElementById('removeGrayscale').style.display = '';
     });
-    document.getElementById('removeGrayscale').addEventListener('click', function() {
+    if (document.getElementById('removeGrayscale')) document.getElementById('removeGrayscale').addEventListener('click', function() {
         document.documentElement.style.filter = '';
         isGrayscale = false;
         this.style.display = 'none';
@@ -1306,6 +1307,7 @@ Turtle.forward(10)
     <!-- ─── PDF 阅读器 JS ─── -->
     <script>
     (function() {
+        if (!document.getElementById('pdfFileInput')) return; // 阅读器组件不存在时跳过，防止 TypeError 中断
         // 等 PDF.js 加载完毕
         if (!window.pdfjsLib) return;
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -1406,7 +1408,7 @@ Turtle.forward(10)
 
         updateUI();
     })();
-    </script>    <script src="../../js/js/blog-share.js"></script>
+    </script>    <script src="../../../js/js/blog-share.js"></script>
     <script src="/js/js/tracking.js"></script>
 <script src="../../../js/js/cwbiblog.js"></script>
 </body>
