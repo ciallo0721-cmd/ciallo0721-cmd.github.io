@@ -183,6 +183,20 @@ for path, pri in app_pages:
     ld = get_file_lastmod(path) or today
     urls.append((encode_url_path(path), ld, 'monthly', pri))
 
+# 博客分类页 blog/<分类>/index.html（自动扫描，新增分类无需手改）
+_blog_dir = os.path.join(blog_root, 'blog')
+_SKIP_CAT = {'muban', 'emergency'}
+if os.path.isdir(_blog_dir):
+    for _name in sorted(os.listdir(_blog_dir)):
+        _dir = os.path.join(_blog_dir, _name)
+        _idx = os.path.join(_dir, 'index.html')
+        if not os.path.isdir(_dir) or not os.path.exists(_idx):
+            continue
+        if _name in _SKIP_CAT or _name.startswith('_'):
+            continue
+        _ld = datetime.date.fromtimestamp(os.path.getmtime(_idx)).isoformat()
+        urls.append((encode_url_path(f'/blog/{_name}/'), _ld, 'weekly', '0.7'))
+
 # 所有博客文章（目录不存在的旧数据自动跳过）
 for a in articles:
     fileName = a.get('fileName', str(a['id']))

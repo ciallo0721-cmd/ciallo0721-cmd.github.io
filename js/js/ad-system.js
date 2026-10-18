@@ -55,6 +55,7 @@
       var tag   = entry[0];
       var img   = entry[1];
       var link  = entry[2];
+      var desc  = entry[3] || '';   // 第 4 项：软性推荐位的推荐语（硬广不用）
       var style = STYLE_MAP[tag] || {};
       AD_REGISTRY.push({
         id:   'ad-' + i,
@@ -62,6 +63,7 @@
         icon: style.icon || '📌',
         svg:  img,
         link: link,
+        desc: desc,
         c1:   style.c1 || '#3366FF',
         c2:   style.c2 || '#7094FF'
       });
@@ -415,6 +417,72 @@
     return wrapper;
   }
 
+  /* ============ 软性推荐位（v1.3） ============
+   * 硬广（728×90 横幅 + 不感兴趣按钮）换成一行原生样式的推荐。
+   * 触发：容器写 <div data-ad-slot data-ad-soft="1"></div>
+   * 文案优先取 AD_DATA 的第 4 项（推荐语），没写就用默认句。
+   * 同一页多个软位不会重复同一条。
+   */
+  var SOFT_TEXT_DEFAULT = '顺便推荐一个，也许用得上';
+
+  function createSoftSlot(adId) {
+    var p = loadPrefs();
+    var ad;
+    if (adId) {
+      ad = AD_REGISTRY.find(function (a) { return a.id === adId; });
+    } else {
+      var used = [];
+      var softNodes = document.querySelectorAll('.ad-soft');
+      for (var i = 0; i < softNodes.length; i++) used.push(softNodes[i].getAttribute('data-ad-id'));
+      var pool = getAvailable(p).filter(function (a) { return used.indexOf(a.id) < 0; });
+      if (pool.length === 0) pool = getAvailable(p);
+      ad = weightedRandomSelect(p, pool);
+    }
+    if (!ad) return null;
+    return buildSoftDOM(ad);
+  }
+
+  function buildSoftDOM(ad) {
+    trackImpression(ad.id);
+
+    var row = document.createElement('div');
+    row.className = 'ad-soft';
+    row.setAttribute('data-ad-id', ad.id);
+    row.setAttribute('data-ad-tag', ad.tag);
+
+    var a = document.createElement('a');
+    a.className = 'ad-soft-link';
+    a.href = ad.link;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML =
+      '<span class="ad-soft-badge">' + ad.icon + ' 推荐</span>' +
+      '<span class="ad-soft-text">' + (ad.desc || SOFT_TEXT_DEFAULT) + '</span>' +
+      '<span class="ad-soft-go">→</span>';
+    a.addEventListener('click', function () { onAdEnter(ad.id); });
+
+    var close = document.createElement('button');
+    close.className = 'ad-soft-close';
+    close.type = 'button';
+    close.title = '不感兴趣，减少此类推荐';
+    close.setAttribute('aria-label', '不感兴趣');
+    close.textContent = '✕';
+    close.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onAdDislike(ad.id);
+      row.style.transition = 'opacity .3s ease';
+      row.style.opacity = '0';
+      setTimeout(function () { if (row.parentNode) row.parentNode.removeChild(row); }, 300);
+    });
+
+    row.appendChild(a);
+    row.appendChild(close);
+    return row;
+  }
+
+  var __rendered = false;   // 防重复渲染标志
+
   function initAdSlots() {
     // 如果 adkey 已生效，不在任何页面渲染广告
     if (isAdDisabled()) {
@@ -423,18 +491,22 @@
     }
 
     var slots = document.querySelectorAll('[data-ad-slot]');
-    
-    var debugMarker = document.createElement('div');
-    debugMarker.style.cssText = 'text-align:center;padding:8px;margin:0 auto;max-width:728px;font-size:11px;color:#aaa;font-family:"PingFang SC","Microsoft YaHei",sans-serif;';
-    debugMarker.textContent = '[AdSystem v1.2] 统计已开启 | 展现: ' + (loadStats().totalImpressions || 0) + ' | 点击: ' + (loadStats().totalClicks || 0);
-    if (slots.length > 0) {
-      var lastSlot = slots[slots.length - 1];
-      lastSlot.parentNode.insertBefore(debugMarker, lastSlot.nextSibling);
-    }
-    
+
     if (slots.length === 0) {
       console.log('[AdSystem] 未检测到广告位容器 (data-ad-slot)');
       return;
+    }
+    if (__rendered) return;      // 本模块的 init 会被调用 2~3 次（readyState / DOMContentLoaded / setTimeout），只渲染一遍
+    __rendered = true;
+
+    // 调试统计行：仅在 ?addebug=1 时插入。
+    // 旧版无条件插入、且因为 init 被调用多次而重复 2~3 行，访客可见——2026-09-30 修。
+    if (/[?&]addebug=1/.test(location.search)) {
+      var dbgLine = document.createElement('div');
+      dbgLine.style.cssText = 'text-align:center;padding:8px;margin:0 auto;max-width:728px;font-size:11px;color:#aaa;font-family:"PingFang SC","Microsoft YaHei",sans-serif;';
+      dbgLine.textContent = '[AdSystem v1.3] 统计 | 展现: ' + (loadStats().totalImpressions || 0) + ' | 点击: ' + (loadStats().totalClicks || 0);
+      var lastSlot = slots[slots.length - 1];
+      lastSlot.parentNode.insertBefore(dbgLine, lastSlot.nextSibling);
     }
 
     console.log('[AdSystem] 检测到 ' + slots.length + ' 个广告位，开始智能投放...');
@@ -443,11 +515,14 @@
       var slot = slots[i];
       if (slot.children.length > 0) continue;
       var specifiedId = slot.getAttribute('data-ad-id') || null;
-      var adEl = createAdSlot(specifiedId);
+      // data-ad-soft="1" → 渲染软性推荐行（原生样式，不用 728 横幅、不写"广告"字样）
+      var adEl = slot.getAttribute('data-ad-soft') === '1'
+        ? createSoftSlot(specifiedId)
+        : createAdSlot(specifiedId);
       if (adEl) {
         slot.appendChild(adEl);
       } else {
-        slot.innerHTML = '<div class="ad-empty">暂无广告喵～</div>';
+        slot.innerHTML = '<div class="ad-empty">暂无推荐喵～</div>';
       }
     }
 
@@ -488,6 +563,16 @@
       '.ad-card-dislike:hover { background: rgba(255,71,87,0.85); }' +
       '.ad-card-tag { position: absolute; bottom: 8px; left: 8px; padding: 3px 10px; background: rgba(0,0,0,0.45); color: #fff; font-size: 11px; border-radius: 10px; font-family: "PingFang SC","Microsoft YaHei",sans-serif; white-space: nowrap; pointer-events: none; }' +
       '.ad-empty { text-align: center; color: #999; padding: 20px; font-size: 13px; font-family: "PingFang SC","Microsoft YaHei",sans-serif; }' +
+      // —— 软性推荐位（v1.3）：原生样式，浅底 + 左侧海青竖条，读起来像正文里的一句话 ——
+      '.ad-soft { position: relative; width: 100%; max-width: 728px; margin: 0 auto; display: flex; align-items: center; gap: 10px; padding: 9px 12px 9px 14px; border: 1px solid #E2E8F0; border-left: 3px solid #0EA5E9; border-radius: 10px; background: #F8FAFC; font-size: 13px; line-height: 1.5; font-family: "PingFang SC","Microsoft YaHei",sans-serif; transition: background 0.25s ease, border-color 0.25s ease; }' +
+      '.ad-soft:hover { background: #FFFFFF; border-color: #7DD3FC; }' +
+      '.ad-soft-link { display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; text-decoration: none; color: #0F172A; }' +
+      '.ad-soft-badge { flex-shrink: 0; padding: 2px 8px; border-radius: 6px; background: #E0F2FE; color: #0284C7; font-size: 12px; font-weight: 700; white-space: nowrap; }' +
+      '.ad-soft-text { flex: 1; min-width: 0; color: #475569; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
+      '.ad-soft-go { flex-shrink: 0; color: #0EA5E9; font-weight: 700; }' +
+      '.ad-soft-close { flex-shrink: 0; width: 20px; height: 20px; padding: 0; border: none; border-radius: 50%; background: transparent; color: #94A3B8; font-size: 11px; line-height: 1; cursor: pointer; }' +
+      '.ad-soft-close:hover { background: #E2E8F0; color: #475569; }' +
+      '@media (max-width: 768px) { .ad-soft-text { white-space: normal; } }' +
       '@media (max-width: 768px) { .ad-card-dislike { opacity: 1; width: 22px; height: 22px; top: 4px; right: 4px; } .ad-card-tag { font-size: 10px; padding: 2px 8px; bottom: 4px; left: 4px; } }';
 
     document.head.appendChild(style);

@@ -166,6 +166,9 @@
 <!-- GA4 统一埋点模块 -->
 <script src="./assets/js/gtag-config.js"></script>
 
+    <!-- 全站面包屑导航（自动渲染，勿删） -->
+    <link rel="stylesheet" href="css/css/breadcrumb.css">
+    <script defer src="js/js/breadcrumb.js"></script>
 </head>
 <body class="auth-passed">
     <!-- 玻璃拟态背景层（流动渐变 + 漂浮光斑，参考 github.com/tuhuowo/tuhutest） -->
@@ -324,11 +327,7 @@
     <!-- 动画分隔线 -->
     <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
-    <!-- 广告位 #1：顶部横幅 -->
-    <div class="container">
-        <div class="ad-slot" data-ad-slot></div>
-    </div>
-
+    <!-- 动画分隔线 -->
     <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
         <!-- 优化首页：减少信息过载，按重要性排列 -->
@@ -424,9 +423,6 @@
                 </div>
             </section>
         </div>
-
-        <!-- 广告位 #2：项目中横幅 -->
-        <div class="ad-slot"><div data-ad-slot></div></div>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
@@ -534,9 +530,6 @@
                 </noscript>
             </div>
         </section>
-
-        <!-- 广告位 #3：文章区下方 -->
-        <div class="ad-slot"><div data-ad-slot></div></div>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
@@ -660,8 +653,8 @@
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 
-        <!-- 广告位 #4：底部横幅（动态广告系统） -->
-        <div class="ad-slot"><div data-ad-slot></div></div>
+        <!-- 软性推荐位（唯一一处，原生样式，不用 728 横幅） -->
+        <div class="ad-slot" data-ad-slot data-ad-soft="1"></div>
 
         <div class="animation-divider"><span></span><span></span><span></span><span></span><span></span></div>
 

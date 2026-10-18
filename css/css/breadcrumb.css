@@ -1,0 +1,152 @@
+/* ==========================================================================
+   全站面包屑导航 / Site Breadcrumb
+   - 由 js/js/breadcrumb.js 自动渲染，页面只需引入本文件
+   - 命名统一前缀 .site-crumb，避免与页面既有样式冲突
+   - 视觉基线：海青 #0EA5E9 / 深 #0284C7，描边 #E2E8F0，文本 #475569
+   ========================================================================== */
+
+.site-crumb {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 14px auto 0;
+  padding: 0 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #475569;
+  text-align: left;
+  position: relative;
+  z-index: 5;
+}
+
+.site-crumb__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 9px 16px;
+  list-style: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid #E2E8F0;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+
+.site-crumb__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.site-crumb__link,
+.site-crumb__current {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.site-crumb__link {
+  color: #0284C7;
+}
+
+.site-crumb__link:hover,
+.site-crumb__link:focus-visible {
+  color: #0C4A6E;
+  background: #F0F9FF;
+  text-decoration: none;
+  outline: none;
+}
+
+.site-crumb__current {
+  color: #0F172A;
+  font-weight: 600;
+  cursor: default;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.site-crumb__sep {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  color: #94A3B8;
+  font-size: 11px;
+  font-weight: 400;
+  user-select: none;
+  opacity: 0.85;
+}
+
+.site-crumb__home-icon {
+  flex: none;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* 窄屏：压缩留白，分隔符收窄 */
+@media (max-width: 640px) {
+  .site-crumb {
+    margin-top: 10px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .site-crumb__inner {
+    padding: 8px 12px;
+    border-radius: 14px;
+    gap: 1px;
+  }
+
+  .site-crumb__link,
+  .site-crumb__current {
+    font-size: 12px;
+  }
+}
+
+/* 深色底页面（JS 探测到 body 背景偏暗时挂 data-adaptive="dark"） */
+.site-crumb[data-adaptive="dark"] .site-crumb__inner {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.28);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.site-crumb[data-adaptive="dark"] .site-crumb__link {
+  color: #7DD3FC;
+}
+
+.site-crumb[data-adaptive="dark"] .site-crumb__link:hover,
+.site-crumb[data-adaptive="dark"] .site-crumb__link:focus-visible {
+  color: #E0F2FE;
+  background: rgba(14, 165, 233, 0.18);
+}
+
+.site-crumb[data-adaptive="dark"] .site-crumb__current {
+  color: #F1F5F9;
+}
+
+.site-crumb[data-adaptive="dark"] .site-crumb__sep {
+  color: #64748B;
+}
+
+@media print {
+  .site-crumb {
+    display: none !important;
+  }
+}

@@ -233,7 +233,7 @@ function setCharName(ch, name){
 }
 function spawnCharacter(team,isPlayer){
   const m=makeCharMesh(team); scene.add(m.group);
-  const ch={team,isPlayer,alive:true,hp:100,respawn:0,group:m.group,meshes:[m.body,m.head],
+  const ch={team,isPlayer,alive:true,hp:100,respawn:0,boostT:0,group:m.group,meshes:[m.body,m.head],
     yaw:0,pitch:0,recoil:0,flyY:0,weapon:isPlayer?'ak':pickBotWeapon(),gun:m.gun,
     ammo:{}, elev:0,          // elev：当前支撑高度（大楼分层用）
     superAI:false,            // 超级AI（Q-learning 推理端）
@@ -283,14 +283,43 @@ function placeAtSpawn(ch){
 }
 
 /* ---------- 3b. 医疗箱 ---------- */
-function makeMedkit(x,z){
+/* ---------- 3c. 场地补给箱（软植入：品牌道具） ----------
+   三种箱子轮换刷在场上，品牌名直接印在箱面上，走过去自动拾取——
+   比横幅广告安静得多，也顺便是「要回血就得记住这个牌子」的自然记忆点。
+   想换牌子 / 改数值：只动 PICKUP_TYPES 这一张表。 */
+const PICKUP_TYPES = [
+  { id:'med',  name:'医疗箱',     mark:'+',    heal:MEDKIT_HEAL, cd:MEDKIT_CD, boost:0, bg:'#d8e8ff', fg:'#1f5fb5', line:'#39d06a', cross:true },
+  { id:'dove', name:'德芙巧克力', mark:'DOVE', heal:20,           cd:8,         boost:5, bg:'#3a2113', fg:'#f3e2c0', line:'#d9b26a' },
+  { id:'spam', name:'SPAM 罐头',  mark:'SPAM', heal:30,           cd:8,         boost:0, bg:'#16307a', fg:'#ffe066', line:'#ff6b6b' }
+];
+const PICKUP_MATS = {};
+function pickupMat(t){
+  if(PICKUP_MATS[t.id]) return PICKUP_MATS[t.id];
+  const c=document.createElement('canvas'); c.width=c.height=128;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle=t.bg; ctx.fillRect(0,0,128,128);
+  ctx.lineWidth=8; ctx.strokeStyle=t.line; ctx.strokeRect(6,6,116,116);
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillStyle=t.fg; ctx.font='bold 34px "Microsoft YaHei","PingFang SC",sans-serif';
+  ctx.fillText(t.mark,64,52);
+  ctx.font='bold 19px "Microsoft YaHei","PingFang SC",sans-serif';
+  ctx.fillText(t.name,64,90);
+  const tex=new THREE.CanvasTexture(c); tex.anisotropy=4;
+  PICKUP_MATS[t.id]=new THREE.MeshLambertMaterial({map:tex});
+  return PICKUP_MATS[t.id];
+}
+function makeMedkit(x,z,t){
+  t = t || PICKUP_TYPES[0];
   const g=new THREE.Group();
-  const box=new THREE.Mesh(new THREE.BoxGeometry(0.9,0.9,0.9),MAT.medBox);
+  const box=new THREE.Mesh(new THREE.BoxGeometry(0.9,0.9,0.9), t.cross?MAT.medBox:pickupMat(t));
   box.position.y=0.8;
-  const cr1=new THREE.Mesh(new THREE.BoxGeometry(0.9,0.26,0.26),MAT.cross); cr1.position.y=0.8;
-  const cr2=new THREE.Mesh(new THREE.BoxGeometry(0.26,0.9,0.26),MAT.cross); cr2.position.y=0.8;
-  g.add(box,cr1,cr2); g.position.set(x,0,z); scene.add(g);
-  medkits.push({group:g,pos:new THREE.Vector3(x,0,z),active:true,cd:0});
+  if(t.cross){
+    const cr1=new THREE.Mesh(new THREE.BoxGeometry(0.9,0.26,0.26),MAT.cross); cr1.position.y=0.8;
+    const cr2=new THREE.Mesh(new THREE.BoxGeometry(0.26,0.9,0.26),MAT.cross); cr2.position.y=0.8;
+    g.add(box,cr1,cr2);
+  } else { g.add(box); }
+  g.position.set(x,0,z); scene.add(g);
+  medkits.push({group:g,pos:new THREE.Vector3(x,0,z),active:true,cd:0,type:t});
 }
 
 /* ---------- 4. 伤害 / 击倒 / 救援 / 胜负 ---------- */
@@ -523,7 +552,8 @@ function updatePlayer(dt){
   let vx=fwdX*fx+rgtX*fz, vz=fwdZ*fx+rgtZ*fz; const len=Math.hypot(vx,vz); if(len>0){vx/=len;vz/=len;}
   // Shift 跑步加速（蹲下时不算；手机端暂无跑步键）
   const sprinting = !crouching && !isPhone && kdown('sprint');
-  const sp=(crouching?4.5:(sprinting?13.5:9))*slowMul(player); player.group.position.x+=vx*sp*dt; player.group.position.z+=vz*sp*dt;
+  const boostMul = (player.boostT>0) ? 1.32 : 1;   // 德芙巧克力：能量供给（软植入道具）
+  const sp=(crouching?4.5:(sprinting?13.5:9))*boostMul*slowMul(player); player.group.position.x+=vx*sp*dt; player.group.position.z+=vz*sp*dt;
   resolveCollision(player.group.position);
   // 分层支撑：中央大楼楼板/坡道（走进大楼自动上楼板，走下边缘逐层掉落）
   player.elev = groundHeightAt(player.group.position.x, player.group.position.z, player.elev+0.01);
@@ -694,7 +724,8 @@ function initScene(texMid, texAlly, texEnemy, texWall, texPIce, texPStone, texPR
   [[-125,-125],[125,-125],[-125,125],[125,125],[0,0],
    [125,0],[-125,0],[0,-125],[0,125],
    [-250,-250],[250,-250],[-250,250],[250,250],
-   [0,-250],[0,250],[-275,0],[275,0]].forEach(p=>makeMedkit(p[0],p[1]));
+   [0,-250],[0,250],[-275,0],[275,0]].forEach((p,i)=>makeMedkit(p[0],p[1],PICKUP_TYPES[(i+1)%3]));
+   // ↑ 轮换三种箱子：德芙巧克力 / SPAM 罐头 / 医疗箱（软植入）
   for(const mk of medkits){ mk.group.traverse(o=>{ if(o.isMesh){ o.updateMatrix(); o.matrixAutoUpdate=false; } }); }
 
   // 玩家：隐身（只剩摄像机在打）+ 应用 hospital 血量
@@ -1081,7 +1112,13 @@ const CHAT_POOL=[
   '萌新瑟瑟发抖','谁也别抢我的人头','侦察无人机好了，要照吗','自爆无人机蓄力中','友军！自己人！别开枪！','蹲草丛里的小可爱是我','楼里在开派对，全是人','三缺一，来打牌吗','前面打完了，过去舔包','别舔了快撤，有人来了',
   '我这把稳如泰山','敌人的敌人就是朋友','报告位置：北边柱子','南边出生点方向有人','中心大楼四层风景不错','我在顶楼看戏','卧倒！有狙击','这狙也太准了','收枪收枪，打不过','虚晃一枪，溜了',
   '包抄成功！他们屁股对我了','别开枪是我！','友军伤害警告','今晚吃鸡…啊不对这是CS','波波波，收到请回答','谁有多的弹药分我点','我数到三一起冲','一…二…你们怎么不等我','赢了一起去吃火锅','输了就当练枪',
-  '这准星是不是歪的','键盘侠上线','把中心大楼围起来！','他们五个人蹲一间房？','笑死，对面全在乱跑','下一个淘汰的就是我（不是）','稳住，我们能赢','别管我了，你们冲','摸鱼摸鱼，苟到前五','收到收到'
+  '这准星是不是歪的','键盘侠上线','把中心大楼围起来！','他们五个人蹲一间房？','笑死，对面全在乱跑','下一个淘汰的就是我（不是）','稳住，我们能赢','别管我了，你们冲','摸鱼摸鱼，苟到前五','收到收到',
+  // —— 软植入：AI 顺口提一句牌子（像人聊天顺嘴说到，不是插播广告）——
+  '谁帮我搞点奥利奥来？我出双倍价钱，谢谢',
+  '德芙巧克力也行啊，我跑不动了',
+  'SPAM 罐头我特别爱吃，拜托搞两个来',
+  '墙上海报那家的罐头，我刚捡了一箱',
+  '打完这局去楼下买罐 SPAM，谁一起'
 ];
 let aiChatT=9;
 // —— 0.1B 对话模型（真AI回复）：Worker 懒加载，点了开始就开始后台加载 ——
@@ -1376,16 +1413,22 @@ function animate(){
       if(g.pos.y<0.3){ g.pos.y=0.3; g.vel.y*=-0.42; g.vel.x*=0.6; g.vel.z*=0.6; if(Math.abs(g.vel.y)<1)g.vel.y=0; }
       g.mesh.position.copy(g.pos); g.fuse-=dt;
       if(g.fuse<=0){ explode(g.pos,g.owner); scene.remove(g.mesh); grenades.splice(i,1); } }
-    // 医疗箱拾取与刷新（扫描降频：冷却倒计时每帧，角色距离扫描 0.15s 一轮）
+    // 补给箱拾取与刷新（扫描降频：冷却倒计时每帧，角色距离扫描 0.15s 一轮）
     _pickupT+=dt; const _scanNow = _pickupT>=0.15; if(_scanNow) _pickupT=0;
+    if(player.boostT>0) player.boostT-=dt;      // 德芙巧克力：能量供给倒计时
     for(const mk of medkits){
+      const T = mk.type || PICKUP_TYPES[0];
       if(mk.cd>0){ mk.cd-=dt; if(mk.cd<=0){ mk.active=true; mk.group.visible=true; } continue; }
       if(!_scanNow) continue;
       for(const c of characters){ if(!c.alive||c.downed)continue;
         if(c.group.position.distanceTo(mk.pos)<MEDKIT_RADIUS){
-          const heal=Math.min(MEDKIT_HEAL,100-c.hp);
-          if(heal>0){ c.hp+=heal; mk.active=false; mk.group.visible=false; mk.cd=MEDKIT_CD;
-            if(c.isPlayer){ toast('拾取医疗箱 +'+Math.round(heal)+' 血'); updateHUD(); } }
+          const heal=Math.min(T.heal,100-c.hp);
+          if(heal>0 || T.boost>0){
+            if(heal>0) c.hp+=heal;
+            if(T.boost>0 && c.isPlayer) c.boostT=T.boost;
+            mk.active=false; mk.group.visible=false; mk.cd=T.cd;
+            if(c.isPlayer){ toast('拾取 '+T.name+(heal>0?' +'+Math.round(heal)+' 血':'')+(T.boost>0?' · 能量供给 '+T.boost+'s':'')); updateHUD(); }
+          }
           break; } }
     }
     updateRockets(dt); updateDrones(dt); tickGunSpecial(dt);

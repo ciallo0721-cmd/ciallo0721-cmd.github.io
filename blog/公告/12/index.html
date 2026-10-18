@@ -542,6 +542,9 @@
       "inLanguage": "zh-CN"
     }
     </script>
+    <!-- 全站面包屑导航（自动渲染，勿删） -->
+    <link rel="stylesheet" href="../../../css/css/breadcrumb.css">
+    <script defer src="../../../js/js/breadcrumb.js"></script>
 </head>
 <body>
 <nav>
@@ -1044,6 +1047,58 @@
                 <p>感谢你读到这里。有什么想法，请直接告诉我——不管是在评论区留言，还是提 Issue，或者直接私信我，都可以。</p>
 
                 <p style="text-align: right; margin-top: 40px; color: #999;">—— ciallo0721-cmd，写于被骗后的第 38 天</p>
+
+                <h2 style="margin-top: 50px; border-top: 2px dashed #FF6B35; padding-top: 30px;">2026年10月14日 - 三补：我错怪 tname 了</h2>
+
+                <p>时隔两个多月，我来收回这篇"曝光"里的部分结论。<strong>tname 被我错怪了，而且错得不轻。</strong>挑两个最严重的说——</p>
+
+                <h3>第一，NS 服务器是能改的——只是它不叫"NS"，叫"DNS"</h3>
+
+                <p>我之前一直以为 tname.net 把 NS 锁死了、不让改，域名只能困死在他家，哪天它跑路了域名只能跟着没。直到前几天我才发现：<strong>面板里明明有修改 DNS 服务器的入口，只是人家管这叫"DNS"，不叫"NS"。</strong></p>
+
+                <p>就因为这两个字的叫法，我对着面板找了几个月，硬是没认出来。找到之后一试，直接就把 DNS 搬到了 Cloudflare。现在查注册局数据，NS 已经明明白白指向：</p>
+
+                <blockquote style="border-left: 4px solid #FF6B35; background: rgba(255, 107, 53, 0.05); padding: 20px 25px; margin: 25px 0; border-radius: 0 12px 12px 0; font-family: monospace; font-size: 0.95rem;">
+                    <p style="margin-bottom: 0;">clark.ns.cloudflare.com<br>ingrid.ns.cloudflare.com</p>
+                </blockquote>
+
+                <p>换句话说，"域名被锁死、管理入口说没就没"这个最吓人的假设，从功能上讲是我自己搞错了。<strong>该有的功能一直都有，是我没找到。</strong></p>
+
+                <h3>第二，那个 Hold 是假的</h3>
+
+                <p>这篇"曝光"里我重点写过的"Hold"——<strong>四个月了，它还挂在面板上，但网站一直能正常访问。</strong>今天我特意去查了 .top 注册局（nic.top）的 RDAP 记录，状态写得很清楚：</p>
+
+                <pre>// 查询自 .top 注册局 RDAP：rdap.org/domain/ciallo0721-cmd.top
+{
+  "status": ["active"],
+  "nameservers": [
+    "clark.ns.cloudflare.com",
+    "ingrid.ns.cloudflare.com"
+  ],
+  "registrar": "NameSilo, LLC (IANA 1479)"
+}</pre>
+
+                <p>注册局层面压根就没有 Hold。tname 面板上那个"Hold"就是个<strong>显示残留</strong>——大概是某个审核流程的状态没同步干净，挂了四个月也没刷掉。我在 7 月写的"长期 Hold 用户根本访问不了"，在这颗域名上<strong>从来没有应验过</strong>。假 hold，实锤了。</p>
+
+                <p>另外顺手查到：注册商信息现在显示的是 <strong>NameSilo（IANA ID 1479）</strong>，不是我在文中写的 Namecheap/GoDaddy。所以"从 Namecheap 和 GoDaddy 进货再转手"这句也得打个问号——至少目前，上游挂的是正经注册商。</p>
+
+                <h3>修正清单</h3>
+                <ul>
+                    <li>"NS 锁死改不了" → <strong>错的。</strong>面板里叫"DNS"，能改，我已经迁到 Cloudflare 了</li>
+                    <li>"域名被 Hold 卡住、随时可能没" → <strong>错的。</strong>注册局状态 active，假 hold，至今访问正常</li>
+                    <li>"从 Namecheap/GoDaddy 进货" → <strong>存疑。</strong>当前注册局记录的上游是 NameSilo</li>
+                    <li>截图里那些（抄袭的"关于我们"、招代理商页面、错别字、"Telegreat"）→ <strong>不改，是啥样是啥样</strong></li>
+                </ul>
+
+                <p>至于 tname.net 到底是不是贴牌分销——那些截图都还在上面，我不翻案。但<strong>"锁域名、Hold 域名、让我的域名处于危险中"这几条，是我搞错了。给 tname 道个歉。</strong></p>
+
+                <p>顺便，当初悬而未决的方案 A/B/C，现在有答案了：<strong>选 B 的变体——域名留在 tname，DNS 全站搬到 Cloudflare。</strong>不转移、不赌博、不删域名，控制权全拿到了。折腾四个月，最后的教训就一句话：</p>
+
+                <blockquote style="border-left: 4px solid #FF6B35; background: rgba(255, 107, 53, 0.05); padding: 20px 25px; margin: 25px 0; border-radius: 0 12px 12px 0;">
+                    <p style="margin-bottom: 0;"><strong>面板上找不到的功能，先问问它叫什么，别急着判死刑。</strong></p>
+                </blockquote>
+
+                <p style="text-align: right; margin-top: 40px; color: #999;">—— ciallo0721-cmd，补于 2026 年秋</p>
             </div>
             
             <div style="text-align: center;">

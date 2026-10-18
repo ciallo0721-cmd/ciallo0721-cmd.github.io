@@ -47,16 +47,30 @@
      自包含模块：开始界面/暂停自动停，游戏中淡入，结算压低音量；HUD 有 🎵 开关，暂停面板可调音量 -->
 <script>window.BGM_CONFIG = { src:'assets/sound/bgm.mp3', volume:0.26, duck:0.5, label:'恐怖氛围音乐' };</script>
 <script src="assets/code/bgm.js"></script>
-<!-- 赞赏置顶弹窗 -->
-<div id="tipPop" style="position:fixed;top:0;left:0;right:0;z-index:99999;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 44px 10px 14px;background:linear-gradient(90deg,rgba(230,180,34,.96),rgba(212,147,10,.96));color:#fff;font-size:14px;font-family:inherit;box-shadow:0 2px 12px rgba(0,0,0,.35);">
-  <span style="flex:1;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.2);">♡ 觉得游戏好玩？请作者喝杯奶茶喵～</span>
-  <a href="/Tipping/" target="_blank" style="flex-shrink:0;padding:6px 18px;border-radius:999px;background:#fff;color:#b8860b;text-decoration:none;font-weight:bold;font-size:13px;">去赞赏</a>
-  <span id="tipPopClose" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:18px;line-height:1;opacity:.85;">✕</span>
-</div>
+<!-- 软性植入：不再用置顶横幅挡画面，只在暂停面板底部留一行（游戏内文案，不打断体验） -->
 <script>
 (function(){
-  var p=document.getElementById('tipPop'),c=document.getElementById('tipPopClose');
-  if(c)c.addEventListener('click',function(e){e.stopPropagation();p.style.display='none';});
+  var HTML = '♡ 这游戏是我一个人做的 · 玩得开心的话 ' +
+    '<a href="/Tipping/" target="_blank" rel="noopener" style="color:#5aa6ff;text-decoration:underline;">请我喝杯奶茶</a>' +
+    ' · <a href="/" target="_blank" rel="noopener" style="color:#5aa6ff;text-decoration:underline;">回主站逛逛</a>';
+  function inject(){
+    var p = document.getElementById('pause');
+    if(!p || p.querySelector('.softTip')) return !!p;
+    var d = document.createElement('div');
+    d.className = 'row softTip';
+    d.style.cssText = 'opacity:.6;font-size:12px;';
+    d.innerHTML = HTML;
+    var anchor = document.getElementById('quitBtn');
+    if(anchor && anchor.parentNode === p) p.insertBefore(d, anchor); else p.appendChild(d);
+    return true;
+  }
+  var timer = null;
+  function boot(){
+    if(inject()) return;
+    timer = setInterval(function(){ if(inject() && timer) clearInterval(timer); }, 500);
+    setTimeout(function(){ if(timer) clearInterval(timer); }, 20000);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
 </script>
 <!-- 真·果蝇脑注入：?fly=1 果蝇自动驾驶人类；?battle=1 对战（你开「它」追果蝇人）；?free=1 逗果蝇沙盒（你飞天、果蝇 6 向漫游）。均需先 node server.js 起 8088 -->

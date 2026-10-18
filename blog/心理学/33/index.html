@@ -90,7 +90,11 @@
         .data-table th { background:linear-gradient(135deg,var(--bili-pink),var(--bili-blue)); color:white; padding:12px 16px; text-align:left; }
         .data-table td { padding:10px 16px; border-bottom:1px solid #eee; }
         .data-table tr:nth-child(even) { background:#f8f9fa; }
-        @media (max-width:768px) { .article-detail { padding:24px 18px; } .article-title { font-size:1.8rem; } .article-content h2 { font-size:1.5rem; } .nav-container { padding:12px 16px; } }
+        .uv-gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:24px 0; }
+        .uv-gallery figure { margin:0; background:#f8f9fa; border:1px solid #e5e5ea; border-radius:16px; overflow:hidden; }
+        .uv-gallery img { width:100%; height:auto; display:block; }
+        .uv-gallery figcaption { padding:10px 14px; font-size:0.85rem; color:#6b6b70; text-align:center; border-top:1px solid #ececf0; }
+        @media (max-width:768px) { .article-detail { padding:24px 18px; } .article-title { font-size:1.8rem; } .article-content h2 { font-size:1.5rem; } .nav-container { padding:12px 16px; } .uv-gallery { grid-template-columns:1fr; } }
     </style>
     <script src="/wiki-data.js"></script>
     <script src="/css/wiki-linker.js"></script>
@@ -122,6 +126,9 @@
       "inLanguage": "zh-CN"
     }
     </script>
+    <!-- 全站面包屑导航（自动渲染，勿删） -->
+    <link rel="stylesheet" href="../../../css/css/breadcrumb.css">
+    <script defer src="../../../js/js/breadcrumb.js"></script>
 </head>
 <body>
     <nav>
@@ -197,6 +204,23 @@
 <li><strong>僵尸题材的恐怖感：</strong>僵尸正是恐怖谷效应的绝佳载体——像人但不是人</li>
 <li><strong>生成式AI生成的"近乎真人"的面孔：</strong>可能引发微妙的不适</li>
 </ul>
+
+<h3>现成的例子：本人改 MMD 模型的现场</h3>
+<p>光讲理论不够直观。最近我在 MikuMikuDance 里给<span class="hl">永雏塔菲的 3D 模型</span>改模调试，随手截了几张中间状态——它们几乎就是恐怖谷效应的教科书式演示：粉色的头发、熟悉的服装和轮廓，大脑的第一反应是"这是那个活泼的角色"；但下一秒，你会看到外露的骨骼与刚体标记、过分整齐的一排牙，以及卡在半路的表情。<span class="hl-blue">"像它"与"是它"之间的裂缝</span>，在这一刻被拉到最大。</p>
+
+<div class="callout callout-danger">
+<i class="fas fa-exclamation-triangle"></i>
+<div><strong>⚠️ 引人不适警告</strong><br>下面是作者在 MMD 里调试模型时的真实截图：骨骼刚体外露、表情扭曲、牙齿数量可疑。若感到轻微不适，属于正常现象——那是恐怖谷效应正在你的脑子里工作。请酌情下滑。</div>
+</div>
+
+<div class="uv-gallery">
+<figure><img src="images/01-skeleton-view.png" loading="lazy" alt="MMD 全身视图：塔菲模型全身布满蓝色刚体与骨骼标记，咧嘴露齿"><figcaption>骨骼显示全开：全身飘着几十个刚体标记，笑容却依旧灿烂</figcaption></figure>
+<figure><img src="images/02-expression-glitch.jpg" loading="lazy" alt="MMD 表情操作中：模型眼睛眯成缝、嘴巴夸张地咧开露出大牙齿"><figcaption>表情滑块调到某个中间值：眼睛和嘴同时"离线"</figcaption></figure>
+<figure><img src="images/03-remodel-teeth.png" loading="lazy" alt="标题栏为 TaFfy_1883改模 的 MMD 窗口，模型面部布满操作标记、表情诡异"><figcaption>改模窗口：标题栏写着 TaFfy_1883，画面已经不太像任何生物</figcaption></figure>
+<figure><img src="images/04-red-bones.jpg" loading="lazy" alt="MMD 特写：模型脸上布满红色骨骼线，露出整齐的牙齿"><figcaption>红色骨骼线特写：皮肤之下全是操作杆</figcaption></figure>
+</div>
+
+<p>有趣的是，这些截图多看几眼后，不适感会明显减轻——大脑很快确认"哦，它只是个模型"，威胁评估解除，谷底一路翻回平面。这也说明恐怖谷效应<span class="hl">不是静态的属性，而是动态的判断过程</span>：谷的深度，取决于你给它多少注意力。</p>
 
 <blockquote>"恐怖谷效应"一词如今已成为跨文化术语，用来描述所有"像人但又不是人"带来的本能反感——但它背后的大脑机制是什么？为什么在文字领域也存在类似的"文字恐怖谷"？让我们在下一篇文章中继续探索。</blockquote>
             <div class="callout callout-warning" style="margin-top:48px;">

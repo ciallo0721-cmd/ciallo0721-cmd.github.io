@@ -342,3 +342,51 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   *,*::before,*::after{animation:none!important;transition:none!important;}
   html{scroll-behavior:auto;}
 }
+
+/* ---------- 13. 分类导航条（blog/&lt;分类&gt;/index.html 互链） ---------- */
+.cat-nav{
+  display:flex;flex-wrap:wrap;gap:var(--s-2);justify-content:center;
+  margin:0 auto var(--s-6);max-width:100%;
+}
+.cat-nav a{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 15px;border-radius:var(--radius-pill);
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text-2);font-size:.86rem;line-height:1;
+  text-decoration:none;box-shadow:var(--shadow-1);
+  transition:border-color .2s,color .2s,transform .2s,background .2s;
+}
+.cat-nav a:hover{
+  border-color:var(--accent);color:var(--accent-dark);
+  transform:translateY(-1px);
+}
+.cat-nav a.is-current{
+  background:var(--accent);border-color:var(--accent);
+  color:#FFFFFF;font-weight:600;
+  box-shadow:0 4px 14px rgba(14,165,233,.28);
+}
+.cat-nav .cat-count{
+  font-size:.74rem;font-weight:500;opacity:.65;
+}
+.cat-nav a.is-current .cat-count{opacity:.85;}
+
+/* 分类页顶部的「返回全部文章」 */
+.cat-back{
+  display:inline-flex;align-items:center;gap:6px;
+  margin:0 0 var(--s-4);padding:8px 16px;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text-2);font-size:.88rem;text-decoration:none;
+  box-shadow:var(--shadow-1);
+  transition:border-color .2s,color .2s,transform .2s;
+}
+.cat-back:hover{
+  border-color:var(--accent);color:var(--accent-dark);
+  transform:translateX(-2px);
+}
+
+@media (max-width:768px){
+  .cat-nav{gap:6px;}
+  .cat-nav a{padding:6px 12px;font-size:.8rem;}
+  .cat-back{font-size:.84rem;padding:7px 14px;}
+}
