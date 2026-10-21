@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玛丽亚·凯莉解冻了吗 · 圣诞解冻倒计时</title>
+<meta name="description" content="牛姐解冻进度实时计算：按万圣节结束到圣诞节的解冻窗口，算出玛丽亚·凯莉现在化到百分之几，配上 0/25/50/75/100% 五段解冻名场面，外加两段 B 站视频。">
+<meta name="keywords" content="玛丽亚·凯莉解冻,Mariah Carey,牛姐解冻,圣诞节倒计时,All I Want for Christmas Is You,解冻进度">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="玛丽亚·凯莉解冻了吗 · 圣诞解冻倒计时">
+<meta property="og:description" content="牛姐现在化到几成了？一句话：看进度条。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciallo0721-cmd.top/isChristmasThaw/">
+<link rel="icon" href="../fanv.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../fanv.ico" type="image/x-icon">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.pageMeta = { content_type: 'app', page_name: 'isChristmasThaw', category: 'season' };
+</script>
+<script src="../js/js/gtag-config.js"></script>
+
+<link rel="stylesheet" href="../css/css/thaw.css">
+<script defer src="../js/js/svg-icons.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+<!-- 全站面包屑导航（自动渲染，勿删） -->
+<link rel="stylesheet" href="../css/css/breadcrumb.css">
+<script defer src="../js/js/breadcrumb.js"></script>
+</head>
+<body class="thaw theme-xmas">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      <i class="fas fa-snowflake"></i>
+      牛姐解冻了吗
+    </div>
+    <nav class="topbar-links">
+      <a href="../isSpringThaw/">刘德华解冻</a>
+      <a href="../isHalloweenThaw/">万圣节倒计时</a>
+      <a href="../">回首页</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+
+  <header class="page-head">
+    <p class="eyebrow"><i class="fas fa-snowflake"></i> Seasonal Thaw Tracker</p>
+    <h1 class="page-title">玛丽亚·凯莉解冻了吗</h1>
+    <p class="page-sub">每年万圣节一过，她就从冰里被拖出来。《All I Want for Christmas Is You》也是。下面这根进度条算的是她化到几成了。</p>
+  </header>
+
+  <section class="hero">
+    <div class="media">
+      <div class="media-bar">
+        <div class="media-dots"><span></span><span></span><span></span></div>
+        <div class="media-addr" id="mediaAddr">thaw://christmas/0%</div>
+        <span class="media-tag"><i class="fas fa-image"></i> 阶段图</span>
+      </div>
+      <div class="media-view">
+        <img class="media-img" id="mediaImg" alt="玛丽亚·凯莉当前解冻阶段示意" hidden>
+        <div class="media-plate" id="mediaPlate" hidden>
+          <span class="plate-icon">❄️</span>
+          <strong class="plate-pct" id="platePct">0%</strong>
+          <span class="plate-name" id="plateName">完全冰封</span>
+          <span class="plate-note" id="plateNote"></span>
+        </div>
+        <div class="media-caption">
+          <strong id="capName">0% · 完全冰封</strong>
+          <span id="capNote"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="countdown">
+        <span class="cd-label">距离 <b id="cdLabelName">圣诞节</b> 还有</span>
+        <div class="cd-main"><strong id="cdDays">—</strong><span class="cd-unit">天</span></div>
+        <div class="cd-clock" id="cdHMS">--:--:--</div>
+        <p class="cd-date" id="cdDate">—</p>
+      </div>
+
+      <div class="meter-wrap">
+        <div class="meter-head">
+          <span>解冻进度</span>
+          <strong id="pctText">0%</strong>
+        </div>
+        <div class="meter">
+          <div class="meter-fill" id="meterFill"></div>
+          <div class="meter-ticks" id="meterTicks"></div>
+        </div>
+        <div class="meter-foot">
+          <span><b id="meterStageName">完全冰封</b></span>
+          <span id="meterStageHint"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stages" id="stageStrip" aria-label="五段解冻阶段"></section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <i class="fas fa-calendar"></i>
+      <h2>解冻档案</h2>
+      <div class="panel-line"></div>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <span class="fact-k">目标日期</span>
+        <strong class="fact-v" id="factTarget">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">剩余</span>
+        <strong class="fact-v is-mono is-accent" id="factLeft">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">解冻窗口</span>
+        <strong class="fact-v" id="factWindow">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">窗口起点</span>
+        <strong class="fact-v" id="factStart">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">当前阶段</span>
+        <strong class="fact-v" id="factStage">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">页面刷新</span>
+        <strong class="fact-v is-mono" id="factTick">—</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="playerSection">
+    <div class="panel-head">
+      <i class="fas fa-play"></i>
+      <h2>解冻现场</h2>
+      <div class="panel-line"></div>
+    </div>
+    <div class="players">
+      <div class="player-frame">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;aid=79934291&amp;bvid=BV1VJ411b7ah&amp;cid=136804244&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" title="玛丽亚·凯莉圣诞现场 一"></iframe>
+      </div>
+      <div class="player-frame">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;aid=79796806&amp;bvid=BV18J411t7tA&amp;cid=136564818&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" title="玛丽亚·凯莉圣诞现场 二"></iframe>
+      </div>
+    </div>
+    <p class="player-note">播放器来自 B 站，需要允许第三方请求；打不开就直接去 B 站搜「Mariah Carey 圣诞」。</p>
+  </section>
+
+  <section class="notes">
+    <article class="note">
+      <h3><i class="fas fa-info-circle"></i> 这个梗是什么</h3>
+      <p>牛姐（Mariah Carey）平时像被冻在冰里，一到圣诞季就被「解冻」出来唱《All I Want for Christmas Is You》。2023 年她自己拍了一支从冰块里砸出来的预告片，把这个梗正式承认了。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-chart-line"></i> 进度怎么算</h3>
+      <p>窗口定在 <strong>11 月 1 日 → 12 月 25 日</strong>，共 54 天。进度 = 已过天数 ÷ 54。所以万圣节当晚她还在冰里，平安夜就是完全解冻。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-image"></i> 图片来源</h3>
+      <p>五段图取自公开流传的「Mariah Carey Defrosting」meme 动图，做了压缩转码，仅作页面示意，版权归原作者。上面两段视频的版权归 B 站 UP 主与原唱片公司。</p>
+    </article>
+  </section>
+
+  <div class="footer-bar">
+    © 2026 ciallo0721-cmd · 本页与 Mariah Carey 本人及 B 站官方无关 · <a href="../isSpringThaw/">换个季节看看</a>
+  </div>
+
+</main>
+
+<script src="../js/js/thaw.js" defer></script>
+<script>
+window.THAW_CONFIG = {
+  targetName: '圣诞节',
+  targets: ['2026-12-25', '2027-12-25', '2028-12-25'],
+  windowDays: 54,
+  windowLabel: '万圣节结束即解冻',
+  mediaAddr: 'thaw://christmas',
+  stripIcon: 'snowflake',
+  stages: [
+    { pct: 0,   name: '完全冰封', img: 'gifs/stage-0.gif',   note: '整块冰，一动不动' },
+    { pct: 25,  name: '冰面起霜', img: 'gifs/stage-25.gif',  note: '冰壳开始发白，能听见一点动静' },
+    { pct: 50,  name: '裂纹出现', img: 'gifs/stage-50.gif',  note: '冰裂了，嘴角先动' },
+    { pct: 75,  name: '破冰而出', img: 'gifs/stage-75.gif',  note: '从冰山上站起来，红裙已就位' },
+    { pct: 100, name: '完全解冻', img: 'gifs/stage-100.gif', note: '红色战袍上线，It\'s time' }
+  ]
+};
+</script>
+</body>
+</html>

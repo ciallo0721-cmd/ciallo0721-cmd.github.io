@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万圣节还剩几天 · 南瓜进度条</title>
+<meta name="description" content="万圣节倒计时：距离 10 月 31 日还有多少天，一条南瓜橙色的进度条算清万圣节氛围到了几成。附两段 B 站万圣节视频。">
+<meta name="keywords" content="万圣节倒计时,Halloween,10月31日,万圣节还有几天,南瓜">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="万圣节还剩几天 · 南瓜进度条">
+<meta property="og:description" content="距离 10 月 31 日还有几天，进度条告诉你现在该不该开始囤糖。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciallo0721-cmd.top/isHalloweenThaw/">
+<link rel="icon" href="../fanv.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../fanv.ico" type="image/x-icon">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.pageMeta = { content_type: 'app', page_name: 'isHalloweenThaw', category: 'season' };
+</script>
+<script src="../js/js/gtag-config.js"></script>
+
+<link rel="stylesheet" href="../css/css/thaw.css">
+<script defer src="../js/js/svg-icons.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+<!-- 全站面包屑导航（自动渲染，勿删） -->
+<link rel="stylesheet" href="../css/css/breadcrumb.css">
+<script defer src="../js/js/breadcrumb.js"></script>
+</head>
+<body class="thaw theme-halloween">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      <i class="fas fa-ghost"></i>
+      万圣节进度
+    </div>
+    <nav class="topbar-links">
+      <a href="../isChristmasThaw/">牛姐解冻</a>
+      <a href="../isSpringThaw/">刘德华解冻</a>
+      <a href="../">回首页</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+
+  <header class="page-head">
+    <p class="eyebrow"><i class="fas fa-moon"></i> Seasonal Countdown</p>
+    <h1 class="page-title">万圣节还剩几天</h1>
+    <p class="page-sub">牛姐和刘德华都有冰块可以解，万圣节没有。所以这一页只剩下一根进度条和两段视频——反正十月一过完，他们两个就都要出来了。</p>
+  </header>
+
+  <section class="hero">
+    <div class="media">
+      <div class="media-bar">
+        <div class="media-dots"><span></span><span></span><span></span></div>
+        <div class="media-addr" id="mediaAddr">thaw://halloween/0%</div>
+        <span class="media-tag"><i class="fas fa-ghost"></i> 氛围读数</span>
+      </div>
+      <div class="media-view">
+        <img class="media-img" id="mediaImg" alt="万圣节氛围示意" hidden>
+        <div class="media-plate" id="mediaPlate">
+          <span class="plate-icon">🎃</span>
+          <strong class="plate-pct" id="platePct">0%</strong>
+          <span class="plate-name" id="plateName">还早</span>
+          <span class="plate-note" id="plateNote"></span>
+        </div>
+        <div class="media-caption">
+          <strong id="capName">0% · 还早</strong>
+          <span id="capNote"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="countdown">
+        <span class="cd-label">距离 <b id="cdLabelName">万圣节</b> 还有</span>
+        <div class="cd-main"><strong id="cdDays">—</strong><span class="cd-unit">天</span></div>
+        <div class="cd-clock" id="cdHMS">--:--:--</div>
+        <p class="cd-date" id="cdDate">—</p>
+      </div>
+
+      <div class="meter-wrap">
+        <div class="meter-head">
+          <span>万圣节氛围</span>
+          <strong id="pctText">0%</strong>
+        </div>
+        <div class="meter">
+          <div class="meter-fill" id="meterFill"></div>
+          <div class="meter-ticks" id="meterTicks"></div>
+        </div>
+        <div class="meter-foot">
+          <span><b id="meterStageName">还早</b></span>
+          <span id="meterStageHint"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stages" id="stageStrip" aria-label="万圣节氛围五个阶段"></section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <i class="fas fa-calendar"></i>
+      <h2>倒计时档案</h2>
+      <div class="panel-line"></div>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <span class="fact-k">目标日期</span>
+        <strong class="fact-v" id="factTarget">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">剩余</span>
+        <strong class="fact-v is-mono is-accent" id="factLeft">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">氛围窗口</span>
+        <strong class="fact-v" id="factWindow">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">窗口起点</span>
+        <strong class="fact-v" id="factStart">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">当前阶段</span>
+        <strong class="fact-v" id="factStage">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">页面刷新</span>
+        <strong class="fact-v is-mono" id="factTick">—</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="playerSection">
+    <div class="panel-head">
+      <i class="fas fa-play"></i>
+      <h2>应景视频</h2>
+      <div class="panel-line"></div>
+    </div>
+    <div class="players">
+      <div class="player-frame">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;aid=74034771&amp;bvid=BV1NE41187t5&amp;cid=126649424&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" title="万圣节视频 一"></iframe>
+      </div>
+      <div class="player-frame">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;aid=6895450&amp;bvid=BV19s411s7yX&amp;cid=11236763&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" title="万圣节视频 二"></iframe>
+      </div>
+    </div>
+    <p class="player-note">播放器来自 B 站，需要允许第三方请求；打不开就直接去 B 站看。</p>
+  </section>
+
+  <section class="notes">
+    <article class="note">
+      <h3><i class="fas fa-info-circle"></i> 为什么没有冰块</h3>
+      <p>「解冻」这个梗只属于牛姐和刘德华——他们一年只在固定节日出现一次。万圣节本身没有对应的冰封角色，硬编一个也没意思，所以这页只做倒计时。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-chart-line"></i> 进度怎么算</h3>
+      <p>窗口定在 <strong>10 月 1 日 → 10 月 31 日</strong>，共 30 天。进度 = 已过天数 ÷ 30，纯粹是给「现在该不该摆南瓜」找个数字依据。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-snowflake"></i> 下一位登场</h3>
+      <p>10 月 31 日一过，牛姐立刻开始解冻，紧接着就是刘德华。三个页面用的都是同一套模板，切换看看谁化得更快。</p>
+    </article>
+  </section>
+
+  <div class="footer-bar">
+    © 2026 ciallo0721-cmd · 本页与 B 站官方无关 · <a href="../isChristmasThaw/">看看牛姐化到几成了</a>
+  </div>
+
+</main>
+
+<script src="../js/js/thaw.js" defer></script>
+<script>
+window.THAW_CONFIG = {
+  targetName: '万圣节',
+  targets: ['2026-10-31', '2027-10-31', '2028-10-31'],
+  windowDays: 30,
+  windowLabel: '十月初开始囤南瓜',
+  mediaAddr: 'thaw://halloween',
+  stripIcon: 'ghost',
+  stages: [
+    { pct: 0,   name: '还早',       icon: 'moon',   note: '超市还在卖月饼，别急' },
+    { pct: 25,  name: '鬼怪上线',   icon: 'ghost',  note: '网上的万圣节图开始刷屏' },
+    { pct: 50,  name: '南瓜点亮',   icon: 'magic',  note: '门口该摆南瓜灯了' },
+    { pct: 75,  name: '囤糖时刻',   icon: 'fire',   note: '糖果被抢空的前一周' },
+    { pct: 100, name: '万圣夜',     icon: 'star',   note: '不给糖就捣蛋' }
+  ]
+};
+</script>
+</body>
+</html>

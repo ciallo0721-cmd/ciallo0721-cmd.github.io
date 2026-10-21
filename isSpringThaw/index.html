@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>刘德华解冻了吗 · 春节解冻进度条</title>
+<meta name="description" content="刘德华解冻进度实时计算：从上一个春节（2026 年 2 月 17 日）算起，算出那个男人现在化到百分之几，配 0/25/50/75/100% 五段名场面，外加《恭喜发财》MV。">
+<meta name="keywords" content="刘德华解冻,恭喜发财,春节倒计时,解冻进度,那个男人要来了">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="刘德华解冻了吗 · 春节解冻进度条">
+<meta property="og:description" content="距离春节还有多少天，那个男人就化到几成。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciallo0721-cmd.top/isSpringThaw/">
+<link rel="icon" href="../fanv.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../fanv.ico" type="image/x-icon">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.pageMeta = { content_type: 'app', page_name: 'isSpringThaw', category: 'season' };
+</script>
+<script src="../js/js/gtag-config.js"></script>
+
+<link rel="stylesheet" href="../css/css/thaw.css">
+<script defer src="../js/js/svg-icons.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+<!-- 全站面包屑导航（自动渲染，勿删） -->
+<link rel="stylesheet" href="../css/css/breadcrumb.css">
+<script defer src="../js/js/breadcrumb.js"></script>
+</head>
+<body class="thaw theme-spring">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      <i class="fas fa-fire"></i>
+      刘德华解冻了吗
+    </div>
+    <nav class="topbar-links">
+      <a href="../isChristmasThaw/">牛姐解冻</a>
+      <a href="../isHalloweenThaw/">万圣节倒计时</a>
+      <a href="../">回首页</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+
+  <header class="page-head">
+    <p class="eyebrow"><i class="fas fa-fire"></i> Seasonal Thaw Tracker</p>
+    <h1 class="page-title">刘德华解冻了吗</h1>
+    <p class="page-sub">上一个春节（2026 年 2 月 17 日）一过，那个男人就被重新冻回冰里，然后慢慢化；到下个春节冰正好化完，全国超市的 BGM 就统一换成《恭喜发财》。进度条在下面。</p>
+  </header>
+
+  <section class="hero">
+    <div class="media">
+      <div class="media-bar">
+        <div class="media-dots"><span></span><span></span><span></span></div>
+        <div class="media-addr" id="mediaAddr">thaw://spring/0%</div>
+        <span class="media-tag"><i class="fas fa-image"></i> 阶段图</span>
+      </div>
+      <div class="media-view">
+        <img class="media-img" id="mediaImg" alt="刘德华当前解冻阶段示意" hidden>
+        <div class="media-plate" id="mediaPlate" hidden>
+          <span class="plate-icon">🧊</span>
+          <strong class="plate-pct" id="platePct">0%</strong>
+          <span class="plate-name" id="plateName">完全冰封</span>
+          <span class="plate-note" id="plateNote"></span>
+        </div>
+        <div class="media-caption">
+          <strong id="capName">0% · 完全冰封</strong>
+          <span id="capNote"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="countdown">
+        <span class="cd-label">距离 <b id="cdLabelName">春节</b> 还有</span>
+        <div class="cd-main"><strong id="cdDays">—</strong><span class="cd-unit">天</span></div>
+        <div class="cd-clock" id="cdHMS">--:--:--</div>
+        <p class="cd-date" id="cdDate">—</p>
+      </div>
+
+      <div class="meter-wrap">
+        <div class="meter-head">
+          <span>解冻进度</span>
+          <strong id="pctText">0%</strong>
+        </div>
+        <div class="meter">
+          <div class="meter-fill" id="meterFill"></div>
+          <div class="meter-ticks" id="meterTicks"></div>
+        </div>
+        <div class="meter-foot">
+          <span><b id="meterStageName">完全冰封</b></span>
+          <span id="meterStageHint"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stages" id="stageStrip" aria-label="五段解冻阶段"></section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <i class="fas fa-calendar"></i>
+      <h2>解冻档案</h2>
+      <div class="panel-line"></div>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <span class="fact-k">目标日期</span>
+        <strong class="fact-v" id="factTarget">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">剩余</span>
+        <strong class="fact-v is-mono is-accent" id="factLeft">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">解冻窗口</span>
+        <strong class="fact-v" id="factWindow">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">窗口起点</span>
+        <strong class="fact-v" id="factStart">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">当前阶段</span>
+        <strong class="fact-v" id="factStage">—</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-k">页面刷新</span>
+        <strong class="fact-v is-mono" id="factTick">—</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="playerSection">
+    <div class="panel-head">
+      <i class="fas fa-play"></i>
+      <h2>解冻现场</h2>
+      <div class="panel-line"></div>
+    </div>
+    <div class="players">
+      <div class="player-frame">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;bvid=BV1XXvtBWEkh&amp;p=1&amp;autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" title="刘德华 恭喜发财 MV"></iframe>
+      </div>
+    </div>
+    <p class="player-note">《恭喜发财》MV（4K 修复上传版）。点播放键开始，音量大，注意场合。</p>
+  </section>
+
+  <section class="notes">
+    <article class="note">
+      <h3><i class="fas fa-info-circle"></i> 这个梗是什么</h3>
+      <p>2005 年春晚，刘德华唱了《恭喜发财》，从那以后每年春节这首歌就会在全国超市、商场、菜市场循环播放。网友的说法是：那个男人被冻了一整年，现在正在解冻。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-chart-line"></i> 进度怎么算</h3>
+      <p>窗口取 <strong>上一个春节 → 这一个春节</strong>（2026-02-17 → 2027-02-06，共 354 天）。进度 = 已过天数 ÷ 354，到春节当天满 100%，过完年归零重新冻上。</p>
+    </article>
+    <article class="note">
+      <h3><i class="fas fa-image"></i> 图片来源</h3>
+      <p>五段图是 B 站相关解冻视频的封面截图，做了裁切压缩，仅作页面示意，版权归原 UP 主与刘德华工作室。要动图直接去 B 站搜「刘德华解冻」。</p>
+    </article>
+  </section>
+
+  <div class="footer-bar">
+    © 2026 ciallo0721-cmd · 本页与刘德华本人及 B 站官方无关 · <a href="../isChristmasThaw/">看看牛姐化到几成了</a>
+  </div>
+
+</main>
+
+<script src="../js/js/thaw.js" defer></script>
+<script>
+window.THAW_CONFIG = {
+  targetName: '春节',
+  targets: ['2027-02-06', '2028-01-26', '2029-02-13', '2030-02-03'],
+  windowDays: 354,
+  windowStarts: ['2026-02-17', '2027-02-06', '2028-01-26', '2029-02-13'],
+  windowLabel: '上个春节 → 这个春节',
+  mediaAddr: 'thaw://spring',
+  stripIcon: 'fire',
+  stages: [
+    { pct: 0,   name: '完全冰封', img: 'img/stage-0.jpg',   note: '冰壁厚得很，超市里还很安静' },
+    { pct: 25,  name: '冰壳松动', img: 'img/stage-25.jpg',  note: '冰开始透光，隐约听见「耶咦耶咦」' },
+    { pct: 50,  name: '半解冻',   img: 'img/stage-50.jpg',  note: '春联已经举起来了' },
+    { pct: 75,  name: '快化完了', img: 'img/stage-75.jpg',  note: '商场 BGM 已经开始试音' },
+    { pct: 100, name: '完全解冻', img: 'img/stage-100.jpg', note: '恭喜发财循环播放，超市门口见' }
+  ]
+};
+</script>
+</body>
+</html>

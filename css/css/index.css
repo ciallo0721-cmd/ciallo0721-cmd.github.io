@@ -634,6 +634,50 @@ textarea.contact-field{resize:vertical;min-height:96px;}
 .tool-card-desc{font-size:.86rem;color:var(--text-2);line-height:1.65;}
 .tools-more{text-align:center;margin-top:var(--s-8);}
 
+/* ---------- 23b. is* 状态小站矩阵 ---------- */
+.is-hub{
+  background:linear-gradient(180deg,rgba(14,165,233,.06),rgba(255,255,255,0) 62%);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--s-6);
+  box-shadow:var(--shadow-1);
+}
+.is-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:var(--s-4);
+}
+.is-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:var(--s-6) var(--s-4);
+  padding-right:72px;
+  min-height:140px;
+  text-align:left;
+}
+.is-card .tool-card-icon{font-size:1.5rem;margin-bottom:var(--s-3);}
+.is-card .tool-card-desc{font-size:.83rem;}
+.is-badge{
+  position:absolute;top:16px;right:14px;
+  font-family:var(--font-mono);
+  font-size:.64rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:var(--radius-pill);
+  background:var(--accent-soft);color:var(--accent-dark);
+}
+.is-card[data-kind="live"] .is-badge{background:#FFE4EF;color:#DB2777;}
+.is-card[data-kind="live"] .tool-card-icon{color:#DB2777;}
+.is-card[data-kind="thaw"] .is-badge{background:#E0F7FA;color:#0E7490;}
+.is-card[data-kind="thaw"] .tool-card-icon{color:#0E7490;}
+@media(max-width:900px){
+  .is-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:560px){
+  .is-grid{grid-template-columns:1fr;}
+  .is-hub{padding:var(--s-4);}
+  .is-card{padding-right:76px;}
+}
+
 /* ---------- 24. 域名推广 ---------- */
 .promo-card{background:var(--bg-soft);}
 .promo-text{color:var(--text-2);font-size:.95rem;line-height:1.85;margin-bottom:var(--s-6);}
