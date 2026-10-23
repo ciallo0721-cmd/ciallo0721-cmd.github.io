@@ -1,7 +1,7 @@
 {
   "name": "CialloWebBlogInformation manifest",
   "generator": "实用工具/CWBI转换器.py",
-  "count": 82,
+  "count": 84,
   "articles": [
     {
       "id": 1,
@@ -254,6 +254,11 @@
       "cwbPath": "blog/ACG/50/50.cwb"
     },
     {
+      "id": 51,
+      "category": "ACG",
+      "cwbPath": "blog/ACG/51/51.cwb"
+    },
+    {
       "id": 52,
       "category": "生活",
       "cwbPath": "blog/生活/52/52.cwb"
@@ -412,6 +417,11 @@
       "id": 85,
       "category": "公告",
       "cwbPath": "blog/公告/85/85.cwb"
+    },
+    {
+      "id": 86,
+      "category": "教程",
+      "cwbPath": "blog/教程/86/86.cwb"
     }
   ]
 }

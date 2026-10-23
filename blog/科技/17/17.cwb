@@ -3,10 +3,10 @@
 [
     {
     index:
-        "title"="优化X(Twitter)推荐算法" //标题
+        "title"="优化X(twitter)推荐" //标题
         "author"="ciallo0721-cmd" //作者
         "date"="2026-05-13" //日期
-        "tag"="X(Twitter)","推荐算法" //标签
+        "tag"="X(twitter)","推荐算法" //标签
         "excerpt"="如何优化X(Twitter)的时间线推荐，获取更有价值的内容。" //摘要(扩展字段)
         "readTime"=10 //预计阅读分钟(扩展字段)
         "featured"=True //精选(扩展字段)

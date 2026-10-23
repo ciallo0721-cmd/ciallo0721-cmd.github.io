@@ -235,11 +235,8 @@
             return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         }
         document.addEventListener('DOMContentLoaded', function() {
-            if (!window.articlesData || typeof window.articlesData.getSortedArticles !== 'function') {
-                console.warn('articlesData 未正确加载');
-                window.articlesData = { getSortedArticles: function() { return []; } };
-            }
-            var allArticles = window.articlesData.getSortedArticles();
+            // CWBI 单源模式：文章列表完全由 .cwb + cwb-manifest.json 驱动，不再读 articles-data.js
+            var allArticles = [];
             var articlesGrid = document.getElementById('articlesGrid');
             var articleCount = document.getElementById('articleCount');
             var filterTags = document.getElementById('filterTags');
@@ -394,9 +391,11 @@
                 if ((e.ctrlKey || e.metaKey) && e.key === 'f') { e.preventDefault(); searchInput.focus(); }
                 if (e.key === 'Escape' && searchInput.value !== '') { searchInput.value = ''; currentSearch = ''; filterArticles(); }
             });
-            // CWBI 双源合并：cwb 优先（同 id 覆盖），articlesData 兜底
-            function mergeCwbi(cwbList) {
-                allArticles = window.CWBI.mergeArticles(cwbList, allArticles);
+            // CWBI 单源：列表只认 .cwb，manifest 拉取失败则显示错误提示
+            function loadFailed(msg) {
+                if (articlesGrid) {
+                    articlesGrid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:60px 0;">' + (msg || '文章列表加载失败，请刷新重试') + '</p>';
+                }
             }
             var pageStarted = false;
             function startPage() {
@@ -408,15 +407,13 @@
                 }, 100);
             }
             if (window.CWBI && window.CWBI.loadAll) {
-                // 2.5s 超时兜底：cwb 清单拉不到也照常渲染旧数据
-                var cwbiTimeout = setTimeout(startPage, 2500);
                 window.CWBI.loadAll().then(function(list) {
-                    clearTimeout(cwbiTimeout);
-                    if (list && list.length) mergeCwbi(list);
+                    allArticles = window.CWBI.mergeArticles(list || [], []);
+                    if (!allArticles.length) { loadFailed('暂时没有文章（CWBI 数据源为空）'); return; }
                     startPage();
-                }).catch(function() { clearTimeout(cwbiTimeout); startPage(); });
+                }).catch(function() { loadFailed(); });
             } else {
-                startPage();
+                loadFailed('CWBI 模块未加载');
             }
         });
     </script>    <script src="../js/js/blog-share.js"></script>

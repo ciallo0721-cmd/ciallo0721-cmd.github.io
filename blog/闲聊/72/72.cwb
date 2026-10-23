@@ -6,7 +6,7 @@
         "title"="NN 聊天室 —— 一个 Flask 项目的血泪修复史" //标题
         "author"="ciallo0721-cmd" //作者
         "date"="2026-07-28" //日期
-        "tag"="项目记录","Flask","WebSocket","Bug 修复","SQLite","NN 聊天室","玻璃拟态" //标签
+        "tag"="项目记录","Flask","WebSocket","Bug 修复","SQLite","NN 聊天室" //标签
         "excerpt"="从「注册卡十分钟没反应」到「图片显示成'图片'标题」，从「E2E 加密后乱码」到「彻底关掉加密全明文」——记录一个初中生自建聊天室的所有踩坑与修复。" //摘要(扩展字段)
         "readTime"=8 //预计阅读分钟(扩展字段)
         "featured"=True //精选(扩展字段)

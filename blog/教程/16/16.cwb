@@ -3,10 +3,10 @@
 [
     {
     index:
-        "title"="从零开始，怎么注册GitHub并克隆仓库" //标题
+        "title"="从零开始,怎么注册github并克隆仓库" //标题
         "author"="ciallo0721-cmd" //作者
         "date"="2026-05-07" //日期
-        "tag"="GitHub","Git","教程","入门","仓库管理" //标签
+        "tag"="Github","Git","教程","入门","仓库管理" //标签
         "excerpt"="从零开始学习如何注册GitHub账号并克隆仓库到本地，适合完全新手。" //摘要(扩展字段)
         "readTime"=10 //预计阅读分钟(扩展字段)
         "featured"=True //精选(扩展字段)

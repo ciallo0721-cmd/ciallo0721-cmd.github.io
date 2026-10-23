@@ -3,10 +3,10 @@
 [
     {
     index:
-        "title"="Python 截图识别文字完全教程：从 Tesseract 到深度学习" //标题
+        "title"="文章标题" //标题
         "author"="ciallo0721-cmd" //作者
         "date"="2026-05-22" //日期
-        "tag"="Python","OCR","Tesseract","PaddleOCR","图像识别","教程" //标签
+        "tag"="示例标签1","示例标签2","示例标签3" //标签
         "excerpt"="完整教程：使用 Python 实现截图文字识别，涵盖 Tesseract、PaddleOCR、截图工具选型、图像预处理技巧和性能优化，附实战代码。" //摘要(扩展字段)
         "readTime"=15 //预计阅读分钟(扩展字段)
         "featured"=True //精选(扩展字段)
