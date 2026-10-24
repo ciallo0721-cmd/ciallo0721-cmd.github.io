@@ -48,6 +48,7 @@ EXCLUDE_PARTS = (
     "privacy.html",
     "arg/",
     "_retro-desktop",
+    "retro-desktop",
 )
 
 MARK = "retro-1024.js"

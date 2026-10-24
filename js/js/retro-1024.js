@@ -243,7 +243,7 @@
     mount.id = 'r2k-desktop-mount';
     mount.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#000;';
     var frame = document.createElement('iframe');
-    frame.src = './_retro-desktop.html';
+    frame.src = './retro-desktop.html';
     frame.style.cssText = 'width:100%;height:100%;border:0;display:block;';
     frame.title = 'Windows 98';
     mount.appendChild(frame);
