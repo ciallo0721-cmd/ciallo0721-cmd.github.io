@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站状态 | ciallo0721-cmd</title>
+    <meta name="description" content="ciallo0721-cmd 网站状态页面，显示各页面和服务的运行状态">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="./fanv.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./fanv.ico" type="image/x-icon">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+    
+    <!-- 状态历史数据 -->
+    <script src="status-data.js"></script>
+
+    <!-- IP 地理检测（美国用户拒绝访问） -->
+    <script src="/geo-check.js"></script>
+    <!-- HTTP 检测与提示 -->
+    
+  <script src="/js/js/svg-icons.js" defer></script>
+    <link rel="stylesheet" href="./css/css/status.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+</head>
+<body>
+    <!-- 广告位 #1：顶部横幅 -->
+    <div class="ad-slot">
+      <div data-ad-slot></div>
+    </div>
+
+<!-- 顶部导航 -->
+    <h1 class="sr-only">网站状态监控 - ciallo0721-cmd</h1>
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="topbar-title">
+            <i class="fas fa-shield-halved"></i>
+            网站状态监控
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ===== 全局状态框 ===== -->
+    <!-- 
+        修改说明：只需修改下面 <div> 的 class：
+        正常：class="global-status status-ok"
+        轻微故障：class="global-status status-warn"
+        严重故障：class="global-status status-error"
+        
+        图标和文字会自动同步，无需手动修改其他内容。
+    -->
+    <div class="global-status status-ok" id="globalStatusBox">   <!--改这里-->
+        <div class="gs-icon">
+            <i class="fas fa-circle-check" id="globalStatusIcon"></i>
+        </div>
+        <div class="gs-text">
+            <h2 id="globalStatusTitle">所有系统正常运行喵～</h2>
+            <p id="globalStatusDesc">当前所有页面与功能均可正常访问，没有已知故障。(๑˃̵ᴗ˂̵)و</p>
+        </div>
+        <div class="gs-badge">
+            <span class="badge-label">最后更新</span>
+            <span class="badge-time" id="lastUpdateTime">—</span>
+        </div>
+    </div>
+
+    <!-- 图例 -->
+    <div class="legend">
+        <div class="legend-item"><div class="legend-dot ok"></div> 一切正常</div>
+        <div class="legend-item"><div class="legend-dot warn"></div> 小问题（错别字/引用错误等）</div>
+        <div class="legend-item"><div class="legend-dot error"></div> 严重问题（无法访问/界面错位等）</div>
+        <div class="legend-item"><div class="legend-dot gray"></div> 无记录</div>
+    </div>
+
+    <!-- ===== 历史回放 ===== -->
+    <div class="section-head">
+        <i class="fas fa-history"></i>
+        <h3>历史回放</h3>
+        <div class="section-line"></div>
+    </div>
+    <p class="section-hint">
+        每次网站更新都会在此记录状态喵～红色=严重问题，黄色=小问题，绿色=一切正常。
+    </p>
+    <div class="sh-container" id="statusHistoryList">
+        <!-- JS 动态渲染 -->
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-bar">
+        © 2026 ciallo0721-cmd
+    </div>
+
+</div>
+
+
+
+    <script src="./js/js/status.js"></script>
+
+    <!-- 广告位 #2：底部横幅 -->
+    <div class="ad-slot">
+      <div data-ad-slot></div>
+    </div>
+
+        <!-- ===== 广告系统 v1.1 ===== -->
+    <script src="./js/js/ad-data.js?v=2"></script>
+    <script src="./js/js/ad-system.js?v=2"></script>
+<!-- GRAYSCALE-TEST -->
+<script>document.documentElement.style.filter="grayscale(1)";</script>
+<!-- /GRAYSCALE-TEST -->
+</body>
+</html>
