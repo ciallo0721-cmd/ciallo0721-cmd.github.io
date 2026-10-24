@@ -1,0 +1,413 @@
+/* ============================
+   Win98 外壳 CSS（保留）
+   ============================ */
+:root {
+  --win98-grey: #c0c0c0;
+  --win98-dark: #808080;
+  --win98-darker: #404040;
+  --win98-light: #ffffff;
+  --arg-green: #00cc00;
+  --arg-darkgreen: #003300;
+  --arg-red: #cc0000;
+  --arg-bg: #0a0a0a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  width:100vw; height:100vh; overflow:hidden;
+  font-family: "Courier New", "NSimSun", "SimSun", monospace;
+  background:#1a1a1a; user-select:none;
+}
+#desktop {
+  width:100vw; height:calc(100vh - 32px);
+  background:#008080;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 3px);
+  position:relative; overflow:hidden; cursor:default;
+}
+.desk-icon {
+  position:absolute; width:72px;
+  display:flex; flex-direction:column; align-items:center;
+  padding:4px 2px; cursor:pointer; border:1px solid transparent;
+  border-radius:0; transition:background 0.1s;
+}
+.desk-icon:hover { background:rgba(0,0,128,0.25); border:1px dotted rgba(255,255,255,0.6); }
+.desk-icon:active { background:rgba(0,0,128,0.45); }
+.desk-icon .ico { font-size:30px; margin-bottom:3px; pointer-events:none; }
+.desk-icon .lbl {
+  color:#fff; font-size:11px; text-align:center;
+  text-shadow:1px 1px 1px rgba(0,0,0,0.9);
+  line-height:1.3; word-break:break-all; pointer-events:none;
+}
+
+#taskbar {
+  position:fixed; bottom:0; left:0; right:0; height:32px;
+  background:linear-gradient(180deg, #245edb 0%, #3f8cf3 4%, #245edb 6%, #245edb 92%, #1941a5 100%);
+  border-top:2px solid #5ab0ff; display:flex; align-items:center;
+  padding:0 2px; z-index:9999; gap:2px;
+}
+#taskbar .start-btn {
+  height:24px; min-width:56px; background:linear-gradient(180deg, #3c9c3c 0%, #2d7a2d 100%);
+  border:2px outset #c0c0c0; border-radius:0; color:#fff; font-weight:bold;
+  font-size:12px; cursor:pointer; font-family:"Tahoma", sans-serif; letter-spacing:0.5px;
+  display:flex; align-items:center; gap:4px; padding:0 8px;
+}
+#taskbar .start-btn:active { border-style:inset; }
+#taskbar .start-btn .flag { font-size:14px; }
+#taskbar .tb-sep {
+  width:4px; height:24px; background:linear-gradient(180deg, #808080, #c0c0c0, #808080);
+  margin:0 2px;
+}
+#taskbar .task-item {
+  height:24px; min-width:120px; max-width:200px;
+  background:linear-gradient(180deg, #f0f0f0 0%, #e0e0e0 4%, #d0d0d0 50%, #e0e0e0 96%, #f0f0f0 100%);
+  border:2px outset #c0c0c0; border-radius:0; font-size:11px;
+  padding:0 8px; cursor:pointer; white-space:nowrap; overflow:hidden;
+  text-overflow:ellipsis; font-family:"Tahoma",sans-serif; display:flex; align-items:center;
+}
+#taskbar .task-item.active {
+  background:linear-gradient(180deg, #e8e8ff 0%, #d0d0ff 4%, #c0c0e0 50%, #d0d0ff 96%, #e8e8ff 100%);
+  border-style:inset; font-weight:bold;
+}
+#taskbar .tray {
+  margin-left:auto; height:24px; display:flex; align-items:center; gap:4px;
+  background:linear-gradient(180deg, #2870c0 0%, #4898ff 100%);
+  border:2px inset #c0c0c0; padding:0 6px; font-size:11px; color:#fff; font-family:"Tahoma",sans-serif;
+}
+/* Start Menu */
+#start-menu {
+  position:fixed; bottom:32px; left:0; width:220px;
+  background:#c0c0c0; border:2px outset #ffffff;
+  border-bottom:none; border-left:none; z-index:10000; display:none;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.4);
+}
+#start-menu.show { display:flex; }
+#start-menu .sm-banner {
+  background:linear-gradient(180deg, #245edb 0%, #245edb 80%, #1941a5 100%);
+  color:#fff; font-weight:bold; font-size:16px; padding:12px 8px; letter-spacing:1px;
+  font-family:"Tahoma",sans-serif; writing-mode:vertical-lr; transform:rotate(180deg);
+  width:30px; min-height:100px; flex-shrink:0; text-align:center;
+}
+#start-menu .sm-items {
+  flex:1; display:flex; flex-direction:column;
+}
+#start-menu .sm-item {
+  display:flex; align-items:center; gap:8px; padding:6px 12px;
+  font-size:12px; font-family:"Tahoma",sans-serif; cursor:pointer;
+}
+#start-menu .sm-item:hover { background:#000080; color:#fff; }
+#start-menu .sm-item .sm-icon { font-size:16px; width:20px; text-align:center; }
+#start-menu hr { margin:4px 8px; border:none; border-top:1px solid #808080; border-bottom:1px solid #ffffff; }
+
+/* Window */
+.window {
+  position:absolute; min-width:300px; min-height:200px;
+  background:#c0c0c0; border:2px outset #ffffff;
+  box-shadow:2px 2px 0 rgba(0,0,0,0.3); display:none; flex-direction:column;
+  border-radius:0; z-index:1;
+}
+.window.active { z-index:100; }
+.window.minimized { display:none; }
+.window-title {
+  background:linear-gradient(90deg, #000080, #1084d0);
+  color:#fff; font-size:12px; font-family:"Tahoma",sans-serif;
+  font-weight:bold; padding:3px 4px; display:flex; align-items:center;
+  cursor:move; user-select:none; flex-shrink:0;
+}
+.window-title .wt-icon { margin-right:4px; font-size:13px; }
+.window-title .wt-text { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.window-title .wt-btns { display:flex; gap:2px; margin-left:4px; }
+.window-title .wt-btns button {
+  width:16px; height:14px; background:#c0c0c0; border:1px outset #ffffff;
+  font-size:10px; line-height:12px; cursor:pointer; padding:0; border-radius:0;
+  font-family:"Tahoma",sans-serif; color:#000;
+}
+.window-title .wt-btns button:active { border-style:inset; }
+.window-menu {
+  background:#c0c0c0; display:flex; font-size:12px; font-family:"Tahoma",sans-serif;
+  padding:1px 0; border-bottom:1px solid #808080; flex-shrink:0;
+}
+.window-menu span { padding:2px 8px; cursor:pointer; }
+.window-menu span:hover { background:#000080; color:#fff; }
+.window-body {
+  flex:1; background:#ffffff; overflow:hidden; position:relative; display:flex; flex-direction:column;
+}
+/* Browser specific */
+.browser-toolbar {
+  background:#c0c0c0; display:flex; gap:4px; padding:4px; border-bottom:1px solid #808080;
+  flex-wrap:wrap; flex-shrink:0;
+}
+.browser-toolbar button {
+  padding:2px 6px; font-size:11px; background:#c0c0c0; border:1px outset #ffffff;
+  cursor:pointer; font-family:"Tahoma",sans-serif; border-radius:0;
+}
+.browser-toolbar button:active { border-style:inset; }
+.browser-toolbar button:disabled { color:#808080; }
+.browser-toolbar .url-bar {
+  flex:1; min-width:120px; height:22px; border:1px inset #ffffff;
+  background:#ffffff; padding:2px 6px; font-size:11px; font-family:"Tahoma",sans-serif;
+}
+.browser-content {
+  flex:1; background:#f5f5f0; overflow-y:auto; padding:16px;
+  font-family:"SimSun",serif; font-size:14px; line-height:1.8; color:#222;
+}
+
+/* Terminal specific */
+.terminal-body {
+  flex:1; background:#0a0a0a; color:var(--arg-green); overflow-y:auto;
+  padding:8px; font-family:"Courier New", monospace; font-size:13px;
+  cursor:text; line-height:1.5; white-space:pre-wrap; word-break:break-all;
+}
+
+/* ============================
+   叙事页面样式
+   ============================ */
+
+/* 警告页 */
+.warn-page { text-align:center; padding:40px 20px; color:#333; }
+.warn-page .warn-icon { font-size:48px; margin-bottom:16px; }
+.warn-page .warn-title { font-size:20px; font-weight:bold; color:#8b0000; margin-bottom:16px; }
+.warn-page .warn-text { font-size:13px; color:#555; margin-bottom:24px; max-width:480px; margin-left:auto; margin-right:auto; }
+.warn-page .warn-input { padding:6px 10px; border:1px inset #ccc; font-size:13px; width:200px; font-family:inherit; }
+.warn-page .warn-btn { padding:6px 20px; margin-left:8px; cursor:pointer; background:#c0c0c0; border:1px outset #fff; font-size:13px; font-family:"Tahoma",sans-serif; }
+
+/* 论坛页 */
+.forum-page { padding:0; }
+.forum-header { background:#2c3e50; color:#d4e6f1; padding:12px 16px; font-size:18px; font-weight:bold; border-bottom:3px solid #1a252f; }
+.forum-nav { background:#d5d8dc; padding:6px 16px; font-size:12px; border-bottom:1px solid #aaa; display:flex; gap:16px; }
+.forum-nav a { color:#2c3e50; cursor:pointer; text-decoration:underline; }
+.forum-post {
+  border-bottom:1px solid #ddd; padding:12px 16px; margin:0;
+}
+.forum-post .post-header { font-size:12px; color:#777; margin-bottom:6px; display:flex; justify-content:space-between; }
+.forum-post .post-author { font-weight:bold; color:#2c3e50; }
+.forum-post .post-date { color:#999; }
+.forum-post .post-body { font-size:14px; line-height:1.8; color:#333; }
+.forum-post.hidden-post .post-body { color:#d0d0d0; font-size:13px; cursor:pointer; transition:color 0.3s; }
+.forum-post.hidden-post .post-body:hover { color:#666; }
+.forum-post.hidden-post .post-header { color:#d0d0d0; }
+.forum-reply { background:#eef2f7; padding:12px 16px; border-top:2px solid #2c3e50; }
+.forum-reply textarea { width:100%; height:60px; border:1px inset #ccc; padding:6px; font-family:inherit; font-size:13px; resize:none; }
+.forum-reply .reply-hint { font-size:11px; color:#888; margin-bottom:6px; }
+.forum-reply .reply-btn { padding:4px 16px; cursor:pointer; background:#2c3e50; color:#fff; border:none; font-size:13px; font-family:"Tahoma",sans-serif; }
+
+/* 时光机 */
+.wayback-page { text-align:center; padding:30px 20px; }
+.wayback-page .wb-logo { font-size:32px; margin-bottom:12px; color:#333; }
+.wayback-page .wb-input { padding:8px 12px; border:1px solid #ccc; font-size:14px; width:300px; font-family:inherit; }
+.wayback-page .wb-btn { padding:8px 16px; cursor:pointer; background:#333; color:#fff; border:none; font-size:14px; margin-left:4px; }
+.wayback-page .wb-result { margin-top:24px; text-align:left; padding:16px; background:#f0f0f0; }
+.wayback-page .wb-result a { color:#00c; cursor:pointer; text-decoration:underline; display:block; padding:4px 0; }
+
+/* 快照页 */
+.snapshot-page { }
+.snapshot-banner { background:#ffeaa7; padding:8px 16px; font-size:12px; color:#555; border-bottom:1px solid #f0c040; }
+.snapshot-date { text-align:center; font-size:16px; font-weight:bold; color:#2c3e50; padding:12px 0; }
+.snapshot-hint { background:#e8f8f5; padding:8px 16px; font-size:12px; color:#1a7a6a; border-bottom:1px solid #a3e4d7; margin-top:12px; }
+
+/* 终端界面 */
+.terminal-welcome { color:#aaa; }
+.terminal-prompt { color:var(--arg-green); }
+.terminal-cmd { color:#fff; }
+.terminal-output { color:var(--arg-green); }
+.terminal-mirror { color:#c0392b; font-style:italic; }
+.terminal-system { color:#f39c12; }
+.terminal-error { color:var(--arg-red); }
+.terminal-dim { color:#555; }
+
+/* 结局画面 */
+.ending-screen { position:absolute; top:0; left:0; right:0; bottom:0; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.ending-a { background:#0a0a0a; color:#fff; }
+.ending-b { background:#0a1a0a; color:var(--arg-green); }
+.ending-c { background:#000; color:#fff; }
+.ending-d { background:#1a1a2e; color:#c0c0d0; }
+.ending-screen .ending-title { font-size:28px; font-weight:bold; margin-bottom:24px; text-align:center; }
+.ending-screen .ending-text { font-size:15px; line-height:2; max-width:520px; text-align:center; padding:0 20px; }
+.ending-screen .ending-restart { margin-top:32px; padding:8px 24px; cursor:pointer; background:#333; color:#ccc; border:1px solid #555; font-size:13px; font-family:inherit; }
+.ending-screen .ending-restart:hover { background:#444; color:#fff; }
+
+/* glitch */
+@keyframes glitch-text {
+  0%,100% { transform:none; }
+  20% { transform:translate(2px, -1px); }
+  40% { transform:translate(-2px, 1px); }
+  60% { transform:translate(1px, 0); }
+  80% { transform:translate(-1px, -1px); }
+}
+.glitch { animation:glitch-text 0.3s infinite; }
+.crack { position:absolute; pointer-events:none; font-size:18px; opacity:0; color:var(--arg-red); z-index:100; }
+.crack.show { opacity:1; transition:opacity 0.1s; }
+
+/* ============================
+   结局E「共存」样式
+   ============================ */
+.ending-e {
+  background-color: #1e1a30;
+  color: #d4c5a9;
+}
+.ending-e .ending-title {
+  color: #e8dcc8;
+  font-size: 28px;
+  font-weight: bold;
+}
+.ending-e .ending-text {
+  color: #d4c5a9;
+  line-height: 2;
+  max-width: 520px;
+  font-size: 15px;
+}
+
+/* ============================
+   10·24 彩蛋扩展（retro-desktop 专属，arg 原页不引用本文件）
+   ============================ */
+
+/* --- BIOS 开机自检屏 --- */
+#bios-screen {
+  position:fixed; inset:0; z-index:100000; background:#000; color:#b8b8b8;
+  font-family:"Courier New", monospace; font-size:14px; line-height:1.55;
+  padding:28px 32px; white-space:pre-wrap; overflow:hidden; cursor:default;
+}
+#bios-screen .bios-hl { color:#ffffff; }
+#bios-screen .bios-dim { color:#707070; }
+#bios-skip {
+  position:absolute; right:18px; bottom:14px; color:#555; font-size:12px;
+  cursor:pointer; font-family:"Tahoma",sans-serif;
+}
+#bios-skip:hover { color:#fff; }
+
+/* --- 67 惊喜：屏幕上下抖动 --- */
+@keyframes r2k-shake {
+  0%,100% { transform:translateY(0); }
+  15% { transform:translateY(-16px); }
+  35% { transform:translateY(12px); }
+  55% { transform:translateY(-9px); }
+  75% { transform:translateY(6px); }
+  90% { transform:translateY(-3px); }
+}
+body.r2k-shaking { animation:r2k-shake 0.16s linear infinite; }
+
+/* --- 死机蓝屏 --- */
+#crash-screen {
+  position:fixed; inset:0; z-index:100001; background:#0000aa; color:#ffffff;
+  font-family:"Courier New", monospace; font-size:15px; line-height:1.8;
+  padding:36px 40px; display:none; cursor:default;
+}
+#crash-screen .crash-title { font-size:24px; font-weight:bold; margin-bottom:18px; letter-spacing:1px; }
+#crash-screen .crash-addr { color:#a8a8ff; }
+
+/* --- 关机屏（Win98 经典橙字） --- */
+#shutdown-screen {
+  position:fixed; inset:0; z-index:100002; background:#000; color:#ff8000;
+  display:none; font-family:"Tahoma",sans-serif; cursor:default;
+}
+#shutdown-screen .sd-msg {
+  position:absolute; top:42%; left:0; right:0; text-align:center; font-size:19px; letter-spacing:1px;
+}
+#shutdown-screen .sd-restart {
+  position:absolute; bottom:12%; left:0; right:0; text-align:center;
+  color:#686868; font-size:13px; cursor:pointer;
+}
+#shutdown-screen .sd-restart:hover { color:#ff8000; }
+
+/* --- 桌面右键菜单 --- */
+.ctx-menu {
+  position:fixed; z-index:100010; min-width:158px; background:#c0c0c0;
+  border:2px outset #ffffff; box-shadow:2px 2px 8px rgba(0,0,0,0.45);
+  font-family:"Tahoma",sans-serif; font-size:12px; display:none; padding:2px 0;
+}
+.ctx-menu .ctx-item { padding:5px 16px; cursor:pointer; display:flex; gap:8px; align-items:center; white-space:nowrap; }
+.ctx-menu .ctx-item:hover { background:#000080; color:#fff; }
+.ctx-menu .ctx-sep { height:0; border-top:1px solid #808080; border-bottom:1px solid #ffffff; margin:3px 2px; }
+.ctx-menu .ctx-ico { width:18px; text-align:center; }
+
+/* --- 任务管理器 --- */
+#win-taskmgr .tm-tabs { display:flex; gap:2px; padding:4px 6px 0; }
+#win-taskmgr .tm-tab { padding:3px 14px; font-size:11px; font-family:"Tahoma",sans-serif; background:#c0c0c0; border:2px outset #fff; border-bottom:none; cursor:pointer; }
+#win-taskmgr .tm-tab.active { background:#a8a8a8; border-style:inset; font-weight:bold; }
+.tm-procs { flex:1; overflow:auto; background:#fff; border:1px inset #ffffff; margin:6px; }
+.tm-proc { display:flex; justify-content:space-between; padding:2px 10px; font-size:11px; font-family:"Tahoma",sans-serif; cursor:default; }
+.tm-proc:hover { background:#000080; color:#fff; }
+.tm-proc.sel { background:#000080; color:#fff; }
+.tm-perf { flex:1; margin:6px; background:#fff; border:1px inset #ffffff; padding:8px; font-family:"Tahoma",sans-serif; font-size:11px; display:none; }
+.tm-perf.show { display:block; }
+.tm-perf .tm-perf-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.tm-perc-bar { flex:1; height:14px; background:#fff; border:1px inset #fff; display:flex; gap:1px; padding:1px; }
+.tm-perc-seg { width:5px; background:#000080; }
+.tm-perc-seg.off { background:#e0e0e0; }
+.tm-btns { display:flex; gap:8px; padding:4px 8px 8px; justify-content:flex-end; }
+.tm-btns button { padding:3px 16px; background:#c0c0c0; border:2px outset #fff; font-family:"Tahoma",sans-serif; font-size:11px; cursor:pointer; }
+.tm-btns button:active { border-style:inset; }
+
+/* --- 安全选项 / 属性对话框 --- */
+.sec-dialog { background:#c0c0c0; border:2px outset #fff; box-shadow:2px 2px 10px rgba(0,0,0,0.5); padding:0; }
+.sec-row { display:flex; gap:10px; padding:10px 14px; justify-content:center; flex-wrap:wrap; }
+.sec-row button { padding:6px 18px; background:#c0c0c0; border:2px outset #fff; font-family:"Tahoma",sans-serif; font-size:12px; cursor:pointer; }
+.sec-row button:active { border-style:inset; }
+.sec-body { padding:16px; text-align:center; font-family:"Tahoma",sans-serif; font-size:12px; line-height:1.9; }
+
+/* --- 锁定屏 --- */
+#lock-screen {
+  position:fixed; inset:0; z-index:100030; background:#000; display:none;
+  font-family:"Tahoma",sans-serif; cursor:pointer;
+}
+#lock-screen .lk-title { position:absolute; top:34%; left:0; right:0; text-align:center; color:#e8e8e8; font-size:26px; font-weight:bold; }
+#lock-screen .lk-user { position:absolute; top:44%; left:0; right:0; text-align:center; color:#c0c0c0; font-size:16px; }
+#lock-screen .lk-hint { position:absolute; bottom:16%; left:0; right:0; text-align:center; color:#585858; font-size:12px; }
+
+/* --- 记事本 / 文件夹窗口 --- */
+.notepad-area {
+  flex:1; border:none; resize:none; padding:10px; font-family:"SimSun",serif;
+  font-size:13px; line-height:1.7; outline:none; background:#fff; color:#000;
+}
+.folder-empty { flex:1; display:flex; align-items:center; justify-content:center; color:#888; font-size:12px; font-family:"Tahoma",sans-serif; background:#fff; }
+
+/* --- IE 主页模式（内嵌主站） --- */
+.browser-content.home-mode { padding:0; overflow:hidden; display:flex; flex-direction:column; }
+.home-frame { flex:1; width:100%; border:none; display:block; background:#fff; }
+.home-foot { padding:6px 14px; background:#e4e4f0; border-top:1px solid #a0a0a0; font-size:12px; font-family:"Tahoma",sans-serif; color:#333; flex-shrink:0; }
+.home-foot a { color:#00c; cursor:pointer; text-decoration:underline; }
+.home-foot a:hover { color:#f00; }
+
+/* ---------- 文件夹窗口（10·24 彩蛋） ---------- */
+.folder-win {
+  display:flex; flex-direction:column; height:100%;
+  background:#c0c0c0; font-family:"Tahoma","宋体",sans-serif;
+}
+.folder-toolbar { display:flex; gap:4px; padding:4px; border-bottom:1px solid #808080; flex-shrink:0; }
+.fb {
+  background:#c0c0c0; border:2px outset #fff; font-family:inherit; font-size:12px;
+  padding:2px 10px; cursor:pointer;
+}
+.fb:active:not(:disabled) { border-style:inset; }
+.fb:disabled { color:#808080; cursor:default; }
+.folder-addr {
+  padding:3px 8px; background:#fff; border:1px inset #808080;
+  margin:4px; font-size:12px; flex-shrink:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.folder-grid {
+  flex:1; overflow:auto; background:#fff; border:1px inset #808080;
+  margin:0 4px; padding:8px; min-height:110px;
+  display:flex; flex-wrap:wrap; align-content:flex-start; gap:4px;
+}
+.folder-item {
+  width:78px; text-align:center; padding:6px 2px;
+  border:1px solid transparent; cursor:default; user-select:none;
+}
+.folder-item:hover { background:#e8f0ff; }
+.folder-item .ico { font-size:26px; line-height:1.2; }
+.folder-item .lbl { font-size:11px; word-break:break-all; line-height:1.3; margin-top:2px; }
+.folder-item.dragging { opacity:.4; }
+.folder-empty-hint {
+  width:100%; text-align:center; color:#888; font-size:12px;
+  padding-top:36px; line-height:2;
+}
+.folder-status {
+  padding:2px 8px; font-size:11px; color:#444;
+  border-top:1px solid #808080; flex-shrink:0;
+}
+.folder-win.drop-hi { outline:2px dashed #000080; outline-offset:-2px; }
+
+/* ---------- 桌面拖拽高亮 ---------- */
+.desk-icon.dragging { opacity:.4; }
+.desk-icon.drop-target { outline:2px dashed #000080; }

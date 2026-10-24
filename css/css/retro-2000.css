@@ -1,0 +1,289 @@
+/* ==========================================================================
+   retro-2000.css — 每年 10 月 24 日限定：全站穿越回 2000 年初风格
+   --------------------------------------------------------------------------
+   本文件由 js/js/retro-1024.js 在命中日期（或 ?retro=1 预览）时动态挂载，
+   平时不加载，对站点零影响。
+   视觉目标：宋体 / Comic Sans、白底细点纹、1px 实线表格框、斜面按钮、
+   彩虹分隔线、跑马灯、闪烁 NEW!、访客计数器、施工条、星标光标、Webring 页脚。
+   ========================================================================== */
+
+/* ---------- 0. 说明：chrome 不做 sticky，随页面滚动自然上移 ---------- */
+/* 早期版本用 sticky 吸顶 + nav 让位，实测挡视角（2026-10-24 用户反馈），已废弃。
+   站点 nav 自身是 sticky top:0，chrome 为 body 首个子元素 in-flow 排布即可：
+   初始时 chrome 在上、nav 在下，往下滚 nav 吸顶、chrome 自然滑出视口。 */
+
+/* ---------- 1. 全局基底：把现代玻璃拟物拍扁成千禧年平面风 ---------- */
+html.retro2k body {
+  background-color: #ffffff !important;
+  background-image:
+    radial-gradient(circle at 12px 12px, rgba(0, 0, 0, .10) 1.2px, transparent 1.6px),
+    radial-gradient(circle at 34px 30px, rgba(0, 0, 0, .07) 1px, transparent 1.4px) !important;
+  background-size: 46px 46px, 46px 46px !important;
+  font-family: "宋体", SimSun, "Comic Sans MS", "MS Sans Serif", sans-serif !important;
+  color: #000000 !important;
+}
+
+html.retro2k ::selection { background: #ffff00; color: #ff0000; }
+
+/* ---------- 2. 链接回到浏览器默认色 ---------- */
+html.retro2k a {
+  color: #0000EE !important;
+  text-decoration: underline !important;
+}
+html.retro2k a:visited { color: #551A8B !important; }
+html.retro2k a:hover { color: #FF0000 !important; }
+
+/* ---------- 3. 标题：Comic Sans + 彩虹渐变 + 双线下划 ---------- */
+html.retro2k h1,
+html.retro2k h2,
+html.retro2k h3 {
+  font-family: "Comic Sans MS", "幼圆", YouYuan, "宋体", SimSun, sans-serif !important;
+  text-shadow: none !important;
+}
+html.retro2k h1 {
+  background: linear-gradient(90deg, #ff0000, #ff9900, #ffee00, #33cc33, #3399ff, #9933ff);
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  border-bottom: 3px double #000000;
+  padding-bottom: 4px;
+}
+
+/* ---------- 4. 卡片 / 板块：Win98 斜面面板 ---------- */
+html.retro2k .card,
+html.retro2k .section,
+html.retro2k .panel,
+html.retro2k .box,
+html.retro2k .seo-header,
+html.retro2k .header-content,
+html.retro2k .nav-container,
+html.retro2k .iframe-header,
+html.retro2k .detail-header,
+html.retro2k .collapsible-header,
+html.retro2k .site-search-panel {
+  background: #ffffff !important;
+  border: 2px outset #d4d0c8 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ---------- 5. 按钮：经典斜面 ---------- */
+html.retro2k button,
+html.retro2k .btn,
+html.retro2k input[type="submit"],
+html.retro2k input[type="button"] {
+  font-family: "宋体", SimSun, sans-serif !important;
+  background: #d4d0c8 !important;
+  color: #000000 !important;
+  border: 2px outset #d4d0c8 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html.retro2k button:hover,
+html.retro2k .btn:hover,
+html.retro2k input[type="submit"]:hover {
+  border-style: inset !important;
+}
+
+/* ---------- 6. 彩虹分隔线 ---------- */
+html.retro2k hr,
+html.retro2k .animation-divider {
+  height: 5px !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, #ff0000, #ff9900, #ffee00, #33cc33, #3399ff, #9933ff) !important;
+  max-width: 100% !important;
+  margin: 12px auto !important;
+}
+
+/* ---------- 7. 表格：1px 实线 + 白底 ---------- */
+html.retro2k table { border-collapse: collapse !important; }
+html.retro2k td,
+html.retro2k th {
+  border: 1px solid #000000 !important;
+  background: #ffffff !important;
+}
+
+/* ---------- 8. 引用：黄色便利贴 ---------- */
+html.retro2k blockquote {
+  background: #ffffe0 !important;
+  border: 1px dashed #000000 !important;
+  border-left: 6px double #000000 !important;
+  border-radius: 0 !important;
+  font-style: normal !important;
+}
+
+/* ==========================================================================
+   9. 千禧年 chrome（页面顶部 in-flow，随滚动自然上移，不挡视角）
+   ========================================================================== */
+html.retro2k .r2k-chrome {
+  font-family: "宋体", SimSun, sans-serif;
+}
+
+/* 9.1 跑马灯 */
+html.retro2k .r2k-marquee {
+  background: #000080;
+  color: #ffff00;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 22px;
+  height: 22px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid #000;
+}
+html.retro2k .r2k-marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: r2k-scroll 22s linear infinite;
+}
+@keyframes r2k-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* 9.2 主横幅 */
+html.retro2k .r2k-banner {
+  background: #ffffff;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  text-align: center;
+  padding: 5px 8px;
+}
+html.retro2k .r2k-banner-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 10px;
+}
+html.retro2k .r2k-blink {
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 14px;
+  animation: r2k-blink 1.1s steps(1) infinite;
+}
+html.retro2k .r2k-blink:nth-of-type(2) { animation-delay: .25s; }
+html.retro2k .r2k-blink:nth-of-type(3) { animation-delay: .5s; }
+@keyframes r2k-blink {
+  50% { opacity: 0; }
+}
+html.retro2k .r2k-banner-title {
+  font-family: "Comic Sans MS", "幼圆", YouYuan, "宋体", SimSun, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #cc00cc;
+  text-shadow: 1px 1px 0 #ffff00;
+}
+html.retro2k .r2k-banner-sub {
+  font-size: 12px;
+  color: #333;
+  width: 100%;
+}
+
+/* 9.3 88×31 小按钮 */
+html.retro2k .r2k-btn88 {
+  display: inline-block;
+  width: 84px;
+  padding: 2px 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 14px;
+  color: #0000EE;
+  background: #ffffe0;
+  border: 1px solid #000;
+  cursor: default;
+}
+
+/* 9.4 关闭穿越（仅预览模式） */
+html.retro2k .r2k-close {
+  font-family: "宋体", SimSun, sans-serif;
+  font-size: 12px;
+  padding: 2px 10px;
+  background: #d4d0c8;
+  border: 2px outset #d4d0c8;
+  cursor: pointer;
+}
+html.retro2k .r2k-close:hover { border-style: inset; }
+
+/* 9.5 施工条 */
+html.retro2k .r2k-construction {
+  background: repeating-linear-gradient(45deg, #ffd800 0 12px, #1a1a1a 12px 24px);
+  text-align: center;
+  padding: 2px;
+}
+html.retro2k .r2k-construction span {
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid #000;
+  padding: 1px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #000;
+}
+
+/* 9.6 访客计数器 */
+html.retro2k .r2k-counter {
+  background: #c0c0c0;
+  border-bottom: 2px groove #ffffff;
+  text-align: center;
+  padding: 2px 0;
+}
+html.retro2k .r2k-counter-label {
+  font-size: 12px;
+  color: #000;
+  margin: 0 4px;
+}
+html.retro2k .r2k-digit {
+  display: inline-block;
+  min-width: 15px;
+  margin: 0 1px;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #00ff00;
+  background: #000000;
+  border: 1px inset #00ff00;
+}
+
+/* ---------- 10. Webring 页脚 ---------- */
+html.retro2k .r2k-footer {
+  background: #c0c0c0;
+  border-top: 2px groove #ffffff;
+  text-align: center;
+  padding: 10px 8px 12px;
+  font-size: 12px;
+  line-height: 2;
+  color: #000;
+}
+html.retro2k .r2k-webring { font-weight: 700; }
+html.retro2k .r2k-sep { color: #666; margin: 0 6px; }
+html.retro2k .r2k-copy {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #333;
+}
+
+/* ---------- 11. 星标光标拖尾 ---------- */
+html.retro2k .r2k-spark {
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+  z-index: 10002;
+  animation: r2k-spark .9s ease-out forwards;
+}
+@keyframes r2k-spark {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateY(16px) scale(.2); opacity: 0; }
+}
+
+/* ---------- 12. 尊重系统减弱动效设置 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html.retro2k .r2k-marquee span { animation: none; padding-left: 0; }
+  html.retro2k .r2k-blink { animation: none; }
+  html.retro2k .r2k-spark { display: none; }
+}
