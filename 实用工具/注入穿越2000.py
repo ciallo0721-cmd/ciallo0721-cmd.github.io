@@ -49,6 +49,7 @@ EXCLUDE_PARTS = (
     "arg/",
     "_retro-desktop",
     "retro-desktop",
+    "xzssy/",   # 3D 游戏页：全屏 canvas + 自定义 HUD，套 2000 风格 CSS 会直接花掉
 )
 
 MARK = "retro-1024.js"

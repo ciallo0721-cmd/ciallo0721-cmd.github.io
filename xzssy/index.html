@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#07090b">
+<title>凶宅试睡员 · 7 天委托</title>
+<meta name="description" content="凶宅试睡员：一份 2 天的委托。给九个区域拍照、在厕所待满五分钟、在出事的卧室睡一晚。3D 第一人称恐怖游戏。">
+<link rel="stylesheet" href="style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TR4FT7JPDZ');
+</script>
+<script src="../assets/js/gtag-config.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- ============ HUD ============ -->
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <div class="tb-left">
+      <div id="dayLabel">第 1 天</div>
+      <div id="clockLabel">22:00</div>
+    </div>
+    <div id="barsBox">
+      <i class="tbar"></i><i class="tbar"></i><i class="tbar"></i>
+    </div>
+    <div class="tb-right">
+      <div id="fearBox">
+        <span class="fear-t">恐惧</span>
+        <div id="fearTrack"><i id="fearBar"></i></div>
+        <span id="fearTxt">0</span>
+      </div>
+      <button id="muteBtn" class="ghost-btn" title="静音">♪</button>
+    </div>
+  </div>
+
+  <div id="taskPanel">
+    <div class="tp-head">今日任务 <span id="taskCount">0/0</span></div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <div id="roomTag"></div>
+
+  <div id="lockHint" class="hidden">鼠标没锁上 · 点一下画面锁定（不行就按住左键拖动）</div>
+
+  <div id="crosshair"><i></i><i></i></div>
+  <div id="viewfinder" class="hidden">
+    <span class="vf-c tl"></span><span class="vf-c tr"></span>
+    <span class="vf-c bl"></span><span class="vf-c br"></span>
+    <div id="vfInfo">取景中 · 左键快门</div>
+  </div>
+
+  <div id="prompt" class="hidden"><b>E</b><span></span></div>
+  <div id="toast"></div>
+  <div id="subtitle"></div>
+
+  <div id="hotbar"></div>
+
+  <div id="phone" class="hidden">
+    <div class="ph-time" id="phTime">21:00</div>
+    <div class="ph-sub" id="phSub">第 1 天 · 无服务</div>
+    <div class="ph-msg"><b>「公司」</b>记得每个区域都要拍到，尤其是厕所。<i>2 分钟前</i></div>
+    <div class="ph-hint">Q 收起</div>
+  </div>
+
+  <div id="touchUI" class="hidden">
+    <div id="stickL" class="stick"><i class="knob"></i><span class="slabel">移动</span></div>
+    <div id="stickR" class="stick"><i class="knob"></i><span class="slabel">视角</span></div>
+    <div id="touchBtns">
+      <button data-act="E">交互</button>
+      <button data-act="F">手电</button>
+      <button data-act="C">相机</button>
+      <button data-act="H">手册</button>
+      <button data-act="Q">手机</button>
+    </div>
+  </div>
+  <div id="dbg" class="hidden"></div>
+</div>
+
+<div id="flash"></div>
+<div id="vignette"></div>
+<div id="grain"></div>
+<div id="fade"></div>
+
+<!-- ============ 开场 / 简报 ============ -->
+<div id="intro">
+  <div class="intro-inner">
+    <div class="intro-kicker">委托编号 XZ-<span id="caseNo">0000</span></div>
+    <h1 id="introTitle">凶宅试睡员</h1>
+    <p id="introSub">两天 · 一间出过事的房子 · 两千块尾款</p>
+
+    <div class="intro-grid">
+      <div class="col-plan">
+        <div class="sec-h">户型图 <span id="planArea"></span></div>
+        <div id="planWrap"></div>
+        <div class="plan-legend" id="planLegend"></div>
+      </div>
+      <div class="col-info">
+        <div class="sec-h">标的物</div>
+        <div id="houseCard"></div>
+        <div class="sec-h">背景档案 <span id="bgLevel"></span></div>
+        <div id="bgStory"></div>
+        <div class="sec-h">本次任务</div>
+        <ul id="introTasks" class="mini-list"></ul>
+      </div>
+    </div>
+
+    <div class="intro-foot">
+      <details>
+        <summary>随身物品清单（8 件）</summary>
+        <ul id="introItems" class="mini-list item-list"></ul>
+      </details>
+      <button id="startBtn">签 字 · 入 住</button>
+      <div class="intro-tip">WASD 移动 · 鼠标看 · E 交互 · F 手电 · C 相机 · H 手册</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 睡觉 / 过场 ============ -->
+<div id="sleep" class="hidden">
+  <div class="sleep-inner">
+    <div id="sleepTitle">熄 灯</div>
+    <div id="sleepText"></div>
+    <button id="sleepNext" class="hidden">继续</button>
+  </div>
+</div>
+
+<!-- ============ 结算 ============ -->
+<div id="ending" class="hidden">
+  <div class="end-inner">
+    <div class="end-kicker" id="endKicker">委托结束</div>
+    <h2 id="endTitle"></h2>
+    <div id="endText"></div>
+    <div id="endStats"></div>
+    <div class="end-btns">
+      <button id="againBtn">再接一单</button>
+      <a href="../" class="end-link">回主站</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 通用面板（手册 / 手机 / 相册 / 暂停） ============ -->
+<div id="panel" class="hidden">
+  <div class="panel-inner">
+    <div class="panel-head"><span id="panelTitle">培训手册</span><button id="panelClose">×</button></div>
+    <div id="panelBody"></div>
+  </div>
+</div>
+
+<div id="pause" class="hidden">
+  <div class="pause-inner">
+    <h2>暂停</h2>
+    <div class="pause-rows">
+      <button id="resumeBtn">继续（Esc）</button>
+      <button id="manualBtn2">培训手册（H）</button>
+      <button id="quitBtn">放弃委托</button>
+    </div>
+    <div class="pause-tip">灵敏度 <input id="sensRange" type="range" min="0.4" max="2.4" step="0.1" value="1"></div>
+    <div class="pause-tip dim">♡ 这游戏是我一个人做的 · 玩得开心的话 <a href="../Tipping/" target="_blank" rel="noopener">请我喝杯奶茶</a> · <a href="../" target="_blank" rel="noopener">回主站逛逛</a></div>
+  </div>
+</div>
+
+<div id="loading">正在进场…</div>
+
+<!-- 引擎 -->
+<script src="three.min.js"></script>
+<!-- 数据 -->
+<script src="maps.js"></script>
+<!-- 网格 -->
+<script src="grid.js"></script>
+<!-- 音效 -->
+<script src="audio.js"></script>
+<!-- 几何 -->
+<script src="build.js"></script>
+<!-- 主逻辑 -->
+<script src="game.js"></script>
+</body>
+</html>
