@@ -120,9 +120,11 @@
 
     var manifestCache = null;
 
-    // loadManifest(baseUrl) — baseUrl 默认相对当前页面向上一层（blog/index.html → 站点根）
+    // loadManifest(baseUrl) — baseUrl 默认站点根（manifest 固定在根目录）
+    // 注意：旧默认值是 '../'，在 blog/分类/index.html（两层）会被解析成 /blog/cwb-manifest.json
+    // → 稳定 404。站点部署在域名根，直接用绝对路径最稳，不受页面深度影响。
     function loadManifest(baseUrl) {
-        var base = baseUrl || '../';
+        var base = baseUrl || '/';
         if (manifestCache) return Promise.resolve(manifestCache);
         return fetch(base + 'cwb-manifest.json', { cache: 'no-cache' })
             .then(function (r) {
@@ -164,7 +166,7 @@
     // options: { baseUrl, manifest } — manifest 可直接传入跳过 fetch
     function loadAll(options) {
         options = options || {};
-        var base = options.baseUrl || '../';
+        var base = options.baseUrl || '/';
         var ready = options.manifest ? Promise.resolve(options.manifest) : loadManifest(base);
         return ready.then(function (manifest) {
             var entries = (manifest && manifest.articles) || [];
