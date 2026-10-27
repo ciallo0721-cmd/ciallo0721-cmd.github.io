@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desktop — 10·31</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='4' y='6' width='24' height='16' rx='2' fill='%232a0d33' stroke='%23ff7a18' stroke-width='2'/><rect x='4' y='6' width='24' height='4' fill='%237b2cbf'/><text x='7' y='18' font-size='7' fill='%23ffd9a8' font-family='monospace'>1031</text><rect x='12' y='22' width='8' height='4' fill='%236d2a7d'/><rect x='10' y='26' width='12' height='2' rx='1' fill='%234a1a56'/></svg>">
+<link rel="stylesheet" href="./css/css/halloween-desktop.css">
+</head>
+<body>
+
+<!-- ==================== 开机自检 ==================== -->
+<div id="bios-screen">
+  <pre id="bios-text"></pre>
+  <div id="bios-skip">跳过自检 ▸</div>
+</div>
+
+<!-- ==================== 桌面 ==================== -->
+<div id="desktop">
+  <div class="desk-icon" id="icon-browser" data-icon="browser" style="left:26px;top:22px">
+    <div class="ico">🌐</div><div class="lbl">Internet<br>Explorer</div>
+  </div>
+  <div class="desk-icon" id="icon-terminal" data-icon="terminal" style="left:124px;top:22px">
+    <div class="ico">🖥️</div><div class="lbl">命令提示符<br>CMD</div>
+  </div>
+  <div class="desk-icon" id="icon-readme" data-icon="readme" style="left:222px;top:22px">
+    <div class="ico">📄</div><div class="lbl">readme.txt</div>
+  </div>
+  <div class="desk-icon" id="icon-bgm" data-icon="bgm" style="left:320px;top:22px">
+    <div class="ico">🎃</div><div class="lbl">今晚的歌</div>
+  </div>
+</div>
+
+<!-- ==================== 任务栏 ==================== -->
+<div id="taskbar">
+  <div class="start-btn" id="start-btn"><span class="flag">🎃</span> 开始</div>
+  <div class="tb-sep"></div>
+  <div id="task-items"></div>
+  <div class="tray">
+    <span class="tray-btn" id="tray-bgm" title="背景音乐">🔇</span>
+    <span class="tray-btn" id="tray-secret" title="?">🕯️</span>
+    <span id="clock">23:59</span>
+  </div>
+</div>
+
+<!-- ==================== 开始菜单 ==================== -->
+<div id="start-menu">
+  <div class="sm-banner">HALLOWEEN</div>
+  <div class="sm-items">
+    <div class="sm-item" data-open="browser"><span class="sm-icon">🌐</span> Internet Explorer</div>
+    <div class="sm-item" data-open="terminal"><span class="sm-icon">🖥️</span> 命令提示符</div>
+    <div class="sm-item" data-open="readme"><span class="sm-icon">📄</span> readme.txt</div>
+    <div class="sm-item" data-bgm="1"><span class="sm-icon">🎵</span> 今晚的歌</div>
+    <hr>
+    <div class="sm-item" data-restart="1"><span class="sm-icon">🔄</span> 重新启动</div>
+  </div>
+</div>
+
+<!-- ==================== 浏览器窗口 ==================== -->
+<div class="window" id="win-browser" style="width:760px;height:560px;left:60px;top:40px;">
+  <div class="window-title" data-drag="win-browser">
+    <span class="wt-icon">🌐</span>
+    <span class="wt-text" id="browser-title">Internet Explorer</span>
+    <span class="wt-btns">
+      <button data-min="browser" title="最小化">—</button>
+      <button data-max="browser" title="最大化">□</button>
+      <button data-close="browser" title="关闭">✕</button>
+    </span>
+  </div>
+  <div class="window-menu"><span>文件</span><span>编辑</span><span>查看</span><span>收藏</span><span>帮助</span></div>
+  <div class="browser-toolbar">
+    <button title="后退" disabled>←</button>
+    <button title="前进" disabled>→</button>
+    <button title="主页" data-ie-home="1">🏠</button>
+    <input class="url-bar" id="ie-url" value="http://ciallo0721-cmd.top/" readonly>
+    <button data-ie-go="1">转到</button>
+  </div>
+  <div class="window-body">
+    <div class="ie-loading" id="ie-loading">正在连接 ciallo0721-cmd.top …</div>
+    <iframe id="ie-frame" class="ie-frame" src="about:blank" title="ciallo0721-cmd.top"></iframe>
+  </div>
+</div>
+
+<!-- ==================== 命令提示符 ==================== -->
+<div class="window" id="win-terminal" style="width:600px;height:380px;left:180px;top:120px;">
+  <div class="window-title" data-drag="win-terminal">
+    <span class="wt-icon">🖥️</span>
+    <span class="wt-text">命令提示符 — CMD.EXE</span>
+    <span class="wt-btns">
+      <button data-min="terminal" title="最小化">—</button>
+      <button data-max="terminal" title="最大化">□</button>
+      <button data-close="terminal" title="关闭">✕</button>
+    </span>
+  </div>
+  <div class="window-body">
+    <div class="terminal-body" id="term-body">
+      <div class="t-sys">Microsoft(R) Windows 98</div>
+      <div class="t-sys">   (C)Copyright Microsoft Corp 1981-1998.</div>
+      <div class="t-sys">&nbsp;</div>
+      <div class="t-hint">输入 help 查看可用命令。</div>
+      <div id="term-out"></div>
+      <div class="t-input-line">
+        <span class="t-prompt">C:\&gt;</span><input id="term-input" autocomplete="off" spellcheck="false" maxlength="120">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== readme ==================== -->
+<div class="window" id="win-readme" style="width:470px;height:430px;left:120px;top:90px;">
+  <div class="window-title" data-drag="win-readme">
+    <span class="wt-icon">📄</span>
+    <span class="wt-text">readme.txt — 记事本</span>
+    <span class="wt-btns">
+      <button data-min="readme" title="最小化">—</button>
+      <button data-max="readme" title="最大化">□</button>
+      <button data-close="readme" title="关闭">✕</button>
+    </span>
+  </div>
+  <div class="window-body">
+    <div class="notepad-area" id="readme-body"></div>
+  </div>
+</div>
+
+<!-- ==================== 惊吓层 ==================== -->
+<div id="blackout"></div>
+
+<div id="scare-face">
+  <svg class="face-svg" viewBox="0 0 400 400" width="min(74vh, 74vw)" height="min(74vh, 74vw)" aria-hidden="true">
+    <defs>
+      <radialGradient id="hwSkin" cx="50%" cy="38%" r="60%">
+        <stop offset="0%" stop-color="#f0e9d8"/>
+        <stop offset="52%" stop-color="#cec3ab"/>
+        <stop offset="86%" stop-color="#6f6656"/>
+        <stop offset="100%" stop-color="#211d17"/>
+      </radialGradient>
+      <radialGradient id="hwVig" cx="50%" cy="50%" r="60%">
+        <stop offset="46%" stop-color="rgba(0,0,0,0)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0.96)"/>
+      </radialGradient>
+    </defs>
+
+    <!-- 脸 -->
+    <ellipse cx="200" cy="198" rx="110" ry="152" fill="url(#hwSkin)"/>
+    <ellipse cx="200" cy="198" rx="110" ry="152" fill="none" stroke="rgba(0,0,0,0.42)" stroke-width="7"/>
+
+    <!-- 眼窝（斜杏仁形，深黑） -->
+    <path d="M124 176 C144 150 180 148 194 166 C174 194 138 196 124 176 Z" fill="#05050a"/>
+    <path d="M276 176 C256 150 220 148 206 166 C226 194 262 196 276 176 Z" fill="#05050a"/>
+    <path d="M124 176 C144 150 180 148 194 166" fill="none" stroke="rgba(0,0,0,0.55)" stroke-width="3"/>
+    <path d="M276 176 C256 150 220 148 206 166" fill="none" stroke="rgba(0,0,0,0.55)" stroke-width="3"/>
+
+    <!-- 瞳（小、偏上、发红） -->
+    <circle cx="157" cy="170" r="4.6" fill="#ff1f1f"/>
+    <circle cx="243" cy="170" r="4.6" fill="#ff1f1f"/>
+    <circle cx="157" cy="170" r="10" fill="rgba(255,30,30,0.16)"/>
+    <circle cx="243" cy="170" r="10" fill="rgba(255,30,30,0.16)"/>
+
+    <!-- 鼻（细长） -->
+    <path d="M200 190 L188 240 Q200 250 212 240 Z" fill="rgba(28,22,16,0.66)"/>
+
+    <!-- 张开的大嘴 + 牙 -->
+    <path d="M138 250 Q200 232 262 250 Q256 338 200 340 Q144 338 138 250 Z" fill="#060309"/>
+    <path d="M144 254 Q200 240 256 254" fill="none" stroke="rgba(0,0,0,0.7)" stroke-width="3"/>
+    <path d="M156 258 l7 24 l11 -22 z" fill="#e6ddc8" opacity="0.9"/>
+    <path d="M185 253 l7 26 l11 -23 z" fill="#e6ddc8" opacity="0.9"/>
+    <path d="M213 253 l7 24 l11 -26 z" fill="#e6ddc8" opacity="0.9"/>
+    <path d="M240 258 l7 20 l10 -22 z" fill="#e6ddc8" opacity="0.9"/>
+
+    <!-- 裂纹 -->
+    <path d="M104 128 L132 156 L112 178" fill="none" stroke="rgba(0,0,0,0.42)" stroke-width="2.2"/>
+    <path d="M296 122 L272 152 L290 176" fill="none" stroke="rgba(0,0,0,0.38)" stroke-width="2.2"/>
+    <path d="M150 300 L162 328" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="1.8"/>
+    <path d="M250 300 L238 328" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="1.8"/>
+
+    <rect x="0" y="0" width="400" height="400" fill="url(#hwVig)"/>
+  </svg>
+</div>
+
+<div id="scare-eyes"><i></i><i></i></div>
+
+<!-- ==================== 蓝屏 ==================== -->
+<div id="bsod">
+  <div class="bsod-logo">Windows</div>
+  <div>
+    A fatal exception 0E has occurred at <span class="bsod-cyan">0028:C0011E36</span> in VXD
+    <b>VMM(01)</b> + 00010E36.<br>
+    当前应用程序 <b>CMD.EXE</b> 已被一个无法识别的进程接管。<br><br>
+
+    错误码：<span class="bsod-yellow">0x0000BEEF</span> — HALLOWEEN_ASSERTION<br>
+    * 按任意键继续。<br>
+    * 按 CTRL+ALT+DEL 重新启动计算机。<br>
+    &nbsp;&nbsp;您将丢失所有未保存的信息。<br><br>
+
+    即将返回到上一个正常状态。请勿离开座位。<br>
+    <span class="bsod-cyan">正在恢复 …</span>
+  </div>
+  <div class="bsod-tail">
+    如果你刚才觉得屏幕里有人回头，那不是错觉。它只是想打个招呼。
+  </div>
+</div>
+
+<!-- ==================== BGM ==================== -->
+<div id="bgm-box">
+  <div class="bgm-bar">
+    <span>🎵 今晚的歌</span>
+    <span class="bgm-x" id="bgm-close">✕</span>
+  </div>
+  <div id="bgm-holder"></div>
+</div>
+
+<!-- ==================== 预览模式关闭 ==================== -->
+<button id="hw-exit" type="button" style="display:none">✕ 关闭彩蛋</button>
+
+<div id="crt-lines"></div>
+
+<script src="./js/js/halloween-desktop.js"></script>
+</body>
+</html>

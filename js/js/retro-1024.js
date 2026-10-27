@@ -25,6 +25,12 @@
 
   /* ---------- 0.5 iframe 内（桌面 IE 窗口）：只挂第一版 chrome，不升级桌面 ---------- */
   if (window.top !== window.self) {
+    // 例外：10·31 万圣节桌面里的 IE 窗口要显示站点现状，不要套 2000 年外壳。
+    // 只读参数、不写 sessionStorage，避免污染顶层会话。
+    var hwIe = false;
+    try { hwIe = new URLSearchParams(location.search).get('hw_ie') === '1'; } catch (e) {}
+    if (hwIe) return;
+
     try { activate(false, false, true); } catch (err) {
       console.warn('[retro-1024] iframe 内穿越失败：', err);
     }
