@@ -926,6 +926,17 @@ window.articlesData = {
             readTime: 11,
             featured: false
         },
+    {
+        id: 87,
+        category: "日记",
+        fileName: "日记/87/",
+        title: "热力图会变白",
+        excerpt: "2024 年 5 月那场葬礼才是起点，不是任何一个同学。排完这条时间线我才看清：一个没人在场的 PVP 服务器、一片会变白的热力图，和一个人自己算回来的那笔账。",
+        date: "2026-10-29",
+        tags: ["个人记录", "校园", "心理", "自救"],
+        readTime: 13,
+        featured: false
+    },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

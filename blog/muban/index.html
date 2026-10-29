@@ -339,6 +339,10 @@ kbd {
     max-width: 100%; height: auto; border-radius: 16px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1); display: block; margin: 0 auto;
 }
+/* 竖版长截图（手机截图、聊天记录）：限高，避免占满整屏；点击可放大 */
+.article-content img.shot-tall { max-height: 680px; width: auto; cursor: zoom-in; }
+/* 宽幅图（热力图、表格截图）：铺满内容宽度 */
+.article-content img.shot-wide { width: 100%; }
 .image-caption {
     text-align: center; font-size: 0.9rem; color: var(--text-secondary);
     margin-top: 12px; font-style: italic;

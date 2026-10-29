@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #87
+[
+    {
+    index:
+        "title"="热力图会变白" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-10-29" //日期
+        "tag"="个人记录","校园","心理","自救" //标签
+        "excerpt"="2024 年 5 月那场葬礼才是起点，不是任何一个同学。排完这条时间线我才看清：一个没人在场的 PVP 服务器、一片会变白的热力图，和一个人自己算回来的那笔账。" //摘要(扩展字段)
+        "readTime"=12 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/日记/87"
+        "html"="index.html"
+    }
+]
