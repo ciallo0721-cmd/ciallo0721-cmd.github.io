@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>MoeFace Web - 动漫人脸识别</title>
-
-    <!-- pageMeta 定义 -->
-    
+    <title>MoeFace - 动漫人脸识别 | ciallo0721-cmd</title>
 
     <link rel="canonical" href="https://ciallo0721-cmd.top/app/moeface/">
-    <meta name="description" content="MoeFace Web - 在线动漫人脸识别工具，基于 face-api.js 的浏览器端AI，支持数百个动漫角色特征库匹配">
-    
-    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+    <meta name="description" content="MoeFace 动漫人脸识别 - 浏览器端本地运行的二次元角色识别工具，特征库直连本站加载，图片不会上传到任何服务器">
+    <link rel="icon" href="../../fanv.ico" type="image/x-icon">
 
-<!-- GA4 统一埋点模块 -->
-<script src="../../js/js/gtag-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <!-- ONNX Runtime Web：跑与特征库同源的 FaceNet -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+
+    <!-- GA4 统一埋点模块 -->
+    <script src="../../js/js/gtag-config.js"></script>
 
     <link rel="stylesheet" href="../../css/css/app-moeface-index.css">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
@@ -26,7 +26,7 @@
 </head>
 <body>
     <!-- 广告位 #1：顶部横幅 -->
-    <div style="max-width:728px;margin:18px auto;">
+    <div class="ad-wrap">
       <div data-ad-slot></div>
     </div>
 
@@ -36,42 +36,54 @@
         <div class="loading-progress">
             <div class="loading-progress-bar" id="loadingProgress"></div>
         </div>
+        <div class="loading-hint">首次加载约 54MB（含 FaceNet 模型），之后走浏览器缓存</div>
     </div>
 
     <div class="container">
         <header>
             <h1>MoeFace</h1>
-            <p class="subtitle">动漫角色识别 · 浏览器端AI · 特征库</p>
+            <p class="subtitle">动漫角色识别 · 浏览器端 AI · 图片不出本地</p>
         </header>
 
         <div class="card">
-            <div class="notice">
-                <strong>📌 注意事项</strong>
-                <p>1. 本工具专为<strong>动漫/二次元角色</strong>人脸识别设计，特征库包含数百个动漫角色。</p>
-                <p>2. 因动漫脸与真实人脸差异较大，请尽量上传<strong>清晰、正面、光线均匀</strong>的动漫人物特写，避免侧脸、遮挡或模糊。</p>
-                <p>3. 识别阈值建议 <strong>0.35~0.55</strong>，若识别不到可适当降低阈值（最低0.25）。</p>
-                <p>4. 如果仍未识别，可尝试裁剪图片使人脸占比更大，或使用<strong>全身图转为半身</strong>后再试。</p>
-                <p>5. 特征库从 GitHub 仓库单文件加载，部分网络环境可能影响加载速度。</p>
-            </div>
-            <div class="notice">
-                <strong>✨ 新特性</strong>
-                <p>• 特征库从 GitHub 仓库自动加载合并文件，无需手动更新。</p>
-                <p>• 所有操作均在本地进行，不会上传任何图片数据。</p>
-            </div>
             <div class="status-bar">
                 <div class="status-item" id="statusModels">
                     <span class="status-dot"></span>
-                    <span>加载中...</span>
+                    <span>模型加载中...</span>
                 </div>
                 <div class="status-item" id="statusDB">
                     <span class="status-dot"></span>
-                    <span>加载中...</span>
+                    <span>特征库加载中...</span>
                 </div>
-                <div class="status-item" id="statusNegDB" style="display:none;">
+                <div class="status-item" id="statusNegDB" hidden>
                     <span class="status-dot"></span>
                     <span>负面特征</span>
                 </div>
             </div>
+
+            <nav class="link-bar" aria-label="相关链接">
+                <a class="link-btn primary" href="https://github.com/ciallo0721-cmd/MoeFace" target="_blank" rel="noopener">
+                    <span class="link-icon">📦</span>
+                    <span class="link-text">
+                        <strong>MoeFace 仓库</strong>
+                        <em>桌面端完整版源码</em>
+                    </span>
+                </a>
+                <a class="link-btn" href="https://github.com/ciallo0721-cmd" target="_blank" rel="noopener">
+                    <span class="link-icon">🐈</span>
+                    <span class="link-text">
+                        <strong>我的 GitHub</strong>
+                        <em>ciallo0721-cmd</em>
+                    </span>
+                </a>
+                <a class="link-btn" href="../../blog/" target="_blank" rel="noopener">
+                    <span class="link-icon">✍️</span>
+                    <span class="link-text">
+                        <strong>技术博客</strong>
+                        <em>ACG 向长文与科普</em>
+                    </span>
+                </a>
+            </nav>
 
             <div class="upload-zone" id="uploadZone">
                 <input type="file" id="fileInput" accept="image/*">
@@ -87,16 +99,36 @@
                 </div>
             </div>
 
-            <div class="controls" id="controls" style="display: none;">
+            <div class="camera-bar" id="cameraBar">
+                <div class="camera-stage">
+                    <video id="cameraVideo" class="camera-video" playsinline muted></video>
+                    <canvas id="cameraCanvas" class="camera-canvas"></canvas>
+                </div>
+                <div class="camera-hint" id="cameraHint">摄像头实时识别已启动</div>
+            </div>
+            <div class="controls" id="controls" hidden>
                 <div class="control-group">
-                    <label>识别阈值 (越低越敏感):</label>
-                    <input type="range" id="threshold" min="0.20" max="0.85" step="0.01" value="0.42">
-                    <span class="threshold-value" id="thresholdValue">0.42</span>
+                    <label for="threshold">识别阈值</label>
+                    <input type="range" id="threshold" min="0.40" max="0.95" step="0.01" value="0.68">
+                    <span class="threshold-value" id="thresholdValue">0.68</span>
                 </div>
                 <div class="control-group">
-                    <button id="recognizeBtn" disabled>🔍 开始识别</button>
-                    <button id="clearBtn" class="secondary">🗑 清除</button>
+                    <button id="recognizeBtn" disabled>开始识别</button>
+                    <button id="clearBtn" class="secondary" type="button">清除</button>
                 </div>
+            </div>
+
+            <div class="realtime-row">
+                <label class="realtime-switch" for="realtimeToggle">
+                    <input type="checkbox" id="realtimeToggle" disabled>
+                    <span class="switch-track"><span class="switch-thumb"></span></span>
+                    <span class="switch-label">实时人脸识别（调用摄像头）</span>
+                </label>
+                <div class="realtime-hint" id="realtimeHint">勾选后开启摄像头，边看边识别</div>
+            </div>
+
+            <div class="engine-state" id="engineState">
+                模型与特征库就绪后即可识别
             </div>
         </div>
 
@@ -106,34 +138,43 @@
                 <span class="face-count" id="faceCount">0 张人脸</span>
             </div>
             <div class="result-list" id="resultList"></div>
-            <div class="no-result" id="noResult" style="display: none;">
-                <p>✨ 未匹配到已知角色 ✨</p>
-                <p style="font-size:0.85rem; margin-top:8px;">试试降低阈值、上传更清晰的正脸图</p>
+            <div class="no-result" id="noResult" hidden>
+                <p>未匹配到已知角色</p>
+                <p class="no-result-hint">试试降低阈值、上传更清晰的正脸图，或裁剪到只剩人物头部</p>
             </div>
         </div>
 
         <div class="card">
-            <h3 style="margin-bottom: 12px;">运行日志</h3>
+            <h2 class="card-title">使用说明</h2>
+            <ul class="tips">
+                <li>本工具针对<strong>动漫 / 二次元角色</strong>调参，真人照片识别率很低，属于正常现象。</li>
+                <li>请上传<strong>清晰、正面、光线均匀</strong>的角色特写；侧脸、遮挡、线稿、黑白图都会明显掉分。</li>
+                <li>全身图识别不到时，先裁剪到只剩头部再试，比调阈值有效。</li>
+                <li>阈值默认 0.68。识别不到往下调（最低 0.40），误匹配太多往上调。动漫脸彼此很接近，0.60 以下噪声会明显变多。</li>
+                <li>浏览器端跑的是与特征库同源的 <strong>FaceNet（512 维）</strong>，模型随页面静态加载、约 47MB，首次加载后走浏览器缓存。</li>
+                <li>全部计算都在你的浏览器里完成，图片不会上传到任何服务器。</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">运行日志</h2>
             <div class="log-container" id="logContainer"></div>
         </div>
 
         <footer>
-            <p>基于 face-api.js + TensorFlow.js | 特征库: <span id="charCount">-</span> 个动漫角色 <span id="negCountDisplay" style="color: var(--muted);"></span></p>
-            <p style="margin-top: 8px;">
-                <a href="#" target="_blank">MoeFace · 专注动漫识别</a>
-            </p>
+            <p>基于 face-api.js + TensorFlow.js · 特征库 <span id="charCount">-</span> 个角色 <span id="negCountDisplay"></span></p>
+            <p class="footer-note">桌面端完整版（FaceNet + 视频识别）见 <a href="https://github.com/ciallo0721-cmd/MoeFace" target="_blank" rel="noopener">MoeFace 仓库</a></p>
         </footer>
     </div>
 
-    
     <script src="../../js/js/app-moeface-index.js"></script>
 
     <!-- 广告位 #2：底部横幅 -->
-    <div style="max-width:728px;margin:18px auto;">
+    <div class="ad-wrap">
       <div data-ad-slot></div>
     </div>
 
-        <!-- ===== 广告系统 v1.1 ===== -->
+    <!-- ===== 广告系统 v1.1 ===== -->
     <script src="../../js/js/ad-data.js?v=2"></script>
     <script src="../../js/js/ad-system.js?v=2"></script>
     <!-- 每年10月24日限定：全站穿越回2000年初风格（勿删，由 实用工具/注入穿越2000.py 维护） -->
