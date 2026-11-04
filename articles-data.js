@@ -937,6 +937,17 @@ window.articlesData = {
         readTime: 13,
         featured: false
     },
+        {
+            id: 88,
+            category: "科技",
+            fileName: "科技/88/",
+            title: "我对GFW的看法",
+            excerpt: "从停笔五个月到重新提笔，聊聊我对GFW的看法：支持存在，反对滥用。",
+            date: "2026-11-04",
+            tags: ["GFW", "互联网", "观点"],
+            readTime: 11,
+            featured: false
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

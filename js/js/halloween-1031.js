@@ -52,6 +52,11 @@
   if (override === '0') return;                              // 明确要求关闭
   if (override !== '1' && !isHalloween) return;              // 平时安静躺好
 
+  /* ---------- 1.5 显式要求预览 10·24 穿越时，让位（?retro=1 优先） ---------- */
+  var retroPreview = false;
+  try { retroPreview = new URLSearchParams(location.search).get('retro') === '1'; } catch (e) {}
+  if (retroPreview) return;
+
   /* ---------- 2. 反推站点根目录 ---------- */
   function getRoot() {
     var src = (document.currentScript && document.currentScript.src) || '';
@@ -69,6 +74,14 @@
   try {
     var root = getRoot();
     var preview = override === '1';
+
+    /* ---------- 3.1 清场：把 10·24 穿越壳（若有）先拆掉 ----------
+       会话里残留 retro2k=1 时，retro-1024.js 可能已经先挂了 Win98 桌面
+       或 2000 年 chrome。万圣节优先，直接移除，避免两层桌面叠在一起。 */
+    Array.prototype.slice.call(
+      document.querySelectorAll('#r2k-desktop-mount, .r2k-chrome, .r2k-footer, .r2k-spark, #r2k-bsod')
+    ).forEach(function (el) { el.remove(); });
+    document.documentElement.classList.remove('retro2k');
 
     var wrap = document.createElement('div');
     wrap.id = 'hw-desktop-mount';

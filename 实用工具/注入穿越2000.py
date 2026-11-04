@@ -49,6 +49,7 @@ EXCLUDE_PARTS = (
     "arg/",
     "_retro-desktop",
     "retro-desktop",
+    "halloween-desktop",  # 10·31 万圣桌面页自身，注入会叠出一条穿越横幅
     "xzssy/",   # 3D 游戏页：全屏 canvas + 自定义 HUD，套 2000 风格 CSS 会直接花掉
 )
 

@@ -23,6 +23,12 @@
   /* ---------- 0. 已激活过就别重复（防御双注入） ---------- */
   if (document.documentElement.classList.contains('retro2k')) return;
 
+  /* ---------- 0.1 彩蛋桌面页自身：绝不穿越（10·31 桌面 / 10·24 桌面） ----------
+     这两个页面是彩蛋本体，本身就跑在 iframe 里，若再挂 2000 年 chrome
+     会出现「万圣节桌面上盖一条穿越横幅」的叠层事故。 */
+  if (/\/halloween-desktop\.html$/i.test(location.pathname) ||
+      /\/retro-desktop\.html$/i.test(location.pathname)) return;
+
   /* ---------- 0.5 iframe 内（桌面 IE 窗口）：只挂第一版 chrome，不升级桌面 ---------- */
   if (window.top !== window.self) {
     // 例外：10·31 万圣节桌面里的 IE 窗口要显示站点现状，不要套 2000 年外壳。
@@ -56,6 +62,11 @@
 
   if (override === '0') return; // 明确要求关闭
   if (override !== '1' && !isAnniversary) return; // 平时安静躺好
+
+  /* ---------- 1.5 显式要求预览 10·31 万圣节时让位（?hw=1 优先） ---------- */
+  var hwPreview = false;
+  try { hwPreview = new URLSearchParams(location.search).get('hw') === '1'; } catch (e) {}
+  if (hwPreview) return;
 
   try { activate(isAnniversary, override === '1'); } catch (err) {
     console.warn('[retro-1024] 穿越失败，不影响本站正常使用：', err);

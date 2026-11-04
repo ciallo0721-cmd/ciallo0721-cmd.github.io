@@ -122,3 +122,29 @@
     }
   });
 })();
+
+/* ─────────────────────────────────────────────
+   外链安全提醒：点外链先过 /oops/link/ 中转页
+   （信任域名存 localStorage.oops_trusted_domains，由中转页维护）
+   ───────────────────────────────────────────── */
+(function() {
+  var TRUSTED_KEY = 'oops_trusted_domains';
+  function isTrusted(host) {
+    try {
+      var list = JSON.parse(localStorage.getItem(TRUSTED_KEY) || '[]');
+      return list.indexOf(host) !== -1;
+    } catch (e) { return false; }
+  }
+  document.addEventListener('click', function(e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a || e.defaultPrevented) return;
+    var href = a.getAttribute('href') || '';
+    if (!/^https?:\/\//i.test(href)) return;
+    var dest;
+    try { dest = new URL(href); } catch (err) { return; }
+    if (dest.hostname === location.hostname) return;
+    if (isTrusted(dest.hostname)) return;
+    e.preventDefault();
+    location.href = '/oops/link/index.html?url=' + encodeURIComponent(href);
+  }, true);
+})();
