@@ -948,6 +948,17 @@ window.articlesData = {
             readTime: 11,
             featured: false
         },
+        {
+            id: 89,
+            category: "科技",
+            fileName: "科技/89/",
+            title: "销冠李老板为什么被封，事情可能比你想的复杂",
+            excerpt: "一个反对摇一摇广告的博主被封号了。多数人以为是“解决问题不如解决提出问题的人”，但翻完评论区会发现：事情从维权滑向集体情绪，只用了几天的工夫。",
+            date: "2026-11-05",
+            tags: ["摇一摇广告", "开屏广告", "网络舆论", "销冠李老板"],
+            readTime: 10,
+            featured: false
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

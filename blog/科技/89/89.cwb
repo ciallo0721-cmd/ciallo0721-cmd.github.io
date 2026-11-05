@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #89
+[
+    {
+    index:
+        "title"="销冠李老板为什么被封，事情可能比你想的复杂" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-11-05" //日期
+        "tag"="摇一摇广告","开屏广告","网络舆论","销冠李老板" //标签
+        "excerpt"="一个反对摇一摇广告的博主被封号了。多数人以为是“解决问题不如解决提出问题的人”，但翻完评论区会发现：事情从维权滑向集体情绪，只用了几天的工夫。" //摘要(扩展字段)
+        "readTime"=10 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=False //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/科技/89"
+        "html"="index.html"
+    }
+]
