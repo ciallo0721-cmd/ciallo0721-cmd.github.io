@@ -12,30 +12,32 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a1020;
 #grain{position:fixed;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:overlay;z-index:5;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 #hud{position:fixed;inset:0;pointer-events:none;z-index:10;}
-#crosshair{position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%);z-index:41;pointer-events:none;color:#fff;font-family:inherit;}
-#crosshair::after{content:"";position:absolute;display:none;}
-/* 默认 / 十：汉字「十」 */
-#crosshair::before{content:"十";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:32px;line-height:1;font-weight:bold;
-  text-shadow:0 0 0 1px #000,0 0 3px #000,0 0 2px #000;}
+#crosshair{position:absolute;left:50%;top:50%;width:30px;height:30px;transform:translate(-50%,-50%);z-index:41;pointer-events:none;color:#fff;font-family:inherit;}
+/* 默认 / 十：四段经典十字（中心留空，不挡目标） */
+#crosshair::before{content:"";position:absolute;left:50%;top:0;width:3px;height:100%;margin-left:-1.5px;
+  background:linear-gradient(to bottom,#fff 0 34%,transparent 34% 66%,#fff 66% 100%);
+  filter:drop-shadow(0 0 1px #000) drop-shadow(0 0 2px rgba(0,0,0,.8));}
+#crosshair::after{content:"";position:absolute;left:0;top:50%;width:100%;height:3px;margin-top:-1.5px;
+  background:linear-gradient(to right,#fff 0 34%,transparent 34% 66%,#fff 66% 100%);
+  filter:drop-shadow(0 0 1px #000) drop-shadow(0 0 2px rgba(0,0,0,.8));}
 /* Ⅹ：对角线交叉 */
-#crosshair[data-cross="x"]::before{content:"";left:50%;top:50%;width:3px;height:36px;background:#fff;
+#crosshair[data-cross="x"]::before{content:"";left:50%;top:50%;width:3px;height:36px;margin:0;background:#fff;filter:none;
   transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 1px #000,0 0 3px #000;}
-#crosshair[data-cross="x"]::after{content:"";display:block;left:50%;top:50%;width:3px;height:36px;background:#fff;
+#crosshair[data-cross="x"]::after{content:"";left:50%;top:50%;width:3px;height:36px;margin:0;background:#fff;filter:none;
   transform:translate(-50%,-50%) rotate(-45deg);box-shadow:0 0 0 1px #000,0 0 3px #000;}
 /* ><：两尖角相对 */
-#crosshair[data-cross="angle"]::before{content:"";position:absolute;left:9px;top:50%;width:0;height:0;transform:translateY(-50%);
-  border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:13px solid #fff;filter:drop-shadow(0 0 2px #000);}
-#crosshair[data-cross="angle"]::after{content:"";display:block;position:absolute;right:9px;top:50%;width:0;height:0;transform:translateY(-50%);
-  border-top:9px solid transparent;border-bottom:9px solid transparent;border-right:13px solid #fff;filter:drop-shadow(0 0 2px #000);}
+#crosshair[data-cross="angle"]::before{content:"";position:absolute;left:9px;top:50%;width:0;height:0;margin:0;background:none;filter:drop-shadow(0 0 2px #000);
+  transform:translateY(-50%);border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:13px solid #fff;}
+#crosshair[data-cross="angle"]::after{content:"";position:absolute;right:9px;top:50%;left:auto;width:0;height:0;margin:0;background:none;filter:drop-shadow(0 0 2px #000);
+  transform:translateY(-50%);border-top:9px solid transparent;border-bottom:9px solid transparent;border-right:13px solid #fff;}
 /* []：方框 */
-#crosshair[data-cross="box"]::before{content:"";position:absolute;inset:8px;border:3px solid #fff;border-radius:3px;
-  box-shadow:0 0 0 1px #000,0 0 3px #000;}
-#crosshair[data-cross="box"]::after{content:"";display:none;}
+#crosshair[data-cross="box"]::before{content:"";inset:6px;width:auto;height:auto;margin:0;background:none;filter:none;
+  border:3px solid #fff;border-radius:3px;box-shadow:0 0 0 1px #000,0 0 3px #000;}
+#crosshair[data-cross="box"]::after{content:"";display:none;background:none;filter:none;}
 /* ·：小圆点 */
-#crosshair[data-cross="dot"]::before{content:"";left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);
-  box-shadow:0 0 0 1px #000,0 0 3px #000;}
-#crosshair[data-cross="dot"]::after{content:"";display:none;}
+#crosshair[data-cross="dot"]::before{content:"";left:50%;top:50%;width:8px;height:8px;margin:0;border-radius:50%;background:#fff;filter:none;
+  transform:translate(-50%,-50%);box-shadow:0 0 0 1px #000,0 0 3px #000;}
+#crosshair[data-cross="dot"]::after{content:"";display:none;background:none;filter:none;}
 /* 狙击枪瞄准镜：圆形暗角 + 十字准星（仅装备狙击时由 JS 显示） */
 #scope{position:fixed;inset:0;display:none;pointer-events:none;z-index:40;
   background:radial-gradient(circle at center, transparent 0 27%, rgba(0,0,0,.97) 30%);}

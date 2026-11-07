@@ -215,7 +215,7 @@ bindLayoutDrag();
 window.addEventListener('resize', applyTouchLayout);
 
 /* ================= C. 瞄准格式（准星样式） ================= */
-const CROSS_OPTS = [ ['ten','十'],['x','Ⅹ'],['angle','><'],['box','[]'],['dot','·'] ];
+const CROSS_OPTS = [ ['ten','十字'],['x','Ⅹ'],['angle','><'],['box','[]'],['dot','·'] ];
 const LS_CROSS = 'csCross';
 function crossBtnId(v){ return 'cross' + v.charAt(0).toUpperCase() + v.slice(1); }   // ten→crossTen …
 function applyCross(){
