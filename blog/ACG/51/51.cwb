@@ -18,7 +18,7 @@
         "isPsychology"=False //心理学
         "isMedical"=False //医学
         "isOpposition"=False //有争议的
-        "istest"=False //测试文章(不显示在首页或blog页)
+        "istest"=True //测试文章(不显示在首页或blog页)
         "isCopyProtection"=False //有版权保护
         "isAIGC"=False //完全AI生成且未查资料
         "isiframe"=False //使用iframe

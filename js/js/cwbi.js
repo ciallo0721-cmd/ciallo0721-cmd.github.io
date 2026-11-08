@@ -1,6 +1,7 @@
 // cwbi.js — CialloWebBlogInformation 核心解析器
-// 职责：解析 .cwb 文件（类 JSON 自定义格式）+ 加载 cwb-manifest.json
-// 使用方：blog/index.html（双源合并渲染，CWBI 优先、articlesData 兜底）
+// 职责：解析 .cwb 文件（类 JSON 自定义格式）+ 加载 cwb-index.json（预构建索引，首选）
+//       兜底链路：cwb-index.json → localStorage 缓存 → cwb-manifest.json + 逐个 .cwb
+// 使用方：blog/index.html 与 blog/*/index.html（分类页）
 // 依赖：无
 (function () {
     'use strict';
@@ -137,6 +138,91 @@
             });
     }
 
+    // ========== 预构建索引（首选数据源） ==========
+    // cwb-index.json 由 实用工具/CWBI转换器.py 在构建时生成，内容等价于「把全部 .cwb 解析一遍」，
+    // 但只需 1 个请求。旧做法是拉 manifest 再逐个 fetch 88 个 .cwb，弱网下永远停在 0 篇。
+
+    var INDEX_CACHE_KEY = 'cwbi_index_v1';
+
+    function isVisible(a) {
+        return !(a.flags && a.flags.istest === true);
+    }
+
+    // 索引条目 → 与 toArticle() 输出同构的文章对象
+    function fromIndexEntry(e) {
+        return toArticle({
+            index: {
+                title: e.title,
+                excerpt: e.excerpt,
+                date: e.date,
+                author: e.author,
+                tag: e.tags,
+                readTime: e.readTime,
+                featured: e.featured === true
+            },
+            flags: e.flags || {},
+            html: { path: e.path }
+        }, e.id);
+    }
+
+    // 带超时的 JSON 请求：网络卡住不能无限等，超时就切缓存/兜底
+    function fetchJson(url, timeoutMs) {
+        return new Promise(function (resolve, reject) {
+            var settled = false;
+            var timer = setTimeout(function () {
+                if (settled) return;
+                settled = true;
+                reject(new Error('timeout'));
+            }, timeoutMs || 8000);
+            fetch(url, { cache: 'no-cache' }).then(function (r) {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            }).then(function (j) {
+                if (settled) return;
+                settled = true;
+                clearTimeout(timer);
+                resolve(j);
+            }).catch(function (err) {
+                if (settled) return;
+                settled = true;
+                clearTimeout(timer);
+                reject(err);
+            });
+        });
+    }
+
+    function readIndexCache() {
+        try {
+            var raw = window.localStorage.getItem(INDEX_CACHE_KEY);
+            if (!raw) return null;
+            var j = JSON.parse(raw);
+            return (j && j.articles && j.articles.length) ? j : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function writeIndexCache(j) {
+        try {
+            window.localStorage.setItem(INDEX_CACHE_KEY, JSON.stringify(j));
+        } catch (e) { /* 隐私模式/配额满，忽略 */ }
+    }
+
+    // loadIndex(baseUrl) → Promise<article[]>，单请求；失败回落到本地缓存
+    function loadIndex(baseUrl) {
+        var base = baseUrl || '/';
+        return fetchJson(base + 'cwb-index.json', 8000).then(function (j) {
+            var list = (j && j.articles) || [];
+            if (!list.length) throw new Error('index empty');
+            writeIndexCache(j);
+            return list.map(fromIndexEntry).filter(isVisible);
+        }).catch(function (err) {
+            var cached = readIndexCache();
+            if (cached) return cached.articles.map(fromIndexEntry).filter(isVisible);
+            throw err;
+        });
+    }
+
     // 限流并发拉取：每批 8 个，失败重试一次（本地 http.server 并发太大会拒连）
     function fetchText(url) {
         return fetch(url, { cache: 'no-cache' })
@@ -162,9 +248,8 @@
         return run(0);
     }
 
-    // loadAll(options) → Promise<article[]>
-    // options: { baseUrl, manifest } — manifest 可直接传入跳过 fetch
-    function loadAll(options) {
+    // loadAllLegacy(options) → 旧链路：manifest + 逐个 .cwb（仅在索引不可用时兜底）
+    function loadAllLegacy(options) {
         options = options || {};
         var base = options.baseUrl || '/';
         var ready = options.manifest ? Promise.resolve(options.manifest) : loadManifest(base);
@@ -185,6 +270,18 @@
         });
     }
 
+    // loadAll(options) → Promise<article[]>
+    // options: { baseUrl, manifest }
+    // 优先读 cwb-index.json（1 个请求）；索引挂了才回退到 manifest + 逐个 .cwb。
+    function loadAll(options) {
+        options = options || {};
+        var base = options.baseUrl || '/';
+        if (options.manifest) return loadAllLegacy(options);
+        return loadIndex(base).catch(function () {
+            return loadAllLegacy(options);
+        });
+    }
+
     // 双源合并：cwb 优先（同 id 覆盖），articlesData 兜底，按日期倒序 + id 倒序
     function mergeArticles(cwbList, legacyList) {
         var byId = {};
@@ -200,11 +297,13 @@
 
     // ========== 导出 ==========
     window.CWBI = {
-        VERSION: '0.1.0',
+        VERSION: '0.2.0',
         parseCwb: parseCwb,
         toArticle: toArticle,
         loadManifest: loadManifest,
+        loadIndex: loadIndex,
         loadAll: loadAll,
+        loadAllLegacy: loadAllLegacy,
         mergeArticles: mergeArticles
     };
 })();

@@ -201,6 +201,12 @@ header{
   gap:var(--s-6);
   margin-bottom:var(--s-12);
 }
+/* 首屏占位：数据未到前不要留白，避免误以为「没有文章」 */
+.articles-loading{
+  grid-column:1/-1;
+  margin:0;padding:60px 0;text-align:center;
+  color:var(--text-2);font-size:.94rem;letter-spacing:.02em;
+}
 .article-card{
   display:flex;flex-direction:column;height:100%;
   background:var(--surface);

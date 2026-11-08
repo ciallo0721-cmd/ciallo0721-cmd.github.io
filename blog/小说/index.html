@@ -208,9 +208,9 @@
         </div>
         <div class="articles-header">
             <h2>小说 · 全部文章</h2>
-            <p class="articles-count">共 <span class="highlight" id="articleCount">0</span> 篇文章</p>
+            <p class="articles-count">共 <span class="highlight" id="articleCount">…</span> 篇文章</p>
         </div>
-        <div class="articles-grid" id="articlesGrid"></div>
+        <div class="articles-grid" id="articlesGrid"><p class="articles-loading">正在加载文章列表…</p></div>
         <div class="no-results" id="noResults">
             <i class="fas fa-search"></i>
             <h3>这里还没有文章</h3>
@@ -320,18 +320,20 @@
                     btn.textContent = '收起标签 ▴';
                 }
             };
-            function displayArticles(articles) {
+            function displayArticles(articles, fast) {
+                // 逐条渐进渲染：每帧补几条，视觉上一条条出现；重新渲染会作废旧任务
+                var token = (articlesGrid.__renderToken || 0) + 1;
+                articlesGrid.__renderToken = token;
                 articlesGrid.innerHTML = '';
                 if (articles.length === 0) {
                     noResults.style.display = 'block';
                     return;
                 }
                 noResults.style.display = 'none';
-                articles.forEach(function(article, index) {
+                function makeCard(article) {
                     var articleCard = document.createElement('a');
                     articleCard.href = '../' + (article.fileName || '').replace(/.html$/, '');
                     articleCard.className = 'article-card card-reveal';
-                    articleCard.style.animationDelay = (index * 0.1) + 's';
                     var tagsHtml = '';
                     (article.tags || []).forEach(function(tag) {
                         tagsHtml += '<span class="article-tag">' + escapeHtml(tag) + '</span>';
@@ -350,8 +352,21 @@
                                 '<span class="read-time"><i class="far fa-clock"></i> 约' + article.readTime + '分钟</span>' +
                             '</div>' +
                         '</div>';
-                    articlesGrid.appendChild(articleCard);
-                });
+                    return articleCard;
+                }
+                var CHUNK = fast ? 6 : 1, GAP = fast ? 16 : 22, from = 0;
+                function push() {
+                    if (token !== articlesGrid.__renderToken) return;
+                    var end = Math.min(from + CHUNK, articles.length);
+                    var frag = document.createDocumentFragment();
+                    for (var i = from; i < end; i++) {
+                        frag.appendChild(makeCard(articles[i]));
+                    }
+                    articlesGrid.appendChild(frag);
+                    from = end;
+                    if (from < articles.length) setTimeout(push, GAP);
+                }
+                push();
             }
             function filterArticles() {
                 var filtered = allArticles;
@@ -368,7 +383,7 @@
                                article.tags.some(function(tag) { return tag.toLowerCase().indexOf(term) !== -1; });
                     });
                 }
-                displayArticles(filtered);
+                displayArticles(filtered, true);
                 updateArticleCount(filtered.length);
             }
             function updateArticleCount(count) { articleCount.textContent = count; }

@@ -763,7 +763,7 @@ footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
 <p>为什么不用 JSON？因为注释。元数据文件里放行内注释，每个字段后面直接写它是干嘛的，人肉编辑的时候不用来回查文档——这是 .cwb 相对 JSON 最实际的取舍。</p>
 <h2 id="cwbipy">四、生成管线：CWBI转换器.py</h2>
 <p>.cwb 不手写。实用工具/CWBI转换器.py 负责批量生成，在仓库根目录跑：</p>
-<pre><code>python &quot;实用工具/CWBI转换器.py&quot;            # 生成全部 .cwb + cwb-manifest.json
+<pre><code>python &quot;实用工具/CWBI转换器.py&quot;            # 生成全部 .cwb + cwb-manifest.json + cwb-index.json
 python &quot;实用工具/CWBI转换器.py&quot; --inject   # 额外给文章页注入 cwbiblog.js 标签
 </code></pre>
 <p>它做三件事：</p>
@@ -778,7 +778,7 @@ python &quot;实用工具/CWBI转换器.py&quot; --inject   # 额外给文章页
 <p>js/js/cwbi.js 是 CWBI 的核心解析器，无依赖，干四件事：</p>
 <p><strong>解析 .cwb。</strong> 先做一次字符级扫描去掉 // 注释——注意要跳过引号内的 //，免得把正文里的 URL 误杀。然后逐行匹配两种结构：块头（index: / is?: / html:）和键值行（"key"=value）。值解析也做了类型推断：true/false 转布尔、纯数字转数值、单个引号串转字符串、逗号分隔的多个引号串转数组。</p>
 <p><strong>转兼容对象。</strong> toArticle() 把解析结果还原成和旧版 articlesData 完全同构的对象（id / category / fileName / title / excerpt……），外加 CWBI 专属的 flags 字段。这样下游渲染代码完全不用改。</p>
-<p><strong>加载清单。</strong> fetch cwb-manifest.json 拿到全站清单，然后按每批 8 个限流并发拉取所有 .cwb（本地 http.server 并发太大会拒连），失败自动重试一次。</p>
+<p><strong>加载数据。</strong>优先 fetch 根目录的 cwb-index.json —— 构建时就把全部 .cwb 合并成单个索引（88 篇约 54KB），一个请求拿全量，弱网不会停在「0 篇文章」。索引拿不到时回落 localStorage 缓存，再不行才退回旧链路：fetch cwb-manifest.json 拿清单，按每批 8 个限流并发拉取所有 .cwb 并重试一次。</p>
 <p><strong>双源合并。</strong> mergeArticles() 把 CWBI 列表和旧版 articlesData 列表合并：同 id 的 .cwb 覆盖 JS 数据，CWBI 拉不到的靠旧数据兜底，最后按日期倒序 + id 倒序排好。</p>
 <h2 id="_1">六、接入方式：双源合并，渐进升级</h2>
 <p>blog/index.html 的接入策略是「新旧并存，CWBI 优先」：</p>
