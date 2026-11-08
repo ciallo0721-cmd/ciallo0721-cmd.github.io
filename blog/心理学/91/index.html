@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://ciallo0721-cmd.top/blog/心理学/91/">
+    <title>一个账号的两次改名 | ciallo0721-cmd</title>
+    <meta name="description" content="同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。">
+    <link rel="stylesheet" href="/media-viewer.css">
+    <link rel="icon" href="/fanv.ico" type="image/x-icon">
+    <script src="/media-viewer.js"></script>
+    <script src="/articles-data.js"></script>
+    <link rel="stylesheet" href="../../mus/audio-player.css">
+    <script src="../../mus/audio-player.js"></script>
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TR4FT7JPDZ');
+    </script>
+<style>
+
+:root {
+    --bili-pink: #FB7299;
+    --bili-blue: #00A1D6;
+    --text-primary: #1D1D1F;
+    --text-secondary: #515154;
+    --bg-light: #F5F5F7;
+    --transition: all 0.3s ease;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --success: #34C759;
+    --warning: #FF9500;
+    --danger: #FF3B30;
+    --info: #007AFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'MaokenAssortedSans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ── 导航栏 ── */
+nav {
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 15px; }
+.logo {
+    font-size: 1.6rem; font-weight: 700; color: var(--bili-pink);
+    text-decoration: none; display: flex; align-items: center; gap: 10px; transition: var(--transition);
+}
+.logo:hover { transform: translateY(-2px); color: var(--bili-blue); }
+.back-btn {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; border: none; padding: 10px 25px; border-radius: 25px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 15px rgba(251,114,153,0.3);
+}
+.back-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(251,114,153,0.4); }
+
+/* ── 目录 ── */
+.toc-box {
+    background: rgba(0,161,214,0.06);
+    border: 1px solid rgba(0,161,214,0.25);
+    border-radius: 14px; padding: 22px 28px; margin: 30px 0;
+}
+.toc-box h4 { color: var(--bili-blue); margin-bottom: 12px; font-size: 1rem; }
+.toc-box ol { padding-left: 20px; }
+.toc-box ol li { margin-bottom: 6px; }
+.toc-box ol li a { color: var(--bili-blue); text-decoration: none; font-size: 0.95rem; transition: var(--transition); }
+.toc-box ol li a:hover { color: var(--bili-pink); text-decoration: underline; }
+
+/* ── 文章框架 ── */
+.article-detail-container { padding: 60px 0; }
+.article-detail {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px; box-shadow: var(--shadow);
+    padding: 50px; border: 1px solid rgba(255,255,255,0.3);
+    position: relative; overflow: hidden; animation: fadeIn 0.5s ease;
+}
+.article-detail::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+}
+.article-header {
+    text-align: center; margin-bottom: 40px; padding-bottom: 30px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.article-number {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; padding: 8px 20px; border-radius: 20px;
+    font-size: 0.9rem; font-weight: 600; margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(251,114,153,0.3);
+}
+.article-title { font-size: 2.4rem; color: var(--text-primary); margin-bottom: 20px; line-height: 1.3; font-weight: 700; }
+.article-intro {
+    font-size: 1.2rem; color: var(--bili-blue); font-weight: 500;
+    margin-bottom: 25px; line-height: 1.5;
+    max-width: 800px; margin-left: auto; margin-right: auto;
+}
+.article-meta { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+.article-date { color: var(--text-secondary); font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+.article-date i { color: var(--bili-pink); }
+.article-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; }
+.article-tag {
+    background: rgba(251,114,153,0.1); color: var(--bili-pink);
+    padding: 6px 15px; border-radius: 15px; font-size: 0.85rem; font-weight: 500;
+    border: 1px solid rgba(251,114,153,0.2); transition: var(--transition); cursor: default;
+}
+.article-tag:hover { background: var(--bili-pink); color: white; transform: translateY(-2px); }
+
+/* ── 正文内容 ── */
+.article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); }
+.article-content h2 {
+    color: var(--text-primary); margin: 40px 0 15px; font-size: 1.8rem; font-weight: 600;
+    position: relative; padding-bottom: 10px;
+}
+.article-content h2::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue)); border-radius: 3px;
+}
+.article-content h3 { color: var(--text-primary); margin: 25px 0 12px; font-size: 1.35rem; font-weight: 600; }
+.article-content p { margin-bottom: 20px; text-align: justify; }
+.article-content ul, .article-content ol { margin-left: 25px; margin-bottom: 20px; }
+.article-content li { margin-bottom: 8px; }
+.article-content hr { border: none; border-top: 2px solid rgba(251,114,153,0.25); margin: 35px 0; border-radius: 2px; }
+
+/* 引用块 */
+.article-content blockquote {
+    border-left: 4px solid var(--bili-pink);
+    padding: 18px 22px; margin: 25px 0;
+    background: rgba(251,114,153,0.05);
+    border-radius: 0 12px 12px 0;
+    color: var(--text-primary);
+}
+.article-content blockquote p { margin: 0; font-style: italic; }
+.article-content blockquote cite { display: block; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary); }
+
+/* 代码块 */
+.article-content pre {
+    background: linear-gradient(135deg, #2D2D30, #1E1E1E);
+    border-radius: 12px; padding: 25px; margin: 25px 0;
+    overflow-x: auto; border: 1px solid rgba(255,255,255,0.1);
+}
+.article-content pre code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    color: #E8E8E8; font-size: 0.95rem; white-space: pre;
+}
+/* 行内代码 - 鼠标悬停揭示 */
+.article-content :not(pre) > code {
+    font-family: 'Monaco', 'Menlo', monospace;
+    color: transparent; font-size: 0.9em;
+    position: relative; display: inline-block; cursor: pointer;
+    border-radius: 4px; padding: 1px 6px; transition: color 0.2s;
+}
+.article-content :not(pre) > code::before {
+    content: attr(data-plain);
+    position: absolute; inset: 0;
+    background: #111; border-radius: 4px;
+    pointer-events: none; transition: opacity 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75em; color: #888; letter-spacing: 0.05em;
+}
+.article-content :not(pre) > code:hover { color: #E8E8E8; }
+.article-content :not(pre) > code:hover::before { opacity: 0; }
+
+/* highlight span */
+.article-content .hl { background: rgba(251,114,153,0.1); padding: 2px 7px; border-radius: 4px; color: var(--bili-pink); font-weight: 500; }
+.article-content .hl-blue { background: rgba(0,161,214,0.1); padding: 2px 7px; border-radius: 4px; color: var(--bili-blue); font-weight: 500; }
+
+/* ── 表格 ── */
+.article-content .table-wrap { overflow-x: auto; margin: 25px 0; border-radius: 14px; box-shadow: var(--shadow); }
+.article-content table { width: 100%; border-collapse: collapse; background: white; }
+.article-content thead th {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; padding: 14px 18px; text-align: left; font-size: 0.95rem;
+}
+.article-content tbody tr { transition: background 0.2s; }
+.article-content tbody tr:nth-child(even) { background: rgba(0,161,214,0.04); }
+.article-content tbody tr:hover { background: rgba(251,114,153,0.06); }
+.article-content tbody td { padding: 13px 18px; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 0.95rem; vertical-align: middle; }
+.article-content tbody tr:last-child td { border-bottom: none; }
+
+/* 状态点 */
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.dot-green { background: var(--success); }
+.dot-yellow { background: var(--warning); }
+.dot-red { background: var(--danger); }
+.dot-blue { background: var(--info); }
+
+/* ── 徽章 ── */
+.badge {
+    display: inline-block; padding: 3px 10px; border-radius: 10px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em; vertical-align: middle;
+}
+.badge-pink { background: rgba(251,114,153,0.15); color: var(--bili-pink); border: 1px solid rgba(251,114,153,0.35); }
+.badge-blue { background: rgba(0,161,214,0.12); color: var(--bili-blue); border: 1px solid rgba(0,161,214,0.3); }
+.badge-green { background: rgba(52,199,89,0.12); color: #2da14b; border: 1px solid rgba(52,199,89,0.3); }
+.badge-orange { background: rgba(255,149,0,0.12); color: #c97500; border: 1px solid rgba(255,149,0,0.3); }
+.badge-gray { background: rgba(0,0,0,0.07); color: #666; border: 1px solid rgba(0,0,0,0.12); }
+
+/* ── 按钮组 ── */
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; align-items: center; }
+.btn {
+    padding: 10px 22px; border-radius: 22px; border: none; font-size: 0.95rem;
+    font-weight: 600; cursor: pointer; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+}
+.btn-primary { background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue)); color: white; box-shadow: 0 4px 15px rgba(251,114,153,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(251,114,153,0.4); }
+.btn-outline { background: transparent; color: var(--bili-pink); border: 2px solid var(--bili-pink); }
+.btn-outline:hover { background: var(--bili-pink); color: white; transform: translateY(-2px); }
+.btn-ghost { background: rgba(0,0,0,0.06); color: var(--text-primary); }
+.btn-ghost:hover { background: rgba(0,0,0,0.12); transform: translateY(-1px); }
+.btn-success { background: linear-gradient(135deg, #34C759, #2eb350); color: white; box-shadow: 0 4px 12px rgba(52,199,89,0.3); }
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(52,199,89,0.4); }
+.btn-danger { background: linear-gradient(135deg, #FF3B30, #c9190b); color: white; box-shadow: 0 4px 12px rgba(255,59,48,0.3); }
+.btn-danger:hover { transform: translateY(-2px); }
+.btn-sm { padding: 6px 14px; font-size: 0.85rem; border-radius: 14px; }
+.btn-lg { padding: 14px 32px; font-size: 1.1rem; border-radius: 28px; }
+.btn-disabled { opacity: 0.45; pointer-events: none; }
+
+/* ── 超链接样式 ── */
+.article-content a.link-default { color: var(--bili-blue); text-decoration: none; border-bottom: 1px dashed var(--bili-blue); transition: var(--transition); }
+.article-content a.link-default:hover { color: var(--bili-pink); border-bottom-color: var(--bili-pink); }
+.article-content a.link-card {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,161,214,0.07); border: 1px solid rgba(0,161,214,0.2);
+    border-radius: 10px; padding: 8px 16px; color: var(--bili-blue);
+    text-decoration: none; transition: var(--transition); font-size: 0.95rem;
+}
+.article-content a.link-card:hover { background: rgba(0,161,214,0.14); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,161,214,0.15); }
+.article-content a.link-ext::after { content: ' ↗'; font-size: 0.8em; opacity: 0.6; }
+
+/* ── 警告/提示框 ── */
+.callout {
+    border-radius: 12px; padding: 18px 22px; margin: 22px 0;
+    display: flex; gap: 14px; align-items: flex-start;
+}
+.callout .callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout .callout-body { flex: 1; }
+.callout .callout-title { font-weight: 700; margin-bottom: 5px; font-size: 0.95rem; }
+.callout .callout-text { font-size: 0.93rem; line-height: 1.6; margin: 0; }
+.callout-info { background: rgba(0,122,255,0.08); border: 1px solid rgba(0,122,255,0.2); }
+.callout-info .callout-title, .callout-info .callout-icon { color: var(--info); }
+.callout-warning { background: rgba(255,149,0,0.08); border: 1px solid rgba(255,149,0,0.25); }
+.callout-warning .callout-title, .callout-warning .callout-icon { color: var(--warning); }
+.callout-danger { background: rgba(255,59,48,0.07); border: 1px solid rgba(255,59,48,0.2); }
+.callout-danger .callout-title, .callout-danger .callout-icon { color: var(--danger); }
+.callout-success { background: rgba(52,199,89,0.07); border: 1px solid rgba(52,199,89,0.2); }
+.callout-success .callout-title, .callout-success .callout-icon { color: var(--success); }
+.callout-pink { background: rgba(251,114,153,0.07); border: 1px solid rgba(251,114,153,0.25); }
+.callout-pink .callout-title, .callout-pink .callout-icon { color: var(--bili-pink); }
+
+/* ── 进度条 ── */
+.progress-list { list-style: none; margin: 20px 0; padding: 0; }
+.progress-list li { margin-bottom: 16px; }
+.progress-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.95rem; }
+.progress-track { background: rgba(0,0,0,0.08); border-radius: 8px; height: 10px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 8px; transition: width 1.2s cubic-bezier(.23,1,.32,1); }
+.pf-pink { background: linear-gradient(90deg, var(--bili-pink), #ff9fc3); }
+.pf-blue { background: linear-gradient(90deg, var(--bili-blue), #66d9ff); }
+.pf-green { background: linear-gradient(90deg, #34C759, #7ee89a); }
+.pf-orange { background: linear-gradient(90deg, #FF9500, #ffcc66); }
+.pf-gray { background: linear-gradient(90deg, #8e8e93, #c7c7cc); }
+
+/* ── 折叠区域 ── */
+details.spoiler {
+    border: 1px solid rgba(251,114,153,0.25);
+    border-radius: 12px; margin: 20px 0; overflow: hidden;
+}
+details.spoiler summary {
+    background: rgba(251,114,153,0.07); padding: 14px 20px;
+    cursor: pointer; font-weight: 600; color: var(--bili-pink);
+    list-style: none; display: flex; align-items: center; gap: 10px;
+    user-select: none; transition: background 0.2s;
+}
+details.spoiler summary::before { content: '▶'; font-size: 0.75rem; transition: transform 0.2s; }
+details.spoiler[open] summary::before { transform: rotate(90deg); }
+details.spoiler summary:hover { background: rgba(251,114,153,0.13); }
+details.spoiler .spoiler-body { padding: 18px 22px; font-size: 0.97rem; line-height: 1.7; color: var(--text-secondary); }
+
+/* ── 卡片网格 ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin: 22px 0; }
+.card {
+    background: white; border-radius: 14px; padding: 22px 18px;
+    box-shadow: var(--shadow); transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.06);
+    display: flex; flex-direction: column; gap: 10px;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.card-icon { font-size: 2rem; }
+.card-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.card-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ── 图表区 ── */
+.chart-wrap {
+    background: white; border-radius: 14px; padding: 24px;
+    box-shadow: var(--shadow); margin: 22px 0;
+    border: 1px solid rgba(0,0,0,0.06);
+}
+.chart-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+canvas { display: block; max-width: 100%; }
+
+/* 手绘风 SVG 图表包裹 */
+.svg-chart-wrap {
+    background: white; border-radius: 14px; padding: 20px;
+    box-shadow: var(--shadow); margin: 22px 0; overflow-x: auto;
+}
+
+/* ── 键盘按键 ── */
+kbd {
+    display: inline-block; background: #f5f5f5;
+    border: 1px solid #ccc; border-radius: 5px;
+    padding: 2px 8px; font-family: monospace; font-size: 0.85rem;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2); color: #333;
+}
+
+/* ── 图片区 ── */
+.article-image-container { text-align: center; margin: 30px 0; }
+.article-content img, .article-img {
+    max-width: 100%; height: auto; border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1); display: block; margin: 0 auto;
+}
+/* 竖版长截图（手机截图、聊天记录）：限高，避免占满整屏；点击可放大 */
+.article-content img.shot-tall { max-height: 680px; width: auto; cursor: zoom-in; }
+/* 宽幅图（热力图、表格截图）：铺满内容宽度 */
+.article-content img.shot-wide { width: 100%; }
+.image-caption {
+    text-align: center; font-size: 0.9rem; color: var(--text-secondary);
+    margin-top: 12px; font-style: italic;
+}
+
+/* ── 音视频 ── */
+.article-audio-container { text-align: center; margin: 30px 0; }
+.article-audio-container .audio-player-container { max-width: 500px; margin: 0 auto; }
+
+/* ── PDF 阅读器 ── */
+.pdf-reader-wrap {
+    background: white; border-radius: 16px; box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.06); margin: 22px 0; overflow: hidden;
+}
+.pdf-reader-toolbar {
+    background: linear-gradient(135deg, rgba(251,114,153,0.08), rgba(0,161,214,0.08));
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 12px 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+}
+.pdf-reader-toolbar .pdf-upload-label {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; padding: 8px 18px; border-radius: 20px; cursor: pointer;
+    font-size: 0.9rem; font-weight: 600; transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(251,114,153,0.25); white-space: nowrap;
+}
+.pdf-reader-toolbar .pdf-upload-label:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(251,114,153,0.35); }
+.pdf-reader-toolbar input[type="file"] { display: none; }
+.pdf-url-row { display: flex; flex: 1; gap: 8px; min-width: 0; }
+.pdf-url-input {
+    flex: 1; border: 1px solid rgba(0,0,0,0.15); border-radius: 20px;
+    padding: 8px 16px; font-size: 0.88rem; outline: none; transition: border-color 0.2s;
+    min-width: 0; font-family: inherit;
+}
+.pdf-url-input:focus { border-color: var(--bili-blue); }
+.pdf-url-btn {
+    background: rgba(0,161,214,0.1); border: 1px solid rgba(0,161,214,0.3);
+    color: var(--bili-blue); border-radius: 20px; padding: 8px 16px;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: var(--transition); white-space: nowrap;
+}
+.pdf-url-btn:hover { background: var(--bili-blue); color: white; }
+.pdf-page-ctrl {
+    display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-left: auto;
+}
+.pdf-page-btn {
+    width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15);
+    background: white; cursor: pointer; font-size: 1rem; display: flex; align-items: center;
+    justify-content: center; transition: var(--transition); color: var(--text-primary);
+}
+.pdf-page-btn:hover { background: var(--bili-pink); color: white; border-color: var(--bili-pink); }
+.pdf-page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.pdf-zoom-btn {
+    background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 14px; padding: 5px 10px; cursor: pointer; font-size: 0.85rem;
+    transition: var(--transition); color: var(--text-primary);
+}
+.pdf-zoom-btn:hover { background: rgba(251,114,153,0.15); }
+.pdf-canvas-area {
+    background: #f0f0f0; min-height: 400px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 20px; position: relative; overflow: auto;
+}
+.pdf-canvas-area canvas { box-shadow: 0 4px 20px rgba(0,0,0,0.15); border-radius: 4px; display: block; }
+.pdf-placeholder {
+    text-align: center; color: #999; font-size: 1rem; user-select: none;
+}
+.pdf-placeholder i { font-size: 3rem; margin-bottom: 14px; display: block; opacity: 0.4; }
+.pdf-status-bar {
+    background: rgba(0,0,0,0.03); border-top: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 18px; font-size: 0.82rem; color: var(--text-secondary);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.pdf-err { color: #c9190b; font-size: 0.88rem; }
+
+/* ── 分割线 ── */
+.divider-text {
+    display: flex; align-items: center; gap: 14px;
+    margin: 30px 0; color: var(--text-secondary); font-size: 0.9rem;
+}
+.divider-text::before, .divider-text::after {
+    content: ''; flex: 1; border-top: 1px solid rgba(0,0,0,0.12);
+}
+
+/* ── 分享 & 图片放大弹窗（继承） ── */
+.share-btn {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; border: none; padding: 12px 25px; border-radius: 25px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 10px; margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(251,114,153,0.3);
+}
+.share-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(251,114,153,0.4); }
+.share-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); display: none; justify-content: center;
+    align-items: center; z-index: 10000;
+}
+.share-modal.active { display: flex; }
+.share-modal-content {
+    background: white; border-radius: 20px; padding: 40px; max-width: 500px; width: 90%;
+    position: relative; animation: slideUp 0.3s ease; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+.share-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.share-modal-title { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); }
+.share-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); transition: var(--transition); }
+.share-close-btn:hover { color: var(--bili-pink); }
+.share-text {
+    background: rgba(251,114,153,0.1); border: 1px solid rgba(251,114,153,0.3);
+    border-radius: 12px; padding: 15px; margin-bottom: 25px;
+    font-size: 1rem; line-height: 1.6; color: var(--text-primary); word-break: break-all;
+}
+.share-actions { display: flex; gap: 15px; flex-wrap: wrap; }
+.share-copy-btn {
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+    color: white; border: none; padding: 12px 25px; border-radius: 12px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.share-copy-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(251,114,153,0.3); }
+.share-copy-btn.copied { background: linear-gradient(135deg, #00cc66, #00b359); }
+.share-close-modal-btn {
+    background: rgba(0,0,0,0.1); color: var(--text-primary); border: none;
+    padding: 12px 25px; border-radius: 12px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: var(--transition); flex: 1;
+}
+.share-close-modal-btn:hover { background: rgba(0,0,0,0.15); }
+.image-zoom-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: none; justify-content: center;
+    align-items: center; z-index: 10001; cursor: zoom-out;
+}
+.image-zoom-modal.active { display: flex; }
+.image-zoom-modal img { max-width: 95%; max-height: 95%; border-radius: 8px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+.image-zoom-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; z-index: 10002; }
+.image-zoom-close:hover { color: var(--bili-pink); }
+
+/* ── 页脚 ── */
+footer {
+    background: linear-gradient(135deg, var(--text-primary), #2D2D2F);
+    color: white; text-align: center; padding: 50px 0 30px;
+    margin-top: 80px; position: relative; overflow: hidden;
+}
+footer::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue));
+}
+.footer-content { position: relative; z-index: 2; }
+.footer-logo { font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; color: var(--bili-pink); }
+footer p { margin-bottom: 15px; opacity: 0.9; font-size: 1.05rem; }
+
+/* ── 动画 ── */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── 滚动条 ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--bili-pink), var(--bili-blue)); border-radius: 4px; }
+
+
+
+
+
+
+/* ── 响应式 ── */
+@media (max-width: 768px) {
+    .article-detail { padding: 30px; }
+    .article-title { font-size: 1.8rem; }
+    .article-intro { font-size: 1.1rem; }
+    .article-content { font-size: 1rem; }
+    .article-content h2 { font-size: 1.5rem; }
+    .btn-row { gap: 8px; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
+    
+}
+@media (max-width: 480px) {
+    .article-detail { padding: 20px; }
+    .article-title { font-size: 1.5rem; }
+    .article-meta { flex-direction: column; gap: 8px; }
+    .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+    <!-- IP 地理检测（美国用户拒绝访问） -->
+    <script src="/geo-check.js"></script>
+    <!-- HTTP 检测与提示 -->
+    <script>
+        (function() {
+            function checkHTTP() {
+                if (window.location.protocol === 'http:') {
+                    var urlSpan = document.getElementById('currentHttpUrl');
+                    if (urlSpan) urlSpan.textContent = window.location.href;
+                    var overlay = document.getElementById('httpWarningOverlay');
+                    if (overlay) overlay.style.display = 'flex';
+                }
+            }
+            function switchToHTTPS() {
+                var url = window.location.href;
+                url = url.replace(/^http:/i, 'https:');
+                window.location.href = url;
+            }
+            function continueHTTP() {
+                var overlay = document.getElementById('httpWarningOverlay');
+                if (overlay) overlay.style.display = 'none';
+            }
+            window.switchToHTTPS = switchToHTTPS;
+            window.continueHTTP = continueHTTP;
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', checkHTTP);
+            } else {
+                checkHTTP();
+            }
+        })();
+    </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4FT7JPDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TR4FT7JPDZ');
+</script>
+<!-- GA4 统一埋点模块 -->
+<script src="../../assets/js/gtag-config.js"></script>
+
+  <script src="/js/js/svg-icons.js" defer></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="7c64c1b7-5571-40ec-9a62-576686340c0b"></script>
+    <link rel="stylesheet" href="../../../css/css/blog-share.css">
+    <!-- 全站面包屑导航（自动渲染，勿删） -->
+    <link rel="stylesheet" href="../../css/css/breadcrumb.css">
+    <script defer src="../../js/js/breadcrumb.js"></script>
+    <!-- Open Graph / 社交分享预览 -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="一个账号的两次改名">
+    <meta property="og:description" content="同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。">
+    <meta property="og:url" content="https://ciallo0721-cmd.top/blog/心理学/91/">
+    <meta property="og:site_name" content="ciallo0721-cmd">
+    <meta property="og:image" content="https://ciallo0721-cmd.top/og-image.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="一个账号的两次改名">
+    <meta name="twitter:description" content="同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。">
+
+    <!-- 结构化数据: BlogPosting -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "一个账号的两次改名",
+      "description": "同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。",
+      "author": {
+        "@type": "Person",
+        "name": "ciallo0721-cmd"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "ciallo0721-cmd"
+      },
+      "mainEntityOfPage": "https://ciallo0721-cmd.top/blog/心理学/91/",
+      "image": "https://ciallo0721-cmd.top/og-image.png",
+      "inLanguage": "zh-CN",
+      "datePublished": "2026-11-08",
+      "dateModified": "2026-11-08"
+    }
+    </script>
+</head>
+<body>
+<!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-gamepad"></i> 开发者ciallo0721-cmd的空间
+            </a>
+            <a href="../../index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> 返回首页
+            </a>
+        </div>
+    </nav>
+
+    <!-- 文章内容 -->
+    <main class="container article-detail-container">
+        <article class="article-detail">
+
+            <!-- ── 文章头 ── -->
+            <header class="article-header">
+                <div class="article-number">心理学</div>
+                <h1 class="article-title">一个账号的两次改名</h1>
+                <p class="article-intro">同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。</p>
+                <div class="article-meta">
+                    <div class="article-date"><i class="far fa-calendar"></i> 发布日期：<span>2026-11-08</span></div>
+                    <div class="article-date"><i class="far fa-clock"></i> 阅读时间：<span>约21分钟</span></div>
+                </div>
+                <div class="article-tags">
+                    <span class="article-tag">认知偏误</span>
+                    <span class="article-tag">二分法思维</span>
+                    <span class="article-tag">政治传播</span>
+                    <span class="article-tag">网络观察</span>
+                    <span class="article-tag">心理学</span>
+                </div>
+            </header>
+
+            <!-- ── 目录 ── -->
+            <nav class="toc-box" aria-label="文章目录">
+                <h4><i class="fas fa-list-ul"></i> &nbsp;目录</h4>
+                <ol>
+<li><a href="#_1">引子：一个人，两个名字</a></li>
+<li><a href="#_2">一、这半年，她发了些什么</a></li>
+<li><a href="#_3">二、她骂过的东西，她现在自己在做</a></li>
+<li><a href="#_4">三、二极管没换，只换了插头</a></li>
+<li><a href="#_5">四、表演过头的爱国，消耗的是「爱国」这个词</a></li>
+<li><a href="#_6">五、为什么「扣帽子」对她无效</a></li>
+<li><a href="#_7">六、这不是政治问题，是认知问题</a></li>
+<li><a href="#_8">结语：快恢复二极管</a></li>
+</ol>
+            </nav>
+
+            <div class="article-content">
+<p><span class="hl">
+免责声明：本文分析对象为公开账号 @誓死报效祖国-李雪（曾用名 @游乐园在前面左边）公开发布的视频与公开评论，所有引用均来自公开页面。本文不评价任何性别群体、不评价任何国家的整体优劣，仅分析特定账号的表达方法与传播逻辑。本文属认知心理学与传播学层面的文本分析，不涉及对任何政治主张的评判。不代表本人立场，不鼓励任何形式的网络暴力、人肉或举报。
+</span></p>
+<h2 id="_1">引子：一个人，两个名字</h2>
+<p>今年十一月，B 站有一个账号改了名。</p>
+<p>从「游乐园在前面左边」，改成「誓死报效祖国-李雪」。</p>
+<p>改名的理由，她自己在评论区解释过：中华血脉醒了。</p>
+<p>我上一次写她，就是那个「游乐园在前面左边」。那时候她的观点很简洁：男生写的书全是垃圾，女生写的书全是神作。她把全世界的作者按身份证分成两堆，一堆扔掉，一堆供起来。（旧文在此：<a href="../../心理学/80/index.html">《锐评"BV1yRFQzqEyo"和"游乐园在前面左边"这个人》</a>）</p>
+<p>那篇文章的结尾我写过一句话，大意是：读书，从来不看户口本。</p>
+<p>三个月后，她把户口本换了。敌人也换了。但从头到尾，她看世界的方法一个字都没改。</p>
+<p>她还是把巨大的、复杂的、充满灰度的世界，压进两个格子里。上一次的格子是「男 / 女」，这一次的格子是「爱国 / 反贼」。</p>
+<p>换了敌人，没换脑子。</p>
+<p>先把话说在前面：这不是一篇政治评论。</p>
+<p>政治太大了。大到一旦开始争论「谁更爱国」，所有人都会输，包括写的人。</p>
+<p>我关心的东西小得多，也具体得多——一个人脑袋里的结构，在换了一个话题之后，会不会跟着换。</p>
+<p>答案是不会。这就是我要记录的全部。</p>
+<h2 id="_2">一、这半年，她发了些什么</h2>
+<p>不必我说，看标题就够了。</p>
+<p>「双面人上野千鹤子（更讨厌日本人了」</p>
+<p>「一部分女权真的让我很失望，这不是女权，是分裂分子」</p>
+<p>「遍地美军基地，遍地细菌战实验室，哪里好？」</p>
+<p>「中国的空气都是甜的～」</p>
+<p>「中国遥遥领先」</p>
+<p>「中国魂」</p>
+<p>「报效祖国」</p>
+<p>「中国精神」</p>
+<p>「女性主义不能脱离民族精神」</p>
+<p>十条里九条是同一个主题，同一个情绪，同一个方向。从十月底到十一月初，几乎日更。</p>
+<p>其中两条我放在这里，因为标题本身已经说明了一切：</p>
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=117484535420631&bvid=BV1s3np6dEtm&cid=42958655371&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="800" height="800"></iframe>
+
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=117420882728483&bvid=BV132pj6xETh&cid=42646965061&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="800" height="800"></iframe>
+
+<p>她不写别的，也不许别人写别的。</p>
+<p>有人说过一句很普通的话：中国的军事力量大概和美国在一个量级。这句话已经足够克制，足够正面，甚至带着善意的判断。她的反应是专门做一期视频去骂那个人是傻子。</p>
+<p>这就是第一个信号。一个人如果对自己的立场有底气，就不需要为一个「并列关系」动怒。她动怒，说明她要的不是「我们很强」，而是「我们唯一」。</p>
+<p>我本来还想再往下列，但我停住了。因为我不想把自己的账号权重交给这个话题，也不想让首页从此变成一个我不认识的地方。她的投稿页在 <a href="https://space.bilibili.com/488890474/upload/video">这里</a>，想看的人自己去看。</p>
+<p>这些标题里有一个共同的动作，值得单独拎出来说。</p>
+<p>她反复用「没有美军基地」这件事作为起点。这个事实是真的：中国境内确实没有外国驻军基地。但她的用法不是「这一项我们做得好」，而是「所以这里一切都完美」。</p>
+<p>这是一个很典型的偷换。一个具体的、可以核对的事实，被当成了全称判断的凭证。就像一个人考了一次满分，从此认定自己所有的题都不会错。</p>
+<p>还有一条要单独拎出来，就是《中国魂》。</p>
+<p>那一期里，她讲了一件事：有些人没有读过「领导人写的书」，她为此感到悲哀。</p>
+<p>我先把话说明白，免得被曲解：那些书本身没有任何问题。书就是书，它值不值得读，跟谁写的没有关系，也跟谁在读没有关系。我要拆的从来不是书，是她的那个反应。</p>
+<p>「你没读过这本书」和「你不好」之间，没有必然联系。</p>
+<p>读书是私事。一个人的书架，是由他的兴趣、专业、经历和时间共同决定的。一个痴迷科幻的人没读过某本政治著作，一个钻研代码的人没读过某本文学理论，这不构成任何道德缺陷，更不构成任何立场问题。</p>
+<p>可她把这个动作做成了审判：你不读，所以你可悲；你可悲，所以你应该读；你不读，所以我就有心寒的理由。</p>
+<p><span class="hl">
+这里有一件很讽刺的事：把一本书变成忠诚度测试，是对那本书最大的不尊重。一本书的力量在于它的内容能说服人，不在于读过它的人数能证明人。当「读过」变成一种资格审查，这本书就从思想降格成了徽章。
+</span></p>
+<p>而徽章是用来别在胸口的，不是用来读的。</p>
+<p>三个月前，她用性别判断书。现在，她用「读没读过某本书」判断人。动作一模一样，只是审查表格换了一张。</p>
+<p>一句话总结：无脑爱国，加上政治学整体跑偏。</p>
+<h2 id="_3">二、她骂过的东西，她现在自己在做</h2>
+<p>这一节是全文最硬的部分，因为不需要我攻击她。</p>
+<p>回到三个月前那篇。「游乐园在前面左边」当时指控男作者犯了四条罪。我把她今天的视频一条条对上：</p>
+<p><strong>第一条罪名：只着眼于宏大叙事，只写宏伟，不写人。</strong></p>
+<p>她当年原话大意是：他们只关心自己的宏大叙事，把眼光永远朝向金字塔的顶端，从来不看底层的人。</p>
+<p>而她今天的标题是：《中国精神》《中国魂》《报效祖国》《中国遥遥领先》。</p>
+<p>宏大叙事是什么？她当年骂的那个东西是什么？她自己做出来的，比任何一个被她骂过的作者都要宏大。整个民族，整个文明，整个东方，整个五千年——一个人能站多高就站多高，能说多大就说多大。</p>
+<p><strong>第二条罪名：不给过程，直接甩结论。</strong></p>
+<p>她当年原话大意是：这群人写书，就给你甩一个结论，告诉你我的观点就是这样，没有过程。</p>
+<p>而她今天的视频，标题本身就是结论。《中国遥遥领先》《中国的空气都是甜的》。没有数据，没有对比，没有论证链，甚至没有具体的人具体的事。只有一个结论，外挂一段情绪。</p>
+<p><strong>第三条罪名：夹带私货，用自己的经历给自己背书。</strong></p>
+<p>她当年的原话是：男作者特别爱夹带私货，随时吹自己见过多少世面、去过多少地方、是什么学历，好让你相信他很厉害所以他说得对。</p>
+<p>而她解释改名的理由是：中华血脉醒了。</p>
+<p>这句话的信息含量是什么？一，我身上有某种古老的血统；二，这个血统正在觉醒；三，所以我的判断有资格被信任。这不叫论证，这叫出示家谱。</p>
+<p><strong>第四条罪名：用身份证代替阅读理解，只会贴标签。</strong></p>
+<p>她当年骂的正是这一条。她用性别当遥控器，按一下「男」，跳过所有文本分析。</p>
+<p>现在她换了个遥控器，还是同一个动作。按一下「爱国」，你就赢了；按一下「反贼」，你就该闭嘴。评论区里的每一次判定，都不是文本分析，都是身份核查。</p>
+<p><span class="hl">
+四条罪名，一条不落，全部复现。她不是在批判一种方法，她是在把那种方法从头到尾学了个遍，然后换了个方向继续用。
+</span></p>
+<p>我甚至不需要判断她的人格。我只需要把她自己的两条时间线并排放着。它们会自己打架。</p>
+<h2 id="_4">三、二极管没换，只换了插头</h2>
+<p>她的方法论，从第一天到今天，只有一个动作：把世界压缩成二极。</p>
+<p>心理学里管这个叫二分法思维（dichotomous thinking），辩证行为疗法把它列为情绪失调的核心认知模式之一：世界只有全好和全坏，人只有全对和全错，中间那片巨大的灰色地带，被整块删掉。</p>
+<p>这个动作有三个特征。</p>
+<p><strong>第一，只需要站队，不需要思考。</strong></p>
+<p>「男作者全是垃圾」——你只需要回答一个选择题：你是男作者还是女作者。回答完了，观点就自动生成了。</p>
+<p>「爱国还是不爱国」——同样是一个选择题，答案只有两个选项，中间没有空白。</p>
+<p>人一旦习惯这种结构，就会开始害怕需要推理的事情。因为推理意味着要区分，要判断，要在两难里待着。而待着很累。贴标签只要一秒。</p>
+<p>社会心理学里有个词叫「认知吝啬鬼」：人处理信息时天然倾向于走最省力的路。而二分法是所有路径里最省力的一条——它不需要你理解对方，只需要你给对方盖章。</p>
+<p><strong>第二，只给结论，只给结果。</strong></p>
+<p>她的每一条视频，都是从一个已经被她当成公理的东西出发的：我们这儿很好。剩下的部分不是论证，是举例，是抒情，是向观众重复那句公理。</p>
+<p>一个真正的观点需要被证明。而一个不需要证明、只需要被复述的观点，本质上不是观点，是口号。</p>
+<p><strong>第三，没有「例外」这两个字。</strong></p>
+<p>这是最要命的一点。她的世界里，不存在「大多数男作者不行，但这位可以」；也不存在「这个国家有很多好的地方，也有许多值得改进的地方」。</p>
+<p>不，她把每一件事都推到全称判断上。</p>
+<p>逻辑学里叫全称判断，心理学里叫过度概括。两个词指向同一件事：从一两个样本，直接跳到整个世界。</p>
+<p>而维持全称判断唯一可行的办法，就是不断开除反例。所以她的体系必须留一个出口，专门用来把不配合的人送出去——那个出口就是最后那一招：你不够爱国。</p>
+<p><strong>最讽刺的地方在这里。</strong></p>
+<p>她指责别人搞分裂的时候，她自己每天在做的事是什么？她每天在男女之间划一条线，然后把这条线画得越来越粗，越来越深。她说别人分裂民族，而她自己分裂的是这个民族的一半人和另一半人。</p>
+<p>她反对的从来不是分裂，她反对的是别人在她的分裂之外，也画了一条线。</p>
+<h2 id="_5">四、表演过头的爱国，消耗的是「爱国」这个词</h2>
+<p>我看过她的视频。</p>
+<p>有一种很奇怪的感觉，我说不清楚，后来想明白了：反串感。</p>
+<p>这不是因为她说错了什么。她的很多结论甚至是事实：中国的治安确实好，基建确实快，中国确实不是战区。这些都不假。</p>
+<p>问题不在内容，在密度和频率。</p>
+<p>一天一条，条条顶格，情绪永远在沸点，语调永远在高潮。你听着听着就会产生一种怀疑：一个人真的可以每天都这么激动吗？</p>
+<p>一个人如果每天都这么激动，那他激动的大概率不是那件事，而是激动本身能带来的东西。</p>
+<p><span class="hl">
+真正的热爱，不需要日更九条来证明。需要不停表演的东西，通常是需要变现的东西。
+</span></p>
+<p>她讲的那些道理，来源很统一：都是别人写好的、现成的、已经封装成结论的书。她把这些结论搬过来，再配上情绪，做成视频。</p>
+<p>这没有问题，人都是这样学习的。但这里有一个缺口：</p>
+<p><strong>她有二手结论，但没有一手经验。</strong></p>
+<p>她有没有自己去过一个县城，看过一个村子，跟一个具体的人坐下来聊过两个小时？她有没有在任何一件具体的小事里，感受过这个国家真实的、粗糙的、带着汗味的质地？</p>
+<p>她的视频里没有这种人。只有大词。</p>
+<p>而一个从没自己走过一段路的人，复述一万句结论，也还是站在原地。</p>
+<p><span class="hl">
+这里必须说清楚一件事，否则文章会被误读：我不是在说「爱国不对」，也不是在说「批评才高级」。我说的是，爱国不是免检章。
+</span></p>
+<p>越是真心爱的东西，越该容得下具体的批评，因为批评的目的不是毁掉它，是让它更好。</p>
+<p>这中间有一条很清楚的界线，我们这代人应该都还记得那条线。</p>
+<p>心理学里有个概念叫道德执照（moral licensing）：人在做了一件自己认为正确的事之后，会觉得手上多了一张许可证，接下来做别的事，哪怕明显越界，也心安理得。</p>
+<p>「我在爱国」这四个字，就是最容易签发这种执照的印章。</p>
+<p>2012 年，很多人上街表达对另一个国家的愤怒。其中有人举着 U 型锁，砸向了同胞的车，砸穿了同胞的头骨。</p>
+<p>那些人当时也觉得自己在爱国。他们的嗓门比谁都大，情绪比谁都满，口号比谁都响。</p>
+<p>可他们最后伤害的是谁？</p>
+<p><span class="hl">
+爱国一旦变成一场表演，它消耗的不是外国，是「爱国」这个词本身的信用。
+</span></p>
+<p>每多一个靠这个赛道吃饭的人，真正想认真说点话的人，说话就更难。因为那两个字已经被喊得廉价了。</p>
+<h2 id="_6">五、为什么「扣帽子」对她无效</h2>
+<p>她的护身符只有一个：你不爱国。</p>
+<p>你只要开始解释「我其实也爱国」，你就输了。因为解释这个动作本身，就等于承认她有资格审你。</p>
+<p>所以有几件事，根本不需要回应：</p>
+<p>她是不是中国人，她爱不爱国，以及——你爱不爱国。</p>
+<p>这三件事一旦开始自证，你就已经在她的场子里打球了。而她的场子里，球网是歪的。</p>
+<p><span class="hl">
+该回应的只有一件事：她的论证在哪一步断了。
+</span></p>
+<p>比如她说「中国的空气都是甜的」。这句话的问题不在于它是否动听，而在于它不可证伪。地球上不存在任何证据能让这句话变成假的，那它也就不是一句可以被讨论的话。它是一句抒情，被当成了论据。</p>
+<p>比如她说「女性主义不能脱离民族精神」。这句话的问题不在于立场，而在于它把一个描述性的概念（女性主义）和一个规范性的要求（民族精神）硬绑在一起，然后把不接受这个绑定的人定义为敌人。这是定义偷换，不是观点交锋。</p>
+<p>再比如她面对那个说「中美军力在一个量级」的人。她没有指出对方哪里说错了，她的处理方式是，做一期视频，宣布对方是傻子。</p>
+<p><span class="hl">
+她要的从来不是辩论。删评是舞台管理的动作，一个真要辩论的人不会删评，因为评论是他的材料。
+</span></p>
+<p>删评的人只说明一件事：这里不是辩论场，是舞台。而舞台上不允许有观众走上台。</p>
+<p>真正的辩手怕的是论据不够，演员怕的是台词被抢。</p>
+<h2 id="_7">六、这不是政治问题，是认知问题</h2>
+<p>说到这里，我得把自己的话也摆出来，不能只站在旁边挑刺。</p>
+<p><strong>我当然支持她爱国。</strong></p>
+<p>爱国是每个公民的权利，也是义务，也是责任。不分种族，不分国界，人对自己生长的地方有感情，这不需要论证，这是本能。</p>
+<p>但爱国不是喊出来的，是做出来的。</p>
+<p>是你在自己的工作里少糊弄一点，是你看到不公平时敢说一句，是你把身边具体的人当人看，是你让这个国家因为你而好了一点点。</p>
+<p>批评和热爱从来不冲突。</p>
+<p>一个国家的自信，恰恰体现在它能容下多少不同的声音。一个需要靠删评来维持的自信，不叫自信，那叫紧张。</p>
+<p><span class="hl">
+我不反对她爱国。我反对的是她把爱国做成一门流量生意，然后顺手把所有不买账的人都打成敌人。
+</span></p>
+<p>她读了很多书，我承认。但读书的目的是让人更能分辨，不是让人更会站队。如果读完一堆书，最后只是把「我们永远正确」这句话说得更响亮，那这些书算是白读了。</p>
+<p>所以这篇文章从头到尾，问的都不是「她爱不爱国」。</p>
+<p>问的是另一个问题：一个人的判断系统，如果只装得下两个格子，那么无论这两个格子叫什么名字，它都会把世界切错。</p>
+<p>今天这两个格子叫「男 / 女」，明天叫「爱国 / 反贼」，后天可以叫任何东西。</p>
+<p>标签一直在换，刀从来没换。</p>
+<p>这才是我想说的全部。</p>
+<h2 id="_8">结语：快恢复二极管</h2>
+<p>回到那个名字。</p>
+<p>改名字很容易。改一个 ID，换一个头像，十分钟的事。</p>
+<p>改脑子很难。因为脑子里的那个结构，是很多年一点点长出来的，它藏在你判断世界的每一个动作里。</p>
+<p>她换了名字，换了敌人，换了赛道，换了口号。唯一没换的，是那个只会用两个格子看世界的脑袋。</p>
+<p>顺着这个思路，我想给她一个更准确的技术称号。</p>
+<p>普通二极管，只允许电流往一个方向走。它的升级款叫快恢复二极管，英文 Fast Recovery Diode，缩写 FRD。名字听着很厉害，恢复得快，反应也快。</p>
+<p>但它还是二极管。</p>
+<p>一个方向，永远只有一个方向。反向电压加得再大，它也只会截止。</p>
+<p><span class="hl">
+名字换了，封装换了，参数标得漂亮了。正向压降还是那个正向压降。
+</span></p>
+<p>最后一句，送给还在往前跑的人：</p>
+<p>看她，不如自己出门走一段路。</p>
+<p>路会告诉你，世界从来不是两个格子。</p>
+            </div><!-- /article-content -->
+
+            <!-- ── 分享按钮 ── -->
+            <div style="text-align:center;margin-top:20px;">
+                <button class="share-btn" id="shareButton2">
+                    <i class="fas fa-share-alt"></i> 分享这篇文章
+                </button>
+            </div>
+
+        </article>
+        
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">开发者ciallo0721-cmd的空间</div>
+            <p>© 2026 ciallo0721-cmd · 一个账号的两次改名</p>
+            <p>感谢阅读喵～</p>
+        </div>
+    </footer>
+
+    <!-- 图片放大弹窗 -->
+    <div class="image-zoom-modal" id="imageZoomModal">
+        <span class="image-zoom-close" id="imageZoomClose">&times;</span>
+        <img src="" alt="放大图片" id="zoomedImage">
+    </div>
+
+    <!-- 分享弹窗 -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <div class="share-modal-header">
+                <h3 class="share-modal-title"><i class="fas fa-share-alt"></i> 分享这篇文章</h3>
+                <button class="share-close-btn" id="closeShareModal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="share-text" id="shareText">快来看看这篇文章: https://ciallo0721-cmd.top/blog/心理学/91/</div>
+            <div class="share-actions">
+                <button class="share-copy-btn" id="copyShareText"><i class="far fa-copy"></i> 复制分享链接</button>
+                <button class="share-close-modal-btn" id="closeShareModalBtn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="totop-btn" aria-label="返回顶部"
+        style="position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,var(--bili-pink),var(--bili-blue));color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 4px 15px rgba(251,114,153,0.3);display:none;z-index:9999;transition:all 0.3s;opacity:0.85;justify-content:center;align-items:center;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    // ── 进度条动画（进入视口后启动） ──
+    function animateProgressBars() {
+        document.querySelectorAll('.progress-fill[data-target]').forEach(function(el) {
+            el.style.width = el.getAttribute('data-target') + '%';
+        });
+    }
+    var progressObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateProgressBars(); progressObserver.disconnect(); } });
+    }, { threshold: 0.3 });
+    var pl = document.getElementById('progressList');
+    if (pl) progressObserver.observe(pl);
+
+    // ── Canvas 折线图 ──
+    function drawLineChart() {
+        var c = document.getElementById('lineChart');
+        if (!c) return;
+        c.width = c.parentElement.clientWidth - 48;
+        var ctx = c.getContext('2d');
+        var data = [1024, 889, 1580, 2101, 2470];
+        var labels = ['2026-01','2026-02','2026-03','2026-04','2026-05'];
+        var w = c.width, h = c.height;
+        var pad = { top: 20, right: 20, bottom: 40, left: 55 };
+        var cw = w - pad.left - pad.right, ch = h - pad.top - pad.bottom;
+        var maxV = 3000, step = cw / (data.length - 1);
+
+        ctx.clearRect(0, 0, w, h);
+
+        // 网格线
+        ctx.strokeStyle = 'rgba(0,0,0,0.06)'; ctx.lineWidth = 1;
+        for (var i = 0; i <= 4; i++) {
+            var y = pad.top + ch - (i / 4) * ch;
+            ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
+            ctx.fillStyle = '#999'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+            ctx.fillText((maxV / 4 * i).toFixed(0), pad.left - 8, y + 4);
+        }
+
+        // X 轴标签
+        ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '11px sans-serif';
+        labels.forEach(function(l, i) { ctx.fillText(l, pad.left + i * step, h - 8); });
+
+        // 渐变填充
+        var pts = data.map(function(v, i) { return [pad.left + i * step, pad.top + ch - (v / maxV) * ch]; });
+        var grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
+        grad.addColorStop(0, 'rgba(251,114,153,0.35)');
+        grad.addColorStop(1, 'rgba(251,114,153,0.02)');
+        ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+        pts.forEach(function(p) { ctx.lineTo(p[0], p[1]); });
+        ctx.lineTo(pts[pts.length-1][0], pad.top + ch); ctx.lineTo(pts[0][0], pad.top + ch);
+        ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+
+        // 折线
+        ctx.beginPath(); ctx.strokeStyle = '#FB7299'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+        pts.forEach(function(p, i) { i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]); });
+        ctx.stroke();
+
+        // 圆点
+        pts.forEach(function(p, i) {
+            ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#FB7299'; ctx.fill();
+            ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillStyle = '#515154'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText(data[i].toLocaleString(), p[0], p[1] - 12);
+        });
+    }
+
+    // ── Canvas 柱状图 ──
+    function drawBarChart() {
+        var c = document.getElementById('barChart');
+        if (!c) return;
+        c.width = c.parentElement.clientWidth - 48;
+        var ctx = c.getContext('2d');
+        var data = [3200, 1800, 4500, 2700, 1200, 5100, 890];
+        var labels = ['文章1','文章2','文章3','文章4','文章5','文章6','文章7'];
+        var w = c.width, h = c.height;
+        var pad = { top: 20, right: 20, bottom: 40, left: 55 };
+        var cw = w - pad.left - pad.right, ch = h - pad.top - pad.bottom;
+        var maxV = 6000, barW = cw / data.length * 0.55, gap = cw / data.length;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // 网格
+        ctx.strokeStyle = 'rgba(0,0,0,0.06)'; ctx.lineWidth = 1;
+        for (var i = 0; i <= 4; i++) {
+            var y = pad.top + ch - (i / 4) * ch;
+            ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
+            ctx.fillStyle = '#999'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+            ctx.fillText((maxV / 4 * i).toFixed(0), pad.left - 8, y + 4);
+        }
+
+        data.forEach(function(v, i) {
+            var x = pad.left + i * gap + (gap - barW) / 2;
+            var barH = (v / maxV) * ch;
+            var y = pad.top + ch - barH;
+            var grad = ctx.createLinearGradient(0, y, 0, y + barH);
+            grad.addColorStop(0, '#00A1D6'); grad.addColorStop(1, 'rgba(0,161,214,0.5)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            var r = 5;
+            ctx.moveTo(x + r, y); ctx.lineTo(x + barW - r, y);
+            ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+            ctx.lineTo(x + barW, y + barH); ctx.lineTo(x, y + barH);
+            ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.fill();
+
+            ctx.fillStyle = '#515154'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText(labels[i], x + barW / 2, h - 8);
+            ctx.fillStyle = 'white'; ctx.font = 'bold 10px sans-serif';
+            if (barH > 22) ctx.fillText(v.toLocaleString(), x + barW / 2, y + 15);
+        });
+    }
+
+    // ── SVG 饼图 ──
+    function drawPieChart() {
+        var svg = document.getElementById('pieChart');
+        var legend = document.getElementById('pieLegend');
+        if (!svg || !legend) return;
+        var data = [
+            { label: '直接访问', value: 52, color: '#FB7299' },
+            { label: '搜索引擎', value: 28, color: '#00A1D6' },
+            { label: '社交媒体', value: 12, color: '#34C759' },
+            { label: '外链引用', value: 8,  color: '#FF9500' }
+        ];
+        var total = data.reduce(function(s, d) { return s + d.value; }, 0);
+        var cx = 100, cy = 100, r = 80; var startAngle = -Math.PI / 2;
+        svg.innerHTML = '';
+
+        data.forEach(function(d) {
+            var angle = (d.value / total) * 2 * Math.PI;
+            var endAngle = startAngle + angle;
+            var x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+            var x2 = cx + r * Math.cos(endAngle),   y2 = cy + r * Math.sin(endAngle);
+            var large = angle > Math.PI ? 1 : 0;
+            var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+            path.setAttribute('d', 'M '+cx+' '+cy+' L '+x1+' '+y1+' A '+r+' '+r+' 0 '+large+' 1 '+x2+' '+y2+' Z');
+            path.setAttribute('fill', d.color);
+            path.style.transition = 'transform 0.2s';
+            path.style.transformOrigin = cx+'px '+cy+'px';
+            path.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.06)'; });
+            path.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
+            svg.appendChild(path);
+            startAngle = endAngle;
+
+            var item = document.createElement('div');
+            item.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:0.9rem;';
+            item.innerHTML = '<span style="width:12px;height:12px;border-radius:3px;background:'+d.color+';flex-shrink:0;"></span>'
+                + '<span style="color:#515154">'+d.label+'</span>'
+                + '<span style="font-weight:700;color:#1D1D1F">'+d.value+'%</span>';
+            legend.appendChild(item);
+        });
+    }
+
+    // ── 灰度预览按钮（元素不存在时跳过，防止 TypeError 中断后续脚本）──
+    var isGrayscale = false;
+    if (document.getElementById('previewGrayscale') && document.getElementById('removeGrayscale'))
+    document.getElementById('previewGrayscale').addEventListener('click', function() {
+        document.documentElement.style.filter = 'grayscale(1)';
+        isGrayscale = true;
+        this.style.display = 'none';
+        document.getElementById('removeGrayscale').style.display = '';
+    });
+    if (document.getElementById('removeGrayscale')) document.getElementById('removeGrayscale').addEventListener('click', function() {
+        document.documentElement.style.filter = '';
+        isGrayscale = false;
+        this.style.display = 'none';
+        document.getElementById('previewGrayscale').style.display = '';
+    });
+
+    // ── DOMContentLoaded ──
+    document.addEventListener('DOMContentLoaded', function() {
+        // 图片放大
+        var modal = document.getElementById('imageZoomModal');
+        var modalImg = document.getElementById('zoomedImage');
+        var closeBtn = document.getElementById('imageZoomClose');
+        if (modal && modalImg) {
+            document.querySelectorAll('.zoomable').forEach(function(img) {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', function() {
+                    modalImg.src = this.src; modalImg.alt = this.alt;
+                    modal.classList.add('active'); document.body.style.overflow = 'hidden';
+                });
+            });
+            function closeZoom() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+            closeBtn.addEventListener('click', closeZoom);
+            modal.addEventListener('click', function(e) { if (e.target === modal) closeZoom(); });
+        }
+
+        // 分享功能
+        var shareModal = document.getElementById('shareModal');
+        var copyBtn = document.getElementById('copyShareText');
+        function openShare() { shareModal.classList.add('active'); }
+        function closeShare() {
+            shareModal.classList.remove('active');
+            copyBtn.innerHTML = '<i class="far fa-copy"></i> 复制分享链接';
+            copyBtn.classList.remove('copied');
+        }
+        ['shareButton','shareButton2'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.addEventListener('click', openShare);
+        });
+        document.getElementById('closeShareModal').addEventListener('click', closeShare);
+        document.getElementById('closeShareModalBtn').addEventListener('click', closeShare);
+        shareModal.addEventListener('click', function(e) { if (e.target === shareModal) closeShare(); });
+        copyBtn.addEventListener('click', function() {
+            var text = document.getElementById('shareText').textContent.trim();
+            function fallbackCopy() {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed'; ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch(e) {}
+                document.body.removeChild(ta);
+                copied();
+            }
+            function copied() {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制到剪贴板';
+                copyBtn.classList.add('copied');
+                setTimeout(function() {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> 复制分享链接';
+                    copyBtn.classList.remove('copied');
+                }, 3000);
+            }
+            // 非安全上下文（http）下 navigator.clipboard 不可用，走降级方案
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(copied).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        });
+
+        // ESC 处理
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (modal && modal.classList.contains('active')) { modal.classList.remove('active'); document.body.style.overflow = ''; return; }
+                if (shareModal && shareModal.classList.contains('active')) { closeShare(); return; }
+                window.location.href = '../../index.html';
+            }
+        });
+
+        // 视频播放器（自研播放器已停用，改用浏览器原生播放器）
+        // if (window.NiceVideo) NiceVideo.initAll();
+
+        // 绘制图表
+        drawLineChart(); drawBarChart(); drawPieChart();
+    });
+
+    // 返回顶部
+    (function() {
+        var btn = document.getElementById('totop-btn');
+        if (!btn) return;
+        btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        window.addEventListener('scroll', function() { btn.style.display = window.scrollY > 300 ? 'flex' : 'none'; }, { passive: true });
+    })();
+
+    // 窗口 resize 重绘图表
+    window.addEventListener('resize', function() { drawLineChart(); drawBarChart(); });
+
+    // ── 推荐文章自动加载 ──
+    ;
+    </script>
+
+    <!-- ─── PDF 阅读器 JS ─── -->
+    <script>
+    (function() {
+        if (!document.getElementById('pdfFileInput')) return; // 阅读器组件不存在时跳过，防止 TypeError 中断
+        // 等 PDF.js 加载完毕
+        if (!window.pdfjsLib) return;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        var pdfDoc = null, curPage = 1, totalPages = 0, scale = 1.0;
+        var canvas = document.getElementById('pdfCanvas');
+        var ctx = canvas ? canvas.getContext('2d') : null;
+
+        function el(id) { return document.getElementById(id); }
+
+        function setErr(msg) { el('pdfErrMsg').textContent = msg || ''; }
+
+        function updateUI() {
+            el('pdfPageInfo').textContent = totalPages ? curPage + ' / ' + totalPages : '— / —';
+            el('pdfPrevBtn').disabled = curPage <= 1;
+            el('pdfNextBtn').disabled = curPage >= totalPages;
+            el('pdfZoomLabel').textContent = Math.round(scale * 100) + '%';
+        }
+
+        function renderPage(num) {
+            if (!pdfDoc || !canvas || !ctx) return;
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({ scale: scale });
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                var renderCtx = { canvasContext: ctx, viewport: viewport };
+                page.render(renderCtx).promise.then(function() {
+                    curPage = num;
+                    updateUI();
+                    setErr('');
+                });
+            }).catch(function(e) { setErr('渲染失败：' + e.message); });
+        }
+
+        function loadPDF(src) {
+            setErr('');
+            el('pdfPlaceholder').style.display = 'none';
+            canvas.style.display = 'none';
+            var loadingTask = pdfjsLib.getDocument(src);
+            loadingTask.promise.then(function(doc) {
+                pdfDoc = doc;
+                totalPages = doc.numPages;
+                curPage = 1;
+                canvas.style.display = 'block';
+                renderPage(1);
+            }).catch(function(e) {
+                setErr('加载失败：' + e.message);
+                el('pdfPlaceholder').style.display = '';
+            });
+        }
+
+        // 本地文件上传
+        el('pdfFileInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+            el('pdfFileName').textContent = file.name + '（' + (file.size / 1024).toFixed(1) + ' KB）';
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+                var typedArray = new Uint8Array(ev.target.result);
+                loadPDF({ data: typedArray });
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        // URL 加载
+        el('pdfUrlLoadBtn').addEventListener('click', function() {
+            var url = el('pdfUrlInput').value.trim();
+            if (!url) return;
+            el('pdfFileName').textContent = url;
+            loadPDF(url);
+        });
+        el('pdfUrlInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') el('pdfUrlLoadBtn').click();
+        });
+
+        // 翻页
+        el('pdfPrevBtn').addEventListener('click', function() { if (curPage > 1) renderPage(curPage - 1); });
+        el('pdfNextBtn').addEventListener('click', function() { if (curPage < totalPages) renderPage(curPage + 1); });
+
+        // 缩放
+        el('pdfZoomIn').addEventListener('click', function() {
+            if (scale >= 3.0) return;
+            scale = Math.round((scale + 0.25) * 100) / 100;
+            renderPage(curPage);
+        });
+        el('pdfZoomOut').addEventListener('click', function() {
+            if (scale <= 0.5) return;
+            scale = Math.round((scale - 0.25) * 100) / 100;
+            renderPage(curPage);
+        });
+
+        // 键盘左右翻页（仅 PDF 区域聚焦时）
+        el('pdfCanvasArea').setAttribute('tabindex', '0');
+        el('pdfCanvasArea').addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); if (curPage > 1) renderPage(curPage - 1); }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); if (curPage < totalPages) renderPage(curPage + 1); }
+        });
+
+        updateUI();
+    })();
+    </script>    <script src="../../../js/js/blog-share.js"></script>
+    <script src="/js/js/tracking.js"></script>
+    <!-- 每年10月24日限定：全站穿越回2000年初风格（勿删，由 实用工具/注入穿越2000.py 维护） -->
+    <script defer src="../../js/js/retro-1024.js?v=1024"></script>
+    <!-- 每年10月26日限定：Warma 生日彩带彩蛋（勿删，由 实用工具/注入Warma生日.py 维护） -->
+    <script defer src="../../js/js/warma-birthday.js"></script>
+</body>
+</html>

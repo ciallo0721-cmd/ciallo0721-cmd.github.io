@@ -970,6 +970,17 @@ window.articlesData = {
             readTime: 37,
             featured: true
         },
+        {
+            id: 91,
+            category: "心理学",
+            fileName: "心理学/91/",
+            title: "一个账号的两次改名",
+            excerpt: "同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。",
+            date: "2026-11-08",
+            tags: ["认知偏误", "二分法思维", "政治传播", "网络观察", "心理学"],
+            readTime: 21,
+            featured: true
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

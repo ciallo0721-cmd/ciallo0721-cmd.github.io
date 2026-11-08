@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #91
+[
+    {
+    index:
+        "title"="一个账号的两次改名" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-11-08" //日期
+        "tag"="认知偏误","二分法思维","政治传播","网络观察","心理学" //标签
+        "excerpt"="同一双手，三个月前把全世界的作者按性别分成两堆，三个月后把所有的声音按立场分成两堆。她改了名字，换了敌人，换了赛道——唯一没换的，是那个只会用两个格子看世界的脑袋。本文用她自己三个月前指控别人的四条罪名，一条条对照她今天的投稿。" //摘要(扩展字段)
+        "readTime"=21 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/91"
+        "html"="index.html"
+    }
+]
