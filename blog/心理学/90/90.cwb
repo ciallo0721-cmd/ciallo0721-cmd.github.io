@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #90
+[
+    {
+    index:
+        "title"="什么是邪教——从 11 月 2 日塔菲直播间，一直到欧洲" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-11-08" //日期
+        "tag"="邪教","心理学","社会观察","宗教社会学","立法" //标签
+        "excerpt"="11 月 1 日深夜，一个注册不到一天的账号在塔菲直播间打出三个字，三分钟后直播间被封。从这三十秒出发，一路查到“邪教”这个词的唐代词源、七场死亡、利夫顿的八条标准，以及法国为什么在 2001 年主动放弃了给邪教列名单。" //摘要(扩展字段)
+        "readTime"=37 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/90"
+        "html"="index.html"
+    }
+]

@@ -959,6 +959,17 @@ window.articlesData = {
             readTime: 10,
             featured: false
         },
+        {
+            id: 90,
+            category: "心理学",
+            fileName: "心理学/90/",
+            title: "什么是邪教——从 11 月 2 日塔菲直播间，一直到欧洲",
+            excerpt: "11 月 1 日深夜，一个注册不到一天的账号在塔菲直播间打出三个字，三分钟后直播间被封。从这三十秒出发，一路查到“邪教”这个词的唐代词源、七场死亡、利夫顿的八条标准，以及法国为什么在 2001 年主动放弃了给邪教列名单。",
+            date: "2026-11-08",
+            tags: ["邪教", "心理学", "社会观察", "宗教社会学", "立法"],
+            readTime: 37,
+            featured: true
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),
