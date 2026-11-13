@@ -1,0 +1,33 @@
+// CWBI 文章信息文件 · 由 实用工具/CWBI转换器.py 生成 · 手动编辑请保留格式
+// 文章 #92
+[
+    {
+    index:
+        "title"="isthishuman?李雪?" //标题
+        "author"="ciallo0721-cmd" //作者
+        "date"="2026-11-13" //日期
+        "tag"="网络观察","性别议题","心理学","逻辑分析" //标签
+        "excerpt"="第四次写这个账号。她把自己的经血床单当商品挂出来出掉，还配上一句“悲哀，因为男性没有月经的能力”。本文从“医疗废品”说起，把这句话一层层拆开——生理现象不是能力，生理差异不是不公。" //摘要(扩展字段)
+        "readTime"=5 //预计阅读分钟(扩展字段)
+        "featured"=False //精选(扩展字段)
+    }
+    {
+    is?:
+        "isadult"=False //轻度或重度成人
+        "istop"=False //置顶
+        "isPsychology"=True //心理学
+        "isMedical"=False //医学
+        "isOpposition"=False //有争议的
+        "istest"=False //测试文章(不显示在首页或blog页)
+        "isCopyProtection"=False //有版权保护
+        "isAIGC"=False //完全AI生成且未查资料
+        "isiframe"=False //使用iframe
+        "isuseArticleEditor.py"=True //使用了 实用工具/文章编辑器.py
+        "canCompatible"=True //兼容旧版文章data
+    }
+    {
+    html:
+        "path"="blog/心理学/92"
+        "html"="index.html"
+    }
+]

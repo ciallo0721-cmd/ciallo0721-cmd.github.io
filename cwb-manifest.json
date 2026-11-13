@@ -1,7 +1,7 @@
 {
   "name": "CialloWebBlogInformation manifest",
   "generator": "实用工具/CWBI转换器.py",
-  "count": 89,
+  "count": 90,
   "articles": [
     {
       "id": 1,
@@ -447,6 +447,11 @@
       "id": 91,
       "category": "心理学",
       "cwbPath": "blog/心理学/91/91.cwb"
+    },
+    {
+      "id": 92,
+      "category": "心理学",
+      "cwbPath": "blog/心理学/92/92.cwb"
     }
   ]
 }

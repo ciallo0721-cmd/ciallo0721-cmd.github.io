@@ -981,6 +981,17 @@ window.articlesData = {
             readTime: 21,
             featured: true
         },
+        {
+            id: 92,
+            category: "心理学",
+            fileName: "心理学/92/",
+            title: "isthishuman?李雪?",
+            excerpt: "第四次写这个账号。她在视频里把自己的经血床单当商品挂出去，还配上一句“悲哀，因为男性没有月经的能力”。本文从“医疗废品”说起，把这句话一层层拆开——生理现象不是能力，生理差异不是不公。",
+            date: "2026-11-13",
+            tags: ["网络观察", "性别议题", "心理学", "逻辑分析"],
+            readTime: 5,
+            featured: true
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),
