@@ -992,6 +992,17 @@ window.articlesData = {
             readTime: 5,
             featured: true
         },
+        {
+            id: 93,
+            category: "求助",
+            fileName: "93",
+            title: "不，这不是希望小学——是“失望小学”",
+            excerpt: "陕西兴平“牵手希望小学”以“免费招收残障儿童”的名义募捐九年，孩子喝着漂苍蝇的米汤，搬物资到凌晨，不听话就挨电棍。它不是希望小学——特教资质、募捐资格，一样都没有。",
+            date: "2026-11-25",
+            tags: ["希望小学", "骗捐", "儿童权益", "社会观察", "陕西兴平", "监管"],
+            readTime: 12,
+            featured: false
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),

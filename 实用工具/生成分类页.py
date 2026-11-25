@@ -153,13 +153,38 @@ def build_page(tpl, cat, count, all_cats, counts):
     )
 
     # 10) 只保留本分类的文章
-    html = html.replace(
-        "            var allArticles = window.articlesData.getSortedArticles();",
-        "            var CATEGORY = '%s';\n"
-        "            function inCat(a) { return a && a.category === CATEGORY; }\n"
-        "            var allArticles = window.articlesData.getSortedArticles().filter(inCat);" % cat,
+    #     模板在「CWBI 单源」升级后改成了 mergeArticles(list, [])，
+    #     旧的两条匹配串（getSortedArticles / mergeArticles(cwbList, allArticles)）已全部失效
+    #     → 分类页会退化成「显示全站 90 篇」。这里同时兼容新旧两种写法。
+    inject = (
+        "var CATEGORY = '%s';\n"
+        "function inCat(a) { return a && a.category === CATEGORY; }\n" % cat
     )
-    # CWBI 合并后二次过滤（cwb 清单是全站的，别把别的分类带进来）
+
+    # 10a) 旧模板写法
+    old_src = "            var allArticles = window.articlesData.getSortedArticles();"
+    if old_src in html:
+        html = html.replace(
+            old_src,
+            "            " + inject.replace("\n", "\n            ").rstrip() +
+            "\n            var allArticles = window.articlesData.getSortedArticles().filter(inCat);",
+        )
+
+    # 10b) 现模板写法（CWBI 单源）
+    cur_src = "                    allArticles = window.CWBI.mergeArticles(list || [], []);"
+    if cur_src in html:
+        html = html.replace(
+            cur_src,
+            "                    " + inject.replace("\n", "\n                    ").rstrip() +
+            "\n                    allArticles = window.CWBI.mergeArticles(list || [], []).filter(inCat);",
+        )
+        # 过滤后为空时，别报「数据源为空」这种误导文案
+        html = html.replace(
+            "if (!allArticles.length) { loadFailed('暂时没有文章（CWBI 数据源为空）'); return; }",
+            "if (!allArticles.length) { loadFailed('「%s」分类下暂无文章'); return; }" % cat,
+        )
+
+    # 10c) 兜底：老版本「cwb 清单合并后二次过滤」
     html = html.replace(
         "                allArticles = window.CWBI.mergeArticles(cwbList, allArticles);",
         "                allArticles = window.CWBI.mergeArticles(cwbList, allArticles).filter(inCat);",
