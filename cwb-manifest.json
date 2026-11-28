@@ -1,7 +1,7 @@
 {
   "name": "CialloWebBlogInformation manifest",
   "generator": "实用工具/CWBI转换器.py",
-  "count": 91,
+  "count": 92,
   "articles": [
     {
       "id": 1,
@@ -457,6 +457,11 @@
       "id": 93,
       "category": "求助",
       "cwbPath": "blog/求助/93/93.cwb"
+    },
+    {
+      "id": 94,
+      "category": "笔记",
+      "cwbPath": "blog/笔记/94/94.cwb"
     }
   ]
 }

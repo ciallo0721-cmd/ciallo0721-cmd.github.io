@@ -1003,6 +1003,17 @@ window.articlesData = {
             readTime: 12,
             featured: false
         },
+        {
+            id: 94,
+            category: "笔记",
+            fileName: "笔记/94/",
+            title: "白纸之下：2022年末的十七天",
+            excerpt: "2022年11月24日19时49分，乌鲁木齐吉祥苑小区一栋高层住宅楼起火，10人死亡。次日晚，南京传媒学院的学生举起一张白纸，十一天后，12月7日的十条通知里写着\"严禁以各种方式封堵消防通道、单元门、小区门\"。一张纸的全部筹码，与它的全部代价。",
+            date: "2026-11-28",
+            tags: ["白纸运动", "历史观察", "社会运动", "零COVID", "言论符号", "2022"],
+            readTime: 11,
+            featured: false
+        },
 ];
         return raw.sort(function(a, b) { return a.id - b.id; });
     })(),
